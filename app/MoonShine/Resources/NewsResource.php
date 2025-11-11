@@ -47,7 +47,11 @@ class NewsResource extends ModelResource
             Box::make('Основная информация', [
                 ID::make(),
                 Text::make('Заголовок', 'title')->required(),
-                TinyMce::make('Содержимое', 'content')->required(),
+                TinyMce::make('Описание', 'description')->required(),
+                Text::make('Видео (URL)', 'video_url')
+                    ->placeholder('https://...')
+                    ->hint('Ссылка на ролик YouTube или другой видеохостинг')
+                    ->nullable(),
                 Image::make('Изображение', 'image')
                     ->dir('news')
                     ->disk('public')
@@ -67,7 +71,8 @@ class NewsResource extends ModelResource
         return [
             ID::make(),
             Text::make('Заголовок', 'title'),
-            TinyMce::make('Содержимое', 'content'),
+            TinyMce::make('Описание', 'description'),
+            Text::make('Видео (URL)', 'video_url'),
             Image::make('Изображение', 'image')->disk('public'),
             Date::make('Дата публикации', 'published_at'),
         ];
@@ -82,21 +87,45 @@ class NewsResource extends ModelResource
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'content' => ['required'],
+            'description' => ['required'],
+            'video_url' => ['nullable', 'url'],
+            'image' => ['nullable', 'image'],
         ];
     }
 
     public function beforeCreating(mixed $item): mixed
     {
-        $item->slug = Str::slug($item->title);
+        $item->slug = $this->makeUniqueSlug($item);
 
         return $item;
     }
 
     public function beforeUpdating(mixed $item): mixed
     {
-        $item->slug = Str::slug($item->title);
+        $item->slug = $this->makeUniqueSlug($item);
 
         return $item;
+    }
+
+    private function makeUniqueSlug(News $item): string
+    {
+        $base = Str::slug($item->title ?? '', '-', 'ru')
+            ?: Str::slug($item->title ?? '', '-', app()->getFallbackLocale())
+            ?: 'news';
+
+        $slug = $base;
+        $suffix = 1;
+
+        while (
+            News::query()
+                ->where('slug', $slug)
+                ->when($item->exists, fn ($query) => $query->where('id', '!=', $item->id))
+                ->exists()
+        ) {
+            $slug = "{$base}-{$suffix}";
+            $suffix++;
+        }
+
+        return $slug;
     }
 }

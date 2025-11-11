@@ -14,40 +14,85 @@
 - [ ] Подготовить контроллер/маршрут для выдачи данных главной страницы на фронт.
 - [ ] Сверстать стартовый Blade-шаблон главной страницы на основе новой модели данных.
 
+## План по переделке фронтенда в стиле Aventro
+
+- [x] Обновить header в стиле Aventro: современный дизайн, sticky навигация, плавные переходы.
+- [x] Создать hero секцию с большим заголовком и CTA кнопками в стиле Aventro.
+- [x] Переделать секции новостей, видео и карты в современном стиле с карточками.
+- [x] Обновить footer в стиле Aventro с современной типографикой.
+- [x] Добавить глобальные стили и анимации в стиле Aventro.
+
 ## Текущая структура проекта
 
-ssmp-moonshine/
-├── app/                               // PHP код приложения
-│   ├── Http/Controllers/Frontend/HomeController.php   // контроллер главной страницы, тянет изображения и медиа
-│   ├── Models/{Setting.php, User.php}                 // Eloquent-модели (настройки, пользователи)
-│   └── MoonShine/                                     // кастомизация MoonShine-админки
-│       ├── Layouts/MoonShineLayout.php                // макет панели управления
-│       ├── Pages/Dashboard.php                        // дашборд MoonShine
-│       └── Resources/
-│           ├── MoonShineUserResource.php              // CRUD для админ-пользователей
-│           ├── MoonShineUserRoleResource.php          // управление ролями MoonShine
-│           └── SettingResource.php                    // галерея изображений главной
-├── config/filesystems.php              // конфиг дисков: публичный корень /storage
-├── database/migrations/                // миграции БД
+ssmp-almaty/
+├── app/                                    // PHP код приложения
+│   ├── Console/Commands/
+│   │   └── DebugSettingPayload.php        // команда для отладки
+│   ├── Http/Controllers/
+│   │   ├── Controller.php                 // базовый контроллер
+│   │   ├── Frontend/
+│   │   │   └── HomeController.php         // контроллер главной страницы, загружает новости и изображения
+│   │   └── Storage/
+│   │       └── PublicStorageController.php // контроллер для публичной раздачи файлов из storage
+│   ├── Models/
+│   │   ├── News.php                       // модель новостей (title, slug, description, video_url, image, published_at)
+│   │   ├── Setting.php                    // модель настроек (main_image для галереи)
+│   │   └── User.php                       // модель пользователей
+│   ├── MoonShine/                         // кастомизация MoonShine-админки
+│   │   ├── Layouts/
+│   │   │   └── MoonShineLayout.php        // макет панели управления с меню "Главный экран"
+│   │   ├── Pages/
+│   │   │   └── Dashboard.php              // дашборд MoonShine
+│   │   └── Resources/
+│   │       ├── MoonShineUserResource.php   // CRUD для админ-пользователей
+│   │       ├── MoonShineUserRoleResource.php // управление ролями MoonShine
+│   │       ├── NewsResource.php           // CRUD новостей (заголовок, описание, видео, картинка)
+│   │       └── SettingResource.php        // галерея изображений главной страницы
+│   ├── Providers/
+│   │   ├── AppServiceProvider.php         // сервис-провайдер приложения
+│   │   └── MoonShineServiceProvider.php   // регистрация ресурсов MoonShine
+│   └── Services/
+│       └── Storage/
+│           └── PublicStorageService.php  // сервис для раздачи публичных файлов
+├── config/
+│   └── filesystems.php                    // конфиг дисков: публичный корень /storage, отключен serve для local
+├── database/migrations/                    // миграции БД
 │   ├── 0001_01_01_000000_create_users_table.php
 │   ├── 0001_01_01_000001_create_cache_table.php
 │   ├── 0001_01_01_000002_create_jobs_table.php
 │   ├── 2020_10_04_115514_create_moonshine_roles_table.php
 │   ├── 2020_10_05_173148_create_moonshine_tables.php
 │   ├── 2025_11_10_144815_create_notifications_table.php
-│   └── 2025_11_10_152732_create_settings_table.php
-├── public/slujba.png                   // логотип для хедера
+│   ├── 2025_11_10_152732_create_settings_table.php
+│   ├── 2025_11_11_113824_create_news_table.php
+│   ├── 2025_11_11_200000_add_slug_to_news_table.php // добавление slug с уникальным индексом
+│   └── 2025_11_11_201500_update_news_fields.php    // замена content на description и video_url
+├── public/
+│   ├── slujba.png                         // логотип для хедера
+│   └── build/                             // скомпилированные Vite ассеты
+│       ├── manifest.json
+│       └── assets/
 ├── resources/
-│   ├── css/app.css                     // глобальные стили Vite/Tailwind
-│   ├── js/{app.js, bootstrap.js}       // JS-энтрипойнты (Vite)
-│   └── views/                          // Blade-шаблоны фронтенда
+│   ├── css/app.css                        // глобальные стили Vite
+│   ├── js/
+│   │   ├── app.js                         // JS-энтрипойнт (Vite)
+│   │   └── bootstrap.js                   // Bootstrap инициализация
+│   └── views/                             // Blade-шаблоны фронтенда
 │       ├── frontend/
-│       │   ├── components/{footer.blade.php, header.blade.php} // повторно используемые куски
-│       │   ├── layouts/app.blade.php   // общий каркас страниц сайта
-│       │   └── home.blade.php          // главная страница с картой, видео и галереей
-│       └── welcome.blade.php           // стандартная заглушка Laravel
-├── routes/web.php                      // веб-маршруты (главная и т.д.)
-└── tasks/todo.md                       // текущий план/заметки
+│       │   ├── components/
+│       │   │   ├── footer.blade.php        // футер с контактами и кнопкой "Наверх"
+│       │   │   └── header.blade.php        // прозрачный header с навигацией и переключателем темы
+│       │   ├── layouts/
+│       │   │   └── app.blade.php          // общий каркас страниц (header, main, footer, JS для темы и скролла)
+│       │   └── home.blade.php              // главная страница: hero секция, новости (карусель), видео/карта, галерея
+│       └── welcome.blade.php               // стандартная заглушка Laravel
+├── routes/
+│   └── web.php                            // веб-маршруты: главная, storage/{path} для публичных файлов
+├── storage/app/public/                    // публичные файлы
+│   ├── main/                              // изображения галереи
+│   └── news/                              // изображения новостей
+└── tasks/
+    └── todo.md                            // текущий план/заметки
 
 ## Review
 
@@ -62,4 +107,13 @@ ssmp-moonshine/
 - На главной вместо сетки теперь бесконечная горизонтальная витрина: изображения дублируются, прокручиваются CSS-анимацией (останавливается при hover), адаптируются под ширину экрана; секция без фона, сверху в одной строке стоят блоки YouTube и карта одинакового размера.
 - Привёл `NewsResource::beforeCreating/beforeUpdating` к сигнатуре MoonShine (`mixed $item): mixed`) и возвращаю модель после генерации slug.
 - `HomeController` подгружает последние новости (`News`) с публичными URL изображений, `home.blade.php` выводит их сеткой карточек с картинкой и датой.
+- Фронтенд полностью переделан в стиле Aventro: header с sticky навигацией и плавными переходами, hero секция с градиентным фоном и CTA кнопками, секции новостей/видео/карты в виде современных карточек с тенями и hover-эффектами, footer в тёмном стиле с колонками навигации и контактов, добавлены глобальные стили с шрифтом Poppins и плавной прокруткой, мобильная адаптация с выезжающим меню.
+- Добавлен переключатель темы (темный/светлый режим): кнопка в header с иконками солнца/луны, автоматическое определение системной темы, сохранение выбора в localStorage, адаптированные стили для всех секций в темной теме.
+- Header сделан прозрачным с эффектом blur: по умолчанию `rgba(255, 255, 255, 0.1)` с `backdrop-filter: blur(10px)`, при скролле > 100px затемняется до `rgba(255, 255, 255, 0.95)`, белый текст с тенью в прозрачном состоянии, темный текст при скролле, адаптировано для темной темы.
+- Добавлена кнопка "Наверх" (Masthead): фиксированная позиция в правом нижнем углу, появляется при скролле > 300px, плавная прокрутка наверх при клике, адаптирована для мобильных устройств, работает в обеих темах.
+- Hero секция получила CSS паттерн с точками и шестиугольниками: сетка точек разного размера через radial-gradient, шестиугольники через repeating-linear-gradient под углами 0°/60°/120°, эффект перспективы через transform: perspective(), полупрозрачные элементы поверх градиентного фона.
+- Таблица `news` обновлена: добавлено поле `slug` с уникальным индексом и автогенерацией для кириллицы, поля `description` и `video_url` вместо `content`, формат даты изменён на русский с месяцем прописью (например, "28 октября, 2025").
+- Новости отображаются в горизонтальном карусельном формате: заголовок "НОВОСТИ" слева сверху, карточки фиксированной ширины (380px) с горизонтальной прокруткой, каждая карточка содержит изображение, заголовок, дату и кнопку "Читать Новость".
+- Создан `PublicStorageService` и маршрут `storage/{path}` для публичной раздачи файлов из `storage/app/public`, отключена автогенерация защищённого маршрута для приватного диска в `config/filesystems.php`.
+- Ресурсы `SettingResource` и `NewsResource` сгруппированы в меню MoonShine под разделом "Главный экран" в `MoonShineLayout.php`.
 

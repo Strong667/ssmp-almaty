@@ -1,11 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Storage\PublicStorageController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('storage/{path}', PublicStorageController::class)
+    ->where('path', '.*')
+    ->name('storage.public');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about/administration', [AboutController::class, 'administration'])->name('about.administration');
+Route::get('/about/schedule', [AboutController::class, 'schedule'])->name('about.schedule');
 

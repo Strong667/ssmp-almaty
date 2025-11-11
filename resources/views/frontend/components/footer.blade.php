@@ -1,50 +1,57 @@
-<footer class="text-white mt-5" style="background: linear-gradient(135deg, #0a567c 0%, #06415a 100%);">
-    <div class="container py-4">
-        <div class="row gy-4">
-            <div class="col-12 col-md-6 col-lg-4">
-                <h6 class="text-uppercase fw-semibold mb-3">Контакты</h6>
-                <ul class="list-unstyled small mb-0">
-                    <li class="d-flex align-items-start gap-2 mb-2">
-                        <i class="bi bi-geo-alt-fill"></i>
-                        <span>
-                            050000, Республика Казахстан, г. Алматы,<br>
-                            Алмалинский район, улица Казыбек би, 115
-                        </span>
-                    </li>
-                    <li class="d-flex align-items-start gap-2 mb-2">
-                        <i class="bi bi-envelope-fill"></i>
-                        <span>e-mail: Kgpssmp@ssmp-almaty.kz</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <h6 class="text-uppercase fw-semibold mb-3">Телефоны</h6>
-                <ul class="list-unstyled small mb-0">
-                    <li class="d-flex align-items-start gap-2 mb-2">
-                        <i class="bi bi-telephone-fill"></i>
-                        <span>103 <span class="opacity-75">(бесплатный с городского и мобильного телефона)</span></span>
-                    </li>
-                    <li class="d-flex align-items-start gap-2 mb-2">
-                        <i class="bi bi-telephone-plus-fill"></i>
-                        <span>+7 (727) 279-46-14</span>
-                    </li>
-                    <li class="d-flex align-items-start gap-2 mb-2">
-                        <i class="bi bi-headset"></i>
-                        <span>Call-центр: +7 (727) 300-05-05, Моб.: 13-12</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-lg-4">
-                <h6 class="text-uppercase fw-semibold mb-3">Мы на связи</h6>
-                <p class="small mb-3">Подпишитесь на новости и обновления медицинского центра.</p>
-                <form class="input-group input-group-sm">
-                    <input type="email" class="form-control border-0 rounded-0" placeholder="Ваш e-mail">
-                    <button class="btn btn-outline-light rounded-0" type="submit">Подписаться</button>
-                </form>
+<footer id="footer" class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-5 col-md-12 footer-info">
+                    <a href="{{ route('home') }}" class="logo d-flex align-items-center">
+                        <img src="{{ asset('slujba.png') }}" alt="Логотип" style="max-height: 50px;">
+                    </a>
+                    <p>Медицинский центр, предоставляющий профессиональную медицинскую помощь для вашего здоровья и благополучия.</p>
+                </div>
+
+                <div class="col-lg-2 col-6 footer-links">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="{{ route('home') }}">Главная</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#news">Новости</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-6 footer-contact">
+                    <h4>Контакты</h4>
+                    <p>
+                        050000, Республика Казахстан, г. Алматы,<br>
+                        Алмалинский район, улица Казыбек би, 115<br><br>
+                        <strong>Телефон:</strong> +7 (727) 279-46-14<br>
+                        <strong>Call-центр:</strong> +7 (727) 300-05-05<br>
+                        <strong>Email:</strong> Kgpssmp@ssmp-almaty.kz<br>
+                    </p>
+                </div>
+
+                <div class="col-lg-2 col-md-12 footer-links">
+                    <h4>Полезные ссылки</h4>
+                    <ul>
+                        <li><a href="#">Антикор. служба</a></li>
+                        <li><a href="#">Для населения</a></li>
+                        <li><a href="#">Гос. закупки</a></li>
+                        <li><a href="#">Гос. услуги</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="border-top border-light border-opacity-25 mt-4 pt-3 text-center small">
-            © {{ date('Y') }} Медицинский центр. Все права защищены.
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; {{ date('Y') }} <strong><span>Медицинский центр</span></strong>. Все права защищены.
         </div>
     </div>
 </footer>
+
+<!-- Back to Top Button -->
+<a href="#" id="back-to-top" class="back-to-top d-flex align-items-center justify-content-center" aria-label="Наверх">
+    <i class="bi bi-arrow-up"></i>
+</a>

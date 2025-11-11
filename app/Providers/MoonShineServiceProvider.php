@@ -13,6 +13,8 @@ use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
 use App\MoonShine\Resources\SettingResource;
 use App\MoonShine\Resources\NewsResource;
+use App\MoonShine\Resources\AdminResource;
+use App\MoonShine\Resources\CitizenScheduleResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -29,6 +31,8 @@ class MoonShineServiceProvider extends ServiceProvider
                 MoonShineUserRoleResource::class,
                 SettingResource::class,
                 NewsResource::class,
+                AdminResource::class,
+                CitizenScheduleResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

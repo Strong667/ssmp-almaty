@@ -33,6 +33,9 @@ use MoonShine\UI\Components\{Breadcrumbs,
 use App\MoonShine\Resources\SettingResource;
 use MoonShine\MenuManager\MenuItem;
 use App\MoonShine\Resources\NewsResource;
+use MoonShine\MenuManager\MenuGroup;
+use App\MoonShine\Resources\AdminResource;
+use App\MoonShine\Resources\CitizenScheduleResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -47,8 +50,14 @@ final class MoonShineLayout extends AppLayout
     {
         return [
             ...parent::menu(),
-            MenuItem::make('Settings', SettingResource::class),
-            MenuItem::make('News', NewsResource::class),
+            MenuGroup::make('Главный экран', [
+                MenuItem::make('Settings', SettingResource::class),
+                MenuItem::make('News', NewsResource::class),
+            ]),
+            MenuGroup::make('О нас', [
+                MenuItem::make('Администрация', AdminResource::class),
+                MenuItem::make('График приёма граждан', CitizenScheduleResource::class),
+            ]),
         ];
     }
 

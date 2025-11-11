@@ -9,7 +9,8 @@ class News extends Model
     protected $fillable = [
         'title',
         'slug',
-        'content',
+        'description',
+        'video_url',
         'image',
         'published_at',
     ];
@@ -20,7 +21,18 @@ class News extends Model
 
     public function getDisplayDateAttribute(): string
     {
-        return optional($this->published_at ?? $this->created_at)
-            ?->format('d.m.Y') ?? '';
+        $date = $this->published_at ?? $this->created_at;
+        
+        if (!$date) {
+            return '';
+        }
+
+        $months = [
+            1 => 'января', 2 => 'февраля', 3 => 'марта', 4 => 'апреля',
+            5 => 'мая', 6 => 'июня', 7 => 'июля', 8 => 'августа',
+            9 => 'сентября', 10 => 'октября', 11 => 'ноября', 12 => 'декабря'
+        ];
+
+        return $date->format('d') . ' ' . $months[$date->format('n')] . ', ' . $date->format('Y');
     }
 }
