@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Image;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -32,7 +30,10 @@ class SettingResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Заголовок', 'main_title'),
+            Image::make('Изображение', 'main_image')
+                ->disk('public')
+                ->dir('main')
+                ->removable(),
         ];
     }
 
@@ -43,13 +44,13 @@ class SettingResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Контент главной страницы', [
+            Box::make('Галерея', [
                 ID::make()->readonly(),
-                Text::make('Заголовок', 'main_title')->required(),
-                Textarea::make('Описание', 'main_description')->required(),
                 Image::make('Изображение', 'main_image')
-                    ->dir('main') // сохранение в /storage/app/public/main
-                    ->removable(),
+                    ->disk('public')
+                    ->dir('main')
+                    ->removable()
+                    ->required(),
             ]),
         ];
     }
@@ -62,9 +63,9 @@ class SettingResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Заголовок', 'main_title'),
-            Textarea::make('Описание', 'main_description'),
-            Image::make('Изображение', 'main_image'),
+            Image::make('Изображение', 'main_image')
+                ->disk('public')
+                ->dir('main'),
         ];
     }
 
@@ -76,8 +77,7 @@ class SettingResource extends ModelResource
     protected function rules(mixed $item): array
     {
         return [
-            'main_title' => ['required', 'string', 'max:255'],
-            'main_description' => ['required', 'string'],
+            'main_image' => ['required', 'file', 'image', 'max:5120'],
         ];
     }
 }
