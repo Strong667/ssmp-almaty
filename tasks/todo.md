@@ -16,44 +16,38 @@
 
 ## Текущая структура проекта
 
-moonshine_project/
-├── app/
-│   ├── Http/
-│   │   └── Controllers/
-│   │       └── Frontend/
-│   │           └── HomeController.php
-│   ├── Models/
-│   │   ├── Setting.php
-│   │   └── User.php
-│   └── MoonShine/
-│       ├── Layouts/
-│       ├── Pages/
+ssmp-moonshine/
+├── app/                               // PHP код приложения
+│   ├── Http/Controllers/Frontend/HomeController.php   // контроллер главной страницы, тянет изображения и медиа
+│   ├── Models/{Setting.php, User.php}                 // Eloquent-модели (настройки, пользователи)
+│   └── MoonShine/                                     // кастомизация MoonShine-админки
+│       ├── Layouts/MoonShineLayout.php                // макет панели управления
+│       ├── Pages/Dashboard.php                        // дашборд MoonShine
 │       └── Resources/
-│           ├── MoonShineUserResource.php
-│           ├── MoonShineUserRoleResource.php
-│           └── SettingResource.php
-├── database/
-│   └── migrations/
-│       ├── 0001_01_01_000000_create_users_table.php
-│       ├── 0001_01_01_000001_create_cache_table.php
-│       ├── 0001_01_01_000002_create_jobs_table.php
-│       ├── 2020_10_04_115514_create_moonshine_roles_table.php
-│       ├── 2020_10_05_173148_create_moonshine_tables.php
-│       ├── 2025_11_10_144815_create_notifications_table.php
-│       └── 2025_11_10_152732_create_settings_table.php
+│           ├── MoonShineUserResource.php              // CRUD для админ-пользователей
+│           ├── MoonShineUserRoleResource.php          // управление ролями MoonShine
+│           └── SettingResource.php                    // галерея изображений главной
+├── config/filesystems.php              // конфиг дисков: публичный корень /storage
+├── database/migrations/                // миграции БД
+│   ├── 0001_01_01_000000_create_users_table.php
+│   ├── 0001_01_01_000001_create_cache_table.php
+│   ├── 0001_01_01_000002_create_jobs_table.php
+│   ├── 2020_10_04_115514_create_moonshine_roles_table.php
+│   ├── 2020_10_05_173148_create_moonshine_tables.php
+│   ├── 2025_11_10_144815_create_notifications_table.php
+│   └── 2025_11_10_152732_create_settings_table.php
+├── public/slujba.png                   // логотип для хедера
 ├── resources/
-│   └── views/
+│   ├── css/app.css                     // глобальные стили Vite/Tailwind
+│   ├── js/{app.js, bootstrap.js}       // JS-энтрипойнты (Vite)
+│   └── views/                          // Blade-шаблоны фронтенда
 │       ├── frontend/
-│       │   ├── components/
-│       │   │   ├── footer.blade.php
-│       │   │   └── header.blade.php
-│       │   ├── layouts/
-│       │   │   └── app.blade.php
-│       │   └── home.blade.php
-│       └── welcome.blade.php
-├── routes/
-│   └── web.php
-└── ...
+│       │   ├── components/{footer.blade.php, header.blade.php} // повторно используемые куски
+│       │   ├── layouts/app.blade.php   // общий каркас страниц сайта
+│       │   └── home.blade.php          // главная страница с картой, видео и галереей
+│       └── welcome.blade.php           // стандартная заглушка Laravel
+├── routes/web.php                      // веб-маршруты (главная и т.д.)
+└── tasks/todo.md                       // текущий план/заметки
 
 ## Review
 
@@ -66,4 +60,6 @@ moonshine_project/
 - Обновлён `SettingResource`: убраны поля заголовка и описания, оставлена загрузка изображения и обновлена валидация (проверка файла/типа); админка работает как галерея, убран недоступный метод `rounded()`.
 - Для галереи изображения получают корректный публичный URL через `Storage::disk('public')->url(...)`; диск `public` переопределён на относительный путь (`/storage`), кеш конфигурации очищен, чтобы браузер не обращался к `http://localhost`.
 - На главной вместо сетки теперь бесконечная горизонтальная витрина: изображения дублируются, прокручиваются CSS-анимацией (останавливается при hover), адаптируются под ширину экрана; секция без фона, сверху в одной строке стоят блоки YouTube и карта одинакового размера.
+- Привёл `NewsResource::beforeCreating/beforeUpdating` к сигнатуре MoonShine (`mixed $item): mixed`) и возвращаю модель после генерации slug.
+- `HomeController` подгружает последние новости (`News`) с публичными URL изображений, `home.blade.php` выводит их сеткой карточек с картинкой и датой.
 
