@@ -36,6 +36,8 @@ use App\MoonShine\Resources\NewsResource;
 use MoonShine\MenuManager\MenuGroup;
 use App\MoonShine\Resources\AdminResource;
 use App\MoonShine\Resources\CitizenScheduleResource;
+use App\MoonShine\Resources\StructureResource;
+use App\MoonShine\Resources\MissionValueResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -57,6 +59,8 @@ final class MoonShineLayout extends AppLayout
             MenuGroup::make('О нас', [
                 MenuItem::make('Администрация', AdminResource::class),
                 MenuItem::make('График приёма граждан', CitizenScheduleResource::class),
+                MenuItem::make('Структура', StructureResource::class),
+                MenuItem::make('Миссия и ценности', MissionValueResource::class),
             ]),
         ];
     }

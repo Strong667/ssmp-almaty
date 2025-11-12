@@ -14,8 +14,10 @@
                         О нас <i class="bi bi-chevron-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="nav-link" href="{{ route('about.administration') }}">Администрация</a></li>
-                        <li><a class="nav-link" href="{{ route('about.schedule') }}">График приёма граждан</a></li>
+                        <li><a class="nav-link{{ request()->routeIs('about.administration') ? ' active' : '' }}" href="{{ route('about.administration') }}">Администрация</a></li>
+                        <li><a class="nav-link{{ request()->routeIs('about.schedule') ? ' active' : '' }}" href="{{ route('about.schedule') }}">График приёма граждан</a></li>
+                        <li><a class="nav-link{{ request()->routeIs('about.structure') ? ' active' : '' }}" href="{{ route('about.structure') }}">Структура</a></li>
+                        <li><a class="nav-link{{ request()->routeIs('about.mission') ? ' active' : '' }}" href="{{ route('about.mission') }}">Миссия и ценности</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-link scrollto" href="#services">Услуги</a></li>
