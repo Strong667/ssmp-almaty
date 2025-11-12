@@ -1,17 +1,52 @@
 <?php
 
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Storage\PublicStorageController;
+use App\Http\Middleware\UseWebGuard;
+use App\MoonShine\Resources\Home\Pages\HomePage;
+use App\MoonShine\Resources\About\Pages\AdministrationPage;
+use App\MoonShine\Resources\About\Pages\SchedulePage;
+use App\MoonShine\Resources\About\Pages\StructurePage;
+use App\MoonShine\Resources\About\Pages\MissionPage;
+use App\MoonShine\Resources\About\Pages\EthicalCodePage;
+use App\MoonShine\Resources\About\Pages\IncomeExpensePage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', PublicStorageController::class)
     ->where('path', '.*')
     ->name('storage.public');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about/administration', [AboutController::class, 'administration'])->name('about.administration');
-Route::get('/about/schedule', [AboutController::class, 'schedule'])->name('about.schedule');
-Route::get('/about/structure', [AboutController::class, 'structure'])->name('about.structure');
-Route::get('/about/mission', [AboutController::class, 'mission'])->name('about.mission');
+// Middleware для переключения на web guard для публичных страниц
+Route::middleware([UseWebGuard::class])->group(function () {
+    
+    // Главная страница
+    Route::get('/', function () {
+        $page = app(HomePage::class);
+        return $page->render();
+    })->name('home');
+    
+    // Страницы О нас
+    Route::get('/about/administration', function () {
+        return app(AdministrationPage::class)->render();
+    })->name('about.administration');
+    
+    Route::get('/about/schedule', function () {
+        return app(SchedulePage::class)->render();
+    })->name('about.schedule');
+    
+    Route::get('/about/structure', function () {
+        return app(StructurePage::class)->render();
+    })->name('about.structure');
+    
+    Route::get('/about/mission', function () {
+        return app(MissionPage::class)->render();
+    })->name('about.mission');
+    
+    Route::get('/about/ethical-code', function () {
+        return app(EthicalCodePage::class)->render();
+    })->name('about.ethical-code');
+    
+    Route::get('/about/income-expense', function () {
+        return app(IncomeExpensePage::class)->render();
+    })->name('about.income-expense');
+});
 

@@ -10,6 +10,7 @@ use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\{ID, Text, Image, Date};
 use MoonShine\TinyMce\Fields\TinyMce;
+use MoonShine\UI\Components\Layout\TopBar;
 
 class NewsResource extends ModelResource
 {

@@ -41,7 +41,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'moonshine',
         ],
         'moonshine' => [
             'driver' => 'session',

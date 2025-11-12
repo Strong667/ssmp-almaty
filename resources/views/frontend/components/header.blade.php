@@ -18,6 +18,8 @@
                         <li><a class="nav-link{{ request()->routeIs('about.schedule') ? ' active' : '' }}" href="{{ route('about.schedule') }}">График приёма граждан</a></li>
                         <li><a class="nav-link{{ request()->routeIs('about.structure') ? ' active' : '' }}" href="{{ route('about.structure') }}">Структура</a></li>
                         <li><a class="nav-link{{ request()->routeIs('about.mission') ? ' active' : '' }}" href="{{ route('about.mission') }}">Миссия и ценности</a></li>
+                        <li><a class="nav-link{{ request()->routeIs('about.ethical-code') ? ' active' : '' }}" href="{{ route('about.ethical-code') }}">Этический кодекс</a></li>
+                        <li><a class="nav-link{{ request()->routeIs('about.income-expense') ? ' active' : '' }}" href="{{ route('about.income-expense') }}">Отчёты о доходах и расходах</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-link scrollto" href="#services">Услуги</a></li>

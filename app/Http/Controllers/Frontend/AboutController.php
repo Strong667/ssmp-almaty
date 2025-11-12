@@ -7,6 +7,9 @@ use App\Models\Admin;
 use App\Models\CitizenSchedule;
 use App\Models\Structure;
 use App\Models\MissionValue;
+use App\Models\EthicalCode;
+use App\Models\IncomeExpenseReport;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
@@ -45,6 +48,34 @@ class AboutController extends Controller
             ->get();
 
         return view('frontend.about.mission', compact('missionValues'));
+    }
+
+    public function ethicalCode()
+    {
+        $ethicalCodes = EthicalCode::query()
+            ->orderByDesc('created_at')
+            ->get()
+            ->each(function (EthicalCode $item) {
+                $item->pdf_url = $item->pdf_path
+                    ? Storage::disk('public')->url($item->pdf_path)
+                    : null;
+            });
+
+        return view('frontend.about.ethical-code', compact('ethicalCodes'));
+    }
+
+    public function incomeExpense()
+    {
+        $reports = IncomeExpenseReport::query()
+            ->orderByDesc('created_at')
+            ->get()
+            ->each(function (IncomeExpenseReport $item) {
+                $item->file_url = $item->file_path
+                    ? Storage::disk('public')->url($item->file_path)
+                    : null;
+            });
+
+        return view('frontend.about.income-expense', compact('reports'));
     }
 }
 

@@ -17,6 +17,10 @@ use App\MoonShine\Resources\Admin\AdminResource;
 use App\MoonShine\Resources\CitizenSchedule\CitizenScheduleResource;
 use App\MoonShine\Resources\Structure\StructureResource;
 use App\MoonShine\Resources\MissionValue\MissionValueResource;
+use App\MoonShine\Resources\EthicalCode\EthicalCodeResource;
+use App\MoonShine\Resources\IncomeExpenseReport\IncomeExpenseReportResource;
+use App\MoonShine\Resources\Home\HomeResource;
+use App\MoonShine\Resources\About\AboutResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -37,6 +41,11 @@ class MoonShineServiceProvider extends ServiceProvider
                 CitizenScheduleResource::class,
                 StructureResource::class,
                 MissionValueResource::class,
+                EthicalCodeResource::class,
+                IncomeExpenseReportResource::class,
+                // Публичные ресурсы для веб-страниц
+                HomeResource::class,
+                AboutResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

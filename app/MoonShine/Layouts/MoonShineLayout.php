@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use MoonShine\Crud\Components\Fragment;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
@@ -29,7 +30,8 @@ use MoonShine\UI\Components\{Breadcrumbs,
     Layout\ThemeSwitcher,
     Layout\TopBar,
     Layout\Wrapper,
-    When};
+    When
+};
 use App\MoonShine\Resources\Setting\SettingResource;
 use MoonShine\MenuManager\MenuItem;
 use App\MoonShine\Resources\News\NewsResource;
@@ -38,6 +40,8 @@ use App\MoonShine\Resources\Admin\AdminResource;
 use App\MoonShine\Resources\CitizenSchedule\CitizenScheduleResource;
 use App\MoonShine\Resources\Structure\StructureResource;
 use App\MoonShine\Resources\MissionValue\MissionValueResource;
+use App\MoonShine\Resources\EthicalCode\EthicalCodeResource;
+use App\MoonShine\Resources\IncomeExpenseReport\IncomeExpenseReportResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -61,6 +65,8 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(CitizenScheduleResource::class, 'График приёма граждан'),
                 MenuItem::make(StructureResource::class, 'Структура'),
                 MenuItem::make(MissionValueResource::class, 'Миссия и ценности'),
+                MenuItem::make(EthicalCodeResource::class, 'Этический кодекс'),
+                MenuItem::make(IncomeExpenseReportResource::class, 'Отчёты о доходах и расходах'),
             ]),
         ];
     }
