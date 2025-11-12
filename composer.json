@@ -9,7 +9,7 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "moonshine/moonshine": "^3.16",
+        "moonshine/moonshine": "^4.0",
         "moonshine/tinymce": "^2.0"
     },
     "require-dev": {
@@ -19,7 +19,8 @@
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^11.5.3"
+        "phpunit/phpunit": "^11.5.3",
+        "warete/moonshine-upgrade": "^1.0"
     },
     "autoload": {
         "psr-4": {

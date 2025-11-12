@@ -2,51 +2,50 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources;
+namespace App\MoonShine\Resources\News;
 
 use App\Models\News;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\{ID, Text, Image, Date};
 use MoonShine\TinyMce\Fields\TinyMce;
-use MoonShine\Contracts\UI\FieldContract;
-use MoonShine\Contracts\UI\ComponentContract;
-use Illuminate\Support\Str;
 
-/**
- * @extends ModelResource<News>
- */
 class NewsResource extends ModelResource
 {
     protected string $model = News::class;
     protected string $title = 'Новости';
 
+    /** Если нужны eager‑загрузки: */
+    // protected array $with = [];
+
     /**
-     * Отображаемые поля в таблице (index)
+     * Поля в таблице (index)
      *
-     * @return list<FieldContract>
+     * @return iterable
      */
     protected function indexFields(): iterable
     {
         return [
             ID::make()->sortable(),
-            Text::make('Заголовок', 'title'),
-            Date::make('Дата публикации', 'published_at'),
+            Text::make('Заголовок', 'title')->sortable(),
+            Date::make('Дата публикации', 'published_at')->sortable(),
         ];
     }
 
     /**
      * Поля в форме создания/редактирования
      *
-     * @return list<ComponentContract|FieldContract>
+     * @return iterable
      */
     protected function formFields(): iterable
     {
         return [
             Box::make('Основная информация', [
-                ID::make(),
-                Text::make('Заголовок', 'title')->required(),
+                ID::make()->readonly(),
+                Text::make('Заголовок', 'title')
+                    ->required()
+                    ->justSaved(fn (News $item) => $item->slug = $this->makeUniqueSlug($item)),
                 TinyMce::make('Описание', 'description')->required(),
                 Text::make('Видео (URL)', 'video_url')
                     ->placeholder('https://...')
@@ -55,8 +54,9 @@ class NewsResource extends ModelResource
                 Image::make('Изображение', 'image')
                     ->dir('news')
                     ->disk('public')
-                    ->removable(),
-                Date::make('Дата публикации', 'published_at'),
+                    ->removable()
+                    ->nullable(),
+                Date::make('Дата публикации', 'published_at')->required(),
             ]),
         ];
     }
@@ -64,7 +64,7 @@ class NewsResource extends ModelResource
     /**
      * Поля на странице просмотра детали
      *
-     * @return list<FieldContract>
+     * @return iterable
      */
     protected function detailFields(): iterable
     {
@@ -79,53 +79,72 @@ class NewsResource extends ModelResource
     }
 
     /**
-     * Валидация
+     * Правила валидации
      *
-     * @param News $item
+     * @param  mixed  $item
+     * @return array
      */
     protected function rules(mixed $item): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required'],
-            'video_url' => ['nullable', 'url'],
-            'image' => ['nullable', 'image'],
+            'title'      => ['required', 'string', 'max:255'],
+            'description'=> ['required', 'string'],
+            'video_url'  => ['nullable', 'url'],
+            'image'      => ['nullable', 'image'],
+            'published_at'=> ['required', 'date'],
         ];
     }
 
-    public function beforeCreating(mixed $item): mixed
+    /**
+     * Хук перед сохранением (создание или обновление)
+     *
+     * @param  mixed  $item
+     * @return void
+     */
+    protected function saving(mixed $item): void
     {
-        $item->slug = $this->makeUniqueSlug($item);
-
-        return $item;
+        if ($item instanceof News) {
+            $item->slug = $this->makeUniqueSlug($item);
+        }
     }
 
-    public function beforeUpdating(mixed $item): mixed
-    {
-        $item->slug = $this->makeUniqueSlug($item);
-
-        return $item;
-    }
-
+    /**
+     * Генерация уникального slug
+     *
+     * @param  News  $item
+     * @return string
+     */
     private function makeUniqueSlug(News $item): string
     {
         $base = Str::slug($item->title ?? '', '-', 'ru')
             ?: Str::slug($item->title ?? '', '-', app()->getFallbackLocale())
-            ?: 'news';
+                ?: 'news';
 
         $slug = $base;
         $suffix = 1;
 
         while (
-            News::query()
-                ->where('slug', $slug)
-                ->when($item->exists, fn ($query) => $query->where('id', '!=', $item->id))
-                ->exists()
+        News::query()
+            ->where('slug', $slug)
+            ->when($item->exists, fn($q) => $q->where('id', '!=', $item->id))
+            ->exists()
         ) {
             $slug = "{$base}-{$suffix}";
             $suffix++;
         }
 
         return $slug;
+    }
+
+    /**
+     * Поля для поиска
+     *
+     * @return array
+     */
+    protected function search(): array
+    {
+        return [
+            'title',
+        ];
     }
 }

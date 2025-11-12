@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages;
 
+use MoonShine\MenuManager\Attributes\SkipMenu;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
-#[\MoonShine\MenuManager\Attributes\SkipMenu]
+#[SkipMenu]
 
 class Dashboard extends Page
 {

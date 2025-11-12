@@ -9,14 +9,14 @@ use MoonShine\Contracts\Core\DependencyInjection\ConfiguratorContract;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\DependencyInjection\MoonShine;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
-use App\MoonShine\Resources\MoonShineUserResource;
-use App\MoonShine\Resources\MoonShineUserRoleResource;
-use App\MoonShine\Resources\SettingResource;
-use App\MoonShine\Resources\NewsResource;
-use App\MoonShine\Resources\AdminResource;
-use App\MoonShine\Resources\CitizenScheduleResource;
-use App\MoonShine\Resources\StructureResource;
-use App\MoonShine\Resources\MissionValueResource;
+use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
+use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
+use App\MoonShine\Resources\Setting\SettingResource;
+use App\MoonShine\Resources\News\NewsResource;
+use App\MoonShine\Resources\Admin\AdminResource;
+use App\MoonShine\Resources\CitizenSchedule\CitizenScheduleResource;
+use App\MoonShine\Resources\Structure\StructureResource;
+use App\MoonShine\Resources\MissionValue\MissionValueResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {

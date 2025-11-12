@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources;
+namespace App\MoonShine\Resources\MoonShineUserRole;
 
+use MoonShine\Support\Enums\Action;
 use Illuminate\Contracts\Validation\Rule;
-use MoonShine\Laravel\Enums\Action;
 use MoonShine\Laravel\Models\MoonshineUserRole;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\Icon;
 use MoonShine\Support\ListOf;
-use MoonShine\UI\Components\Layout\Box;
-use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Text;
-use Stringable;
+use App\MoonShine\Pages\MoonShineUserRole\MoonShineUserRoleIndexPage;
+use App\MoonShine\Pages\MoonShineUserRole\MoonShineUserRoleFormPage;
+use MoonShine\Crud\Contracts\Page\DetailPageContract;
 
 #[Icon('bookmark')]
 #[Group('moonshine::ui.resource.system', 'users', translatable: true)]
@@ -37,6 +36,18 @@ class MoonShineUserRoleResource extends ModelResource
 
     protected bool $cursorPaginate = true;
 
+    /**
+     * @return list<class-string<\MoonShine\Contracts\Core\PageContract>>
+     */
+    protected function pages(): array
+    {
+        return [
+            MoonShineUserRoleIndexPage::class,
+            MoonShineUserRoleFormPage::class,
+            DetailPageContract::class,
+        ];
+    }
+
     public function getTitle(): string
     {
         return __('moonshine::ui.resource.role');
@@ -45,30 +56,6 @@ class MoonShineUserRoleResource extends ModelResource
     protected function activeActions(): ListOf
     {
         return parent::activeActions()->except(Action::VIEW);
-    }
-
-    protected function indexFields(): iterable
-    {
-        return [
-            ID::make()->sortable(),
-            Text::make(__('moonshine::ui.resource.role_name'), 'name'),
-        ];
-    }
-
-    protected function detailFields(): iterable
-    {
-        return $this->indexFields();
-    }
-
-    protected function formFields(): iterable
-    {
-        return [
-            Box::make([
-                ID::make()->sortable(),
-                Text::make(__('moonshine::ui.resource.role_name'), 'name')
-                    ->required(),
-            ]),
-        ];
     }
 
     /**

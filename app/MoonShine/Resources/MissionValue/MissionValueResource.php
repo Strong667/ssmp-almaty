@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources;
+namespace App\MoonShine\Resources\MissionValue;
 
 use App\Models\MissionValue;
 use MoonShine\Laravel\Resources\ModelResource;

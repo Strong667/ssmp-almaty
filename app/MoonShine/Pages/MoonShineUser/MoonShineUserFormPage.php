@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources;
+namespace App\MoonShine\Pages\MoonShineUser;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Validation\Rule;
-use MoonShine\Laravel\Enums\Action;
+use Illuminate\Validation\Rules\Password as PasswordRule;
+use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Models\MoonshineUser;
-use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Laravel\Models\MoonshineUserRole;
-use MoonShine\MenuManager\Attributes\Group;
-use MoonShine\MenuManager\Attributes\Order;
-use MoonShine\Support\Attributes\Icon;
-use MoonShine\Support\Enums\Color;
-use MoonShine\Support\ListOf;
+use MoonShine\Laravel\Pages\Crud\FormPage;
+use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
+use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use MoonShine\UI\Components\Collapse;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Flex;
@@ -28,75 +28,22 @@ use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Password;
 use MoonShine\UI\Fields\PasswordRepeat;
 use MoonShine\UI\Fields\Text;
-use Stringable;
 
-#[Icon('users')]
-#[Group('moonshine::ui.resource.system', 'users', translatable: true)]
-#[Order(1)]
 /**
- * @extends ModelResource<MoonshineUser>
+ * @extends FormPage<MoonShineUserResource, MoonShineUser>
  */
-class MoonShineUserResource extends ModelResource
+final class MoonShineUserFormPage extends FormPage
 {
-    protected string $model = MoonshineUser::class;
-
-    protected string $column = 'name';
-
-    protected array $with = ['moonshineUserRole'];
-
-    protected bool $simplePaginate = true;
-
-    protected bool $columnSelection = true;
-
-    public function getTitle(): string
-    {
-        return __('moonshine::ui.resource.admins_title');
-    }
-
-    protected function activeActions(): ListOf
-    {
-        return parent::activeActions()->except(Action::VIEW);
-    }
-
-    protected function indexFields(): iterable
-    {
-        return [
-            ID::make()->sortable(),
-
-            BelongsTo::make(
-                __('moonshine::ui.resource.role'),
-                'moonshineUserRole',
-                formatted: static fn (MoonshineUserRole $model) => $model->name,
-                resource: MoonShineUserRoleResource::class,
-            )->badge(Color::PURPLE),
-
-            Text::make(__('moonshine::ui.resource.name'), 'name'),
-
-            Image::make(__('moonshine::ui.resource.avatar'), 'avatar')->modifyRawValue(fn (
-                ?string $raw
-            ): string => $raw ?? ''),
-
-            Date::make(__('moonshine::ui.resource.created_at'), 'created_at')
-                ->format("d.m.Y")
-                ->sortable(),
-
-            Email::make(__('moonshine::ui.resource.email'), 'email')
-                ->sortable(),
-        ];
-    }
-
-    protected function detailFields(): iterable
-    {
-        return $this->indexFields();
-    }
-
-    protected function formFields(): iterable
+    /**
+     * @return list<ComponentContract|FieldContract>
+     */
+    protected function fields(): iterable
     {
         return [
             Box::make([
                 Tabs::make([
                     Tab::make(__('moonshine::ui.resource.main_information'), [
-                        ID::make()->sortable(),
+                        ID::make(),
 
                         BelongsTo::make(
                             __('moonshine::ui.resource.role'),
@@ -131,7 +78,7 @@ class MoonShineUserResource extends ModelResource
                                 ->customAttributes(['autocomplete' => 'new-password'])
                                 ->eye(),
 
-                            PasswordRepeat::make(__('moonshine::ui.resource.repeat_password'), 'password_repeat')
+                            PasswordRepeat::make(__('moonshine::ui.resource.repeat_password'), 'password_confirmation')
                                 ->customAttributes(['autocomplete' => 'confirm-password'])
                                 ->eye(),
                         ])->icon('lock-closed'),
@@ -141,10 +88,7 @@ class MoonShineUserResource extends ModelResource
         ];
     }
 
-    /**
-     * @return array<string, string[]|string|list<Rule>|list<Stringable>>
-     */
-    protected function rules($item): array
+    protected function rules(DataWrapperContract $item): array
     {
         return [
             'name' => 'required',
@@ -154,34 +98,15 @@ class MoonShineUserResource extends ModelResource
                 'bail',
                 'required',
                 'email',
-                Rule::unique('moonshine_users')->ignoreModel($item),
+                Rule::unique('moonshine_users')->ignoreModel($item->getOriginal()),
             ],
             'avatar' => ['sometimes', 'nullable', 'image', 'mimes:jpeg,jpg,png,gif'],
-            'password' => $item->exists
-                ? 'sometimes|nullable|min:6|required_with:password_repeat|same:password_repeat'
-                : 'required|min:6|required_with:password_repeat|same:password_repeat',
-        ];
-    }
-
-    protected function search(): array
-    {
-        return [
-            'id',
-            'name',
-        ];
-    }
-
-    protected function filters(): iterable
-    {
-        return [
-            BelongsTo::make(
-                __('moonshine::ui.resource.role'),
-                'moonshineUserRole',
-                formatted: static fn (MoonshineUserRole $model) => $model->name,
-                resource: MoonShineUserRoleResource::class,
-            )->valuesQuery(static fn (Builder $q) => $q->select(['id', 'name'])),
-
-            Email::make('E-mail', 'email'),
+            'password' => [
+                ...$item->getKey() !== null ? ['sometimes', 'nullable'] : ['required'],
+                PasswordRule::defaults(),
+                'confirmed',
+            ],
         ];
     }
 }
+

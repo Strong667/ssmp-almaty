@@ -1,10 +1,29 @@
+## Описание проекта
+
+**SSMP Almaty** - официальный сайт государственного учреждения с админ-панелью для управления контентом.
+
+### Основные функции:
+- **Публичный сайт**: главная страница с новостями, информацией об администрации, графике приёма граждан, структуре организации, миссии и ценностях
+- **Админ-панель MoonShine**: управление контентом через удобный интерфейс
+- **Управление новостями**: создание, редактирование новостей с изображениями и видео
+- **Галерея изображений**: управление изображениями для главной страницы
+- **Управление администрацией**: информация о руководстве организации
+- **График приёма граждан**: расписание приёма посетителей
+- **Структура организации**: информация о подразделениях
+- **Миссия и ценности**: описание миссии и ценностей организации
+
+### Архитектура:
+- **Backend**: Laravel 12 + MoonShine 4.0 (админ-панель)
+- **Frontend**: Blade шаблоны + Bootstrap 5.3.3 + Vite
+- **База данных**: MySQL с миграциями Laravel
+
 ## План обзора проекта (2025-11-11)
 
 - [x] Собрать ключевые артефакты (маршруты, контроллеры, модели, ресурсы MoonShine)
 - [x] Разобрать фронтенд-шаблоны и компоненты
-- [ ] Проанализировать миграции и структуру данных
-- [ ] Сформировать описание назначения проекта и основных функций
-- [ ] Подготовить обзор возможностей MoonShine-админки
+- [x] Проанализировать миграции и структуру данных
+- [x] Сформировать описание назначения проекта и основных функций
+- [x] Подготовить обзор возможностей MoonShine-админки
 
 ## План по главной странице
 
@@ -22,6 +41,39 @@
 - [x] Обновить footer в стиле Aventro с современной типографикой.
 - [x] Добавить глобальные стили и анимации в стиле Aventro.
 
+## Версии технологий
+
+### Backend
+- **PHP**: ^8.2 (текущая версия: 8.4.13)
+- **Laravel Framework**: ^12.0 (текущая версия: 12.37.0)
+- **MoonShine**: ^4.0 (текущая версия: 4.0.1)
+- **MoonShine TinyMCE**: ^2.0
+
+### Frontend
+- **Bootstrap**: 5.3.3 (подключен через CDN)
+- **Bootstrap Icons**: через CDN
+- **Vite**: ^7.0.7 (для сборки ассетов)
+- **Tailwind CSS**: ^4.0.0 (через Vite плагин)
+- **Axios**: ^1.11.0
+- **Blade**: шаблонизатор Laravel
+
+### База данных
+- **MySQL**: основная БД
+- **Миграции**: Laravel migrations для управления схемой БД
+
+### Объяснение версий
+
+**Laravel 12** - последняя мажорная версия фреймворка с улучшенной производительностью и новыми возможностями.
+
+**MoonShine 4.0** - значительное обновление админ-панели с новой архитектурой:
+- Поля определяются в страницах (метод `fields()`), а не в ресурсах
+- Изменена структура ресурсов - методы `indexFields()`, `formFields()` перенесены в страницы
+- Удален метод `searchable()` для полей - поиск настраивается через метод `search()` в ресурсе
+- Изменена конфигурация аутентификации - `auth.middleware` должен быть массивом
+- Требуется явное указание кастомных страниц через метод `pages()` в ресурсе
+
+**PHP 8.2+** - современная версия PHP с улучшенной производительностью и поддержкой новых возможностей языка.
+
 ## Текущая структура проекта
 
 ssmp-almaty/
@@ -34,29 +86,53 @@ ssmp-almaty/
 │   │   │   └── HomeController.php         // контроллер главной страницы, загружает новости и изображения
 │   │   └── Storage/
 │   │       └── PublicStorageController.php // контроллер для публичной раздачи файлов из storage
-│   ├── Models/
-│   │   ├── News.php                       // модель новостей (title, slug, description, video_url, image, published_at)
+│   ├── Models/                             // Eloquent модели
+│   │   ├── Admin.php                       // модель администрации (full_name, position, email, image)
+│   │   ├── CitizenSchedule.php            // модель графика приёма граждан (full_name, position, day, time)
+│   │   ├── MissionValue.php               // модель миссии и ценностей (title, description)
+│   │   ├── News.php                        // модель новостей (title, slug, description, video_url, image, published_at)
 │   │   ├── Setting.php                    // модель настроек (main_image для галереи)
-│   │   └── User.php                       // модель пользователей
-│   ├── MoonShine/                         // кастомизация MoonShine-админки
+│   │   ├── Structure.php                   // модель структуры (title, image)
+│   │   └── User.php                        // модель пользователей Laravel
+│   ├── MoonShine/                          // кастомизация MoonShine-админки
 │   │   ├── Layouts/
-│   │   │   └── MoonShineLayout.php        // макет панели управления с меню "Главный экран"
-│   │   ├── Pages/
-│   │   │   └── Dashboard.php              // дашборд MoonShine
-│   │   └── Resources/
-│   │       ├── MoonShineUserResource.php   // CRUD для админ-пользователей
-│   │       ├── MoonShineUserRoleResource.php // управление ролями MoonShine
-│   │       ├── NewsResource.php           // CRUD новостей (заголовок, описание, видео, картинка)
-│   │       └── SettingResource.php        // галерея изображений главной страницы
+│   │   │   └── MoonShineLayout.php         // макет панели управления с меню "Главный экран" и "О нас"
+│   │   ├── Pages/                           // кастомные страницы для ресурсов
+│   │   │   ├── Dashboard.php                // дашборд MoonShine
+│   │   │   ├── MoonShineUser/               // страницы для управления пользователями админки
+│   │   │   │   ├── MoonShineUserIndexPage.php
+│   │   │   │   └── MoonShineUserFormPage.php
+│   │   │   └── MoonShineUserRole/           // страницы для управления ролями
+│   │   │       ├── MoonShineUserRoleIndexPage.php
+│   │   │       └── MoonShineUserRoleFormPage.php
+│   │   └── Resources/                      // ресурсы MoonShine (CRUD для моделей)
+│   │       ├── Admin/                       // CRUD администрации
+│   │       │   └── AdminResource.php
+│   │       ├── CitizenSchedule/             // CRUD графика приёма граждан
+│   │       │   └── CitizenScheduleResource.php
+│   │       ├── MissionValue/                // CRUD миссии и ценностей
+│   │       │   └── MissionValueResource.php
+│   │       ├── MoonShineUser/               // CRUD админ-пользователей (использует кастомные страницы)
+│   │       │   └── MoonShineUserResource.php
+│   │       ├── MoonShineUserRole/           // CRUD ролей (использует кастомные страницы)
+│   │       │   └── MoonShineUserRoleResource.php
+│   │       ├── News/                        // CRUD новостей
+│   │       │   └── NewsResource.php
+│   │       ├── Setting/                     // CRUD настроек (галерея изображений)
+│   │       │   └── SettingResource.php
+│   │       └── Structure/                   // CRUD структуры
+│   │           └── StructureResource.php
 │   ├── Providers/
-│   │   ├── AppServiceProvider.php         // сервис-провайдер приложения
-│   │   └── MoonShineServiceProvider.php   // регистрация ресурсов MoonShine
+│   │   ├── AppServiceProvider.php           // сервис-провайдер приложения
+│   │   └── MoonShineServiceProvider.php     // регистрация ресурсов MoonShine
 │   └── Services/
 │       └── Storage/
-│           └── PublicStorageService.php  // сервис для раздачи публичных файлов
-├── config/
-│   └── filesystems.php                    // конфиг дисков: публичный корень /storage, отключен serve для local
-├── database/migrations/                    // миграции БД
+│           └── PublicStorageService.php     // сервис для раздачи публичных файлов
+├── config/                                  // конфигурационные файлы
+│   ├── auth.php                            // конфигурация аутентификации (добавлен guard 'moonshine')
+│   ├── filesystems.php                     // конфиг дисков: публичный корень /storage
+│   └── moonshine.php                       // конфигурация MoonShine 4.0
+├── database/migrations/                     // миграции БД
 │   ├── 0001_01_01_000000_create_users_table.php
 │   ├── 0001_01_01_000001_create_cache_table.php
 │   ├── 0001_01_01_000002_create_jobs_table.php
@@ -67,32 +143,32 @@ ssmp-almaty/
 │   ├── 2025_11_11_113824_create_news_table.php
 │   ├── 2025_11_11_200000_add_slug_to_news_table.php // добавление slug с уникальным индексом
 │   └── 2025_11_11_201500_update_news_fields.php    // замена content на description и video_url
-├── public/
-│   ├── slujba.png                         // логотип для хедера
-│   └── build/                             // скомпилированные Vite ассеты
+├── public/                                  // публичная директория
+│   ├── slujba.png                          // логотип для хедера
+│   └── build/                              // скомпилированные Vite ассеты
 │       ├── manifest.json
 │       └── assets/
-├── resources/
-│   ├── css/app.css                        // глобальные стили Vite
+├── resources/                               // исходники фронтенда
+│   ├── css/app.css                         // глобальные стили Vite
 │   ├── js/
-│   │   ├── app.js                         // JS-энтрипойнт (Vite)
-│   │   └── bootstrap.js                   // Bootstrap инициализация
-│   └── views/                             // Blade-шаблоны фронтенда
+│   │   ├── app.js                          // JS-энтрипойнт (Vite)
+│   │   └── bootstrap.js                    // Bootstrap инициализация
+│   └── views/                              // Blade-шаблоны фронтенда
 │       ├── frontend/
 │       │   ├── components/
-│       │   │   ├── footer.blade.php        // футер с контактами и кнопкой "Наверх"
+│       │   │   ├── footer.blade.php         // футер с контактами и кнопкой "Наверх"
 │       │   │   └── header.blade.php        // прозрачный header с навигацией и переключателем темы
 │       │   ├── layouts/
-│       │   │   └── app.blade.php          // общий каркас страниц (header, main, footer, JS для темы и скролла)
+│       │   │   └── app.blade.php           // общий каркас страниц (header, main, footer, JS для темы и скролла)
 │       │   └── home.blade.php              // главная страница: hero секция, новости (карусель), видео/карта, галерея
-│       └── welcome.blade.php               // стандартная заглушка Laravel
+│       └── welcome.blade.php                // стандартная заглушка Laravel
 ├── routes/
-│   └── web.php                            // веб-маршруты: главная, storage/{path} для публичных файлов
-├── storage/app/public/                    // публичные файлы
-│   ├── main/                              // изображения галереи
-│   └── news/                              // изображения новостей
+│   └── web.php                             // веб-маршруты: главная, storage/{path} для публичных файлов
+├── storage/app/public/                     // публичные файлы
+│   ├── main/                               // изображения галереи
+│   └── news/                               // изображения новостей
 └── tasks/
-    └── todo.md                            // текущий план/заметки
+    └── todo.md                             // текущий план/заметки
 
 ## Review
 
@@ -116,4 +192,5 @@ ssmp-almaty/
 - Новости отображаются в горизонтальном карусельном формате: заголовок "НОВОСТИ" слева сверху, карточки фиксированной ширины (380px) с горизонтальной прокруткой, каждая карточка содержит изображение, заголовок, дату и кнопку "Читать Новость".
 - Создан `PublicStorageService` и маршрут `storage/{path}` для публичной раздачи файлов из `storage/app/public`, отключена автогенерация защищённого маршрута для приватного диска в `config/filesystems.php`.
 - Ресурсы `SettingResource` и `NewsResource` сгруппированы в меню MoonShine под разделом "Главный экран" в `MoonShineLayout.php`.
+- Обновление MoonShine с версии 3 на версию 4: добавлен guard 'moonshine' в `config/auth.php` с provider и password reset broker для корректной работы аутентификации; исправлены типы возвращаемых значений в `NewsResource` (array -> iterable, методы сделаны protected) для совместимости с MoonShine 4; исправлен `auth.middleware` в `config/moonshine.php` (должен быть массивом `[Authenticate::class]`); исправлены сигнатуры методов `rules()` и `saving()` в `NewsResource` (параметры должны быть `mixed`, методы должны быть `protected`); удален метод `searchable()` из полей - поиск настроен через метод `search()` в ресурсе; созданы кастомные страницы для `MoonShineUserResource` и `MoonShineUserRoleResource` (`app/MoonShine/Pages/MoonShineUser/*` и `app/MoonShine/Pages/MoonShineUserRole/*`) для использования кастомных ресурсов вместо ресурсов из vendor; удалены методы `indexFields()`, `formFields()`, `detailFields()` из ресурсов - поля теперь определяются в страницах через метод `fields()`; все ресурсы проверены на совместимость с новой версией.
 

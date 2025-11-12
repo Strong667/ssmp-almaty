@@ -30,14 +30,14 @@ use MoonShine\UI\Components\{Breadcrumbs,
     Layout\TopBar,
     Layout\Wrapper,
     When};
-use App\MoonShine\Resources\SettingResource;
+use App\MoonShine\Resources\Setting\SettingResource;
 use MoonShine\MenuManager\MenuItem;
-use App\MoonShine\Resources\NewsResource;
+use App\MoonShine\Resources\News\NewsResource;
 use MoonShine\MenuManager\MenuGroup;
-use App\MoonShine\Resources\AdminResource;
-use App\MoonShine\Resources\CitizenScheduleResource;
-use App\MoonShine\Resources\StructureResource;
-use App\MoonShine\Resources\MissionValueResource;
+use App\MoonShine\Resources\Admin\AdminResource;
+use App\MoonShine\Resources\CitizenSchedule\CitizenScheduleResource;
+use App\MoonShine\Resources\Structure\StructureResource;
+use App\MoonShine\Resources\MissionValue\MissionValueResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -53,14 +53,14 @@ final class MoonShineLayout extends AppLayout
         return [
             ...parent::menu(),
             MenuGroup::make('Главный экран', [
-                MenuItem::make('Settings', SettingResource::class),
-                MenuItem::make('News', NewsResource::class),
+                MenuItem::make(SettingResource::class, 'Settings'),
+                MenuItem::make(NewsResource::class, 'News'),
             ]),
             MenuGroup::make('О нас', [
-                MenuItem::make('Администрация', AdminResource::class),
-                MenuItem::make('График приёма граждан', CitizenScheduleResource::class),
-                MenuItem::make('Структура', StructureResource::class),
-                MenuItem::make('Миссия и ценности', MissionValueResource::class),
+                MenuItem::make(AdminResource::class, 'Администрация'),
+                MenuItem::make(CitizenScheduleResource::class, 'График приёма граждан'),
+                MenuItem::make(StructureResource::class, 'Структура'),
+                MenuItem::make(MissionValueResource::class, 'Миссия и ценности'),
             ]),
         ];
     }

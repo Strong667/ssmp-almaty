@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources;
+namespace App\MoonShine\Resources\Structure;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Structure;
 
 use MoonShine\Laravel\Resources\ModelResource;
