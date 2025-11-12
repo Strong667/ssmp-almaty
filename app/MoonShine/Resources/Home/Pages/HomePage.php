@@ -12,8 +12,9 @@ use App\Models\Setting;
 use App\Models\News;
 use Illuminate\Support\Facades\Storage;
 use MoonShine\UI\Components\Layout\Box;
-use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Components\Heading;
+use MoonShine\UI\Components\Layout\Div;
+use Illuminate\Support\Facades\View;
 
 #[SkipMenu]
 class HomePage extends Page
@@ -57,12 +58,13 @@ class HomePage extends Page
                     : null;
             });
 
+        $newsHtml = View::make('moonshine.home.news', ['news' => $news])->render();
+
         return [
             Box::make('Главная страница', [
                 Heading::make('Добро пожаловать'),
-                Text::make('Это главная страница сайта'),
-                // Здесь можно добавить больше компонентов MoonShine
-                // или использовать Blade view через ViewPage
+                Div::make([$newsHtml])
+                    ->customAttributes(['class' => 'news-wrapper']),
             ]),
         ];
     }
