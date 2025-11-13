@@ -21,6 +21,12 @@ use App\MoonShine\Resources\EthicalCode\EthicalCodeResource;
 use App\MoonShine\Resources\IncomeExpenseReport\IncomeExpenseReportResource;
 use App\MoonShine\Resources\Home\HomeResource;
 use App\MoonShine\Resources\About\AboutResource;
+use App\MoonShine\Resources\Vacancy\VacancyResource;
+use App\MoonShine\Resources\MedicalEmploymentInfo\MedicalEmploymentInfoResource;
+use App\MoonShine\Resources\CorporateDocument\CorporateDocumentResource;
+use App\MoonShine\Resources\Document\DocumentResource;
+use App\MoonShine\Resources\ActivitySphere\ActivitySphereResource;
+use App\MoonShine\Resources\Substation\SubstationResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -43,9 +49,14 @@ class MoonShineServiceProvider extends ServiceProvider
                 MissionValueResource::class,
                 EthicalCodeResource::class,
                 IncomeExpenseReportResource::class,
-                // Публичные ресурсы для веб-страниц
                 HomeResource::class,
                 AboutResource::class,
+                VacancyResource::class,
+                MedicalEmploymentInfoResource::class,
+                CorporateDocumentResource::class,
+                DocumentResource::class,
+                ActivitySphereResource::class,
+                SubstationResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

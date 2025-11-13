@@ -13,7 +13,7 @@ use App\MoonShine\Resources\EthicalCode\Pages\EthicalCodeDetailPage;
 class EthicalCodeResource extends ModelResource
 {
     protected string $model = EthicalCode::class;
-    
+
     protected string $title = 'Этический кодекс';
 
     /**

@@ -9,6 +9,9 @@ use App\MoonShine\Resources\About\Pages\StructurePage;
 use App\MoonShine\Resources\About\Pages\MissionPage;
 use App\MoonShine\Resources\About\Pages\EthicalCodePage;
 use App\MoonShine\Resources\About\Pages\IncomeExpensePage;
+use App\MoonShine\Resources\About\Pages\VacancyEmploymentPage;
+use App\MoonShine\Resources\About\Pages\DocumentsPage;
+use App\MoonShine\Resources\About\Pages\ActivitySpherePage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', PublicStorageController::class)
@@ -48,5 +51,17 @@ Route::middleware([UseWebGuard::class])->group(function () {
     Route::get('/about/income-expense', function () {
         return app(IncomeExpensePage::class)->render();
     })->name('about.income-expense');
+    
+    Route::get('/about/vacancy-employment', function () {
+        return app(VacancyEmploymentPage::class)->render();
+    })->name('about.vacancy-employment');
+    
+    Route::get('/about/documents', function () {
+        return app(DocumentsPage::class)->render();
+    })->name('about.documents');
+    
+    Route::get('/about/activity-sphere', function () {
+        return app(ActivitySpherePage::class)->render();
+    })->name('about.activity-sphere');
 });
 

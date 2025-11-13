@@ -42,6 +42,12 @@ use App\MoonShine\Resources\Structure\StructureResource;
 use App\MoonShine\Resources\MissionValue\MissionValueResource;
 use App\MoonShine\Resources\EthicalCode\EthicalCodeResource;
 use App\MoonShine\Resources\IncomeExpenseReport\IncomeExpenseReportResource;
+use App\MoonShine\Resources\Vacancy\VacancyResource;
+use App\MoonShine\Resources\MedicalEmploymentInfo\MedicalEmploymentInfoResource;
+use App\MoonShine\Resources\CorporateDocument\CorporateDocumentResource;
+use App\MoonShine\Resources\Document\DocumentResource;
+use App\MoonShine\Resources\ActivitySphere\ActivitySphereResource;
+use App\MoonShine\Resources\Substation\SubstationResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -67,6 +73,18 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(MissionValueResource::class, 'Миссия и ценности'),
                 MenuItem::make(EthicalCodeResource::class, 'Этический кодекс'),
                 MenuItem::make(IncomeExpenseReportResource::class, 'Отчёты о доходах и расходах'),
+                MenuGroup::make('Вакансия', [
+                    MenuItem::make(VacancyResource::class, 'Вакансии'),
+                    MenuItem::make(MedicalEmploymentInfoResource::class, 'Информация для медицинских специалистов'),
+                ]),
+                MenuGroup::make('Документы', [
+                    MenuItem::make(CorporateDocumentResource::class, 'Категории документов'),
+                    MenuItem::make(DocumentResource::class, 'Документы'),
+                ]),
+                MenuGroup::make('Сфера деятельности', [
+                    MenuItem::make(ActivitySphereResource::class, 'Общая информация'),
+                    MenuItem::make(SubstationResource::class, 'Подстанции'),
+                ]),
             ]),
         ];
     }

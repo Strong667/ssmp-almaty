@@ -11,6 +11,9 @@ use MoonShine\MenuManager\Attributes\SkipMenu;
 use App\Models\CitizenSchedule;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Heading;
+use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Components\Table\TableBuilder;
 
 #[SkipMenu]
 class SchedulePage extends Page
@@ -42,8 +45,19 @@ class SchedulePage extends Page
 
         return [
             Box::make('График приёма граждан', [
-                Heading::make('График приёма граждан'),
-                // Здесь можно добавить компоненты для отображения графика
+                $schedules->isNotEmpty()
+                    ? TableBuilder::make(
+                        [
+                            ID::make()->sortable(),
+                            Text::make('ФИО', 'full_name'),
+                            Text::make('Должность', 'position'),
+                            Text::make('День', 'day'),
+                            Text::make('Время', 'time'),
+                        ],
+                        $schedules
+                    )
+                    : Text::make('График приёма граждан пока не добавлен')
+                        ->readonly(),
             ]),
         ];
     }

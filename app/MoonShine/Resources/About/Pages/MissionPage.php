@@ -11,6 +11,8 @@ use MoonShine\MenuManager\Attributes\SkipMenu;
 use App\Models\MissionValue;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Heading;
+use MoonShine\UI\Components\CardsBuilder;
+use MoonShine\UI\Fields\Text;
 
 #[SkipMenu]
 class MissionPage extends Page
@@ -39,10 +41,35 @@ class MissionPage extends Page
             ->orderBy('title')
             ->get();
 
+        // Подготавливаем данные для CardsBuilder
+        $missionValuesData = $missionValues->map(function (MissionValue $missionValue) {
+            $description = strip_tags($missionValue->description ?? '');
+            $shortDescription = mb_strlen($description) > 150 
+                ? mb_substr($description, 0, 150) . '...' 
+                : $description;
+            
+            return [
+                'id' => $missionValue->id,
+                'title' => $missionValue->title,
+                'description' => $shortDescription,
+                'full_description' => $description,
+            ];
+        })->toArray();
+
         return [
             Box::make('Миссия и ценности', [
-                Heading::make('Миссия и ценности'),
-                // Здесь можно добавить компоненты для отображения миссии и ценностей
+                $missionValues->isNotEmpty()
+                    ? CardsBuilder::make($missionValuesData, [])
+                        ->title(fn ($data) => $data['title'] ?? '')
+                        ->subtitle(fn ($data) => $data['description'] ?? '')
+                        ->content('')
+                        ->componentAttributes(fn ($data) => [
+                            'style' => 'min-height: 200px; display: flex; flex-direction: column;',
+                            'class' => 'mission-value-card'
+                        ])
+                        ->columnSpan(6)  // 2 карточки в ряд (12/6=2)
+                    : Text::make('Миссия и ценности пока не добавлены')
+                        ->readonly(),
             ]),
         ];
     }

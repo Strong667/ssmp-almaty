@@ -9,9 +9,11 @@ use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\MenuManager\Attributes\SkipMenu;
 use App\Models\IncomeExpenseReport;
-use Illuminate\Support\Facades\Storage;
 use MoonShine\UI\Components\Layout\Box;
-use MoonShine\UI\Components\Heading;
+use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\File;
+use MoonShine\UI\Components\Table\TableBuilder;
 
 #[SkipMenu]
 class IncomeExpensePage extends Page
@@ -38,17 +40,23 @@ class IncomeExpensePage extends Page
     {
         $reports = IncomeExpenseReport::query()
             ->orderByDesc('created_at')
-            ->get()
-            ->each(function (IncomeExpenseReport $item) {
-                $item->file_url = $item->file_path
-                    ? Storage::disk('public')->url($item->file_path)
-                    : null;
-            });
+            ->get();
 
         return [
             Box::make('Отчёты о доходах и расходах', [
-                Heading::make('Отчёты о доходах и расходах'),
-                // Здесь можно добавить компоненты для отображения отчётов
+                $reports->isNotEmpty()
+                    ? TableBuilder::make(
+                        [
+                            ID::make()->sortable(),
+                            Text::make('Название', 'title')->sortable(),
+                            Text::make('Описание', 'description'),
+                            File::make('Файл', 'file_path')
+                                ->disk('public'),
+                        ],
+                        $reports
+                    )
+                    : Text::make('Отчёты о доходах и расходах пока не добавлены')
+                        ->readonly(),
             ]),
         ];
     }
