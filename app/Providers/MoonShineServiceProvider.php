@@ -40,6 +40,9 @@ use App\MoonShine\Resources\RegistryOfStateServices\RegistryOfStateServicesResou
 use App\MoonShine\Resources\StateServiceStandards\StateServiceStandardsResource;
 use App\MoonShine\Resources\StateServiceRegulations\StateServiceRegulationsResource;
 use App\MoonShine\Resources\StateServices\StateServicesResource;
+use App\MoonShine\Resources\StateFlag\StateFlagResource;
+use App\MoonShine\Resources\StateEmblem\StateEmblemResource;
+use App\MoonShine\Resources\StateAnthem\StateAnthemResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -83,6 +86,9 @@ class MoonShineServiceProvider extends ServiceProvider
                 StateServiceStandardsResource::class,
                 StateServiceRegulationsResource::class,
                 StateServicesResource::class,
+                StateFlagResource::class,
+                StateEmblemResource::class,
+                StateAnthemResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

@@ -27,6 +27,9 @@ use App\MoonShine\Resources\About\Pages\RegistryOfStateServicesPage;
 use App\MoonShine\Resources\About\Pages\StateServiceStandardsPage;
 use App\MoonShine\Resources\About\Pages\StateServiceRegulationsPage;
 use App\MoonShine\Resources\About\Pages\StateServicesPage;
+use App\MoonShine\Resources\About\Pages\StateFlagPage;
+use App\MoonShine\Resources\About\Pages\StateEmblemPage;
+use App\MoonShine\Resources\About\Pages\StateAnthemPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', PublicStorageController::class)
@@ -130,6 +133,19 @@ Route::middleware([UseWebGuard::class])->group(function () {
     Route::get('/about/state-services', function () {
         return app(StateServicesPage::class)->render();
     })->name('about.state-services');
+    
+    // Государственные символы
+    Route::get('/about/state-symbols/flag', function () {
+        return app(StateFlagPage::class)->render();
+    })->name('about.state-flag');
+    
+    Route::get('/about/state-symbols/emblem', function () {
+        return app(StateEmblemPage::class)->render();
+    })->name('about.state-emblem');
+    
+    Route::get('/about/state-symbols/anthem', function () {
+        return app(StateAnthemPage::class)->render();
+    })->name('about.state-anthem');
     
     // Новости
     Route::get('/news', function () {

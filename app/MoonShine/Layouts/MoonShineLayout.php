@@ -61,6 +61,9 @@ use App\MoonShine\Resources\RegistryOfStateServices\RegistryOfStateServicesResou
 use App\MoonShine\Resources\StateServiceStandards\StateServiceStandardsResource;
 use App\MoonShine\Resources\StateServiceRegulations\StateServiceRegulationsResource;
 use App\MoonShine\Resources\StateServices\StateServicesResource;
+use App\MoonShine\Resources\StateFlag\StateFlagResource;
+use App\MoonShine\Resources\StateEmblem\StateEmblemResource;
+use App\MoonShine\Resources\StateAnthem\StateAnthemResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -111,6 +114,11 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(RegistryOfStateServicesResource::class, 'Реестр государственных услуг'),
                 MenuItem::make(StateServiceStandardsResource::class, 'Стандарты государственных услуг'),
                 MenuItem::make(StateServiceRegulationsResource::class, 'Регламенты государственных услуг'),
+            ]),
+            MenuGroup::make('Государственные символы', [
+                MenuItem::make(StateFlagResource::class, 'Государственный Флаг'),
+                MenuItem::make(StateEmblemResource::class, 'Государственный Герб'),
+                MenuItem::make(StateAnthemResource::class, 'Государственный Гимн'),
             ]),
             MenuGroup::make('Государственные закупки', [
                 MenuItem::make(ProcurementPlanResource::class, 'План государственных закупок'),
