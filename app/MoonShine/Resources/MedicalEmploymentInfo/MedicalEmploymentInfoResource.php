@@ -41,18 +41,18 @@ class MedicalEmploymentInfoResource extends ModelResource
     {
         return [
             Box::make('Основная информация', [
-                Text::make('Заголовок', 'title')
+            Text::make('Заголовок', 'title')
                     ->required()
                     ->placeholder('Например: Требования к медицинским специалистам'),
-                Textarea::make('Описание', 'description')
-                    ->required()
+            Textarea::make('Описание', 'description')
+                ->required()
                     ->customAttributes(['rows' => 10])
                     ->placeholder('Подробная информация для медицинских специалистов'),
-                File::make('Прикрепленный файл', 'attachment')
-                    ->disk('public')
-                    ->dir('employment_info')
-                    ->allowedExtensions(['pdf', 'doc', 'docx'])
-                    ->nullable(),
+            File::make('Прикрепленный файл', 'attachment')
+                ->disk('public')
+                ->dir('employment_info')
+                ->allowedExtensions(['pdf', 'doc', 'docx'])
+                ->nullable(),
             ]),
         ];
     }

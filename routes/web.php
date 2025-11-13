@@ -12,6 +12,9 @@ use App\MoonShine\Resources\About\Pages\IncomeExpensePage;
 use App\MoonShine\Resources\About\Pages\VacancyEmploymentPage;
 use App\MoonShine\Resources\About\Pages\DocumentsPage;
 use App\MoonShine\Resources\About\Pages\ActivitySpherePage;
+use App\MoonShine\Resources\About\Pages\ProcurementPlanPage;
+use App\MoonShine\Resources\About\Pages\AnnouncementsPage;
+use App\MoonShine\Resources\About\Pages\ProtocolsPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', PublicStorageController::class)
@@ -63,5 +66,17 @@ Route::middleware([UseWebGuard::class])->group(function () {
     Route::get('/about/activity-sphere', function () {
         return app(ActivitySpherePage::class)->render();
     })->name('about.activity-sphere');
+    
+    Route::get('/about/procurement-plan', function () {
+        return app(ProcurementPlanPage::class)->render();
+    })->name('about.procurement-plan');
+    
+    Route::get('/about/announcements', function () {
+        return app(AnnouncementsPage::class)->render();
+    })->name('about.announcements');
+    
+    Route::get('/about/protocols', function () {
+        return app(ProtocolsPage::class)->render();
+    })->name('about.protocols');
 });
 

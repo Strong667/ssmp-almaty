@@ -27,6 +27,10 @@ use App\MoonShine\Resources\CorporateDocument\CorporateDocumentResource;
 use App\MoonShine\Resources\Document\DocumentResource;
 use App\MoonShine\Resources\ActivitySphere\ActivitySphereResource;
 use App\MoonShine\Resources\Substation\SubstationResource;
+use App\MoonShine\Resources\ProcurementPlan\ProcurementPlanResource;
+use App\MoonShine\Resources\AnnouncementCategory\AnnouncementCategoryResource;
+use App\MoonShine\Resources\Announcement\AnnouncementResource;
+use App\MoonShine\Resources\Protocol\ProtocolResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -57,6 +61,10 @@ class MoonShineServiceProvider extends ServiceProvider
                 DocumentResource::class,
                 ActivitySphereResource::class,
                 SubstationResource::class,
+                ProcurementPlanResource::class,
+                AnnouncementCategoryResource::class,
+                AnnouncementResource::class,
+                ProtocolResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

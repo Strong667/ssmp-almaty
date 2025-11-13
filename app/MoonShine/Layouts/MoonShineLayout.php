@@ -48,6 +48,10 @@ use App\MoonShine\Resources\CorporateDocument\CorporateDocumentResource;
 use App\MoonShine\Resources\Document\DocumentResource;
 use App\MoonShine\Resources\ActivitySphere\ActivitySphereResource;
 use App\MoonShine\Resources\Substation\SubstationResource;
+use App\MoonShine\Resources\ProcurementPlan\ProcurementPlanResource;
+use App\MoonShine\Resources\AnnouncementCategory\AnnouncementCategoryResource;
+use App\MoonShine\Resources\Announcement\AnnouncementResource;
+use App\MoonShine\Resources\Protocol\ProtocolResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -85,6 +89,14 @@ final class MoonShineLayout extends AppLayout
                     MenuItem::make(ActivitySphereResource::class, 'Общая информация'),
                     MenuItem::make(SubstationResource::class, 'Подстанции'),
                 ]),
+            ]),
+            MenuGroup::make('Государственные закупки', [
+                MenuItem::make(ProcurementPlanResource::class, 'План государственных закупок'),
+                MenuGroup::make('Объявления', [
+                    MenuItem::make(AnnouncementCategoryResource::class, 'Категории объявлений'),
+                    MenuItem::make(AnnouncementResource::class, 'Объявления'),
+                ]),
+                MenuItem::make(ProtocolResource::class, 'Протоколы'),
             ]),
         ];
     }

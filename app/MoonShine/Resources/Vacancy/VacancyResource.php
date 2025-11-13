@@ -42,10 +42,10 @@ class VacancyResource extends ModelResource
     {
         return [
             Box::make('Основная информация', [
-                Text::make('Заголовок', 'title')
+            Text::make('Заголовок', 'title')
                     ->required()
                     ->placeholder('Например: Ведущий специалист по охране труда'),
-                Textarea::make('Описание', 'description')
+            Textarea::make('Описание', 'description')
                     ->required()
                     ->customAttributes(['rows' => 10])
                     ->placeholder('Подробное описание вакансии, требования, обязанности'),
