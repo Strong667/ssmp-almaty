@@ -23,6 +23,10 @@ use App\MoonShine\Resources\About\Pages\EmergencyServiceRulesPage;
 use App\MoonShine\Resources\About\Pages\SocialInsurancePage;
 use App\MoonShine\Resources\About\Pages\RubricForPopulationPage;
 use App\MoonShine\Resources\About\Pages\RubricForPopulationDetailPage;
+use App\MoonShine\Resources\About\Pages\RegistryOfStateServicesPage;
+use App\MoonShine\Resources\About\Pages\StateServiceStandardsPage;
+use App\MoonShine\Resources\About\Pages\StateServiceRegulationsPage;
+use App\MoonShine\Resources\About\Pages\StateServicesPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', PublicStorageController::class)
@@ -110,6 +114,22 @@ Route::middleware([UseWebGuard::class])->group(function () {
     Route::get('/about/rubric-for-population/{id}', function (int $id) {
         return app(RubricForPopulationDetailPage::class)->render();
     })->name('about.rubric-for-population.detail');
+    
+    Route::get('/about/registry-of-state-services', function () {
+        return app(RegistryOfStateServicesPage::class)->render();
+    })->name('about.registry-of-state-services');
+    
+    Route::get('/about/state-service-standards', function () {
+        return app(StateServiceStandardsPage::class)->render();
+    })->name('about.state-service-standards');
+    
+    Route::get('/about/state-service-regulations', function () {
+        return app(StateServiceRegulationsPage::class)->render();
+    })->name('about.state-service-regulations');
+    
+    Route::get('/about/state-services', function () {
+        return app(StateServicesPage::class)->render();
+    })->name('about.state-services');
     
     // Новости
     Route::get('/news', function () {

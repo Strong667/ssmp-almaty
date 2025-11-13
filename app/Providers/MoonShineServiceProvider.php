@@ -36,6 +36,10 @@ use App\MoonShine\Resources\LegalFramework\LegalFrameworkResource;
 use App\MoonShine\Resources\EmergencyServiceRules\EmergencyServiceRulesResource;
 use App\MoonShine\Resources\SocialInsurance\SocialInsuranceResource;
 use App\MoonShine\Resources\RubricForPopulation\RubricForPopulationResource;
+use App\MoonShine\Resources\RegistryOfStateServices\RegistryOfStateServicesResource;
+use App\MoonShine\Resources\StateServiceStandards\StateServiceStandardsResource;
+use App\MoonShine\Resources\StateServiceRegulations\StateServiceRegulationsResource;
+use App\MoonShine\Resources\StateServices\StateServicesResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -75,6 +79,10 @@ class MoonShineServiceProvider extends ServiceProvider
                 EmergencyServiceRulesResource::class,
                 SocialInsuranceResource::class,
                 RubricForPopulationResource::class,
+                RegistryOfStateServicesResource::class,
+                StateServiceStandardsResource::class,
+                StateServiceRegulationsResource::class,
+                StateServicesResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

@@ -57,6 +57,10 @@ use App\MoonShine\Resources\LegalFramework\LegalFrameworkResource;
 use App\MoonShine\Resources\EmergencyServiceRules\EmergencyServiceRulesResource;
 use App\MoonShine\Resources\SocialInsurance\SocialInsuranceResource;
 use App\MoonShine\Resources\RubricForPopulation\RubricForPopulationResource;
+use App\MoonShine\Resources\RegistryOfStateServices\RegistryOfStateServicesResource;
+use App\MoonShine\Resources\StateServiceStandards\StateServiceStandardsResource;
+use App\MoonShine\Resources\StateServiceRegulations\StateServiceRegulationsResource;
+use App\MoonShine\Resources\StateServices\StateServicesResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -101,6 +105,12 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(EmergencyServiceRulesResource::class, 'Правила обращения в службу скорой медицинской помощи'),
                 MenuItem::make(SocialInsuranceResource::class, 'Обязательное социальное медицинское страхование'),
                 MenuItem::make(RubricForPopulationResource::class, 'Рубрика для населения'),
+            ]),
+            MenuGroup::make('Государственные услуги', [
+                MenuItem::make(StateServicesResource::class, 'Государственные услуги'),
+                MenuItem::make(RegistryOfStateServicesResource::class, 'Реестр государственных услуг'),
+                MenuItem::make(StateServiceStandardsResource::class, 'Стандарты государственных услуг'),
+                MenuItem::make(StateServiceRegulationsResource::class, 'Регламенты государственных услуг'),
             ]),
             MenuGroup::make('Государственные закупки', [
                 MenuItem::make(ProcurementPlanResource::class, 'План государственных закупок'),
