@@ -31,6 +31,11 @@ use App\MoonShine\Resources\ProcurementPlan\ProcurementPlanResource;
 use App\MoonShine\Resources\AnnouncementCategory\AnnouncementCategoryResource;
 use App\MoonShine\Resources\Announcement\AnnouncementResource;
 use App\MoonShine\Resources\Protocol\ProtocolResource;
+use App\MoonShine\Resources\MedicalHelpForForeigners\MedicalHelpForForeignersResource;
+use App\MoonShine\Resources\LegalFramework\LegalFrameworkResource;
+use App\MoonShine\Resources\EmergencyServiceRules\EmergencyServiceRulesResource;
+use App\MoonShine\Resources\SocialInsurance\SocialInsuranceResource;
+use App\MoonShine\Resources\RubricForPopulation\RubricForPopulationResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -65,6 +70,11 @@ class MoonShineServiceProvider extends ServiceProvider
                 AnnouncementCategoryResource::class,
                 AnnouncementResource::class,
                 ProtocolResource::class,
+                MedicalHelpForForeignersResource::class,
+                LegalFrameworkResource::class,
+                EmergencyServiceRulesResource::class,
+                SocialInsuranceResource::class,
+                RubricForPopulationResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

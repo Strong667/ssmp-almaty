@@ -40,9 +40,10 @@ class HomePage extends Page
     protected function components(): iterable
     {
         $news = News::query()
-            ->orderByDesc('published_at')
+            ->whereNotNull('slug')
+            ->where('slug', '!=', '')
             ->orderByDesc('created_at')
-            ->limit(6)
+            ->limit(4)
             ->get()
             ->each(function (News $item) {
                 $item->image_url = $item->image
@@ -80,14 +81,16 @@ class HomePage extends Page
                 ->thumbnail(fn ($data) => $data['thumbnail'] ?? '')
                 ->title(fn ($data) => $data['title'] ?? '')
                 ->subtitle('')  // Убираем subtitle
-                ->content(fn ($data) =>
-                    '<div style="padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                ->content(function ($data) {
+                    $slug = $data['slug'] ?? null;
+                    $newsDetailUrl = $slug && $slug !== '#' ? route('news.detail', $slug) : '#';
+                    return '<div style="padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
                         <div style="font-size: 0.875rem; color: #6c757d;">' . e($data['date'] ?? '') . '</div>
-                        <a href="' . e($data['slug'] ?? '#') . '" style="color: #1977cc; text-decoration: none; font-size: 0.875rem; transition: color 0.3s;" onmouseover="this.style.color=\'#0d5aa7\'" onmouseout="this.style.color=\'#1977cc\'">
+                        <a href="' . e($newsDetailUrl) . '" style="color: #1977cc; text-decoration: none; font-size: 0.875rem; transition: color 0.3s;" onmouseover="this.style.color=\'#0d5aa7\'" onmouseout="this.style.color=\'#1977cc\'">
                             Читать новости →
                         </a>
-                    </div>'
-                )
+                    </div>';
+                })
                 ->componentAttributes(fn ($data) => [
                     'style' => 'height: 380px; display: flex; flex-direction: column; overflow: hidden;',
                     'class' => 'news-card'

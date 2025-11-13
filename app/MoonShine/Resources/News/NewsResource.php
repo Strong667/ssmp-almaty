@@ -8,8 +8,7 @@ use App\Models\News;
 use Illuminate\Support\Str;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
-use MoonShine\UI\Fields\{ID, Text, Image, Date};
-use MoonShine\TinyMce\Fields\TinyMce;
+use MoonShine\UI\Fields\{ID, Text, Textarea, Image, Date, Hidden};
 use MoonShine\UI\Components\Layout\TopBar;
 
 class NewsResource extends ModelResource
@@ -45,9 +44,10 @@ class NewsResource extends ModelResource
             Box::make('Основная информация', [
                 ID::make()->readonly(),
                 Text::make('Заголовок', 'title')
-                    ->required()
-                    ->justSaved(fn (News $item) => $item->slug = $this->makeUniqueSlug($item)),
-                TinyMce::make('Описание', 'description')->required(),
+                    ->required(),
+                Textarea::make('Описание', 'description')
+                    ->nullable()
+                    ->customAttributes(['rows' => 10]),
                 Text::make('Видео (URL)', 'video_url')
                     ->placeholder('https://...')
                     ->hint('Ссылка на ролик YouTube или другой видеохостинг')
@@ -72,7 +72,9 @@ class NewsResource extends ModelResource
         return [
             ID::make(),
             Text::make('Заголовок', 'title'),
-            TinyMce::make('Описание', 'description'),
+            Textarea::make('Описание', 'description')
+                ->readonly()
+                ->customAttributes(['rows' => 10]),
             Text::make('Видео (URL)', 'video_url'),
             Image::make('Изображение', 'image')->disk('public'),
             Date::make('Дата публикации', 'published_at'),
@@ -89,7 +91,7 @@ class NewsResource extends ModelResource
     {
         return [
             'title'      => ['required', 'string', 'max:255'],
-            'description'=> ['required', 'string'],
+            'description'=> ['nullable', 'string'],
             'video_url'  => ['nullable', 'url'],
             'image'      => ['nullable', 'image'],
             'published_at'=> ['required', 'date'],
@@ -105,7 +107,10 @@ class NewsResource extends ModelResource
     protected function saving(mixed $item): void
     {
         if ($item instanceof News) {
-            $item->slug = $this->makeUniqueSlug($item);
+            // Генерируем slug, если его нет или изменился заголовок
+            if (!$item->slug || $item->isDirty('title')) {
+                $item->slug = $this->makeUniqueSlug($item);
+            }
         }
     }
 

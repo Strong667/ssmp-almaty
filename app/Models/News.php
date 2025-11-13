@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -18,6 +19,45 @@ class News extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($news) {
+            if (!$news->slug || $news->isDirty('title')) {
+                $news->slug = static::makeUniqueSlug($news);
+            }
+        });
+    }
+
+    /**
+     * Генерация уникального slug
+     *
+     * @param  News  $item
+     * @return string
+     */
+    private static function makeUniqueSlug(News $item): string
+    {
+        $base = Str::slug($item->title ?? '', '-', 'ru')
+            ?: Str::slug($item->title ?? '', '-', app()->getFallbackLocale())
+                ?: 'news';
+
+        $slug = $base;
+        $suffix = 1;
+
+        while (
+            static::query()
+                ->where('slug', $slug)
+                ->when($item->exists, fn($q) => $q->where('id', '!=', $item->id))
+                ->exists()
+        ) {
+            $slug = "{$base}-{$suffix}";
+            $suffix++;
+        }
+
+        return $slug;
+    }
 
     public function getDisplayDateAttribute(): string
     {

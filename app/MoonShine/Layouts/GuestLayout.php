@@ -150,6 +150,39 @@ final class GuestLayout extends AppLayout
                             ->icon('document-check'),
                     ])
                     ->placement('bottom-start'),
+                // Ссылка на новости
+                Link::make(route('news.list'), 'Новости')
+                    ->icon('newspaper')
+                    ->when(
+                        fn (): bool => Route::currentRouteName() === 'news.list' || Route::currentRouteName() === 'news.detail',
+                        fn (Link $link): Link => $link->customAttributes(['class' => 'active'])
+                    ),
+                // Дропдаун меню "Жителям Алматы"
+                Dropdown::make()
+                    ->toggler(
+                        '<div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; border-radius: 0.375rem; transition: all 0.2s; ' .
+                        (in_array(Route::currentRouteName() ?? '', ['about.medical-help-for-foreigners', 'about.legal-framework', 'about.emergency-service-rules', 'about.social-insurance', 'about.rubric-for-population']) ? 'background-color: rgba(139, 92, 246, 0.1); color: rgb(139, 92, 246);' : '') .
+                        '">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 1rem; height: 1rem;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                            </svg>
+                            <span>Жителям Алматы</span>
+                        </div>'
+                    )
+                    ->items([
+                        Link::make(route('about.medical-help-for-foreigners'), 'Оказание медицинской помощи иностранному гражданину в РК')
+                            ->icon('globe-alt'),
+                        Link::make(route('about.legal-framework'), 'Нормативно-правовая база')
+                            ->icon('document-text'),
+                        Link::make(route('about.emergency-service-rules'), 'Правила обращения в службу скорой медицинской помощи')
+                            ->icon('phone'),
+                        Link::make(route('about.social-insurance'), 'Обязательное социальное медицинское страхование')
+                            ->icon('shield-check'),
+                        Link::make(route('about.rubric-for-population'), 'Рубрика для населения')
+                            ->icon('newspaper'),
+                    ])
+                    ->placement('bottom-start'),
                 // Можно добавить больше пунктов меню здесь
             ])->class('menu menu--horizontal')->name('topbar-menu'),
 

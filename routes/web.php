@@ -15,6 +15,14 @@ use App\MoonShine\Resources\About\Pages\ActivitySpherePage;
 use App\MoonShine\Resources\About\Pages\ProcurementPlanPage;
 use App\MoonShine\Resources\About\Pages\AnnouncementsPage;
 use App\MoonShine\Resources\About\Pages\ProtocolsPage;
+use App\MoonShine\Resources\About\Pages\NewsListPage;
+use App\MoonShine\Resources\About\Pages\NewsDetailPage;
+use App\MoonShine\Resources\About\Pages\MedicalHelpForForeignersPage;
+use App\MoonShine\Resources\About\Pages\LegalFrameworkPage;
+use App\MoonShine\Resources\About\Pages\EmergencyServiceRulesPage;
+use App\MoonShine\Resources\About\Pages\SocialInsurancePage;
+use App\MoonShine\Resources\About\Pages\RubricForPopulationPage;
+use App\MoonShine\Resources\About\Pages\RubricForPopulationDetailPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', PublicStorageController::class)
@@ -78,5 +86,38 @@ Route::middleware([UseWebGuard::class])->group(function () {
     Route::get('/about/protocols', function () {
         return app(ProtocolsPage::class)->render();
     })->name('about.protocols');
+    
+    Route::get('/about/medical-help-for-foreigners', function () {
+        return app(MedicalHelpForForeignersPage::class)->render();
+    })->name('about.medical-help-for-foreigners');
+    
+    Route::get('/about/legal-framework', function () {
+        return app(LegalFrameworkPage::class)->render();
+    })->name('about.legal-framework');
+    
+    Route::get('/about/emergency-service-rules', function () {
+        return app(EmergencyServiceRulesPage::class)->render();
+    })->name('about.emergency-service-rules');
+    
+    Route::get('/about/social-insurance', function () {
+        return app(SocialInsurancePage::class)->render();
+    })->name('about.social-insurance');
+    
+    Route::get('/about/rubric-for-population', function () {
+        return app(RubricForPopulationPage::class)->render();
+    })->name('about.rubric-for-population');
+    
+    Route::get('/about/rubric-for-population/{id}', function (int $id) {
+        return app(RubricForPopulationDetailPage::class)->render();
+    })->name('about.rubric-for-population.detail');
+    
+    // Новости
+    Route::get('/news', function () {
+        return app(NewsListPage::class)->render();
+    })->name('news.list');
+    
+    Route::get('/news/{slug}', function (string $slug) {
+        return app(NewsDetailPage::class)->render();
+    })->name('news.detail');
 });
 

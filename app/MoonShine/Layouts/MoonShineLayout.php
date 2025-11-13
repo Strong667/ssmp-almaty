@@ -52,6 +52,11 @@ use App\MoonShine\Resources\ProcurementPlan\ProcurementPlanResource;
 use App\MoonShine\Resources\AnnouncementCategory\AnnouncementCategoryResource;
 use App\MoonShine\Resources\Announcement\AnnouncementResource;
 use App\MoonShine\Resources\Protocol\ProtocolResource;
+use App\MoonShine\Resources\MedicalHelpForForeigners\MedicalHelpForForeignersResource;
+use App\MoonShine\Resources\LegalFramework\LegalFrameworkResource;
+use App\MoonShine\Resources\EmergencyServiceRules\EmergencyServiceRulesResource;
+use App\MoonShine\Resources\SocialInsurance\SocialInsuranceResource;
+use App\MoonShine\Resources\RubricForPopulation\RubricForPopulationResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -89,6 +94,13 @@ final class MoonShineLayout extends AppLayout
                     MenuItem::make(ActivitySphereResource::class, 'Общая информация'),
                     MenuItem::make(SubstationResource::class, 'Подстанции'),
                 ]),
+            ]),
+            MenuGroup::make('Жителям Алматы', [
+                MenuItem::make(MedicalHelpForForeignersResource::class, 'Оказание медицинской помощи иностранному гражданину в РК'),
+                MenuItem::make(LegalFrameworkResource::class, 'Нормативно-правовая база'),
+                MenuItem::make(EmergencyServiceRulesResource::class, 'Правила обращения в службу скорой медицинской помощи'),
+                MenuItem::make(SocialInsuranceResource::class, 'Обязательное социальное медицинское страхование'),
+                MenuItem::make(RubricForPopulationResource::class, 'Рубрика для населения'),
             ]),
             MenuGroup::make('Государственные закупки', [
                 MenuItem::make(ProcurementPlanResource::class, 'План государственных закупок'),
