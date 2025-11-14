@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Структура')
+@section('title', 'План работы комплаенс офицера 2024г')
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -13,32 +13,42 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Структура</li>
+                    <li class="breadcrumb-item active" aria-current="page">План работы комплаенс офицера 2024г</li>
                 </ol>
             </nav>
         </div>
     </section>
 
-    <!-- Structure Section -->
-    <section class="structure section">
+    <!-- Compliance Officer Plan Section -->
+    <section class="compliance-officer-plan section">
         <div class="container">
-            @if($structures->isNotEmpty())
+            @if($plans->isNotEmpty())
                 <div class="row gy-4">
-                    @foreach($structures as $structure)
-                        <div class="col-lg-4 col-md-6">
-                            <div class="structure-card">
-                                @if($structure->image_url)
-                                    <div class="structure-photo">
-                                        <img src="{{ $structure->image_url }}" alt="{{ $structure->title }}" class="img-fluid">
+                    @foreach($plans as $plan)
+                        <div class="col-12">
+                            <div class="plan-card">
+                                <h3 class="plan-title">{{ $plan->title }}</h3>
+                                @if($plan->file_url)
+                                    <div class="plan-pdf-wrapper">
+                                        <iframe
+                                            src="{{ $plan->file_url }}#toolbar=1&navpanes=1&scrollbar=1"
+                                            width="100%"
+                                            height="800"
+                                            frameborder="0"
+                                            allowfullscreen
+                                        ></iframe>
                                     </div>
-                                @else
-                                    <div class="structure-photo-placeholder">
-                                        <i class="bi bi-image"></i>
+                                    <div class="plan-actions">
+                                        <a href="{{ $plan->file_url }}" target="_blank" class="plan-link">
+                                            <i class="bi bi-box-arrow-up-right"></i>
+                                            <span>Открыть в новой вкладке</span>
+                                        </a>
+                                        <a href="{{ $plan->file_url }}" download class="plan-link plan-link-secondary">
+                                            <i class="bi bi-download"></i>
+                                            <span>Скачать PDF</span>
+                                        </a>
                                     </div>
                                 @endif
-                                <div class="structure-info">
-                                    <h4 class="structure-title">{{ $structure->title }}</h4>
-                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -48,7 +58,7 @@
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">Структура пока не добавлена</p>
+                            <p class="mb-0">Информация пока не добавлена</p>
                         </div>
                     </div>
                 </div>
@@ -111,66 +121,80 @@
             font-size: 16px;
         }
 
-        /* Structure Section */
-        .structure {
+        /* Compliance Officer Plan Section */
+        .compliance-officer-plan {
             padding: 40px 0;
             background: #fff;
         }
 
-        .structure-card {
+        .plan-card {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
+            padding: 30px;
             transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
         }
 
-        .structure-card:hover {
+        .plan-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .structure-photo {
+        .plan-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #212529;
+            margin: 0 0 20px 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .plan-pdf-wrapper {
             width: 100%;
-            height: 250px;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
             overflow: hidden;
             background: #f8f9fa;
         }
 
-        .structure-photo img {
+        .plan-pdf-wrapper iframe {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: 800px;
+            border: none;
+            display: block;
         }
 
-        .structure-photo-placeholder {
-            width: 100%;
-            height: 250px;
+        .plan-actions {
             display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .plan-link {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            background: #f8f9fa;
-            color: #adb5bd;
-            font-size: 80px;
-            border-bottom: 1px solid #e5e7eb;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #0d9488;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
 
-        .structure-info {
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .plan-link:hover {
+            background: #0b7d73;
+            color: #fff;
         }
 
-        .structure-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #212529;
-            margin: 0;
-            font-family: "Montserrat", sans-serif;
+        .plan-link-secondary {
+            background: #6c757d;
+        }
+
+        .plan-link-secondary:hover {
+            background: #5a6268;
         }
 
         .alert {
@@ -207,35 +231,51 @@
             color: #495057;
         }
 
-        [data-theme="dark"] .structure {
+        [data-theme="dark"] .compliance-officer-plan {
             background: #1a1a1a;
         }
 
-        [data-theme="dark"] .structure-card {
+        [data-theme="dark"] .plan-card {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .structure-card:hover {
+        [data-theme="dark"] .plan-card:hover {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        [data-theme="dark"] .structure-photo-placeholder {
-            background: #2a2a2a;
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-            color: #495057;
-        }
-
-        [data-theme="dark"] .structure-title {
+        [data-theme="dark"] .plan-title {
             color: #e0e0e0;
         }
 
-        @media (max-width: 991px) {
-            .structure-photo,
-            .structure-photo-placeholder {
-                height: 200px;
+        [data-theme="dark"] .plan-pdf-wrapper {
+            border-color: rgba(255, 255, 255, 0.1);
+            background: #1a1a1a;
+        }
+
+        @media (max-width: 768px) {
+            .plan-card {
+                padding: 20px;
+            }
+
+            .plan-title {
+                font-size: 20px;
+            }
+
+            .plan-pdf-wrapper iframe {
+                height: 600px;
+            }
+
+            .plan-actions {
+                flex-direction: column;
+            }
+
+            .plan-link {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
     @endpush
 @endsection
+

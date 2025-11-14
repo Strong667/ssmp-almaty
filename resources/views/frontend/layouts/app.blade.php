@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Медицинский центр')</title>
+    <link rel="icon" type="image/png" href="{{ asset('slujba.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('slujba.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('slujba.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -35,30 +38,81 @@
         }
 
 
-        /* Первый слой: Социальные сети, тема, локализация */
+        /* Первый слой: Социальные сети, контакты, тема, локализация */
         .header-top {
-            background: transparent;
-            padding: 10px 0;
-            border-bottom: none;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        .social-links {
+        .header-main-content {
             display: flex;
-            gap: 12px;
             align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-social {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .header-contacts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 11px;
+            font-weight: 500;
+            font-family: "Montserrat", sans-serif;
+            line-height: 1.3;
+        }
+
+        .contact-item i {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .contact-item span {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .contact-item a {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-item a:hover {
+            color: #fff;
+            text-decoration: underline;
         }
 
         .social-link {
             color: #fff;
-            font-size: 18px;
+            font-size: 16px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
@@ -84,7 +138,7 @@
 
         .social-link:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px) scale(1.1);
+            transform: translateY(-2px) scale(1.1);
             color: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
@@ -386,66 +440,52 @@
 
         .dropdown-menu {
             background: #fff;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
-            padding: 8px 0;
-            margin-top: 8px;
-            min-width: 280px;
-            animation: dropdownFadeIn 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+            padding: 6px 0;
+            margin-top: 6px;
+            min-width: 240px;
+            animation: dropdownFadeIn 0.2s ease;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            right: auto !important;
         }
 
         @keyframes dropdownFadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateX(-50%) translateY(-10px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(-50%) translateY(0);
             }
         }
 
         .dropdown-item {
-            padding: 12px 20px;
-            color: #0d9488;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px 16px;
+            color: #2c4964;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
-            font-size: 14px;
+            font-size: 13px;
             font-family: "Montserrat", sans-serif;
-            font-weight: 500;
+            font-weight: 600;
             position: relative;
-            margin: 2px 8px;
-            border-radius: 6px;
+            margin: 1px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
         .dropdown-item i {
             display: none;
         }
 
-        .dropdown-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 0;
-            background: linear-gradient(180deg, #0d9488 0%, #0f766e 100%);
-            border-radius: 0 3px 3px 0;
-            transition: height 0.3s ease;
-        }
-
         .dropdown-item:hover {
             background: #f0fdfa;
-            color: #0f766e;
-            padding-left: 20px;
-            transform: translateX(4px);
-        }
-
-        .dropdown-item:hover::before {
-            height: 70%;
+            color: #0d9488;
         }
 
         .dropdown-item.active {
@@ -454,13 +494,10 @@
             font-weight: 700;
         }
 
-        .dropdown-item.active::before {
-            height: 70%;
-        }
-
         .dropdown-divider {
-            margin: 6px 12px;
-            opacity: 0.2;
+            margin: 4px 10px;
+            opacity: 0.15;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .navbar-toggler {
@@ -516,8 +553,8 @@
 
         [data-theme="dark"] .dropdown-menu {
             background: #1e293b;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         [data-theme="dark"] .dropdown-item {
@@ -525,13 +562,13 @@
         }
 
         [data-theme="dark"] .dropdown-item:hover {
-            background: linear-gradient(90deg, rgba(25, 119, 204, 0.2) 0%, rgba(25, 119, 204, 0.1) 100%);
-            color: #60a5fa;
+            background: rgba(13, 148, 136, 0.15);
+            color: #5eead4;
         }
 
         [data-theme="dark"] .dropdown-item.active {
-            background: linear-gradient(90deg, rgba(25, 119, 204, 0.25) 0%, rgba(25, 119, 204, 0.15) 100%);
-            color: #60a5fa;
+            background: rgba(13, 148, 136, 0.2);
+            color: #5eead4;
         }
 
         [data-theme="dark"] .dropdown-item i {
@@ -540,6 +577,28 @@
 
         [data-theme="dark"] .dropdown-item:hover i {
             color: #93c5fd;
+        }
+
+        [data-theme="dark"] .header-top {
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom-color: rgba(255, 255, 255, 0.15);
+        }
+
+        [data-theme="dark"] .contact-item {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        [data-theme="dark"] .contact-item i {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        [data-theme="dark"] .contact-item span,
+        [data-theme="dark"] .contact-item a {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        [data-theme="dark"] .contact-item a:hover {
+            color: #fff;
         }
 
         [data-theme="dark"] .header-bottom::before {
@@ -566,8 +625,56 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
+        /* Средние экраны - если не помещается, центрируем и делаем в несколько рядов */
+        @media (max-width: 1200px) and (min-width: 992px) {
+            .header-contacts {
+                justify-content: flex-start;
+            }
+        }
+
         /* Mobile Styles */
         @media (max-width: 991px) {
+            .header-main-content {
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+                width: 100%;
+            }
+
+            .header-social {
+                justify-content: center;
+            }
+
+            .header-contacts {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .contact-item {
+                font-size: 10px;
+                flex-direction: column;
+                text-align: center;
+                gap: 4px;
+            }
+
+            .contact-item i {
+                font-size: 14px;
+            }
+
+            .contact-item span,
+            .contact-item a {
+                text-align: center;
+            }
+
+            .social-link {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+
             .logo-link {
                 flex-direction: column;
                 gap: 12px;
@@ -627,11 +734,14 @@
                 margin-left: 20px;
                 border-radius: 8px;
                 animation: none;
+                left: auto !important;
+                transform: none !important;
+                right: auto !important;
             }
 
             .dropdown-item {
-                padding: 10px 16px;
-                font-size: 13px;
+                padding: 8px 14px;
+                font-size: 12px;
             }
 
             [data-theme="dark"] .navbar-collapse {
@@ -1049,8 +1159,44 @@
         });
     })();
 
-    // Bootstrap 5 Dropdown работает автоматически
+    // Bootstrap 5 Dropdown с задержкой закрытия при наведении
     document.addEventListener('DOMContentLoaded', function() {
+        // Добавляем задержку закрытия дропдаунов при наведении
+        const dropdowns = document.querySelectorAll('.dropdown');
+        let hoverTimeouts = {};
+
+        dropdowns.forEach(function(dropdown) {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            if (!toggle || !menu) return;
+
+            const dropdownId = dropdown.getAttribute('data-dropdown-id') || Math.random().toString(36);
+            dropdown.setAttribute('data-dropdown-id', dropdownId);
+
+            // При наведении на dropdown
+            dropdown.addEventListener('mouseenter', function() {
+                // Очищаем таймер закрытия, если он есть
+                if (hoverTimeouts[dropdownId]) {
+                    clearTimeout(hoverTimeouts[dropdownId]);
+                    hoverTimeouts[dropdownId] = null;
+                }
+                // Открываем дропдаун
+                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                bsDropdown.show();
+            });
+
+            // При уходе курсора с dropdown
+            dropdown.addEventListener('mouseleave', function() {
+                hoverTimeouts[dropdownId] = setTimeout(function() {
+                    const bsDropdown = bootstrap.Dropdown.getInstance(toggle);
+                    if (bsDropdown) {
+                        bsDropdown.hide();
+                    }
+                    hoverTimeouts[dropdownId] = null;
+                }, 200); // Задержка 200ms перед закрытием
+            });
+        });
 
         // Back to Top Button
         const backToTop = document.getElementById('back-to-top');

@@ -45,7 +45,7 @@ class HomePage extends Page
             ->get()
             ->each(function (News $item) {
                 $item->image_url = $item->image
-                    ? Storage::disk('public')->url($item->image)
+                    ? route('storage.public', ['path' => $item->image])
                     : null;
             });
 
@@ -66,7 +66,7 @@ class HomePage extends Page
             ->orderByDesc('updated_at')
             ->get()
             ->map(function (Setting $setting) {
-                return Storage::disk('public')->url($setting->main_image);
+                return route('storage.public', ['path' => $setting->main_image]);
             })
             ->toArray();
 

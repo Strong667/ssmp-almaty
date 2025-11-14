@@ -1,19 +1,43 @@
 <header id="header" class="fixed-top">
-    <!-- Первый слой: Социальные сети, тема, локализация -->
+    <!-- Первый слой: Социальные сети, контакты, тема, локализация -->
     <div class="header-top">
         <div class="container-fluid">
             <div class="row align-items-center g-0">
-                <div class="col-md-6">
-                    <div class="social-links">
-                        <a href="#" target="_blank" aria-label="Instagram" class="social-link">
-                            <i class="bi bi-instagram"></i>
-                        </a>
-                        <a href="#" target="_blank" aria-label="Facebook" class="social-link">
-                            <i class="bi bi-facebook"></i>
-                        </a>
+                <div class="col-md-9">
+                    <div class="header-main-content">
+                        <div class="header-social">
+                            <a href="#" target="_blank" aria-label="Instagram" class="social-link">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="#" target="_blank" aria-label="Facebook" class="social-link">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                        </div>
+                        <div class="header-contacts">
+                            <div class="contact-item">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <span>050000, Қазахстан Республикасы, Алматы қаласы, Алмалы ауданы, Қазыбек би көшесі, 115</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="bi bi-telephone-fill"></i>
+                                <span>Тел.: 103</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="bi bi-telephone-fill"></i>
+                                <span>+7 (727) 279-46-14</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="bi bi-telephone-fill"></i>
+                                <span>+7 (727) 300-05-05</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="bi bi-envelope-fill"></i>
+                                <a href="mailto:Kgpssmp@ssmp-almaty.kz">Kgpssmp@ssmp-almaty.kz</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 text-end">
+                <div class="col-md-3 text-end">
                     <div class="header-top-right">
                         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Переключить тему">
                             <i class="bi bi-sun-fill theme-icon-light"></i>
@@ -68,7 +92,7 @@
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.administration', 'about.schedule', 'about.structure', 'about.mission', 'about.ethical-code', 'about.income-expense', 'about.vacancy-employment', 'about.documents', 'about.activity-sphere') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 О нас
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item{{ request()->routeIs('about.administration') ? ' active' : '' }}" href="{{ route('about.administration') }}">Администрация</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.schedule') ? ' active' : '' }}" href="{{ route('about.schedule') }}">График приёма граждан</a></li>
@@ -86,7 +110,7 @@
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.procurement-plan', 'about.announcements', 'about.protocols') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Государственные закупки
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item{{ request()->routeIs('about.procurement-plan') ? ' active' : '' }}" href="{{ route('about.procurement-plan') }}">План государственных закупок</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.announcements') ? ' active' : '' }}" href="{{ route('about.announcements') }}">Объявления</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.protocols') ? ' active' : '' }}" href="{{ route('about.protocols') }}">Протоколы</a></li>
@@ -96,7 +120,7 @@
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.medical-help-for-foreigners', 'about.legal-framework', 'about.emergency-service-rules', 'about.social-insurance', 'about.rubric-for-population') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Жителям Алматы
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item{{ request()->routeIs('about.medical-help-for-foreigners') ? ' active' : '' }}" href="{{ route('about.medical-help-for-foreigners') }}">Оказание медицинской помощи иностранному гражданину в РК</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.legal-framework') ? ' active' : '' }}" href="{{ route('about.legal-framework') }}">Нормативно-правовая база</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.emergency-service-rules') ? ' active' : '' }}" href="{{ route('about.emergency-service-rules') }}">Правила обращения в службу скорой медицинской помощи</a></li>
@@ -108,7 +132,7 @@
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.registry-of-state-services', 'about.state-service-standards', 'about.state-service-regulations', 'about.state-services') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Государственные услуги
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item{{ request()->routeIs('about.state-services') ? ' active' : '' }}" href="{{ route('about.state-services') }}">Государственные услуги</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.registry-of-state-services') ? ' active' : '' }}" href="{{ route('about.registry-of-state-services') }}">Реестр государственных услуг</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.state-service-standards') ? ' active' : '' }}" href="{{ route('about.state-service-standards') }}">Стандарты государственных услуг</a></li>
@@ -119,7 +143,7 @@
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.state-flag', 'about.state-emblem', 'about.state-anthem') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Государственные символы
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item{{ request()->routeIs('about.state-flag') ? ' active' : '' }}" href="{{ route('about.state-flag') }}">Государственный Флаг</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.state-emblem') ? ' active' : '' }}" href="{{ route('about.state-emblem') }}">Государственный Герб</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.state-anthem') ? ' active' : '' }}" href="{{ route('about.state-anthem') }}">Государственный Гимн</a></li>
@@ -134,7 +158,7 @@
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.compliance-officer-plan', 'about.corruption-risk-analysis', 'about.internal-regulations') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Комплаенс служба
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item{{ request()->routeIs('about.compliance-officer-plan') ? ' active' : '' }}" href="{{ route('about.compliance-officer-plan') }}">План работы комплаенс офицера 2024г</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-analysis') ? ' active' : '' }}" href="{{ route('about.corruption-risk-analysis') }}">Внутренний анализ коррупционных рисков</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.internal-regulations') ? ' active' : '' }}" href="{{ route('about.internal-regulations') }}">Внутренние НПА</a></li>
@@ -144,7 +168,7 @@
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.corruption-risk-positions', 'about.corruption-risk-list', 'about.corruption-risk-map') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Картограмма коррупции
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-positions') ? ' active' : '' }}" href="{{ route('about.corruption-risk-positions') }}">Должности, подверженные коррупционным рискам</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-list') ? ' active' : '' }}" href="{{ route('about.corruption-risk-list') }}">Перечень коррупционных рисков</a></li>
                                 <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-map') ? ' active' : '' }}" href="{{ route('about.corruption-risk-map') }}">Карта коррупционных рисков</a></li>

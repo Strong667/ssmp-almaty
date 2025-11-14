@@ -3,25 +3,52 @@
 @section('title', $substation->name . ' - Сотрудники')
 
 @section('content')
-    <section class="substation-employees section">
+    <!-- Breadcrumbs Section -->
+    <section class="breadcrumbs-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('home') }}">
+                            <i class="bi bi-house-door"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $substation->name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Substation Section -->
+    <section class="substation section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="substation-header mb-4">
-                        <a href="{{ route('home') }}" class="back-link">
-                            <i class="bi bi-arrow-left"></i> Назад на главную
-                        </a>
-                        <h1 class="substation-name">{{ $substation->name }}</h1>
-                        <p class="substation-info">
-                            <i class="bi bi-geo-alt"></i> {{ $substation->address }} | 
-                            <i class="bi bi-telephone"></i> {{ $substation->phone }}
-                        </p>
+                    <div class="substation-info">
+                        <h2 class="substation-name">{{ $substation->name }}</h2>
+                        
+                        <div class="substation-detail">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>{{ $substation->address }}</span>
+                        </div>
+
+                        @if($substation->phone)
+                            <div class="substation-detail">
+                                <i class="bi bi-telephone"></i>
+                                <span>{{ $substation->phone }}</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
 
             @if($employees->isNotEmpty())
-                <div class="row gy-4">
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <h3 class="section-title">Сотрудники</h3>
+                    </div>
+                </div>
+                <div class="row gy-4 mt-2">
                     @foreach($employees as $employee)
                         <div class="col-lg-4 col-md-6">
                             <div class="employee-card">
@@ -35,7 +62,7 @@
                                     </div>
                                 @endif
                                 <div class="employee-info">
-                                    <h3 class="employee-name">{{ $employee['full_name'] }}</h3>
+                                    <h4 class="employee-name">{{ $employee['full_name'] }}</h4>
                                     <p class="employee-position">{{ $employee['position'] }}</p>
                                     @if($employee['description'])
                                         <p class="employee-description">{{ $employee['description'] }}</p>
@@ -46,7 +73,7 @@
                     @endforeach
                 </div>
             @else
-                <div class="row">
+                <div class="row mt-4">
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
@@ -60,55 +87,110 @@
 
     @push('styles')
     <style>
-        .substation-employees {
-            padding: 80px 0;
+        /* Breadcrumbs Section */
+        .breadcrumbs-section {
+            padding: 15px 0;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e5e7eb;
         }
 
-        .back-link {
-            display: inline-flex;
+        .breadcrumb {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            display: flex;
             align-items: center;
             gap: 8px;
-            color: #1977cc;
+            font-size: 13px;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-item a {
+            color: #6c757d;
             text-decoration: none;
-            margin-bottom: 20px;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s ease;
         }
 
-        .back-link:hover {
-            color: #0d5aa7;
-            transform: translateX(-5px);
+        .breadcrumb-item a:hover {
+            color: #0d9488;
         }
 
-        .substation-header {
-            text-align: center;
-            padding-bottom: 30px;
-            border-bottom: 2px solid #e5e7eb;
-            margin-bottom: 40px;
-        }
-
-        .substation-name {
-            font-size: 36px;
-            font-weight: 700;
+        .breadcrumb-item.active {
             color: #2c4964;
-            margin: 20px 0 15px;
+            font-weight: 500;
+        }
+
+        .breadcrumb-item::after {
+            content: '>';
+            margin: 0 8px;
+            color: #adb5bd;
+        }
+
+        .breadcrumb-item:last-child::after {
+            display: none;
+        }
+
+        .breadcrumb-item i {
+            font-size: 16px;
+        }
+
+        /* Substation Section */
+        .substation {
+            padding: 40px 0;
+            background: #fff;
         }
 
         .substation-info {
-            font-size: 18px;
-            color: #6c757d;
-            margin: 0;
+            padding: 0;
+            margin-bottom: 30px;
         }
 
-        .substation-info i {
-            margin-right: 5px;
-            color: #1977cc;
+        .substation-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #212529;
+            margin: 0 0 20px 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .substation-detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        .substation-detail:last-child {
+            margin-bottom: 0;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .substation-detail i {
+            color: #0d9488;
+            font-size: 18px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
+            margin: 0 0 20px 0;
+            font-family: "Montserrat", sans-serif;
         }
 
         .employee-card {
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             transition: all 0.3s ease;
             height: 100%;
@@ -118,7 +200,7 @@
 
         .employee-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         }
 
         .employee-photo {
@@ -140,9 +222,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
+            background: #f8f9fa;
+            color: #adb5bd;
             font-size: 120px;
+            border-bottom: 1px solid #e5e7eb;
         }
 
         .employee-info {
@@ -153,23 +236,24 @@
         }
 
         .employee-name {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2c4964;
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
             margin: 0 0 10px 0;
+            font-family: "Montserrat", sans-serif;
         }
 
         .employee-position {
-            font-size: 16px;
-            color: #1977cc;
-            font-weight: 600;
+            font-size: 15px;
+            color: #0d9488;
+            font-weight: 500;
             margin: 0 0 15px 0;
         }
 
         .employee-description {
             font-size: 14px;
-            color: #6c757d;
-            line-height: 1.6;
+            color: #495057;
+            line-height: 1.7;
             margin: 0;
             flex-grow: 1;
         }
@@ -187,25 +271,60 @@
             margin-right: 10px;
         }
 
-        [data-theme="dark"] .substation-name {
-            color: #e2e8f0;
-        }
-
-        [data-theme="dark"] .substation-info {
-            color: #94a3b8;
-        }
-
-        [data-theme="dark"] .substation-header {
+        [data-theme="dark"] .breadcrumbs-section {
+            background: #1a1a1a;
             border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .breadcrumb-item a {
+            color: #adb5bd;
+        }
+
+        [data-theme="dark"] .breadcrumb-item a:hover {
+            color: #0d9488;
+        }
+
+        [data-theme="dark"] .breadcrumb-item.active {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .breadcrumb-item::after {
+            color: #495057;
+        }
+
+        [data-theme="dark"] .substation {
+            background: #1a1a1a;
+        }
+
+        [data-theme="dark"] .substation-name {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .substation-detail {
+            color: #adb5bd;
+        }
+
+        [data-theme="dark"] .substation-detail:last-child {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .section-title {
+            color: #e0e0e0;
         }
 
         [data-theme="dark"] .employee-card {
             background: #2a2a2a;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         [data-theme="dark"] .employee-card:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="dark"] .employee-photo-placeholder {
+            background: #2a2a2a;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+            color: #495057;
         }
 
         [data-theme="dark"] .employee-name {
@@ -213,16 +332,12 @@
         }
 
         [data-theme="dark"] .employee-description {
-            color: #b0b0b0;
+            color: #adb5bd;
         }
 
         @media (max-width: 991px) {
             .substation-name {
-                font-size: 28px;
-            }
-
-            .substation-info {
-                font-size: 16px;
+                font-size: 24px;
             }
 
             .employee-photo,

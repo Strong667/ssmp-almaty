@@ -22,7 +22,7 @@ class FrontendController extends Controller
             ->get()
             ->map(fn (Setting $setting) => [
                 'id' => $setting->id,
-                'url' => Storage::disk('public')->url($setting->main_image),
+                'url' => route('storage.public', ['path' => $setting->main_image]),
             ]);
 
         $news = News::query()
@@ -33,7 +33,7 @@ class FrontendController extends Controller
             ->get()
             ->each(function (News $item) {
                 $item->image_url = $item->image
-                    ? Storage::disk('public')->url($item->image)
+                    ? route('storage.public', ['path' => $item->image])
                     : null;
             });
 
@@ -52,7 +52,7 @@ class FrontendController extends Controller
             ->get()
             ->each(function (Admin $admin) {
                 $admin->image_url = $admin->image
-                    ? Storage::disk('public')->url($admin->image)
+                    ? route('storage.public', ['path' => $admin->image])
                     : null;
             });
 
@@ -76,7 +76,7 @@ class FrontendController extends Controller
             ->get()
             ->each(function (Structure $structure) {
                 $structure->image_url = $structure->image
-                    ? Storage::disk('public')->url($structure->image)
+                    ? route('storage.public', ['path' => $structure->image])
                     : null;
             });
 
@@ -102,7 +102,7 @@ class FrontendController extends Controller
             ->get()
             ->each(function (News $item) {
                 $item->image_url = $item->image
-                    ? Storage::disk('public')->url($item->image)
+                    ? route('storage.public', ['path' => $item->image])
                     : null;
             });
 
@@ -116,7 +116,7 @@ class FrontendController extends Controller
             ->firstOrFail();
 
         $news->image_url = $news->image
-            ? Storage::disk('public')->url($news->image)
+            ? route('storage.public', ['path' => $news->image])
             : null;
 
         return view('frontend.news.detail', compact('news'));

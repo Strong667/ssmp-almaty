@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Миссия и ценности')
+@section('title', 'Оказание медицинской помощи иностранному гражданину в РК')
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -13,26 +13,31 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Миссия и ценности</li>
+                    <li class="breadcrumb-item active" aria-current="page">Оказание медицинской помощи иностранному гражданину в РК</li>
                 </ol>
             </nav>
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission section">
+    <!-- Medical Help For Foreigners Section -->
+    <section class="medical-help section">
         <div class="container">
-            @if($missionValues->isNotEmpty())
+            @if($items->isNotEmpty())
                 <div class="row gy-4">
-                    @foreach($missionValues as $missionValue)
-                        <div class="col-lg-6">
-                            <div class="mission-card">
-                                <div class="mission-content">
-                                    <h3 class="mission-title">{{ $missionValue->title }}</h3>
-                                    <div class="mission-description">
-                                        {!! $missionValue->description !!}
+                    @foreach($items as $item)
+                        <div class="col-12">
+                            <div class="info-card">
+                                <div class="info-header">
+                                    <div class="info-icon">
+                                        <i class="bi bi-info-circle-fill"></i>
                                     </div>
+                                    <h3 class="info-title">{{ $item->title }}</h3>
                                 </div>
+                                @if($item->description)
+                                    <div class="info-content">
+                                        {!! nl2br(e($item->description)) !!}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -42,7 +47,7 @@
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">Миссия и ценности пока не добавлены</p>
+                            <p class="mb-0">Информация пока не добавлена</p>
                         </div>
                     </div>
                 </div>
@@ -105,41 +110,67 @@
             font-size: 16px;
         }
 
-        /* Mission Section */
-        .mission {
+        /* Medical Help Section */
+        .medical-help {
             padding: 40px 0;
             background: #fff;
         }
 
-        .mission-card {
+        .info-card {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             padding: 30px;
             transition: all 0.3s ease;
-            height: 100%;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
         }
 
-        .mission-card:hover {
+        .info-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .mission-title {
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            background: #0d9488;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
             font-size: 22px;
+        }
+
+        .info-title {
+            font-size: 24px;
             font-weight: 600;
-            margin: 0 0 20px 0;
             color: #212529;
+            margin: 0;
             font-family: "Montserrat", sans-serif;
         }
 
-        .mission-description {
-            color: #495057;
-            line-height: 1.7;
+        .info-content {
             font-size: 15px;
+            line-height: 1.7;
+            color: #495057;
+        }
+
+        .info-content p {
+            margin-bottom: 15px;
+        }
+
+        .info-content p:last-child {
+            margin-bottom: 0;
         }
 
         .alert {
@@ -176,32 +207,54 @@
             color: #495057;
         }
 
-        [data-theme="dark"] .mission {
+        [data-theme="dark"] .medical-help {
             background: #1a1a1a;
         }
 
-        [data-theme="dark"] .mission-card {
+        [data-theme="dark"] .info-card {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .mission-card:hover {
+        [data-theme="dark"] .info-card:hover {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        [data-theme="dark"] .mission-title {
+        [data-theme="dark"] .info-header {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .info-title {
             color: #e0e0e0;
         }
 
-        [data-theme="dark"] .mission-description {
+        [data-theme="dark"] .info-content {
             color: #adb5bd;
         }
 
-        @media (max-width: 991px) {
-            .mission-title {
+        @media (max-width: 768px) {
+            .info-card {
+                padding: 20px;
+            }
+
+            .info-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .info-icon {
+                width: 45px;
+                height: 45px;
+                min-width: 45px;
+                font-size: 20px;
+            }
+
+            .info-title {
                 font-size: 20px;
             }
         }
     </style>
     @endpush
 @endsection
+

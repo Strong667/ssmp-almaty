@@ -3,7 +3,7 @@
 use App\MoonShine\Pages\Dashboard;
 use App\MoonShine\Layouts\MoonShineLayout;
 use MoonShine\ColorManager\Palettes\PurplePalette;
-use MoonShine\Laravel\Forms\LoginForm;
+use MoonShine\Crud\Forms\LoginForm;
 use MoonShine\Crud\Forms\FiltersForm;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;

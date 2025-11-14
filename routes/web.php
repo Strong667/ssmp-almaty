@@ -56,114 +56,44 @@ Route::middleware([UseWebGuard::class])->group(function () {
     Route::get('/about/mission', [FrontendController::class, 'mission'])->name('about.mission');
     Route::get('/about/ethical-code', [AboutController::class, 'ethicalCode'])->name('about.ethical-code');
     Route::get('/about/income-expense', [AboutController::class, 'incomeExpense'])->name('about.income-expense');
+    Route::get('/about/vacancy-employment', [AboutController::class, 'vacancyEmployment'])->name('about.vacancy-employment');
+    Route::get('/about/documents', [AboutController::class, 'documents'])->name('about.documents');
+    Route::get('/about/activity-sphere', [AboutController::class, 'activitySphere'])->name('about.activity-sphere');
+    Route::get('/about/procurement-plan', [AboutController::class, 'procurementPlan'])->name('about.procurement-plan');
+    Route::get('/about/announcements', [AboutController::class, 'announcements'])->name('about.announcements');
+    Route::get('/about/protocols', [AboutController::class, 'protocols'])->name('about.protocols');
     
     // Остальные страницы через MoonShine Pages (будут переделаны позже)
-    Route::get('/about/vacancy-employment', function () {
-        return app(VacancyEmploymentPage::class)->render();
-    })->name('about.vacancy-employment');
     
-    Route::get('/about/documents', function () {
-        return app(DocumentsPage::class)->render();
-    })->name('about.documents');
+    Route::get('/about/medical-help-for-foreigners', [AboutController::class, 'medicalHelpForForeigners'])->name('about.medical-help-for-foreigners');
+    Route::get('/about/legal-framework', [AboutController::class, 'legalFramework'])->name('about.legal-framework');
+    Route::get('/about/emergency-service-rules', [AboutController::class, 'emergencyServiceRules'])->name('about.emergency-service-rules');
+    Route::get('/about/social-insurance', [AboutController::class, 'socialInsurance'])->name('about.social-insurance');
     
-    Route::get('/about/activity-sphere', function () {
-        return app(ActivitySpherePage::class)->render();
-    })->name('about.activity-sphere');
+    Route::get('/about/rubric-for-population', [AboutController::class, 'rubricForPopulation'])->name('about.rubric-for-population');
+    Route::get('/about/rubric-for-population/{id}', [AboutController::class, 'rubricForPopulationDetail'])->name('about.rubric-for-population.detail');
     
-    Route::get('/about/procurement-plan', function () {
-        return app(ProcurementPlanPage::class)->render();
-    })->name('about.procurement-plan');
-    
-    Route::get('/about/announcements', function () {
-        return app(AnnouncementsPage::class)->render();
-    })->name('about.announcements');
-    
-    Route::get('/about/protocols', function () {
-        return app(ProtocolsPage::class)->render();
-    })->name('about.protocols');
-    
-    Route::get('/about/medical-help-for-foreigners', function () {
-        return app(MedicalHelpForForeignersPage::class)->render();
-    })->name('about.medical-help-for-foreigners');
-    
-    Route::get('/about/legal-framework', function () {
-        return app(LegalFrameworkPage::class)->render();
-    })->name('about.legal-framework');
-    
-    Route::get('/about/emergency-service-rules', function () {
-        return app(EmergencyServiceRulesPage::class)->render();
-    })->name('about.emergency-service-rules');
-    
-    Route::get('/about/social-insurance', function () {
-        return app(SocialInsurancePage::class)->render();
-    })->name('about.social-insurance');
-    
-    Route::get('/about/rubric-for-population', function () {
-        return app(RubricForPopulationPage::class)->render();
-    })->name('about.rubric-for-population');
-    
-    Route::get('/about/rubric-for-population/{id}', function (int $id) {
-        return app(RubricForPopulationDetailPage::class)->render();
-    })->name('about.rubric-for-population.detail');
-    
-    Route::get('/about/registry-of-state-services', function () {
-        return app(RegistryOfStateServicesPage::class)->render();
-    })->name('about.registry-of-state-services');
-    
-    Route::get('/about/state-service-standards', function () {
-        return app(StateServiceStandardsPage::class)->render();
-    })->name('about.state-service-standards');
-    
-    Route::get('/about/state-service-regulations', function () {
-        return app(StateServiceRegulationsPage::class)->render();
-    })->name('about.state-service-regulations');
-    
-    Route::get('/about/state-services', function () {
-        return app(StateServicesPage::class)->render();
-    })->name('about.state-services');
+    Route::get('/about/state-services', [AboutController::class, 'stateServices'])->name('about.state-services');
+    Route::get('/about/registry-of-state-services', [AboutController::class, 'registryOfStateServices'])->name('about.registry-of-state-services');
+    Route::get('/about/state-service-standards', [AboutController::class, 'stateServiceStandards'])->name('about.state-service-standards');
+    Route::get('/about/state-service-regulations', [AboutController::class, 'stateServiceRegulations'])->name('about.state-service-regulations');
     
     // Государственные символы
-    Route::get('/about/state-symbols/flag', function () {
-        return app(StateFlagPage::class)->render();
-    })->name('about.state-flag');
+    Route::get('/about/state-symbols/flag', [AboutController::class, 'stateFlag'])->name('about.state-flag');
+    Route::get('/about/state-symbols/emblem', [AboutController::class, 'stateEmblem'])->name('about.state-emblem');
+    Route::get('/about/state-symbols/anthem', [AboutController::class, 'stateAnthem'])->name('about.state-anthem');
     
-    Route::get('/about/state-symbols/emblem', function () {
-        return app(StateEmblemPage::class)->render();
-    })->name('about.state-emblem');
-    
-    Route::get('/about/state-symbols/anthem', function () {
-        return app(StateAnthemPage::class)->render();
-    })->name('about.state-anthem');
-    
-    Route::get('/about/paid-services', function () {
-        return app(PaidServicesPage::class)->render();
-    })->name('about.paid-services');
+    Route::get('/about/paid-services', [AboutController::class, 'paidServices'])->name('about.paid-services');
     
     // Комплаенс служба
-    Route::get('/about/compliance-service/officer-plan', function () {
-        return app(ComplianceOfficerPlanPage::class)->render();
-    })->name('about.compliance-officer-plan');
-    
-    Route::get('/about/compliance-service/corruption-risk-analysis', function () {
-        return app(InternalCorruptionRiskAnalysisPage::class)->render();
-    })->name('about.corruption-risk-analysis');
-    
-    Route::get('/about/compliance-service/internal-regulations', function () {
-        return app(InternalRegulationsPage::class)->render();
-    })->name('about.internal-regulations');
+    Route::get('/about/compliance-service/officer-plan', [AboutController::class, 'complianceOfficerPlan'])->name('about.compliance-officer-plan');
+    Route::get('/about/compliance-service/corruption-risk-analysis', [AboutController::class, 'corruptionRiskAnalysis'])->name('about.corruption-risk-analysis');
+    Route::get('/about/compliance-service/internal-regulations', [AboutController::class, 'internalRegulations'])->name('about.internal-regulations');
     
     // Картограмма коррупции
-    Route::get('/about/corruption-risk-map/positions', function () {
-        return app(CorruptionRiskPositionPage::class)->render();
-    })->name('about.corruption-risk-positions');
-    
-    Route::get('/about/corruption-risk-map/list', function () {
-        return app(CorruptionRiskListPage::class)->render();
-    })->name('about.corruption-risk-list');
-    
-    Route::get('/about/corruption-risk-map/map', function () {
-        return app(CorruptionRiskMapPage::class)->render();
-    })->name('about.corruption-risk-map');
+    Route::get('/about/corruption-risk-map/positions', [AboutController::class, 'corruptionRiskPositions'])->name('about.corruption-risk-positions');
+    Route::get('/about/corruption-risk-map/list', [AboutController::class, 'corruptionRiskList'])->name('about.corruption-risk-list');
+    Route::get('/about/corruption-risk-map/map', [AboutController::class, 'corruptionRiskMap'])->name('about.corruption-risk-map');
     
     // Новости (через blade views)
     Route::get('/news', [FrontendController::class, 'newsList'])->name('news.list');

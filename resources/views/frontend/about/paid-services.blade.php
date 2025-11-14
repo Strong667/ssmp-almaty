@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Миссия и ценности')
+@section('title', 'Платные услуги')
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -13,25 +13,28 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Миссия и ценности</li>
+                    <li class="breadcrumb-item active" aria-current="page">Платные услуги</li>
                 </ol>
             </nav>
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission section">
+    <!-- Paid Services Section -->
+    <section class="paid-services section">
         <div class="container">
-            @if($missionValues->isNotEmpty())
+            @if($services->isNotEmpty())
                 <div class="row gy-4">
-                    @foreach($missionValues as $missionValue)
-                        <div class="col-lg-6">
-                            <div class="mission-card">
-                                <div class="mission-content">
-                                    <h3 class="mission-title">{{ $missionValue->title }}</h3>
-                                    <div class="mission-description">
-                                        {!! $missionValue->description !!}
-                                    </div>
+                    @foreach($services as $service)
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="service-card">
+                                <div class="service-image-wrapper">
+                                    @if($service->image_url)
+                                        <img src="{{ $service->image_url }}" alt="Платная услуга" class="service-image">
+                                    @else
+                                        <div class="service-image-placeholder">
+                                            <i class="bi bi-image"></i>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -42,7 +45,7 @@
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">Миссия и ценности пока не добавлены</p>
+                            <p class="mb-0">Информация пока не добавлена</p>
                         </div>
                     </div>
                 </div>
@@ -105,41 +108,55 @@
             font-size: 16px;
         }
 
-        /* Mission Section */
-        .mission {
+        /* Paid Services Section */
+        .paid-services {
             padding: 40px 0;
             background: #fff;
         }
 
-        .mission-card {
+        .service-card {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            padding: 30px;
+            overflow: hidden;
             transition: all 0.3s ease;
             height: 100%;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
         }
 
-        .mission-card:hover {
+        .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .mission-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin: 0 0 20px 0;
-            color: #212529;
-            font-family: "Montserrat", sans-serif;
+        .service-image-wrapper {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .mission-description {
-            color: #495057;
-            line-height: 1.7;
-            font-size: 15px;
+        .service-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-image {
+            transform: scale(1.05);
+        }
+
+        .service-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #adb5bd;
+            font-size: 48px;
         }
 
         .alert {
@@ -176,32 +193,33 @@
             color: #495057;
         }
 
-        [data-theme="dark"] .mission {
+        [data-theme="dark"] .paid-services {
             background: #1a1a1a;
         }
 
-        [data-theme="dark"] .mission-card {
+        [data-theme="dark"] .service-card {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .mission-card:hover {
+        [data-theme="dark"] .service-card:hover {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        [data-theme="dark"] .mission-title {
-            color: #e0e0e0;
+        [data-theme="dark"] .service-image-wrapper {
+            background: #1a1a1a;
         }
 
-        [data-theme="dark"] .mission-description {
-            color: #adb5bd;
+        [data-theme="dark"] .service-image-placeholder {
+            color: #495057;
         }
 
-        @media (max-width: 991px) {
-            .mission-title {
-                font-size: 20px;
+        @media (max-width: 768px) {
+            .service-image-wrapper {
+                height: 200px;
             }
         }
     </style>
     @endpush
 @endsection
+

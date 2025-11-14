@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Структура')
+@section('title', 'Рубрика для населения')
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -13,31 +13,39 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Структура</li>
+                    <li class="breadcrumb-item active" aria-current="page">Рубрика для населения</li>
                 </ol>
             </nav>
         </div>
     </section>
 
-    <!-- Structure Section -->
-    <section class="structure section">
+    <!-- Rubric For Population Section -->
+    <section class="rubric-for-population section">
         <div class="container">
-            @if($structures->isNotEmpty())
+            @if($items->isNotEmpty())
                 <div class="row gy-4">
-                    @foreach($structures as $structure)
+                    @foreach($items as $item)
                         <div class="col-lg-4 col-md-6">
-                            <div class="structure-card">
-                                @if($structure->image_url)
-                                    <div class="structure-photo">
-                                        <img src="{{ $structure->image_url }}" alt="{{ $structure->title }}" class="img-fluid">
-                                    </div>
-                                @else
-                                    <div class="structure-photo-placeholder">
-                                        <i class="bi bi-image"></i>
-                                    </div>
-                                @endif
-                                <div class="structure-info">
-                                    <h4 class="structure-title">{{ $structure->title }}</h4>
+                            <div class="rubric-card">
+                                <div class="rubric-image-wrapper">
+                                    @if($item->image_url)
+                                        <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="rubric-image">
+                                    @else
+                                        <div class="rubric-image-placeholder">
+                                            <i class="bi bi-image"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="rubric-content">
+                                    <h3 class="rubric-title">{{ $item->title }}</h3>
+                                    <p class="rubric-date">
+                                        <i class="bi bi-calendar"></i>
+                                        {{ $item->created_at ? $item->created_at->format('d.m.Y') : '' }}
+                                    </p>
+                                    <a href="{{ route('about.rubric-for-population.detail', $item->id) }}" class="rubric-link">
+                                        <span>ПОСМОТРЕТЬ</span>
+                                        <i class="bi bi-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +56,7 @@
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">Структура пока не добавлена</p>
+                            <p class="mb-0">Информация пока не добавлена</p>
                         </div>
                     </div>
                 </div>
@@ -111,13 +119,13 @@
             font-size: 16px;
         }
 
-        /* Structure Section */
-        .structure {
+        /* Rubric For Population Section */
+        .rubric-for-population {
             padding: 40px 0;
             background: #fff;
         }
 
-        .structure-card {
+        .rubric-card {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -128,49 +136,81 @@
             flex-direction: column;
         }
 
-        .structure-card:hover {
+        .rubric-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .structure-photo {
+        .rubric-image-wrapper {
             width: 100%;
-            height: 250px;
+            height: 200px;
             overflow: hidden;
             background: #f8f9fa;
         }
 
-        .structure-photo img {
+        .rubric-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .structure-photo-placeholder {
+        .rubric-image-placeholder {
             width: 100%;
-            height: 250px;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f8f9fa;
             color: #adb5bd;
-            font-size: 80px;
-            border-bottom: 1px solid #e5e7eb;
+            font-size: 48px;
         }
 
-        .structure-info {
-            padding: 25px;
+        .rubric-content {
+            padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
-        .structure-title {
-            font-size: 20px;
+        .rubric-title {
+            font-size: 18px;
             font-weight: 600;
             color: #212529;
-            margin: 0;
+            margin: 0 0 12px 0;
             font-family: "Montserrat", sans-serif;
+            flex-grow: 1;
+        }
+
+        .rubric-date {
+            font-size: 14px;
+            color: #6c757d;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rubric-date i {
+            color: #0d9488;
+        }
+
+        .rubric-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #0d9488;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .rubric-link:hover {
+            background: #0b7d73;
+            color: #fff;
         }
 
         .alert {
@@ -207,35 +247,45 @@
             color: #495057;
         }
 
-        [data-theme="dark"] .structure {
+        [data-theme="dark"] .rubric-for-population {
             background: #1a1a1a;
         }
 
-        [data-theme="dark"] .structure-card {
+        [data-theme="dark"] .rubric-card {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .structure-card:hover {
+        [data-theme="dark"] .rubric-card:hover {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        [data-theme="dark"] .structure-photo-placeholder {
-            background: #2a2a2a;
-            border-bottom-color: rgba(255, 255, 255, 0.1);
+        [data-theme="dark"] .rubric-image-wrapper {
+            background: #1a1a1a;
+        }
+
+        [data-theme="dark"] .rubric-image-placeholder {
             color: #495057;
         }
 
-        [data-theme="dark"] .structure-title {
+        [data-theme="dark"] .rubric-title {
             color: #e0e0e0;
         }
 
-        @media (max-width: 991px) {
-            .structure-photo,
-            .structure-photo-placeholder {
-                height: 200px;
+        [data-theme="dark"] .rubric-date {
+            color: #adb5bd;
+        }
+
+        @media (max-width: 768px) {
+            .rubric-content {
+                padding: 15px;
+            }
+
+            .rubric-title {
+                font-size: 16px;
             }
         }
     </style>
     @endpush
 @endsection
+

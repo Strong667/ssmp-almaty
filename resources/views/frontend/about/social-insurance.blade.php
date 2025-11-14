@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Миссия и ценности')
+@section('title', 'Обязательное социальное медицинское страхование')
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -13,27 +13,43 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Миссия и ценности</li>
+                    <li class="breadcrumb-item active" aria-current="page">Обязательное социальное медицинское страхование</li>
                 </ol>
             </nav>
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission section">
+    <!-- Social Insurance Section -->
+    <section class="social-insurance section">
         <div class="container">
-            @if($missionValues->isNotEmpty())
+            @if($items->isNotEmpty())
                 <div class="row gy-4">
-                    @foreach($missionValues as $missionValue)
-                        <div class="col-lg-6">
-                            <div class="mission-card">
-                                <div class="mission-content">
-                                    <h3 class="mission-title">{{ $missionValue->title }}</h3>
-                                    <div class="mission-description">
-                                        {!! $missionValue->description !!}
+                    @foreach($items as $item)
+                        <div class="col-12">
+                            @if($item->type === 'text' && $item->content)
+                                <div class="content-block text-block">
+                                    <div class="content-text">
+                                        {!! nl2br(e($item->content)) !!}
                                     </div>
                                 </div>
-                            </div>
+                            @elseif($item->type === 'image' && $item->image_url)
+                                <div class="content-block image-block">
+                                    <img src="{{ $item->image_url }}" alt="Изображение" class="content-image">
+                                </div>
+                            @elseif($item->type === 'video' && $item->embed_url)
+                                <div class="content-block video-block">
+                                    <div class="video-wrapper">
+                                        <iframe
+                                            width="100%"
+                                            height="100%"
+                                            src="{{ $item->embed_url }}"
+                                            frameborder="0"
+                                            allow="autoplay; encrypted-media"
+                                            allowfullscreen
+                                        ></iframe>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -42,7 +58,7 @@
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">Миссия и ценности пока не добавлены</p>
+                            <p class="mb-0">Информация пока не добавлена</p>
                         </div>
                     </div>
                 </div>
@@ -105,41 +121,71 @@
             font-size: 16px;
         }
 
-        /* Mission Section */
-        .mission {
+        /* Social Insurance Section */
+        .social-insurance {
             padding: 40px 0;
             background: #fff;
         }
 
-        .mission-card {
+        .content-block {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             padding: 30px;
             transition: all 0.3s ease;
-            height: 100%;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
         }
 
-        .mission-card:hover {
+        .content-block:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .mission-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin: 0 0 20px 0;
-            color: #212529;
-            font-family: "Montserrat", sans-serif;
+        .text-block .content-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #495057;
         }
 
-        .mission-description {
-            color: #495057;
-            line-height: 1.7;
-            font-size: 15px;
+        .text-block .content-text p {
+            margin-bottom: 15px;
+        }
+
+        .text-block .content-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .image-block {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .content-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .video-block {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         .alert {
@@ -176,32 +222,34 @@
             color: #495057;
         }
 
-        [data-theme="dark"] .mission {
+        [data-theme="dark"] .social-insurance {
             background: #1a1a1a;
         }
 
-        [data-theme="dark"] .mission-card {
+        [data-theme="dark"] .content-block {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .mission-card:hover {
+        [data-theme="dark"] .content-block:hover {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        [data-theme="dark"] .mission-title {
-            color: #e0e0e0;
-        }
-
-        [data-theme="dark"] .mission-description {
+        [data-theme="dark"] .text-block .content-text {
             color: #adb5bd;
         }
 
-        @media (max-width: 991px) {
-            .mission-title {
-                font-size: 20px;
+        @media (max-width: 768px) {
+            .content-block {
+                padding: 20px;
+            }
+
+            .image-block,
+            .video-block {
+                padding: 0;
             }
         }
     </style>
     @endpush
 @endsection
+

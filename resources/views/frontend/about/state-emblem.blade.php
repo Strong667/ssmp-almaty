@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Миссия и ценности')
+@section('title', 'Государственный Герб')
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -13,36 +13,39 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Миссия и ценности</li>
+                    <li class="breadcrumb-item active" aria-current="page">Государственный Герб</li>
                 </ol>
             </nav>
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission section">
+    <!-- State Emblem Section -->
+    <section class="state-emblem section">
         <div class="container">
-            @if($missionValues->isNotEmpty())
-                <div class="row gy-4">
-                    @foreach($missionValues as $missionValue)
-                        <div class="col-lg-6">
-                            <div class="mission-card">
-                                <div class="mission-content">
-                                    <h3 class="mission-title">{{ $missionValue->title }}</h3>
-                                    <div class="mission-description">
-                                        {!! $missionValue->description !!}
-                                    </div>
+            @if($item)
+                <div class="row">
+                    <div class="col-12">
+                        <div class="symbol-card">
+                            @if($item->image_url)
+                                <div class="symbol-image-wrapper">
+                                    <img src="{{ $item->image_url }}" alt="Государственный Герб" class="symbol-image">
                                 </div>
-                            </div>
+                            @endif
+
+                            @if($item->description)
+                                <div class="symbol-description">
+                                    {!! nl2br(e($item->description)) !!}
+                                </div>
+                            @endif
                         </div>
-                    @endforeach
+                    </div>
                 </div>
             @else
                 <div class="row">
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">Миссия и ценности пока не добавлены</p>
+                            <p class="mb-0">Информация пока не добавлена</p>
                         </div>
                     </div>
                 </div>
@@ -105,41 +108,50 @@
             font-size: 16px;
         }
 
-        /* Mission Section */
-        .mission {
+        /* State Emblem Section */
+        .state-emblem {
             padding: 40px 0;
             background: #fff;
         }
 
-        .mission-card {
+        .symbol-card {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             padding: 30px;
             transition: all 0.3s ease;
-            height: 100%;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
         }
 
-        .mission-card:hover {
+        .symbol-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .mission-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin: 0 0 20px 0;
-            color: #212529;
-            font-family: "Montserrat", sans-serif;
+        .symbol-image-wrapper {
+            width: 100%;
+            margin-bottom: 25px;
+            text-align: center;
         }
 
-        .mission-description {
-            color: #495057;
-            line-height: 1.7;
+        .symbol-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .symbol-description {
             font-size: 15px;
+            line-height: 1.7;
+            color: #495057;
+        }
+
+        .symbol-description p {
+            margin-bottom: 15px;
+        }
+
+        .symbol-description p:last-child {
+            margin-bottom: 0;
         }
 
         .alert {
@@ -176,32 +188,29 @@
             color: #495057;
         }
 
-        [data-theme="dark"] .mission {
+        [data-theme="dark"] .state-emblem {
             background: #1a1a1a;
         }
 
-        [data-theme="dark"] .mission-card {
+        [data-theme="dark"] .symbol-card {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .mission-card:hover {
+        [data-theme="dark"] .symbol-card:hover {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        [data-theme="dark"] .mission-title {
-            color: #e0e0e0;
-        }
-
-        [data-theme="dark"] .mission-description {
+        [data-theme="dark"] .symbol-description {
             color: #adb5bd;
         }
 
-        @media (max-width: 991px) {
-            .mission-title {
-                font-size: 20px;
+        @media (max-width: 768px) {
+            .symbol-card {
+                padding: 20px;
             }
         }
     </style>
     @endpush
 @endsection
+

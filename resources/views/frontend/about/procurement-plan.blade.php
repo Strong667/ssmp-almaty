@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Отчёты о доходах и расходах')
+@section('title', 'План государственных закупок')
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -13,72 +13,63 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Отчёты о доходах и расходах</li>
+                    <li class="breadcrumb-item active" aria-current="page">План государственных закупок</li>
                 </ol>
             </nav>
         </div>
     </section>
 
-    <!-- Income Expense Reports Section -->
-    <section class="income-expense section">
+    <!-- Procurement Plan Section -->
+    <section class="procurement-plan section">
         <div class="container">
-            @if($reports->isEmpty())
-                <div class="row">
-                    <div class="col-12">
-                        <div class="alert alert-info text-center">
-                            <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">Отчёты о доходах и расходах пока не добавлены</p>
-                        </div>
-                    </div>
-                </div>
-            @else
+            @if($plans->isNotEmpty())
                 <div class="row gy-4">
-                    @foreach($reports as $report)
+                    @foreach($plans as $plan)
                         <div class="col-12">
-                            <div class="report-card">
-                                <div class="report-header">
-                                    <div class="report-icon">
+                            <div class="plan-card">
+                                <div class="plan-header">
+                                    <div class="plan-icon">
                                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                     </div>
-                                    <div class="report-content">
-                                        <h3 class="report-title">{{ $report->title }}</h3>
-                                        @if($report->description)
-                                            <div class="report-description">
-                                                {!! $report->description !!}
+                                    <div class="plan-content">
+                                        <h3 class="plan-title">{{ $plan->title }}</h3>
+                                        @if($plan->year)
+                                            <div class="plan-year">
+                                                <i class="bi bi-calendar"></i>
+                                                <span>{{ $plan->year }} год</span>
                                             </div>
                                         @endif
-                                        @if($report->file_url)
-                                            <div class="report-actions">
-                                                <a href="{{ $report->file_url }}" target="_blank" class="report-link">
+                                        @if($plan->file_url)
+                                            <div class="plan-actions">
+                                                <a href="{{ $plan->file_url }}" target="_blank" class="plan-link">
                                                     <i class="bi bi-box-arrow-up-right"></i>
                                                     <span>Открыть в новой вкладке</span>
                                                 </a>
-                                                <a href="{{ $report->file_url }}" download class="report-link report-link-secondary">
+                                                <a href="{{ $plan->file_url }}" download class="plan-link plan-link-secondary">
                                                     <i class="bi bi-download"></i>
                                                     <span>Скачать файл</span>
                                                 </a>
                                             </div>
+                                        @else
+                                            <div class="plan-no-file">
+                                                <i class="bi bi-exclamation-circle"></i>
+                                                <span>Файл не загружен</span>
+                                            </div>
                                         @endif
-                                        <div class="report-date">
-                                            <i class="bi bi-calendar3"></i>
-                                            <span>Опубликовано: {{ $report->created_at->format('d.m.Y') }}</span>
-                                        </div>
                                     </div>
                                 </div>
-                                @if($report->file_url && str_ends_with(strtolower($report->file_path), '.pdf'))
-                                    <div class="report-preview">
-                                        <iframe src="{{ $report->file_url }}#toolbar=1&navpanes=0&scrollbar=1" 
-                                                class="report-iframe" 
-                                                title="{{ $report->title }}">
-                                            <p>Ваш браузер не поддерживает отображение PDF. 
-                                                <a href="{{ $report->file_url }}" target="_blank">Откройте PDF в новой вкладке</a>.
-                                            </p>
-                                        </iframe>
-                                    </div>
-                                @endif
                             </div>
                         </div>
                     @endforeach
+                </div>
+            @else
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-info text-center">
+                            <i class="bi bi-info-circle"></i>
+                            <p class="mb-0">Планы закупок пока не добавлены</p>
+                        </div>
+                    </div>
                 </div>
             @endif
         </div>
@@ -139,35 +130,32 @@
             font-size: 16px;
         }
 
-        /* Income Expense Reports Section */
-        .income-expense {
+        /* Procurement Plan Section */
+        .procurement-plan {
             padding: 40px 0;
             background: #fff;
         }
 
-        .report-card {
+        .plan-card {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             padding: 30px;
             transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
         }
 
-        .report-card:hover {
+        .plan-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .report-header {
+        .plan-header {
             display: flex;
             gap: 20px;
-            margin-bottom: 30px;
             align-items: flex-start;
         }
 
-        .report-icon {
+        .plan-icon {
             width: 50px;
             height: 50px;
             min-width: 50px;
@@ -180,42 +168,39 @@
             font-size: 20px;
         }
 
-        .report-content {
+        .plan-content {
             flex-grow: 1;
         }
 
-        .report-title {
+        .plan-title {
             font-size: 22px;
             font-weight: 600;
-            margin: 0 0 15px 0;
             color: #212529;
-            line-height: 1.3;
+            margin: 0 0 15px 0;
             font-family: "Montserrat", sans-serif;
         }
 
-        .report-description {
-            font-size: 16px;
-            line-height: 1.8;
+        .plan-year {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
             color: #6c757d;
             margin-bottom: 20px;
         }
 
-        .report-description p {
-            margin-bottom: 10px;
+        .plan-year i {
+            color: #0d9488;
+            font-size: 18px;
         }
 
-        .report-description p:last-child {
-            margin-bottom: 0;
-        }
-
-        .report-actions {
+        .plan-actions {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 15px;
         }
 
-        .report-link {
+        .plan-link {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -229,49 +214,29 @@
             transition: all 0.3s ease;
         }
 
-        .report-link:hover {
+        .plan-link:hover {
             background: #0b7d73;
             color: #fff;
         }
 
-        .report-link-secondary {
+        .plan-link-secondary {
             background: #6c757d;
         }
 
-        .report-link-secondary:hover {
+        .plan-link-secondary:hover {
             background: #5a6268;
         }
 
-        .report-link i {
-            font-size: 16px;
-        }
-
-        .report-date {
+        .plan-no-file {
             display: flex;
             align-items: center;
             gap: 8px;
+            color: #dc3545;
             font-size: 14px;
-            color: #6c757d;
         }
 
-        .report-date i {
-            font-size: 16px;
-        }
-
-        .report-preview {
-            width: 100%;
-            height: 800px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            background: #f8f9fa;
-            margin-top: 20px;
-        }
-
-        .report-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        .plan-no-file i {
+            font-size: 18px;
         }
 
         .alert {
@@ -287,7 +252,6 @@
             margin-right: 10px;
         }
 
-        /* Dark Theme */
         [data-theme="dark"] .breadcrumbs-section {
             background: #1a1a1a;
             border-bottom-color: rgba(255, 255, 255, 0.1);
@@ -309,73 +273,59 @@
             color: #495057;
         }
 
-        [data-theme="dark"] .income-expense {
+        [data-theme="dark"] .procurement-plan {
             background: #1a1a1a;
         }
 
-        [data-theme="dark"] .report-card {
+        [data-theme="dark"] .plan-card {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .report-card:hover {
+        [data-theme="dark"] .plan-card:hover {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        [data-theme="dark"] .report-title {
+        [data-theme="dark"] .plan-title {
             color: #e0e0e0;
         }
 
-        [data-theme="dark"] .report-description {
-            color: #b0b0b0;
+        [data-theme="dark"] .plan-year {
+            color: #adb5bd;
         }
 
-        [data-theme="dark"] .report-date {
-            color: #b0b0b0;
+        [data-theme="dark"] .plan-no-file {
+            color: #ff6b6b;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-
-            .report-card {
+            .plan-card {
                 padding: 20px;
             }
 
-            .report-header {
+            .plan-header {
                 flex-direction: column;
                 gap: 15px;
             }
 
-            .report-icon {
-                width: 50px;
-                height: 50px;
-                min-width: 50px;
+            .plan-icon {
+                width: 45px;
+                height: 45px;
+                min-width: 45px;
+                font-size: 18px;
+            }
+
+            .plan-title {
                 font-size: 20px;
             }
 
-            .report-title {
-                font-size: 20px;
-                margin-bottom: 12px;
-            }
-
-            .report-description {
-                font-size: 15px;
-                margin-bottom: 15px;
-            }
-
-            .report-actions {
+            .plan-actions {
                 flex-direction: column;
             }
 
-            .report-link {
+            .plan-link {
                 width: 100%;
                 justify-content: center;
-                padding: 10px 16px;
-                font-size: 14px;
-            }
-
-            .report-preview {
-                height: 500px;
             }
         }
     </style>

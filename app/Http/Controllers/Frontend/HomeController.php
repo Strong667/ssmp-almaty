@@ -17,7 +17,7 @@ class HomeController extends Controller
             ->get()
             ->map(fn (Setting $setting) => [
                 'id' => $setting->id,
-                'url' => Storage::disk('public')->url($setting->main_image),
+                'url' => route('storage.public', ['path' => $setting->main_image]),
             ]);
 
         $news = News::query()
@@ -27,7 +27,7 @@ class HomeController extends Controller
             ->get()
             ->each(function (News $item) {
                 $item->image_url = $item->image
-                    ? Storage::disk('public')->url($item->image)
+                    ? route('storage.public', ['path' => $item->image])
                     : null;
             });
 
