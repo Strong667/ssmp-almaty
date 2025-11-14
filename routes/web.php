@@ -30,6 +30,13 @@ use App\MoonShine\Resources\About\Pages\StateServicesPage;
 use App\MoonShine\Resources\About\Pages\StateFlagPage;
 use App\MoonShine\Resources\About\Pages\StateEmblemPage;
 use App\MoonShine\Resources\About\Pages\StateAnthemPage;
+use App\MoonShine\Resources\About\Pages\PaidServicesPage;
+use App\MoonShine\Resources\About\Pages\ComplianceOfficerPlanPage;
+use App\MoonShine\Resources\About\Pages\InternalCorruptionRiskAnalysisPage;
+use App\MoonShine\Resources\About\Pages\InternalRegulationsPage;
+use App\MoonShine\Resources\About\Pages\CorruptionRiskPositionPage;
+use App\MoonShine\Resources\About\Pages\CorruptionRiskListPage;
+use App\MoonShine\Resources\About\Pages\CorruptionRiskMapPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', PublicStorageController::class)
@@ -146,6 +153,36 @@ Route::middleware([UseWebGuard::class])->group(function () {
     Route::get('/about/state-symbols/anthem', function () {
         return app(StateAnthemPage::class)->render();
     })->name('about.state-anthem');
+    
+    Route::get('/about/paid-services', function () {
+        return app(PaidServicesPage::class)->render();
+    })->name('about.paid-services');
+    
+    // Комплаенс служба
+    Route::get('/about/compliance-service/officer-plan', function () {
+        return app(ComplianceOfficerPlanPage::class)->render();
+    })->name('about.compliance-officer-plan');
+    
+    Route::get('/about/compliance-service/corruption-risk-analysis', function () {
+        return app(InternalCorruptionRiskAnalysisPage::class)->render();
+    })->name('about.corruption-risk-analysis');
+    
+    Route::get('/about/compliance-service/internal-regulations', function () {
+        return app(InternalRegulationsPage::class)->render();
+    })->name('about.internal-regulations');
+    
+    // Картограмма коррупции
+    Route::get('/about/corruption-risk-map/positions', function () {
+        return app(CorruptionRiskPositionPage::class)->render();
+    })->name('about.corruption-risk-positions');
+    
+    Route::get('/about/corruption-risk-map/list', function () {
+        return app(CorruptionRiskListPage::class)->render();
+    })->name('about.corruption-risk-list');
+    
+    Route::get('/about/corruption-risk-map/map', function () {
+        return app(CorruptionRiskMapPage::class)->render();
+    })->name('about.corruption-risk-map');
     
     // Новости
     Route::get('/news', function () {

@@ -64,6 +64,13 @@ use App\MoonShine\Resources\StateServices\StateServicesResource;
 use App\MoonShine\Resources\StateFlag\StateFlagResource;
 use App\MoonShine\Resources\StateEmblem\StateEmblemResource;
 use App\MoonShine\Resources\StateAnthem\StateAnthemResource;
+use App\MoonShine\Resources\PaidService\PaidServiceResource;
+use App\MoonShine\Resources\ComplianceOfficerPlan\ComplianceOfficerPlanResource;
+use App\MoonShine\Resources\InternalCorruptionRiskAnalysis\InternalCorruptionRiskAnalysisResource;
+use App\MoonShine\Resources\InternalRegulations\InternalRegulationsResource;
+use App\MoonShine\Resources\CorruptionRiskPosition\CorruptionRiskPositionResource;
+use App\MoonShine\Resources\CorruptionRiskList\CorruptionRiskListResource;
+use App\MoonShine\Resources\CorruptionRiskMap\CorruptionRiskMapResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -119,6 +126,17 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(StateFlagResource::class, 'Государственный Флаг'),
                 MenuItem::make(StateEmblemResource::class, 'Государственный Герб'),
                 MenuItem::make(StateAnthemResource::class, 'Государственный Гимн'),
+            ]),
+            MenuItem::make(PaidServiceResource::class, 'Платные услуги'),
+            MenuGroup::make('Комплаенс служба', [
+                MenuItem::make(ComplianceOfficerPlanResource::class, 'План работы комплаенс офицера 2024г'),
+                MenuItem::make(InternalCorruptionRiskAnalysisResource::class, 'Внутренний анализ коррупционных рисков'),
+                MenuItem::make(InternalRegulationsResource::class, 'Внутренние НПА'),
+            ]),
+            MenuGroup::make('Картограмма коррупции', [
+                MenuItem::make(CorruptionRiskPositionResource::class, 'Должности, подверженные коррупционным рискам'),
+                MenuItem::make(CorruptionRiskListResource::class, 'Перечень коррупционных рисков'),
+                MenuItem::make(CorruptionRiskMapResource::class, 'Карта коррупционных рисков'),
             ]),
             MenuGroup::make('Государственные закупки', [
                 MenuItem::make(ProcurementPlanResource::class, 'План государственных закупок'),

@@ -227,6 +227,55 @@ final class GuestLayout extends AppLayout
                             ->icon('speaker-wave'),
                     ])
                     ->placement('bottom-start'),
+                // Ссылка на платные услуги
+                Link::make(route('about.paid-services'), 'Платные услуги')
+                    ->icon('banknotes')
+                    ->when(
+                        fn (): bool => Route::currentRouteName() === 'about.paid-services',
+                        fn (Link $link): Link => $link->customAttributes(['class' => 'active'])
+                    ),
+                // Дропдаун меню "Комплаенс служба"
+                Dropdown::make()
+                    ->toggler(
+                        '<div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; border-radius: 0.375rem; transition: all 0.2s; ' .
+                        (in_array(Route::currentRouteName() ?? '', ['about.compliance-officer-plan', 'about.corruption-risk-analysis', 'about.internal-regulations']) ? 'background-color: rgba(139, 92, 246, 0.1); color: rgb(139, 92, 246);' : '') .
+                        '">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 1rem; height: 1rem;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>Комплаенс служба</span>
+                        </div>'
+                    )
+                    ->items([
+                        Link::make(route('about.compliance-officer-plan'), 'План работы комплаенс офицера 2024г')
+                            ->icon('document-check'),
+                        Link::make(route('about.corruption-risk-analysis'), 'Внутренний анализ коррупционных рисков')
+                            ->icon('shield-exclamation'),
+                        Link::make(route('about.internal-regulations'), 'Внутренние НПА')
+                            ->icon('document-text'),
+                    ])
+                    ->placement('bottom-start'),
+                // Дропдаун меню "Картограмма коррупции"
+                Dropdown::make()
+                    ->toggler(
+                        '<div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; border-radius: 0.375rem; transition: all 0.2s; ' .
+                        (in_array(Route::currentRouteName() ?? '', ['about.corruption-risk-positions', 'about.corruption-risk-list', 'about.corruption-risk-map']) ? 'background-color: rgba(139, 92, 246, 0.1); color: rgb(139, 92, 246);' : '') .
+                        '">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 1rem; height: 1rem;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                            </svg>
+                            <span>Картограмма коррупции</span>
+                        </div>'
+                    )
+                    ->items([
+                        Link::make(route('about.corruption-risk-positions'), 'Должности, подверженные коррупционным рискам')
+                            ->icon('user-group'),
+                        Link::make(route('about.corruption-risk-list'), 'Перечень коррупционных рисков')
+                            ->icon('list-bullet'),
+                        Link::make(route('about.corruption-risk-map'), 'Карта коррупционных рисков')
+                            ->icon('map'),
+                    ])
+                    ->placement('bottom-start'),
                 // Можно добавить больше пунктов меню здесь
             ])->class('menu menu--horizontal')->name('topbar-menu'),
 

@@ -43,6 +43,13 @@ use App\MoonShine\Resources\StateServices\StateServicesResource;
 use App\MoonShine\Resources\StateFlag\StateFlagResource;
 use App\MoonShine\Resources\StateEmblem\StateEmblemResource;
 use App\MoonShine\Resources\StateAnthem\StateAnthemResource;
+use App\MoonShine\Resources\PaidService\PaidServiceResource;
+use App\MoonShine\Resources\ComplianceOfficerPlan\ComplianceOfficerPlanResource;
+use App\MoonShine\Resources\InternalCorruptionRiskAnalysis\InternalCorruptionRiskAnalysisResource;
+use App\MoonShine\Resources\InternalRegulations\InternalRegulationsResource;
+use App\MoonShine\Resources\CorruptionRiskPosition\CorruptionRiskPositionResource;
+use App\MoonShine\Resources\CorruptionRiskList\CorruptionRiskListResource;
+use App\MoonShine\Resources\CorruptionRiskMap\CorruptionRiskMapResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -89,6 +96,13 @@ class MoonShineServiceProvider extends ServiceProvider
                 StateFlagResource::class,
                 StateEmblemResource::class,
                 StateAnthemResource::class,
+                PaidServiceResource::class,
+                ComplianceOfficerPlanResource::class,
+                InternalCorruptionRiskAnalysisResource::class,
+                InternalRegulationsResource::class,
+                CorruptionRiskPositionResource::class,
+                CorruptionRiskListResource::class,
+                CorruptionRiskMapResource::class,
             ])
             ->pages([
                 ...$config->getPages(),
