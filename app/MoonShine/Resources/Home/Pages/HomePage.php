@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Home\Pages;
 
-use App\MoonShine\Layouts\GuestLayout;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\MenuManager\Attributes\SkipMenu;
@@ -20,7 +19,6 @@ use MoonShine\UI\Components\FlexibleRender;
 #[SkipMenu]
 class HomePage extends Page
 {
-    protected ?string $layout = GuestLayout::class;
 
     public function getTitle(): string
     {

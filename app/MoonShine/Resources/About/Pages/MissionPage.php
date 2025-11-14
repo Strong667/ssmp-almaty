@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\About\Pages;
 
-use App\MoonShine\Layouts\GuestLayout;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\MenuManager\Attributes\SkipMenu;
@@ -17,7 +16,6 @@ use MoonShine\UI\Fields\Text;
 #[SkipMenu]
 class MissionPage extends Page
 {
-    protected ?string $layout = GuestLayout::class;
 
     public function getTitle(): string
     {

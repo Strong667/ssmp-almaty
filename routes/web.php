@@ -1,12 +1,9 @@
 <?php
 
 use App\Http\Controllers\Storage\PublicStorageController;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Middleware\UseWebGuard;
-use App\MoonShine\Resources\Home\Pages\HomePage;
-use App\MoonShine\Resources\About\Pages\AdministrationPage;
-use App\MoonShine\Resources\About\Pages\SchedulePage;
-use App\MoonShine\Resources\About\Pages\StructurePage;
-use App\MoonShine\Resources\About\Pages\MissionPage;
 use App\MoonShine\Resources\About\Pages\EthicalCodePage;
 use App\MoonShine\Resources\About\Pages\IncomeExpensePage;
 use App\MoonShine\Resources\About\Pages\VacancyEmploymentPage;
@@ -15,8 +12,6 @@ use App\MoonShine\Resources\About\Pages\ActivitySpherePage;
 use App\MoonShine\Resources\About\Pages\ProcurementPlanPage;
 use App\MoonShine\Resources\About\Pages\AnnouncementsPage;
 use App\MoonShine\Resources\About\Pages\ProtocolsPage;
-use App\MoonShine\Resources\About\Pages\NewsListPage;
-use App\MoonShine\Resources\About\Pages\NewsDetailPage;
 use App\MoonShine\Resources\About\Pages\MedicalHelpForForeignersPage;
 use App\MoonShine\Resources\About\Pages\LegalFrameworkPage;
 use App\MoonShine\Resources\About\Pages\EmergencyServiceRulesPage;
@@ -47,36 +42,17 @@ Route::get('storage/{path}', PublicStorageController::class)
 Route::middleware([UseWebGuard::class])->group(function () {
     
     // Главная страница
-    Route::get('/', function () {
-        $page = app(HomePage::class);
-        return $page->render();
-    })->name('home');
+    Route::get('/', [FrontendController::class, 'home'])->name('home');
     
-    // Страницы О нас
-    Route::get('/about/administration', function () {
-        return app(AdministrationPage::class)->render();
-    })->name('about.administration');
+    // Страницы О нас (через blade views)
+    Route::get('/about/administration', [FrontendController::class, 'administration'])->name('about.administration');
+    Route::get('/about/schedule', [FrontendController::class, 'schedule'])->name('about.schedule');
+    Route::get('/about/structure', [FrontendController::class, 'structure'])->name('about.structure');
+    Route::get('/about/mission', [FrontendController::class, 'mission'])->name('about.mission');
+    Route::get('/about/ethical-code', [AboutController::class, 'ethicalCode'])->name('about.ethical-code');
+    Route::get('/about/income-expense', [AboutController::class, 'incomeExpense'])->name('about.income-expense');
     
-    Route::get('/about/schedule', function () {
-        return app(SchedulePage::class)->render();
-    })->name('about.schedule');
-    
-    Route::get('/about/structure', function () {
-        return app(StructurePage::class)->render();
-    })->name('about.structure');
-    
-    Route::get('/about/mission', function () {
-        return app(MissionPage::class)->render();
-    })->name('about.mission');
-    
-    Route::get('/about/ethical-code', function () {
-        return app(EthicalCodePage::class)->render();
-    })->name('about.ethical-code');
-    
-    Route::get('/about/income-expense', function () {
-        return app(IncomeExpensePage::class)->render();
-    })->name('about.income-expense');
-    
+    // Остальные страницы через MoonShine Pages (будут переделаны позже)
     Route::get('/about/vacancy-employment', function () {
         return app(VacancyEmploymentPage::class)->render();
     })->name('about.vacancy-employment');
@@ -184,13 +160,8 @@ Route::middleware([UseWebGuard::class])->group(function () {
         return app(CorruptionRiskMapPage::class)->render();
     })->name('about.corruption-risk-map');
     
-    // Новости
-    Route::get('/news', function () {
-        return app(NewsListPage::class)->render();
-    })->name('news.list');
-    
-    Route::get('/news/{slug}', function (string $slug) {
-        return app(NewsDetailPage::class)->render();
-    })->name('news.detail');
+    // Новости (через blade views)
+    Route::get('/news', [FrontendController::class, 'newsList'])->name('news.list');
+    Route::get('/news/{slug}', [FrontendController::class, 'newsDetail'])->name('news.detail');
 });
 

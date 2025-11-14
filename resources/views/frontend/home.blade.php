@@ -3,29 +3,6 @@
 @section('title', 'Главная')
 
 @section('content')
-    <!-- Hero Section -->
-    <section id="hero" class="hero d-flex align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 d-flex flex-column justify-content-center">
-                    <h1 data-aos="fade-up">Медицинский центр</h1>
-                    <h2 data-aos="fade-up" data-aos-delay="400">Профессиональная медицинская помощь для вашего здоровья</h2>
-                    <div data-aos="fade-up" data-aos-delay="600">
-                        <div class="text-center text-lg-start">
-                            <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                                <span>Узнать больше</span>
-                                <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-                    <img src="{{ asset('slujba.png') }}" class="img-fluid" alt="Медицинский центр">
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- News Section -->
     @if($news->isNotEmpty())
         <section id="news" class="news section">
@@ -47,7 +24,7 @@
                                 <div class="news-content">
                                     <h3 class="news-title">{{ $article->title }}</h3>
                                     <p class="news-date">{{ $article->display_date }}</p>
-                                    <a href="#" class="read-more">
+                                    <a href="{{ route('news.detail', $article->slug) }}" class="read-more">
                                         <span>Читать Новость</span>
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -125,224 +102,6 @@
 
     @push('styles')
     <style>
-
-        /* Hero Section */
-        #hero {
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding-top: 120px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                /* Точки сетки - мелкие */
-                radial-gradient(circle, rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px),
-                /* Точки сетки - средние */
-                radial-gradient(circle, rgba(255, 255, 255, 0.15) 2px, transparent 2px),
-                /* Точки сетки - крупные */
-                radial-gradient(circle, rgba(255, 255, 255, 0.1) 3px, transparent 3px);
-            background-size: 
-                40px 40px,
-                80px 80px,
-                160px 160px;
-            background-position: 
-                0 0,
-                20px 20px,
-                40px 40px;
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        #hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 70%;
-            height: 100%;
-            background-image: 
-                /* Шестиугольники - создаем через clip-path и градиенты */
-                repeating-linear-gradient(
-                    0deg,
-                    transparent 0px,
-                    transparent 48px,
-                    rgba(255, 255, 255, 0.08) 48px,
-                    rgba(255, 255, 255, 0.08) 50px,
-                    transparent 50px,
-                    transparent 98px
-                ),
-                repeating-linear-gradient(
-                    60deg,
-                    transparent 0px,
-                    transparent 48px,
-                    rgba(255, 255, 255, 0.08) 48px,
-                    rgba(255, 255, 255, 0.08) 50px,
-                    transparent 50px,
-                    transparent 98px
-                ),
-                repeating-linear-gradient(
-                    120deg,
-                    transparent 0px,
-                    transparent 48px,
-                    rgba(255, 255, 255, 0.08) 48px,
-                    rgba(255, 255, 255, 0.08) 50px,
-                    transparent 50px,
-                    transparent 98px
-                ),
-                /* Дополнительные линии для соединения */
-                repeating-linear-gradient(
-                    30deg,
-                    transparent 0px,
-                    transparent 84px,
-                    rgba(255, 255, 255, 0.05) 84px,
-                    rgba(255, 255, 255, 0.05) 86px,
-                    transparent 86px,
-                    transparent 170px
-                ),
-                repeating-linear-gradient(
-                    90deg,
-                    transparent 0px,
-                    transparent 84px,
-                    rgba(255, 255, 255, 0.05) 84px,
-                    rgba(255, 255, 255, 0.05) 86px,
-                    transparent 86px,
-                    transparent 170px
-                );
-            background-size: 
-                100px 87px,
-                100px 87px,
-                100px 87px,
-                173px 150px,
-                173px 150px;
-            background-position: 
-                0 0,
-                50px 43.5px,
-                25px 87px,
-                0 0,
-                86.5px 75px;
-            opacity: 0.4;
-            transform: perspective(1200px) rotateX(50deg) rotateY(-10deg) scale(1.3);
-            transform-origin: right center;
-            pointer-events: none;
-            filter: blur(0.5px);
-        }
-
-        #hero .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        [data-theme="dark"] #hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        }
-
-        [data-theme="dark"] #hero::before {
-            background-image: 
-                radial-gradient(circle, rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.08) 2px, transparent 2px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.05) 3px, transparent 3px);
-        }
-
-        [data-theme="dark"] #hero::after {
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent 0px,
-                    transparent 48px,
-                    rgba(255, 255, 255, 0.05) 48px,
-                    rgba(255, 255, 255, 0.05) 50px,
-                    transparent 50px,
-                    transparent 98px
-                ),
-                repeating-linear-gradient(
-                    60deg,
-                    transparent 0px,
-                    transparent 48px,
-                    rgba(255, 255, 255, 0.05) 48px,
-                    rgba(255, 255, 255, 0.05) 50px,
-                    transparent 50px,
-                    transparent 98px
-                ),
-                repeating-linear-gradient(
-                    120deg,
-                    transparent 0px,
-                    transparent 48px,
-                    rgba(255, 255, 255, 0.05) 48px,
-                    rgba(255, 255, 255, 0.05) 50px,
-                    transparent 50px,
-                    transparent 98px
-                ),
-                repeating-linear-gradient(
-                    30deg,
-                    transparent 0px,
-                    transparent 84px,
-                    rgba(255, 255, 255, 0.03) 84px,
-                    rgba(255, 255, 255, 0.03) 86px,
-                    transparent 86px,
-                    transparent 170px
-                ),
-                repeating-linear-gradient(
-                    90deg,
-                    transparent 0px,
-                    transparent 84px,
-                    rgba(255, 255, 255, 0.03) 84px,
-                    rgba(255, 255, 255, 0.03) 86px,
-                    transparent 86px,
-                    transparent 170px
-                );
-        }
-
-        #hero h1 {
-            margin: 0 0 10px 0;
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 56px;
-            color: #fff;
-        }
-
-        #hero h2 {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 50px;
-            font-size: 24px;
-        }
-
-        .btn-get-started {
-            font-family: "Poppins", sans-serif;
-            font-weight: 500;
-            font-size: 16px;
-            letter-spacing: 1px;
-            display: inline-block;
-            padding: 12px 36px;
-            border-radius: 50px;
-            transition: 0.5s;
-            color: #fff;
-            border: 2px solid #fff;
-            text-decoration: none;
-        }
-
-        .btn-get-started:hover {
-            background: #fff;
-            color: #667eea;
-        }
-
-        .hero-img {
-            text-align: right;
-        }
-
-        .hero-img img {
-            width: 100%;
-            max-width: 500px;
-        }
-
         /* News Section */
         .news {
             padding: 80px 0;
@@ -572,25 +331,6 @@
 
         /* Responsive */
         @media (max-width: 991px) {
-            #hero {
-                height: auto;
-                padding: 120px 0 60px;
-            }
-
-            #hero h1 {
-                font-size: 32px;
-                line-height: 40px;
-            }
-
-            #hero h2 {
-                font-size: 20px;
-            }
-
-            .hero-img {
-                text-align: center;
-                margin-top: 40px;
-            }
-
             .section-header h2 {
                 font-size: 28px;
             }
