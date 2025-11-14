@@ -48,6 +48,12 @@ use App\MoonShine\Resources\CorporateDocument\CorporateDocumentResource;
 use App\MoonShine\Resources\Document\DocumentResource;
 use App\MoonShine\Resources\ActivitySphere\ActivitySphereResource;
 use App\MoonShine\Resources\Substation\SubstationResource;
+use App\MoonShine\Resources\SubstationEmployee\SubstationEmployeeResource;
+use App\MoonShine\Resources\DirectorBlog\DirectorBlogResource;
+use App\MoonShine\Resources\Anticorruption\AnticorruptionResource;
+use App\MoonShine\Resources\AnticorruptionImage\AnticorruptionImageResource;
+use App\MoonShine\Resources\MissionOfEmergencyService\MissionOfEmergencyServiceResource;
+use App\MoonShine\Resources\HealthyLifestyle\HealthyLifestyleResource;
 use App\MoonShine\Resources\ProcurementPlan\ProcurementPlanResource;
 use App\MoonShine\Resources\AnnouncementCategory\AnnouncementCategoryResource;
 use App\MoonShine\Resources\Announcement\AnnouncementResource;
@@ -88,6 +94,13 @@ final class MoonShineLayout extends AppLayout
             MenuGroup::make('Главный экран', [
                 MenuItem::make(SettingResource::class, 'Settings'),
                 MenuItem::make(NewsResource::class, 'News'),
+                MenuItem::make(DirectorBlogResource::class, 'Блог о директоре'),
+                MenuGroup::make('Антикор', [
+                    MenuItem::make(AnticorruptionResource::class, 'Антикор'),
+                    MenuItem::make(AnticorruptionImageResource::class, 'Изображения'),
+                ]),
+                MenuItem::make(MissionOfEmergencyServiceResource::class, 'Миссия скорой помощи'),
+                MenuItem::make(HealthyLifestyleResource::class, 'ЗОЖ'),
             ]),
             MenuGroup::make('О нас', [
                 MenuItem::make(AdminResource::class, 'Администрация'),
@@ -107,6 +120,7 @@ final class MoonShineLayout extends AppLayout
                 MenuGroup::make('Сфера деятельности', [
                     MenuItem::make(ActivitySphereResource::class, 'Общая информация'),
                     MenuItem::make(SubstationResource::class, 'Подстанции'),
+                    MenuItem::make(SubstationEmployeeResource::class, 'Сотрудники подстанций'),
                 ]),
             ]),
             MenuGroup::make('Жителям Алматы', [

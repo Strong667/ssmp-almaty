@@ -9,6 +9,7 @@ use App\Models\Structure;
 use App\Models\MissionValue;
 use App\Models\News;
 use App\Models\Setting;
+use App\Models\Substation;
 use Illuminate\Support\Facades\Storage;
 
 class FrontendController extends Controller
@@ -36,7 +37,12 @@ class FrontendController extends Controller
                     : null;
             });
 
-        return view('frontend.home', compact('images', 'news'));
+        $substations = Substation::query()
+            ->withCount('employees')
+            ->orderBy('name')
+            ->get();
+
+        return view('frontend.home', compact('images', 'news', 'substations'));
     }
 
     public function administration()

@@ -3,23 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Substation extends Model
 {
     protected $fillable = [
-        'number',
+        'name',
         'address',
-        'brigades_count',
-        'doctors_count',
-        'paramedics_count',
-        'junior_staff_count',
+        'phone',
     ];
 
-    protected $casts = [
-        'number' => 'integer',
-        'brigades_count' => 'integer',
-        'doctors_count' => 'integer',
-        'paramedics_count' => 'integer',
-        'junior_staff_count' => 'integer',
-    ];
+    /**
+     * Сотрудники подстанции
+     */
+    public function employees(): HasMany
+    {
+        return $this->hasMany(SubstationEmployee::class);
+    }
 }

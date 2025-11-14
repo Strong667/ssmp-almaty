@@ -23,7 +23,6 @@
                             <select id="language-select" class="language-select form-select form-select-sm">
                                 <option value="ru" selected>Рус</option>
                                 <option value="kk">Қаз</option>
-                                <option value="en">Eng</option>
                             </select>
                         </div>
                     </div>
@@ -93,11 +92,6 @@
                                 <li><a class="dropdown-item{{ request()->routeIs('about.protocols') ? ' active' : '' }}" href="{{ route('about.protocols') }}">Протоколы</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link{{ request()->routeIs('news.list', 'news.detail') ? ' active' : '' }}" href="{{ route('news.list') }}">
-                                Новости
-                            </a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.medical-help-for-foreigners', 'about.legal-framework', 'about.emergency-service-rules', 'about.social-insurance', 'about.rubric-for-population') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Жителям Алматы
@@ -161,4 +155,38 @@
             </nav>
         </div>
     </div>
+
+    <!-- Четвертый слой: Быстрые кнопки (только на главной странице) -->
+    @if(request()->routeIs('home'))
+    <div class="header-quick-links">
+        <div class="container-fluid">
+            <div class="row g-0">
+                <div class="col-12">
+                    <div class="quick-links-wrapper">
+                        <a href="{{ route('director-blog.show') }}" class="quick-link-btn">
+                            <i class="bi bi-file-person"></i>
+                            <span>БЛОГ О ДИРЕКТОРЕ</span>
+                        </a>
+                        <a href="{{ route('news.list') }}" class="quick-link-btn">
+                            <i class="bi bi-newspaper"></i>
+                            <span>НОВОСТИ</span>
+                        </a>
+                        <a href="{{ route('anticorruption.show') }}" class="quick-link-btn">
+                            <i class="bi bi-shield-check"></i>
+                            <span>АНТИКОР</span>
+                        </a>
+                        <a href="{{ route('healthy-lifestyle.show') }}" class="quick-link-btn">
+                            <i class="bi bi-heart-pulse"></i>
+                            <span>ЗОЖ</span>
+                        </a>
+                        <a href="{{ route('mission-of-emergency-service.show') }}" class="quick-link-btn">
+                            <i class="bi bi-bullseye"></i>
+                            <span>МИССИЯ СКОРОЙ<br>ПОМОЩИ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </header>

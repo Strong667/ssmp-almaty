@@ -3,6 +3,76 @@
 @section('title', 'Главная')
 
 @section('content')
+    <!-- Departments Section with Tabs -->
+    <section id="departments" class="departments section">
+        <div class="container" data-aos="fade-up">
+            <div class="departments-header">
+                <!-- Tabs Navigation -->
+                <ul class="nav nav-tabs departments-tabs" id="departmentsTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="substations-tab" data-bs-toggle="tab" data-bs-target="#substations" type="button" role="tab" aria-controls="substations" aria-selected="true">
+                            ПОДСТАНЦИИ
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="map-tab" data-bs-toggle="tab" data-bs-target="#map" type="button" role="tab" aria-controls="map" aria-selected="false">
+                            КАРТА
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="departmentsTabContent">
+                <!-- Substations Tab -->
+                <div class="tab-pane fade show active" id="substations" role="tabpanel" aria-labelledby="substations-tab">
+                    <div class="departments-content">
+                        @if(isset($substations) && $substations->isNotEmpty())
+                            <div class="row gy-4">
+                                @foreach($substations as $substation)
+                                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                                        <div class="department-card">
+                                            <div class="department-icon">
+                                                <i class="bi bi-hospital"></i>
+                                            </div>
+                                            <div class="department-info">
+                                                <h3 class="department-name">{{ $substation->name }}</h3>
+                                                <a href="{{ route('substations.show', $substation->id) }}" class="department-link">
+                                                    Посмотреть сотрудников <i class="bi bi-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="alert alert-info text-center" role="alert">
+                                Подстанции пока не добавлены
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- Map Tab -->
+                <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
+                    <div class="departments-content">
+                        <div class="map-container">
+                            <iframe
+                                src="https://yandex.ru/map-widget/v1/?um=constructor%3A984a0c4f628d41f0563e1e4becea1dd9bfe4ad7ec66d31d1ad0418b2232d4e74&source=constructor"
+                                width="100%"
+                                height="600"
+                                style="border:0; border-radius: 10px;"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- News Section -->
     @if($news->isNotEmpty())
         <section id="news" class="news section">
@@ -102,6 +172,228 @@
 
     @push('styles')
     <style>
+        /* Departments Section with Tabs */
+        .departments {
+            padding: 80px 0;
+            position: relative;
+            background-image: url('{{ asset("72_main.png") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .departments::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 248, 240, 0.6);
+            z-index: 0;
+        }
+
+        .departments .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .departments-header {
+            margin-bottom: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .departments-tabs {
+            border-bottom: 2px solid #e5e7eb;
+            gap: 0;
+        }
+
+        .departments-tabs .nav-item {
+            margin-bottom: -2px;
+        }
+
+        .departments-tabs .nav-link {
+            padding: 14px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #212529;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            border-radius: 0;
+            text-transform: uppercase;
+            text-shadow: none;
+            box-shadow: none;
+        }
+
+        .departments-tabs .nav-link:hover {
+            color: #212529;
+            background: transparent;
+            text-shadow: none;
+            box-shadow: none;
+        }
+
+        .departments-tabs .nav-link.active {
+            color: #212529;
+            background: #fff;
+            border-bottom-color: #212529;
+            font-weight: 700;
+            text-shadow: none;
+            box-shadow: none;
+        }
+
+        .departments-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 0 10px 10px 10px;
+            min-height: 400px;
+            margin-top: -2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Department Cards */
+        .department-card {
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .department-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 12px 12px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+        }
+
+        .department-icon {
+            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0d9488;
+            border-radius: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .department-icon i {
+            font-size: 32px;
+            color: #fff;
+        }
+
+        .department-info {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .department-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c4964;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+
+        .department-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1977cc;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .department-link:hover {
+            color: #0d5aa7;
+            gap: 12px;
+        }
+
+        .department-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .department-link:hover i {
+            transform: translateX(5px);
+        }
+
+        .map-container {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .departments {
+            background: rgba(26, 26, 26, 0.8);
+        }
+
+        [data-theme="dark"] .departments-tabs {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .departments-tabs .nav-link {
+            color: #e0e0e0;
+            text-shadow: none;
+            box-shadow: none;
+        }
+
+        [data-theme="dark"] .departments-tabs .nav-link:hover {
+            color: #e0e0e0;
+            background: transparent;
+            text-shadow: none;
+            box-shadow: none;
+        }
+
+        [data-theme="dark"] .departments-tabs .nav-link.active {
+            color: #e0e0e0;
+            background: #2a2a2a;
+            border-bottom-color: #e0e0e0;
+            text-shadow: none;
+            box-shadow: none;
+        }
+
+        [data-theme="dark"] .departments-content {
+            background: #2a2a2a;
+        }
+
+        [data-theme="dark"] .department-card {
+            background: #333333;
+        }
+
+        [data-theme="dark"] .department-card:hover {
+            background: #3a3a3a;
+        }
+
+        [data-theme="dark"] .department-name {
+            color: #e0e0e0;
+        }
+
         /* News Section */
         .news {
             padding: 80px 0;

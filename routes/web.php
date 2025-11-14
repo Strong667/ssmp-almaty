@@ -3,6 +3,11 @@
 use App\Http\Controllers\Storage\PublicStorageController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\SubstationController;
+use App\Http\Controllers\Frontend\DirectorBlogController;
+use App\Http\Controllers\Frontend\AnticorruptionController;
+use App\Http\Controllers\Frontend\MissionOfEmergencyServiceController;
+use App\Http\Controllers\Frontend\HealthyLifestyleController;
 use App\Http\Middleware\UseWebGuard;
 use App\MoonShine\Resources\About\Pages\EthicalCodePage;
 use App\MoonShine\Resources\About\Pages\IncomeExpensePage;
@@ -163,5 +168,21 @@ Route::middleware([UseWebGuard::class])->group(function () {
     // Новости (через blade views)
     Route::get('/news', [FrontendController::class, 'newsList'])->name('news.list');
     Route::get('/news/{slug}', [FrontendController::class, 'newsDetail'])->name('news.detail');
+    
+    // Подстанции
+    Route::get('/substations', [SubstationController::class, 'index'])->name('substations.index');
+    Route::get('/substations/{id}', [SubstationController::class, 'show'])->name('substations.show');
+    
+    // Блог о директоре
+    Route::get('/director-blog', [DirectorBlogController::class, 'show'])->name('director-blog.show');
+    
+    // Антикор
+    Route::get('/anticorruption', [AnticorruptionController::class, 'show'])->name('anticorruption.show');
+    
+    // Миссия скорой помощи
+    Route::get('/mission-of-emergency-service', [MissionOfEmergencyServiceController::class, 'show'])->name('mission-of-emergency-service.show');
+    
+    // ЗОЖ
+    Route::get('/healthy-lifestyle', [HealthyLifestyleController::class, 'show'])->name('healthy-lifestyle.show');
 });
 

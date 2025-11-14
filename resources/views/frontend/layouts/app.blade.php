@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
     <style>
@@ -190,7 +191,7 @@
         /* Второй слой: Логотип с текстом */
         .header-middle {
             background: transparent;
-            padding: 25px 0;
+            padding: 30px 0;
             border-bottom: none;
         }
 
@@ -198,7 +199,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
             text-decoration: none;
             color: inherit;
             transition: all 0.3s ease;
@@ -210,9 +211,9 @@
 
         .logo-wrapper {
             position: relative;
-            padding: 12px;
+            padding: 15px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            border-radius: 15px;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
@@ -223,9 +224,9 @@
         }
 
         .logo-img {
-            max-height: 100px;
+            max-height: 160px;
             height: auto;
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
             transition: all 0.3s ease;
         }
 
@@ -234,29 +235,35 @@
         }
 
         .logo-title {
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 36px;
+            font-weight: 800;
             margin: 0;
             color: #fff;
-            line-height: 1.3;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            letter-spacing: 0.3px;
+            line-height: 1.2;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
+            font-family: "Montserrat", sans-serif;
+            text-transform: uppercase;
         }
 
         .logo-subtitle {
-            font-size: 16px;
-            margin: 6px 0 0 0;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            font-size: 20px;
+            margin: 8px 0 0 0;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.3px;
+            font-family: "Montserrat", sans-serif;
         }
 
         /* Третий слой: Меню навигации */
         .header-bottom {
             background: transparent;
-            padding: 0;
+            padding: 15px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
+
 
         .navbar {
             padding: 0;
@@ -273,15 +280,27 @@
             margin: 0;
             padding: 0;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 2px;
+            flex-wrap: nowrap;
+            gap: 6px;
             width: 100%;
             justify-content: center;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .navbar-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .navbar-nav {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         @media (min-width: 992px) {
             .navbar-nav {
                 justify-content: center;
+                overflow-x: visible;
             }
         }
 
@@ -291,55 +310,53 @@
 
         .nav-link {
             color: rgba(255, 255, 255, 0.95);
-            padding: 16px 18px;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
+            font-weight: 800;
+            font-size: 13px;
+            font-family: "Montserrat", sans-serif;
+            text-transform: uppercase;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
             position: relative;
-            border-radius: 6px;
-            margin: 2px;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
-            border-radius: 2px 2px 0 0;
-            transition: width 0.3s ease;
+            border-radius: 0;
+            flex-shrink: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .nav-link:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        .nav-link:hover::before {
-            width: 80%;
+            background: transparent;
+            color: rgba(255, 255, 255, 1);
+            transform: translateY(0);
+            box-shadow: none;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .nav-link.active {
-            background: rgba(255, 255, 255, 0.18);
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .nav-link.active::before {
-            width: 80%;
+            background: transparent;
+            color: rgba(255, 255, 255, 1);
+            font-weight: 800;
+            box-shadow: none;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .nav-link i {
-            font-size: 16px;
+            font-size: 14px;
             transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-link.active i {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .nav-link:hover i {
+            color: rgba(255, 255, 255, 1);
         }
 
         .nav-link i.bi-chevron-down {
@@ -349,14 +366,18 @@
         /* Bootstrap 5 автоматически добавляет стрелку через псевдоэлемент */
         .dropdown-toggle::after {
             display: inline-block;
-            margin-left: 0.255em;
-            vertical-align: 0.255em;
+            margin-left: 0.25em;
+            vertical-align: 0.2em;
             content: "";
-            border-top: 0.3em solid rgba(255, 255, 255, 0.95);
-            border-right: 0.3em solid transparent;
+            border-top: 0.25em solid rgba(255, 255, 255, 0.95);
+            border-right: 0.25em solid transparent;
             border-bottom: 0;
-            border-left: 0.3em solid transparent;
+            border-left: 0.25em solid transparent;
             transition: transform 0.3s ease;
+        }
+
+        .nav-link.active .dropdown-toggle::after {
+            border-top-color: rgba(255, 255, 255, 1);
         }
 
         .dropdown-toggle[aria-expanded="true"]::after {
@@ -387,11 +408,13 @@
 
         .dropdown-item {
             padding: 12px 20px;
-            color: #2c4964;
+            color: #0d9488;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             font-size: 14px;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
             position: relative;
             margin: 2px 8px;
             border-radius: 6px;
@@ -409,14 +432,14 @@
             transform: translateY(-50%);
             width: 3px;
             height: 0;
-            background: linear-gradient(180deg, #1977cc 0%, #0d5aa7 100%);
+            background: linear-gradient(180deg, #0d9488 0%, #0f766e 100%);
             border-radius: 0 3px 3px 0;
             transition: height 0.3s ease;
         }
 
         .dropdown-item:hover {
-            background: linear-gradient(90deg, rgba(25, 119, 204, 0.08) 0%, rgba(25, 119, 204, 0.05) 100%);
-            color: #1977cc;
+            background: #f0fdfa;
+            color: #0f766e;
             padding-left: 20px;
             transform: translateX(4px);
         }
@@ -426,9 +449,9 @@
         }
 
         .dropdown-item.active {
-            background: linear-gradient(90deg, rgba(25, 119, 204, 0.15) 0%, rgba(25, 119, 204, 0.08) 100%);
-            color: #1977cc;
-            font-weight: 600;
+            background: #f0fdfa;
+            color: #0d9488;
+            font-weight: 700;
         }
 
         .dropdown-item.active::before {
@@ -519,6 +542,30 @@
             color: #93c5fd;
         }
 
+        [data-theme="dark"] .header-bottom::before {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.08) 100%);
+            box-shadow: 
+                0 0 40px rgba(255, 255, 255, 0.08),
+                0 0 20px rgba(255, 255, 255, 0.05),
+                inset 0 2px 0 rgba(255, 255, 255, 0.15),
+                inset 0 -2px 0 rgba(255, 255, 255, 0.1);
+        }
+
+
+        [data-theme="dark"] .header-quick-links {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .quick-link-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        [data-theme="dark"] .quick-link-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
         /* Mobile Styles */
         @media (max-width: 991px) {
             .logo-link {
@@ -531,15 +578,15 @@
             }
 
             .logo-title {
-                font-size: 22px;
+                font-size: 28px;
             }
 
             .logo-subtitle {
-                font-size: 14px;
+                font-size: 16px;
             }
 
             .logo-img {
-                max-height: 75px;
+                max-height: 120px;
             }
 
             .navbar-toggler {
@@ -594,6 +641,85 @@
 
         main {
             padding-top: 0;
+        }
+
+        /* Четвертый слой: Быстрые кнопки (только на главной странице) */
+        .header-quick-links {
+            background: transparent;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .quick-links-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quick-link-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 24px;
+            background: #ffffff;
+            border: none;
+            border-radius: 10px;
+            color: #0d9488;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            font-family: "Montserrat", sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .quick-link-btn i {
+            font-size: 20px;
+            color: #0d9488;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .quick-link-btn span {
+            line-height: 1.3;
+            text-align: left;
+        }
+
+        .quick-link-btn:hover {
+            background: #f0fdfa;
+            color: #0f766e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-link-btn:hover i {
+            color: #0f766e;
+            transform: scale(1.1);
+        }
+
+        /* Увеличиваем padding-top для main на главной странице (4 слоя) */
+        body:has(.header-quick-links) main {
+            padding-top: 0;
+        }
+
+        @media (max-width: 991px) {
+            .quick-links-wrapper {
+                gap: 10px;
+            }
+
+            .quick-link-btn {
+                padding: 10px 15px;
+                font-size: 12px;
+                flex: 1 1 calc(50% - 5px);
+                min-width: 0;
+            }
+
+            .quick-link-btn span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
 
         .section {
@@ -954,5 +1080,6 @@
         }
     });
 </script>
+@stack('scripts')
 </body>
 </html>

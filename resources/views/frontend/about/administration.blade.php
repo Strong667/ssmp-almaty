@@ -14,11 +14,11 @@
                     @foreach($admins as $admin)
                         <div class="col-lg-4 col-md-6" data-aos="fade-up">
                             <div class="admin-card">
-                                @if($admin->image_url)
+                                    @if($admin->image_url)
                                     <div class="admin-img">
                                         <img src="{{ $admin->image_url }}" alt="{{ $admin->full_name }}" class="img-fluid">
-                                    </div>
-                                @endif
+                                        </div>
+                                    @endif
                                 <div class="admin-content">
                                     <h3 class="admin-name">{{ $admin->full_name }}</h3>
                                     <p class="admin-position">{{ $admin->position }}</p>

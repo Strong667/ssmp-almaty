@@ -29,12 +29,9 @@ class SubstationResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Number::make('Номер', 'number')->sortable(),
+            Text::make('Название', 'name')->sortable(),
             Text::make('Адрес', 'address')->sortable(),
-            Number::make('Бригад', 'brigades_count'),
-            Number::make('Врачей', 'doctors_count'),
-            Number::make('Фельдшеров', 'paramedics_count'),
-            Number::make('Младший персонал', 'junior_staff_count'),
+            Text::make('Телефон', 'phone')->sortable(),
         ];
     }
 
@@ -45,30 +42,15 @@ class SubstationResource extends ModelResource
     {
         return [
             Box::make('Основная информация', [
-                Number::make('Номер подстанции', 'number')
+                Text::make('Название', 'name')
                     ->required()
-                    ->min(1)
-                    ->max(12)
-                    ->placeholder('Номер от 1 до 12'),
+                    ->placeholder('Например: Подстанция №1'),
                 Text::make('Адрес', 'address')
                     ->required()
                     ->placeholder('Например: ул. Толстого, 6А'),
-                Number::make('Количество бригад', 'brigades_count')
+                Text::make('Телефон', 'phone')
                     ->required()
-                    ->min(0)
-                    ->default(0),
-                Number::make('Количество врачей', 'doctors_count')
-                    ->required()
-                    ->min(0)
-                    ->default(0),
-                Number::make('Количество фельдшеров', 'paramedics_count')
-                    ->required()
-                    ->min(0)
-                    ->default(0),
-                Number::make('Младший персонал', 'junior_staff_count')
-                    ->required()
-                    ->min(0)
-                    ->default(0),
+                    ->placeholder('Например: +7 (727) 123-45-67'),
             ]),
         ];
     }
@@ -80,12 +62,9 @@ class SubstationResource extends ModelResource
     {
         return [
             ID::make(),
-            Number::make('Номер подстанции', 'number'),
+            Text::make('Название', 'name'),
             Text::make('Адрес', 'address'),
-            Number::make('Количество бригад', 'brigades_count'),
-            Number::make('Количество врачей', 'doctors_count'),
-            Number::make('Количество фельдшеров', 'paramedics_count'),
-            Number::make('Младший персонал', 'junior_staff_count'),
+            Text::make('Телефон', 'phone'),
         ];
     }
 
@@ -97,12 +76,9 @@ class SubstationResource extends ModelResource
     protected function rules(mixed $item): array
     {
         return [
-            'number' => ['required', 'integer', 'min:1', 'max:12', 'unique:substations,number,' . $item->id],
-            'address' => ['required', 'string', 'max:255'],
-            'brigades_count' => ['required', 'integer', 'min:0'],
-            'doctors_count' => ['required', 'integer', 'min:0'],
-            'paramedics_count' => ['required', 'integer', 'min:0'],
-            'junior_staff_count' => ['required', 'integer', 'min:0'],
+            'name' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string'],
+            'phone' => ['required', 'string', 'max:255'],
         ];
     }
 }

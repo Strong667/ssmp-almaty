@@ -27,6 +27,12 @@ use App\MoonShine\Resources\CorporateDocument\CorporateDocumentResource;
 use App\MoonShine\Resources\Document\DocumentResource;
 use App\MoonShine\Resources\ActivitySphere\ActivitySphereResource;
 use App\MoonShine\Resources\Substation\SubstationResource;
+use App\MoonShine\Resources\SubstationEmployee\SubstationEmployeeResource;
+use App\MoonShine\Resources\DirectorBlog\DirectorBlogResource;
+use App\MoonShine\Resources\Anticorruption\AnticorruptionResource;
+use App\MoonShine\Resources\AnticorruptionImage\AnticorruptionImageResource;
+use App\MoonShine\Resources\MissionOfEmergencyService\MissionOfEmergencyServiceResource;
+use App\MoonShine\Resources\HealthyLifestyle\HealthyLifestyleResource;
 use App\MoonShine\Resources\ProcurementPlan\ProcurementPlanResource;
 use App\MoonShine\Resources\AnnouncementCategory\AnnouncementCategoryResource;
 use App\MoonShine\Resources\Announcement\AnnouncementResource;
@@ -80,6 +86,12 @@ class MoonShineServiceProvider extends ServiceProvider
                 DocumentResource::class,
                 ActivitySphereResource::class,
                 SubstationResource::class,
+                SubstationEmployeeResource::class,
+                DirectorBlogResource::class,
+                AnticorruptionResource::class,
+                AnticorruptionImageResource::class,
+                MissionOfEmergencyServiceResource::class,
+                HealthyLifestyleResource::class,
                 ProcurementPlanResource::class,
                 AnnouncementCategoryResource::class,
                 AnnouncementResource::class,
