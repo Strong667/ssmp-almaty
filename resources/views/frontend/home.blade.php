@@ -77,11 +77,6 @@
     @if($news->isNotEmpty())
         <section id="news" class="news section">
             <div class="container" data-aos="fade-up">
-                <header class="section-header">
-                    <h2>НОВОСТИ</h2>
-                    <p>Актуальные события и новости медицинского центра</p>
-                </header>
-
                 <div class="row gy-4">
                     @foreach($news as $article)
                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
@@ -154,11 +149,6 @@
     @if($images->isNotEmpty())
         <section id="gallery" class="gallery section">
             <div class="container" data-aos="fade-up">
-                <header class="section-header">
-                    <h2>Галерея</h2>
-                    <p>Фотографии из жизни медицинского центра</p>
-                </header>
-
                 <div class="gallery-carousel">
                     @foreach($images->merge($images) as $index => $item)
                         <div class="gallery-item">

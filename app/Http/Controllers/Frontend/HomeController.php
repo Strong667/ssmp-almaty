@@ -21,9 +21,8 @@ class HomeController extends Controller
             ]);
 
         $news = News::query()
-            ->orderByDesc('published_at')
-            ->orderByDesc('created_at')
-            ->limit(6)
+            ->orderByRaw('COALESCE(published_at, created_at) DESC')
+            ->limit(3)
             ->get()
             ->each(function (News $item) {
                 $item->image_url = $item->image

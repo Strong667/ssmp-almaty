@@ -28,8 +28,8 @@ class FrontendController extends Controller
         $news = News::query()
             ->whereNotNull('slug')
             ->where('slug', '!=', '')
-            ->orderByDesc('created_at')
-            ->limit(4)
+            ->orderByRaw('COALESCE(published_at, created_at) DESC')
+            ->limit(3)
             ->get()
             ->each(function (News $item) {
                 $item->image_url = $item->image
@@ -97,8 +97,7 @@ class FrontendController extends Controller
         $news = News::query()
             ->whereNotNull('slug')
             ->where('slug', '!=', '')
-            ->orderByDesc('published_at')
-            ->orderByDesc('created_at')
+            ->orderByRaw('COALESCE(published_at, created_at) DESC')
             ->get()
             ->each(function (News $item) {
                 $item->image_url = $item->image
