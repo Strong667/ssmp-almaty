@@ -37,6 +37,22 @@
                                             </div>
                                             <div class="department-info">
                                                 <h3 class="department-name">{{ $substation->name }}</h3>
+                                                @if($substation->address || $substation->phone)
+                                                    <div class="department-meta">
+                                                        @if($substation->address)
+                                                            <div class="department-meta-item">
+                                                                <i class="bi bi-geo-alt"></i>
+                                                                <span>{{ $substation->address }}</span>
+                                                            </div>
+                                                        @endif
+                                                        @if($substation->phone)
+                                                            <div class="department-meta-item">
+                                                                <i class="bi bi-telephone"></i>
+                                                                <a href="tel:{{ $substation->phone }}">{{ $substation->phone }}</a>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                @endif
                                                 <a href="{{ route('substations.show', $substation->id) }}" class="department-link">
                                                     Посмотреть сотрудников <i class="bi bi-arrow-right"></i>
                                                 </a>
@@ -105,44 +121,23 @@
     <!-- Media Section -->
     <section id="media" class="media section">
         <div class="container" data-aos="fade-up">
-            <div class="row gy-4">
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="media-box">
-                        <div class="media-content">
-                            <h3>Видео</h3>
-                            <div class="media-embed">
-                        <iframe
-                            width="100%"
-                            height="100%"
-                            src="https://www.youtube.com/embed/videoseries?list=PLsaGgmCCSu8VucnlqRDRA-637FOrsBy1o"
-                            frameborder="0"
-                            allow="autoplay; encrypted-media"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-                    </div>
-                </div>
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="media-box">
-                        <div class="media-content">
-                            <h3>Карта</h3>
-                            <div class="media-embed">
-                        <iframe
-                            src="https://yandex.ru/map-widget/v1/?um=constructor%3A984a0c4f628d41f0563e1e4becea1dd9bfe4ad7ec66d31d1ad0418b2232d4e74&source=constructor"
-                            width="100%"
-                            height="100%"
-                            style="border:0;"
-                            allowfullscreen
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+            <div class="row justify-content-center">
+                <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
+                    <div class="media-full">
+                        <div class="media-embed">
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                src="https://www.youtube.com/embed/videoseries?list=PLsaGgmCCSu8VucnlqRDRA-637FOrsBy1o"
+                                frameborder="0"
+                                allow="autoplay; encrypted-media"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-            </div>
-            </div>
     </section>
 
     <!-- Gallery Section -->
@@ -179,39 +174,46 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(255, 248, 240, 0.6);
+            background: rgba(240, 249, 255, 0.85);
             z-index: 0;
         }
 
         .departments .container {
             position: relative;
             z-index: 1;
+            max-width: 1200px;
         }
 
         .departments-header {
             margin-bottom: 0;
             position: relative;
             z-index: 1;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
         }
 
         .departments-tabs {
-            border-bottom: 2px solid #e5e7eb;
-            gap: 0;
+            border-bottom: none;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 6px;
+            border-radius: 9999px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.14);
         }
 
         .departments-tabs .nav-item {
-            margin-bottom: -2px;
+            margin-bottom: 0;
         }
 
         .departments-tabs .nav-link {
-            padding: 14px 24px;
+            padding: 10px 24px;
             font-weight: 600;
             font-size: 14px;
             color: #212529;
             background: transparent;
             border: none;
-            border-bottom: 3px solid transparent;
-            border-radius: 0;
+            border-radius: 9999px;
             text-transform: uppercase;
             text-shadow: none;
             box-shadow: none;
@@ -225,22 +227,23 @@
         }
 
         .departments-tabs .nav-link.active {
-            color: #212529;
-            background: #fff;
-            border-bottom-color: #212529;
+            color: #ffffff;
+            background: #0d9488;
             font-weight: 700;
             text-shadow: none;
-            box-shadow: none;
+            box-shadow: 0 10px 25px rgba(13, 148, 136, 0.45);
         }
 
         .departments-content {
-            background: #fff;
-            padding: 40px;
-            border-radius: 0 10px 10px 10px;
-            min-height: 400px;
-            margin-top: -2px;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 36px 40px 40px;
+            border-radius: 18px;
+            min-height: 420px;
+            margin-top: -1px;
             position: relative;
             z-index: 1;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.16);
+            border: 1px solid rgba(148, 163, 184, 0.35);
         }
 
         /* Department Cards */
@@ -308,6 +311,36 @@
             line-height: 1.4;
         }
 
+        .department-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        .department-meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .department-meta-item i {
+            font-size: 16px;
+            color: #0d9488;
+            margin-top: 2px;
+        }
+
+        .department-meta-item a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .department-meta-item a:hover {
+            text-decoration: underline;
+        }
+
         .department-link {
             display: inline-flex;
             align-items: center;
@@ -339,12 +372,9 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        [data-theme="dark"] .departments {
-            background: rgba(26, 26, 26, 0.8);
-        }
-
         [data-theme="dark"] .departments-tabs {
-            border-bottom-color: rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.96);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
         }
 
         [data-theme="dark"] .departments-tabs .nav-link {
@@ -369,7 +399,9 @@
         }
 
         [data-theme="dark"] .departments-content {
-            background: #2a2a2a;
+            background: rgba(17, 24, 39, 0.96);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+            border-color: rgba(55, 65, 81, 0.8);
         }
 
         [data-theme="dark"] .department-card {
@@ -384,9 +416,18 @@
             color: #e0e0e0;
         }
 
+        [data-theme="dark"] .department-meta {
+            color: #cbd5f5;
+        }
+
+        [data-theme="dark"] .department-meta-item i {
+            color: #22c55e;
+        }
+
         /* News Section */
         .news {
             padding: 80px 0;
+            background: linear-gradient(180deg, #f9fafb 0%, #eef2ff 100%);
         }
 
         .section-header {
@@ -485,25 +526,28 @@
         /* Media Section */
         .media {
             padding: 80px 0;
-            background: #f8f9fa;
+            position: relative;
+            background-image: url('{{ asset("72_main.png") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .media-box {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            height: 100%;
+        .media::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(240, 249, 255, 0.88);
+            z-index: 0;
         }
 
-        .media-content {
-            padding: 30px;
-        }
-
-        .media-content h3 {
+        .media-full h3 {
             font-size: 24px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             color: #2c4964;
         }
 
@@ -513,6 +557,8 @@
             height: 0;
             overflow: hidden;
             border-radius: 8px;
+            position: relative;
+            z-index: 1;
         }
 
         .media-embed iframe {
@@ -526,6 +572,7 @@
         /* Gallery Section */
         .gallery {
             padding: 80px 0;
+            background: #fdfdfd;
         }
 
         .gallery-carousel {
@@ -574,7 +621,7 @@
 
         /* Dark Theme for Home Page Sections */
         [data-theme="dark"] .news {
-            background: #1a1a1a;
+            background: radial-gradient(circle at top, #1f2937 0, #020617 60%);
         }
 
         [data-theme="dark"] .news-box {
@@ -594,21 +641,16 @@
             color: #b0b0b0;
         }
 
-        [data-theme="dark"] .media {
-            background: #222222;
+        [data-theme="dark"] .departments::before {
+            background: rgba(15, 23, 42, 0.9);
         }
 
-        [data-theme="dark"] .media-box {
-            background: #2a2a2a;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-        }
-
-        [data-theme="dark"] .media-content h3 {
-            color: #e0e0e0;
+        [data-theme="dark"] .media::before {
+            background: rgba(15, 23, 42, 0.9);
         }
 
         [data-theme="dark"] .gallery {
-            background: #1a1a1a;
+            background: #020617;
         }
 
         /* Responsive */

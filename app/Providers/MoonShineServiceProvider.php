@@ -56,6 +56,8 @@ use App\MoonShine\Resources\InternalRegulations\InternalRegulationsResource;
 use App\MoonShine\Resources\CorruptionRiskPosition\CorruptionRiskPositionResource;
 use App\MoonShine\Resources\CorruptionRiskList\CorruptionRiskListResource;
 use App\MoonShine\Resources\CorruptionRiskMap\CorruptionRiskMapResource;
+use App\MoonShine\Resources\Question\QuestionResource;
+use App\MoonShine\Resources\DirectorQuestion\DirectorQuestionResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -115,6 +117,8 @@ class MoonShineServiceProvider extends ServiceProvider
                 CorruptionRiskPositionResource::class,
                 CorruptionRiskListResource::class,
                 CorruptionRiskMapResource::class,
+                QuestionResource::class,
+                DirectorQuestionResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

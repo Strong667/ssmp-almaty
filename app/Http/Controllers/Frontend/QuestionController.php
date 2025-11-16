@@ -3,42 +3,30 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\DirectorBlog;
-use App\Models\DirectorQuestion;
+use App\Models\Question;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class DirectorBlogController extends Controller
+class QuestionController extends Controller
 {
     /**
-     * Показать страницу блога директора
+     * Показать страницу с вопросами и ответами и формой отправки вопроса
      */
-    public function show()
+    public function index()
     {
-        $director = DirectorBlog::query()
-            ->orderBy('created_at', 'desc')
-            ->first();
-
-        if ($director && $director->photo) {
-            $director->photo_url = Storage::disk('public')->url($director->photo);
-        } elseif ($director) {
-            $director->photo_url = null;
-        }
-
-        $questions = DirectorQuestion::query()
+        $questions = Question::query()
             ->where('published', true)
             ->whereNotNull('answer')
             ->orderByDesc('created_at')
             ->get();
 
-        return view('frontend.director-blog.show', compact('director', 'questions'));
+        return view('frontend.questions.index', compact('questions'));
     }
 
     /**
-     * Сохранить новый вопрос к директору
+     * Сохранить новый вопрос от пользователя
      */
-    public function storeQuestion(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
@@ -54,12 +42,12 @@ class DirectorBlogController extends Controller
 
         if ($validator->fails()) {
             return redirect()
-                ->route('director-blog.show')
+                ->route('questions.index')
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        DirectorQuestion::create([
+        Question::create([
             'name' => $request->name,
             'email' => $request->email,
             'question' => $request->question,
@@ -68,7 +56,7 @@ class DirectorBlogController extends Controller
         ]);
 
         return redirect()
-            ->route('director-blog.show')
-            ->with('success', 'Ваш вопрос успешно отправлен! Директор ответит вам в ближайшее время.');
+            ->route('questions.index')
+            ->with('success', 'Ваш вопрос успешно отправлен! Мы ответим вам в ближайшее время.');
     }
 }

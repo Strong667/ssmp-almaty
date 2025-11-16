@@ -611,19 +611,7 @@
         }
 
 
-        [data-theme="dark"] .header-quick-links {
-            border-top-color: rgba(255, 255, 255, 0.1);
-        }
-
-        [data-theme="dark"] .quick-link-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        [data-theme="dark"] .quick-link-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
+        /* В тёмной теме быстрые кнопки остаются как в светлой (белые карточки) */
 
         /* Средние экраны - если не помещается, центрируем и делаем в несколько рядов */
         @media (max-width: 1200px) and (min-width: 992px) {

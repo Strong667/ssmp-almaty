@@ -77,6 +77,8 @@ use App\MoonShine\Resources\InternalRegulations\InternalRegulationsResource;
 use App\MoonShine\Resources\CorruptionRiskPosition\CorruptionRiskPositionResource;
 use App\MoonShine\Resources\CorruptionRiskList\CorruptionRiskListResource;
 use App\MoonShine\Resources\CorruptionRiskMap\CorruptionRiskMapResource;
+use App\MoonShine\Resources\Question\QuestionResource;
+use App\MoonShine\Resources\DirectorQuestion\DirectorQuestionResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -102,6 +104,8 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(MissionOfEmergencyServiceResource::class, 'Миссия скорой помощи'),
                 MenuItem::make(HealthyLifestyleResource::class, 'ЗОЖ'),
             ]),
+            MenuItem::make(QuestionResource::class, 'Вопросы и ответы'),
+            MenuItem::make(DirectorQuestionResource::class, 'Вопросы к директору'),
             MenuGroup::make('О нас', [
                 MenuItem::make(AdminResource::class, 'Администрация'),
                 MenuItem::make(CitizenScheduleResource::class, 'График приёма граждан'),

@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\DirectorBlogController;
 use App\Http\Controllers\Frontend\AnticorruptionController;
 use App\Http\Controllers\Frontend\MissionOfEmergencyServiceController;
 use App\Http\Controllers\Frontend\HealthyLifestyleController;
+use App\Http\Controllers\Frontend\QuestionController;
 use App\Http\Middleware\UseWebGuard;
 use App\MoonShine\Resources\About\Pages\EthicalCodePage;
 use App\MoonShine\Resources\About\Pages\IncomeExpensePage;
@@ -105,6 +106,7 @@ Route::middleware([UseWebGuard::class])->group(function () {
     
     // Блог о директоре
     Route::get('/director-blog', [DirectorBlogController::class, 'show'])->name('director-blog.show');
+    Route::post('/director-blog/questions', [DirectorBlogController::class, 'storeQuestion'])->name('director-blog.store-question');
     
     // Антикор
     Route::get('/anticorruption', [AnticorruptionController::class, 'show'])->name('anticorruption.show');
@@ -114,5 +116,9 @@ Route::middleware([UseWebGuard::class])->group(function () {
     
     // ЗОЖ
     Route::get('/healthy-lifestyle', [HealthyLifestyleController::class, 'show'])->name('healthy-lifestyle.show');
+    
+    // Вопросы и ответы
+    Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
+    Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
 });
 
