@@ -49,33 +49,14 @@
                                         @endif
                                         @if($report->file_url)
                                             <div class="report-actions">
-                                                <a href="{{ $report->file_url }}" target="_blank" class="report-link">
-                                                    <i class="bi bi-box-arrow-up-right"></i>
-                                                    <span>Открыть в новой вкладке</span>
-                                                </a>
-                                                <a href="{{ $report->file_url }}" download class="report-link report-link-secondary">
+                                                <a href="{{ $report->file_url }}" download class="report-link">
                                                     <i class="bi bi-download"></i>
                                                     <span>Скачать файл</span>
                                                 </a>
                                             </div>
                                         @endif
-                                        <div class="report-date">
-                                            <i class="bi bi-calendar3"></i>
-                                            <span>Опубликовано: {{ $report->created_at->format('d.m.Y') }}</span>
-                                        </div>
                                     </div>
                                 </div>
-                                @if($report->file_url && str_ends_with(strtolower($report->file_path), '.pdf'))
-                                    <div class="report-preview">
-                                        <iframe src="{{ $report->file_url }}#toolbar=1&navpanes=0&scrollbar=1" 
-                                                class="report-iframe" 
-                                                title="{{ $report->title }}">
-                                            <p>Ваш браузер не поддерживает отображение PDF. 
-                                                <a href="{{ $report->file_url }}" target="_blank">Откройте PDF в новой вкладке</a>.
-                                            </p>
-                                        </iframe>
-                                    </div>
-                                @endif
                             </div>
                         </div>
                     @endforeach

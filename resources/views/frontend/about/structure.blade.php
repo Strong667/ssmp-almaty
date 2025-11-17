@@ -25,20 +25,15 @@
             @if($structures->isNotEmpty())
                 <div class="row gy-4">
                     @foreach($structures as $structure)
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-12">
                             <div class="structure-card">
                                 @if($structure->image_url)
-                                    <div class="structure-photo">
-                                        <img src="{{ $structure->image_url }}" alt="{{ $structure->title }}" class="img-fluid">
-                                    </div>
+                                    <img src="{{ $structure->image_url }}" alt="{{ $structure->title }}" class="structure-image img-fluid">
                                 @else
                                     <div class="structure-photo-placeholder">
                                         <i class="bi bi-image"></i>
                                     </div>
                                 @endif
-                                <div class="structure-info">
-                                    <h4 class="structure-title">{{ $structure->title }}</h4>
-                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -123,9 +118,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+            width: 100%;
         }
 
         .structure-card:hover {
@@ -133,44 +126,21 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .structure-photo {
+        .structure-image {
             width: 100%;
-            height: 250px;
-            overflow: hidden;
-            background: #f8f9fa;
-        }
-
-        .structure-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            display: block;
         }
 
         .structure-photo-placeholder {
             width: 100%;
-            height: 250px;
+            min-height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #f8f9fa;
             color: #adb5bd;
             font-size: 80px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .structure-info {
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .structure-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #212529;
-            margin: 0;
-            font-family: "Montserrat", sans-serif;
         }
 
         .alert {
@@ -226,14 +196,9 @@
             color: #495057;
         }
 
-        [data-theme="dark"] .structure-title {
-            color: #e0e0e0;
-        }
-
         @media (max-width: 991px) {
-            .structure-photo,
             .structure-photo-placeholder {
-                height: 200px;
+                min-height: 200px;
             }
         }
     </style>

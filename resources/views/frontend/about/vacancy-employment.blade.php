@@ -24,12 +24,7 @@
         <div class="container">
             <!-- Employment Info Section -->
             @if($employmentInfos->isNotEmpty())
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="section-title">Информация для медицинских специалистов</h2>
-                    </div>
-                </div>
-                <div class="row gy-4 mt-2">
+                <div class="row gy-4">
                     @foreach($employmentInfos as $info)
                         <div class="col-12">
                             <div class="employment-card">
@@ -44,16 +39,26 @@
                                                 {!! $info->description !!}
                                             </div>
                                         @endif
-                                        @if($info->attachment_url)
+                                        @if($info->file1_url || $info->file2_url || $info->file3_url)
                                             <div class="employment-actions">
-                                                <a href="{{ $info->attachment_url }}" target="_blank" class="employment-link">
-                                                    <i class="bi bi-box-arrow-up-right"></i>
-                                                    <span>Открыть в новой вкладке</span>
-                                                </a>
-                                                <a href="{{ $info->attachment_url }}" download class="employment-link employment-link-secondary">
-                                                    <i class="bi bi-download"></i>
-                                                    <span>Скачать файл</span>
-                                                </a>
+                                                @if($info->file1_url)
+                                                    <a href="{{ $info->file1_url }}" download class="employment-link">
+                                                        <i class="bi bi-download"></i>
+                                                        <span>{{ $info->file1_name ?: 'Скачать файл 1' }}</span>
+                                                    </a>
+                                                @endif
+                                                @if($info->file2_url)
+                                                    <a href="{{ $info->file2_url }}" download class="employment-link">
+                                                        <i class="bi bi-download"></i>
+                                                        <span>{{ $info->file2_name ?: 'Скачать файл 2' }}</span>
+                                                    </a>
+                                                @endif
+                                                @if($info->file3_url)
+                                                    <a href="{{ $info->file3_url }}" download class="employment-link">
+                                                        <i class="bi bi-download"></i>
+                                                        <span>{{ $info->file3_name ?: 'Скачать файл 3' }}</span>
+                                                    </a>
+                                                @endif
                                             </div>
                                         @endif
                                     </div>
@@ -103,6 +108,23 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+            @endif
+
+            <!-- Vacancy Contact Information -->
+            @if($vacancies->isNotEmpty())
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="vacancy-contact-info">
+                            <p class="vacancy-contact-text">Заработная плата обсуждается при собеседовании.</p>
+                            <p class="vacancy-contact-text"><strong>Резюме отправлять:</strong></p>
+                            <ul class="vacancy-contact-list">
+                                <li>на электронную почту - <a href="mailto:Kgpssmp@ssmp-almaty.ru">Kgpssmp@ssmp-almaty.ru</a></li>
+                                <li>на ватсап и по всем вопросам обращаться на номер <a href="tel:+77013144646">8 701 314 46 46</a></li>
+                                <li>или доставить по адресу - Казыбек би, 115.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             @endif
 
@@ -266,6 +288,62 @@
             font-size: 18px;
         }
 
+        .vacancy-contact-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .vacancy-contact-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .vacancy-contact-text:last-of-type {
+            margin-bottom: 10px;
+        }
+
+        .vacancy-contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 0 20px;
+        }
+
+        .vacancy-contact-list li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #495057;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .vacancy-contact-list li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #0d9488;
+            font-weight: bold;
+        }
+
+        .vacancy-contact-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .vacancy-contact-list a {
+            color: #0d9488;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .vacancy-contact-list a:hover {
+            color: #0b7d73;
+            text-decoration: underline;
+        }
+
         .employment-actions {
             display: flex;
             gap: 12px;
@@ -365,6 +443,30 @@
 
         [data-theme="dark"] .vacancy-detail {
             color: #adb5bd;
+        }
+
+        [data-theme="dark"] .vacancy-contact-info {
+            background: #2a2a2a;
+        }
+
+        [data-theme="dark"] .vacancy-contact-text {
+            color: #adb5bd;
+        }
+
+        [data-theme="dark"] .vacancy-contact-list li {
+            color: #adb5bd;
+        }
+
+        [data-theme="dark"] .vacancy-contact-list li:before {
+            color: #0d9488;
+        }
+
+        [data-theme="dark"] .vacancy-contact-list a {
+            color: #0d9488;
+        }
+
+        [data-theme="dark"] .vacancy-contact-list a:hover {
+            color: #0b7d73;
         }
 
         @media (max-width: 768px) {

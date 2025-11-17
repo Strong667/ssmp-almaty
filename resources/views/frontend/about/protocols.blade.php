@@ -46,11 +46,7 @@
                                                             <h4 class="protocol-title">{{ $protocol->title }}</h4>
                                                             @if($protocol->file_url)
                                                                 <div class="protocol-actions">
-                                                                    <a href="{{ $protocol->file_url }}" target="_blank" class="protocol-link">
-                                                                        <i class="bi bi-box-arrow-up-right"></i>
-                                                                        <span>Открыть в новой вкладке</span>
-                                                                    </a>
-                                                                    <a href="{{ $protocol->file_url }}" download class="protocol-link protocol-link-secondary">
+                                                                    <a href="{{ $protocol->file_url }}" download class="protocol-link">
                                                                         <i class="bi bi-download"></i>
                                                                         <span>Скачать файл</span>
                                                                     </a>
@@ -179,7 +175,18 @@
         }
 
         .accordion-body {
-            padding: 25px;
+            padding: 25px !important;
+            background: #fff !important;
+            color: #495057 !important;
+        }
+
+        .accordion-body * {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .accordion-collapse {
+            background: #fff !important;
         }
 
         .protocols-list {
@@ -252,13 +259,6 @@
             color: #fff;
         }
 
-        .protocol-link-secondary {
-            background: #6c757d;
-        }
-
-        .protocol-link-secondary:hover {
-            background: #5a6268;
-        }
 
         .alert {
             padding: 30px;
@@ -323,6 +323,15 @@
 
         [data-theme="dark"] .protocol-title {
             color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .accordion-body {
+            background: #2a2a2a !important;
+            color: #adb5bd !important;
+        }
+
+        [data-theme="dark"] .accordion-collapse {
+            background: #2a2a2a !important;
         }
 
         @media (max-width: 768px) {

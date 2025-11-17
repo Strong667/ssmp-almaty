@@ -92,6 +92,52 @@
                     </div>
                 </div>
             @endif
+
+            <!-- SSMP Structure Table -->
+            @if(isset($ssmpStructures) && $ssmpStructures->isNotEmpty())
+                @php
+                    $totalSubstations = $ssmpStructures->count();
+                    $totalBrigades = $ssmpStructures->sum('brigades_count');
+                    $totalDoctors = $ssmpStructures->sum('doctors_count');
+                    $totalParamedics = $ssmpStructures->sum('paramedics_count');
+                    $totalJuniorStaff = $ssmpStructures->sum('junior_staff_count');
+                    $totalEmployees = $totalDoctors + $totalParamedics + $totalJuniorStaff;
+                @endphp
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="structure-card">
+                            <h3 class="structure-table-title">Структура ССМП</h3>
+                            <p class="structure-table-subtitle">{{ $totalSubstations }} подстанций, {{ $totalBrigades }} бригад, {{ $totalEmployees }} сотрудников</p>
+                            <div class="table-responsive">
+                                <table class="table structure-table">
+                                    <thead>
+                                        <tr>
+                                            <th>№ п/с</th>
+                                            <th>Адрес</th>
+                                            <th>Кол-во бригад</th>
+                                            <th>Кол-во врачей</th>
+                                            <th>Кол-во фельдшеров</th>
+                                            <th>Младший персонал</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($ssmpStructures as $structure)
+                                            <tr>
+                                                <td>{{ $structure->substation_number }}</td>
+                                                <td>{{ $structure->address }}</td>
+                                                <td>{{ $structure->brigades_count }}</td>
+                                                <td>{{ $structure->doctors_count }}</td>
+                                                <td>{{ $structure->paramedics_count }}</td>
+                                                <td>{{ $structure->junior_staff_count }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -218,6 +264,97 @@
             margin-bottom: 0;
         }
 
+        /* Structure Table */
+        .structure-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .structure-table-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #212529;
+            margin: 0 0 10px 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .structure-table-subtitle {
+            font-size: 16px;
+            color: #6c757d;
+            margin: 0 0 25px 0;
+        }
+
+        .structure-table {
+            width: 100%;
+            margin: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .structure-table thead {
+            background: #0d9488;
+            color: #fff;
+        }
+
+        .structure-table thead th {
+            padding: 15px 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            border: none;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .structure-table thead th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        .structure-table thead th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        .structure-table tbody tr {
+            background: #fff;
+            transition: background 0.2s ease;
+        }
+
+        .structure-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .structure-table tbody tr:hover {
+            background: #e9ecef;
+        }
+
+        .structure-table tbody td {
+            padding: 15px 12px;
+            font-size: 14px;
+            color: #495057;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .structure-table tbody td:first-child {
+            font-weight: 600;
+            color: #2c4964;
+        }
+
+        .structure-table tbody td:nth-child(2) {
+            text-align: left;
+        }
+
+        .structure-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 8px;
+        }
+
         .alert {
             padding: 30px;
             border-radius: 10px;
@@ -277,6 +414,40 @@
             color: #adb5bd;
         }
 
+        [data-theme="dark"] .structure-card {
+            background: #2a2a2a;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .structure-table-title {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .structure-table-subtitle {
+            color: #adb5bd;
+        }
+
+        [data-theme="dark"] .structure-table tbody tr {
+            background: #2a2a2a;
+        }
+
+        [data-theme="dark"] .structure-table tbody tr:nth-child(even) {
+            background: #333333;
+        }
+
+        [data-theme="dark"] .structure-table tbody tr:hover {
+            background: #3a3a3a;
+        }
+
+        [data-theme="dark"] .structure-table tbody td {
+            color: #adb5bd;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .structure-table tbody td:first-child {
+            color: #e0e0e0;
+        }
+
         @media (max-width: 768px) {
             .info-card {
                 padding: 20px;
@@ -297,6 +468,24 @@
 
             .info-title {
                 font-size: 20px;
+            }
+
+            .structure-card {
+                padding: 20px;
+            }
+
+            .structure-table-title {
+                font-size: 20px;
+            }
+
+            .structure-table-subtitle {
+                font-size: 14px;
+            }
+
+            .structure-table thead th,
+            .structure-table tbody td {
+                padding: 10px 8px;
+                font-size: 12px;
             }
         }
     </style>

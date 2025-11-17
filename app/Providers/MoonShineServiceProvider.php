@@ -26,6 +26,7 @@ use App\MoonShine\Resources\MedicalEmploymentInfo\MedicalEmploymentInfoResource;
 use App\MoonShine\Resources\CorporateDocument\CorporateDocumentResource;
 use App\MoonShine\Resources\Document\DocumentResource;
 use App\MoonShine\Resources\ActivitySphere\ActivitySphereResource;
+use App\MoonShine\Resources\SsmpStructure\SsmpStructureResource;
 use App\MoonShine\Resources\Substation\SubstationResource;
 use App\MoonShine\Resources\SubstationEmployee\SubstationEmployeeResource;
 use App\MoonShine\Resources\DirectorBlog\DirectorBlogResource;
@@ -87,6 +88,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 CorporateDocumentResource::class,
                 DocumentResource::class,
                 ActivitySphereResource::class,
+                SsmpStructureResource::class,
                 SubstationResource::class,
                 SubstationEmployeeResource::class,
                 DirectorBlogResource::class,

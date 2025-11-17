@@ -13,6 +13,7 @@ use App\Models\Vacancy;
 use App\Models\MedicalEmploymentInfo;
 use App\Models\CorporateDocument;
 use App\Models\ActivitySphere;
+use App\Models\SsmpStructure;
 use App\Models\ProcurementPlan;
 use App\Models\AnnouncementCategory;
 use App\Models\Protocol;
@@ -114,8 +115,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (MedicalEmploymentInfo $item) {
-                $item->attachment_url = $item->attachment
-                    ? Storage::disk('public')->url($item->attachment)
+                $item->file1_url = $item->file1
+                    ? route('storage.public', ['path' => $item->file1])
+                    : null;
+                $item->file2_url = $item->file2
+                    ? route('storage.public', ['path' => $item->file2])
+                    : null;
+                $item->file3_url = $item->file3
+                    ? route('storage.public', ['path' => $item->file3])
                     : null;
             });
 
@@ -145,7 +152,12 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->first();
 
-        return view('frontend.about.activity-sphere', compact('activitySphere'));
+        $ssmpStructures = SsmpStructure::query()
+            ->orderBy('order')
+            ->orderBy('substation_number')
+            ->get();
+
+        return view('frontend.about.activity-sphere', compact('activitySphere', 'ssmpStructures'));
     }
 
     public function procurementPlan()

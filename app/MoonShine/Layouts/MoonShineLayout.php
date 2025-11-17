@@ -47,6 +47,7 @@ use App\MoonShine\Resources\MedicalEmploymentInfo\MedicalEmploymentInfoResource;
 use App\MoonShine\Resources\CorporateDocument\CorporateDocumentResource;
 use App\MoonShine\Resources\Document\DocumentResource;
 use App\MoonShine\Resources\ActivitySphere\ActivitySphereResource;
+use App\MoonShine\Resources\SsmpStructure\SsmpStructureResource;
 use App\MoonShine\Resources\Substation\SubstationResource;
 use App\MoonShine\Resources\SubstationEmployee\SubstationEmployeeResource;
 use App\MoonShine\Resources\DirectorBlog\DirectorBlogResource;
@@ -123,6 +124,7 @@ final class MoonShineLayout extends AppLayout
                 ]),
                 MenuGroup::make('Сфера деятельности', [
                     MenuItem::make(ActivitySphereResource::class, 'Общая информация'),
+                    MenuItem::make(SsmpStructureResource::class, 'Структура ССМП'),
                     MenuItem::make(SubstationResource::class, 'Подстанции'),
                     MenuItem::make(SubstationEmployeeResource::class, 'Сотрудники подстанций'),
                 ]),

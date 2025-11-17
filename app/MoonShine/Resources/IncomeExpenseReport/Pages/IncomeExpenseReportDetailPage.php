@@ -12,7 +12,6 @@ use App\MoonShine\Resources\IncomeExpenseReport\IncomeExpenseReportResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
-use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Fields\File;
 use Throwable;
 
@@ -30,7 +29,6 @@ class IncomeExpenseReportDetailPage extends DetailPage
         return [
             ID::make(),
             Text::make('Название', 'title'),
-            TinyMce::make('Описание', 'description'),
             File::make('Файл', 'file_path')
                 ->disk('public'),
         ];

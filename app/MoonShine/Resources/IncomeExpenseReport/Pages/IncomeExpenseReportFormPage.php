@@ -14,7 +14,6 @@ use App\MoonShine\Resources\IncomeExpenseReport\IncomeExpenseReportResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
-use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Fields\File;
 use MoonShine\UI\Components\Layout\Box;
 use Throwable;
@@ -36,9 +35,6 @@ class IncomeExpenseReportFormPage extends FormPage
                 Text::make('Название', 'title')
                     ->required()
                     ->placeholder('Введите название отчёта'),
-                TinyMce::make('Описание', 'description')
-                    ->required()
-                    ->placeholder('Введите описание отчёта'),
                 File::make('Файл', 'file_path')
                     ->allowedExtensions(['pdf', 'xlsx', 'xls', 'doc', 'docx'])
                     ->disk('public')
@@ -63,7 +59,6 @@ class IncomeExpenseReportFormPage extends FormPage
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
             'file_path' => ['nullable', 'file', 'mimes:pdf,xlsx,xls,doc,docx'],
         ];
     }

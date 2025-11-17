@@ -23,50 +23,51 @@
     <section class="documents section">
         <div class="container">
             @if($categories->isNotEmpty())
-                @foreach($categories as $category)
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <div class="category-card">
-                                <h3 class="category-title">
-                                    <i class="bi bi-folder-fill"></i>
-                                    {{ $category->title }}
-                                </h3>
-                                
-                                @if($category->documents->isNotEmpty())
-                                    <div class="documents-list">
-                                        @foreach($category->documents as $document)
-                                            <div class="document-item">
-                                                <div class="document-icon">
-                                                    <i class="bi bi-file-earmark-pdf-fill"></i>
-                                                </div>
-                                                <div class="document-content">
-                                                    <h4 class="document-title">{{ $document->title }}</h4>
-                                                    @if($document->file_url)
-                                                        <div class="document-actions">
-                                                            <a href="{{ $document->file_url }}" target="_blank" class="document-link">
-                                                                <i class="bi bi-box-arrow-up-right"></i>
-                                                                <span>Открыть в новой вкладке</span>
-                                                            </a>
-                                                            <a href="{{ $document->file_url }}" download class="document-link document-link-secondary">
-                                                                <i class="bi bi-download"></i>
-                                                                <span>Скачать файл</span>
-                                                            </a>
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        @endforeach
+                <div class="accordion" id="documentsAccordion">
+                    @foreach($categories as $index => $category)
+                        <div class="accordion-item document-accordion-item">
+                            <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $category->id }}" aria-expanded="false" aria-controls="collapse{{ $category->id }}">
+                                    <div class="category-title-wrapper">
+                                        <i class="bi bi-folder-fill"></i>
+                                        <span class="category-title-text">{{ $category->title }}</span>
                                     </div>
-                                @else
-                                    <div class="alert alert-info">
-                                        <i class="bi bi-info-circle"></i>
-                                        <span>Документов в этой категории пока нет</span>
-                                    </div>
-                                @endif
+                                </button>
+                            </h2>
+                            <div id="collapse{{ $category->id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $category->id }}" data-bs-parent="#documentsAccordion">
+                                <div class="accordion-body">
+                                    @if($category->documents->isNotEmpty())
+                                        <div class="documents-list">
+                                            @foreach($category->documents as $document)
+                                                <div class="document-item">
+                                                    <div class="document-icon">
+                                                        <i class="bi bi-file-earmark-pdf-fill"></i>
+                                                    </div>
+                                                    <div class="document-content">
+                                                        <h4 class="document-title">{{ $document->title }}</h4>
+                                                        @if($document->file_url)
+                                                            <div class="document-actions">
+                                                                <a href="{{ $document->file_url }}" download class="document-link">
+                                                                    <i class="bi bi-download"></i>
+                                                                    <span>Скачать файл</span>
+                                                                </a>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div class="alert alert-info">
+                                            <i class="bi bi-info-circle"></i>
+                                            <span>Документов в этой категории пока нет</span>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             @else
                 <div class="row">
                     <div class="col-12">
@@ -141,32 +142,93 @@
             background: #fff;
         }
 
-        .category-card {
-            background: #fff;
-            border-radius: 8px;
+        /* Accordion Styles */
+        #documentsAccordion {
+            --bs-accordion-border-color: #e5e7eb;
+            --bs-accordion-border-radius: 12px;
+            --bs-accordion-inner-border-radius: 12px;
+        }
+
+        .document-accordion-item {
+            border: none;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            padding: 30px;
-            transition: all 0.3s ease;
+            background: #fff;
         }
 
-        .category-card:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        #documentsAccordion .accordion-button {
+            background: #fff;
+            border: none;
+            padding: 20px 24px;
+            font-weight: 500;
+            color: #2c4964;
+            font-size: 18px;
+            box-shadow: none;
         }
 
-        .category-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #212529;
-            margin: 0 0 25px 0;
-            font-family: "Montserrat", sans-serif;
+        #documentsAccordion .accordion-button:not(.collapsed) {
+            background: #f8f9fa;
+            color: #2c4964;
+            box-shadow: none;
+        }
+
+        #documentsAccordion .accordion-button:focus {
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        #documentsAccordion .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232c4964'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-left: auto;
+            content: "";
+            background-repeat: no-repeat;
+            background-size: 1.25rem;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        #documentsAccordion .accordion-button:not(.collapsed)::after {
+            transform: rotate(-180deg);
+        }
+
+        .category-title-wrapper {
             display: flex;
             align-items: center;
             gap: 12px;
+            width: 100%;
+            text-align: left;
         }
 
-        .category-title i {
+        .category-title-wrapper i {
             color: #0d9488;
-            font-size: 28px;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .category-title-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c4964;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        #documentsAccordion .accordion-body {
+            padding: 20px 24px !important;
+            background: #fff !important;
+            color: #2c4964 !important;
+        }
+
+        #documentsAccordion .accordion-collapse {
+            background: #fff !important;
+        }
+
+        #documentsAccordion .accordion-body * {
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         .documents-list {
@@ -297,17 +359,36 @@
             background: #1a1a1a;
         }
 
-        [data-theme="dark"] .category-card {
+        [data-theme="dark"] .document-accordion-item {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .category-card:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        [data-theme="dark"] #documentsAccordion .accordion-button {
+            background: #2a2a2a;
+            color: #e0e0e0;
         }
 
-        [data-theme="dark"] .category-title {
+        [data-theme="dark"] #documentsAccordion .accordion-button:not(.collapsed) {
+            background: #333333;
             color: #e0e0e0;
+        }
+
+        [data-theme="dark"] #documentsAccordion .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e0e0e0'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        [data-theme="dark"] .category-title-text {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] #documentsAccordion .accordion-body {
+            background: #2a2a2a !important;
+            color: #e0e0e0 !important;
+        }
+
+        [data-theme="dark"] #documentsAccordion .accordion-collapse {
+            background: #2a2a2a !important;
         }
 
         [data-theme="dark"] .document-item {
@@ -323,12 +404,21 @@
         }
 
         @media (max-width: 768px) {
-            .category-title {
+            .category-title-text {
+                font-size: 16px;
+            }
+
+            .category-title-wrapper i {
                 font-size: 20px;
             }
 
-            .category-card {
-                padding: 20px;
+            #documentsAccordion .accordion-button {
+                padding: 16px 20px;
+                font-size: 16px;
+            }
+
+            #documentsAccordion .accordion-body {
+                padding: 16px 20px !important;
             }
 
             .document-item {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\MedicalEmploymentInfo\Pages;
+namespace App\MoonShine\Resources\SsmpStructure\Pages;
 
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -10,18 +10,18 @@ use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\QueryTags\QueryTag;
 use MoonShine\UI\Components\Metrics\Wrapped\Metric;
-use App\MoonShine\Resources\MedicalEmploymentInfo\MedicalEmploymentInfoResource;
+use App\MoonShine\Resources\SsmpStructure\SsmpStructureResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\File;
 use Throwable;
 
 
 /**
- * @extends IndexPage<MedicalEmploymentInfoResource>
+ * @extends IndexPage<SsmpStructureResource>
  */
-class MedicalEmploymentInfoIndexPage extends IndexPage
+class SsmpStructureIndexPage extends IndexPage
 {
     protected bool $isLazy = true;
 
@@ -32,7 +32,12 @@ class MedicalEmploymentInfoIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'title')->sortable(),
+            Number::make('№ п/с', 'substation_number')->sortable(),
+            Text::make('Адрес', 'address')->sortable(),
+            Number::make('Кол-во бригад', 'brigades_count')->sortable(),
+            Number::make('Кол-во врачей', 'doctors_count')->sortable(),
+            Number::make('Кол-во фельдшеров', 'paramedics_count')->sortable(),
+            Number::make('Младший персонал', 'junior_staff_count')->sortable(),
         ];
     }
 
@@ -108,3 +113,4 @@ class MedicalEmploymentInfoIndexPage extends IndexPage
         ];
     }
 }
+

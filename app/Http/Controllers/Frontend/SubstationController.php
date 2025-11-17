@@ -30,7 +30,7 @@ class SubstationController extends Controller
         $substation = Substation::with('employees')->findOrFail($id);
         
         $employees = $substation->employees()
-            ->orderBy('full_name')
+            ->orderBy('id')
             ->get()
             ->map(function ($employee) {
                 return [

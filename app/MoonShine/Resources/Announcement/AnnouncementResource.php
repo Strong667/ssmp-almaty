@@ -33,7 +33,6 @@ class AnnouncementResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Категория', 'announcementCategory.title'),
-            Textarea::make('Текст', 'text'),
             File::make('Файл', 'file_path')->disk('public'),
         ];
     }

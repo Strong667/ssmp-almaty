@@ -2,25 +2,24 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\MedicalEmploymentInfo\Pages;
+namespace App\MoonShine\Resources\SsmpStructure\Pages;
 
 use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
-use App\MoonShine\Resources\MedicalEmploymentInfo\MedicalEmploymentInfoResource;
+use App\MoonShine\Resources\SsmpStructure\SsmpStructureResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
-use MoonShine\TinyMce\Fields\TinyMce;
-use MoonShine\UI\Fields\File;
 use Throwable;
 
 
 /**
- * @extends DetailPage<MedicalEmploymentInfoResource>
+ * @extends DetailPage<SsmpStructureResource>
  */
-class MedicalEmploymentInfoDetailPage extends DetailPage
+class SsmpStructureDetailPage extends DetailPage
 {
     /**
      * @return list<FieldContract>
@@ -29,17 +28,13 @@ class MedicalEmploymentInfoDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'title'),
-            TinyMce::make('Описание', 'description'),
-            Text::make('Название 1 файла', 'file1_name'),
-            File::make('Файл 1', 'file1')
-                ->disk('public'),
-            Text::make('Название 2 файла', 'file2_name'),
-            File::make('Файл 2', 'file2')
-                ->disk('public'),
-            Text::make('Название 3 файла', 'file3_name'),
-            File::make('Файл 3', 'file3')
-                ->disk('public'),
+            Number::make('№ п/с', 'substation_number'),
+            Text::make('Адрес', 'address'),
+            Number::make('Кол-во бригад', 'brigades_count'),
+            Number::make('Кол-во врачей', 'doctors_count'),
+            Number::make('Кол-во фельдшеров', 'paramedics_count'),
+            Number::make('Младший персонал', 'junior_staff_count'),
+            Number::make('Порядок сортировки', 'order'),
         ];
     }
 
@@ -91,3 +86,4 @@ class MedicalEmploymentInfoDetailPage extends DetailPage
         ];
     }
 }
+

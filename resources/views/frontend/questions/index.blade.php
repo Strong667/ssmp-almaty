@@ -129,28 +129,38 @@
                 <!-- Q&A List Section -->
                 <div class="col-lg-7">
                     <div class="qa-list">
-                        <h2 class="qa-title">Часто задаваемые вопросы</h2>
                         @if($questions->isNotEmpty())
-                            <div class="qa-items">
+                            <div class="accordion" id="questionsAccordion">
                                 @foreach($questions as $question)
-                                    <div class="qa-item">
-                                        <div class="qa-question">
-                                            <div class="qa-question-header">
-                                                <i class="bi bi-question-circle-fill"></i>
-                                                <h4>{{ $question->name }}</h4>
+                                    <div class="accordion-item qa-accordion-item">
+                                        <h2 class="accordion-header" id="heading{{ $question->id }}">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $question->id }}" aria-expanded="false" aria-controls="collapse{{ $question->id }}">
+                                                <div class="qa-question-header">
+                                                    <i class="bi bi-question-circle-fill"></i>
+                                                    <span class="qa-question-text">{{ $question->question }}</span>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ $question->id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $question->id }}" data-bs-parent="#questionsAccordion">
+                                            <div class="accordion-body">
+                                                <div class="qa-question-meta">
+                                                    <div class="qa-question-author">
+                                                        <i class="bi bi-person"></i>
+                                                        <span>{{ $question->name }}</span>
+                                                    </div>
+                                                    <div class="qa-date">
+                                                        <i class="bi bi-calendar"></i>
+                                                        <span>{{ $question->created_at->format('d.m.Y') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="qa-answer">
+                                                    <div class="qa-answer-header">
+                                                        <i class="bi bi-check-circle-fill"></i>
+                                                        <h5>Ответ:</h5>
+                                                    </div>
+                                                    <p>{{ $question->answer }}</p>
+                                                </div>
                                             </div>
-                                            <p>{{ $question->question }}</p>
-                                            <div class="qa-date">
-                                                <i class="bi bi-calendar"></i>
-                                                {{ $question->created_at->format('d.m.Y') }}
-                                            </div>
-                                        </div>
-                                        <div class="qa-answer">
-                                            <div class="qa-answer-header">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <h5>Ответ:</h5>
-                                            </div>
-                                            <p>{{ $question->answer }}</p>
                                         </div>
                                     </div>
                                 @endforeach
@@ -379,63 +389,115 @@
             padding-left: 30px;
         }
 
-        .qa-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 0 0 30px 0;
-            color: #2c4964;
-            font-family: "Montserrat", sans-serif;
+        /* Accordion Styles */
+        .accordion {
+            --bs-accordion-border-color: #e5e7eb;
+            --bs-accordion-border-radius: 12px;
+            --bs-accordion-inner-border-radius: 12px;
         }
 
-        .qa-items {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .qa-item {
-            background: #fff;
+        .qa-accordion-item {
+            border: none;
+            margin-bottom: 16px;
             border-radius: 12px;
+            overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            padding: 24px;
-            transition: all 0.3s ease;
+            background: #fff;
         }
 
-        .qa-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        .accordion-button {
+            background: #fff;
+            border: none;
+            padding: 20px 24px;
+            font-weight: 500;
+            color: #2c4964;
+            font-size: 15px;
+            box-shadow: none;
         }
 
-        .qa-question {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e5e7eb;
+        .accordion-button:not(.collapsed) {
+            background: #f8f9fa;
+            color: #2c4964;
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232c4964'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-left: auto;
+            content: "";
+            background-repeat: no-repeat;
+            background-size: 1.25rem;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            transform: rotate(-180deg);
         }
 
         .qa-question-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 12px;
+            width: 100%;
+            text-align: left;
         }
 
         .qa-question-header i {
             color: #0d9488;
             font-size: 20px;
+            flex-shrink: 0;
         }
 
-        .qa-question-header h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 0;
+        .qa-question-text {
+            font-size: 15px;
+            font-weight: 500;
             color: #2c4964;
             font-family: "Montserrat", sans-serif;
+            line-height: 1.5;
         }
 
-        .qa-question p {
-            color: #495057;
-            line-height: 1.6;
-            margin: 0 0 12px 0;
+        .accordion-body {
+            padding: 20px 24px !important;
+            background: #fff !important;
+            color: #2c4964 !important;
+        }
+
+        .accordion-collapse {
+            background: #fff !important;
+        }
+
+        .accordion-body * {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .qa-question-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .qa-question-author {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .qa-question-author i {
+            color: #0d9488;
             font-size: 14px;
         }
 
@@ -452,7 +514,7 @@
         }
 
         .qa-answer {
-            padding-top: 20px;
+            padding-top: 0;
         }
 
         .qa-answer-header {
@@ -573,28 +635,34 @@
             color: #6c757d;
         }
 
-        [data-theme="dark"] .qa-title {
-            color: #e0e0e0;
-        }
-
-        [data-theme="dark"] .qa-item {
+        [data-theme="dark"] .qa-accordion-item {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .qa-item:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        [data-theme="dark"] .qa-question {
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-        }
-
-        [data-theme="dark"] .qa-question-header h4 {
+        [data-theme="dark"] .accordion-button {
+            background: #2a2a2a;
             color: #e0e0e0;
         }
 
-        [data-theme="dark"] .qa-question p {
+        [data-theme="dark"] .accordion-button:not(.collapsed) {
+            background: #333333;
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e0e0e0'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        [data-theme="dark"] .qa-question-text {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .qa-question-meta {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .qa-question-author {
             color: #adb5bd;
         }
 
@@ -602,11 +670,25 @@
             color: #6c757d;
         }
 
+        [data-theme="dark"] .accordion-body {
+            background: #2a2a2a !important;
+            color: #e0e0e0 !important;
+        }
+
+        [data-theme="dark"] .accordion-collapse {
+            background: #2a2a2a !important;
+        }
+
         [data-theme="dark"] .qa-answer-header h5 {
             color: #e0e0e0;
         }
 
         [data-theme="dark"] .qa-answer p {
+            color: #adb5bd;
+        }
+
+        [data-theme="dark"] .qa-question-author span,
+        [data-theme="dark"] .qa-date span {
             color: #adb5bd;
         }
 

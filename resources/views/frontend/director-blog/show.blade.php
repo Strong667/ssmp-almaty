@@ -210,28 +210,38 @@
                 <!-- Q&A List Section -->
                 <div class="col-lg-7">
                     <div class="director-qa-list">
-                        <h2 class="qa-title">Вопросы и ответы</h2>
                         @if($questions->isNotEmpty())
-                            <div class="director-qa-items">
+                            <div class="accordion" id="directorQuestionsAccordion">
                                 @foreach($questions as $question)
-                                    <div class="director-qa-item">
-                                        <div class="director-qa-question">
-                                            <div class="director-qa-question-header">
-                                                <i class="bi bi-question-circle-fill"></i>
-                                                <h4>{{ $question->name }}</h4>
+                                    <div class="accordion-item director-qa-accordion-item">
+                                        <h2 class="accordion-header" id="directorHeading{{ $question->id }}">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#directorCollapse{{ $question->id }}" aria-expanded="false" aria-controls="directorCollapse{{ $question->id }}">
+                                                <div class="director-qa-question-header">
+                                                    <i class="bi bi-question-circle-fill"></i>
+                                                    <span class="director-qa-question-text">{{ $question->question }}</span>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="directorCollapse{{ $question->id }}" class="accordion-collapse collapse" aria-labelledby="directorHeading{{ $question->id }}" data-bs-parent="#directorQuestionsAccordion">
+                                            <div class="accordion-body">
+                                                <div class="director-qa-question-meta">
+                                                    <div class="director-qa-question-author">
+                                                        <i class="bi bi-person"></i>
+                                                        <span>{{ $question->name }}</span>
+                                                    </div>
+                                                    <div class="director-qa-date">
+                                                        <i class="bi bi-calendar"></i>
+                                                        <span>{{ $question->created_at->format('d.m.Y') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="director-qa-answer">
+                                                    <div class="director-qa-answer-header">
+                                                        <i class="bi bi-check-circle-fill"></i>
+                                                        <h5>Ответ директора:</h5>
+                                                    </div>
+                                                    <p>{{ $question->answer }}</p>
+                                                </div>
                                             </div>
-                                            <p>{{ $question->question }}</p>
-                                            <div class="director-qa-date">
-                                                <i class="bi bi-calendar"></i>
-                                                {{ $question->created_at->format('d.m.Y') }}
-                                            </div>
-                                        </div>
-                                        <div class="director-qa-answer">
-                                            <div class="director-qa-answer-header">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <h5>Ответ директора:</h5>
-                                            </div>
-                                            <p>{{ $question->answer }}</p>
                                         </div>
                                     </div>
                                 @endforeach
@@ -573,68 +583,120 @@
             font-size: 18px;
         }
 
-        /* Director Q&A List - Same styles as regular Q&A */
+        /* Director Q&A List - Accordion styles */
         .director-qa-list {
             padding-left: 30px;
         }
 
-        .director-qa-list .qa-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 0 0 30px 0;
-            color: #2c4964;
-            font-family: "Montserrat", sans-serif;
+        /* Accordion Styles */
+        #directorQuestionsAccordion {
+            --bs-accordion-border-color: #e5e7eb;
+            --bs-accordion-border-radius: 12px;
+            --bs-accordion-inner-border-radius: 12px;
         }
 
-        .director-qa-items {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .director-qa-item {
-            background: #fff;
+        .director-qa-accordion-item {
+            border: none;
+            margin-bottom: 16px;
             border-radius: 12px;
+            overflow: hidden;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            padding: 24px;
-            transition: all 0.3s ease;
+            background: #fff;
         }
 
-        .director-qa-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        #directorQuestionsAccordion .accordion-button {
+            background: #fff;
+            border: none;
+            padding: 20px 24px;
+            font-weight: 500;
+            color: #2c4964;
+            font-size: 15px;
+            box-shadow: none;
         }
 
-        .director-qa-question {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e5e7eb;
+        #directorQuestionsAccordion .accordion-button:not(.collapsed) {
+            background: #f8f9fa;
+            color: #2c4964;
+            box-shadow: none;
+        }
+
+        #directorQuestionsAccordion .accordion-button:focus {
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        #directorQuestionsAccordion .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232c4964'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-left: auto;
+            content: "";
+            background-repeat: no-repeat;
+            background-size: 1.25rem;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        #directorQuestionsAccordion .accordion-button:not(.collapsed)::after {
+            transform: rotate(-180deg);
         }
 
         .director-qa-question-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 12px;
+            width: 100%;
+            text-align: left;
         }
 
         .director-qa-question-header i {
             color: #0d9488;
             font-size: 20px;
+            flex-shrink: 0;
         }
 
-        .director-qa-question-header h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 0;
+        .director-qa-question-text {
+            font-size: 15px;
+            font-weight: 500;
             color: #2c4964;
             font-family: "Montserrat", sans-serif;
+            line-height: 1.5;
         }
 
-        .director-qa-question p {
-            color: #495057;
-            line-height: 1.6;
-            margin: 0 0 12px 0;
+        #directorQuestionsAccordion .accordion-body {
+            padding: 20px 24px !important;
+            background: #fff !important;
+            color: #2c4964 !important;
+        }
+
+        #directorQuestionsAccordion .accordion-collapse {
+            background: #fff !important;
+        }
+
+        #directorQuestionsAccordion .accordion-body * {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .director-qa-question-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .director-qa-question-author {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .director-qa-question-author i {
+            color: #0d9488;
             font-size: 14px;
         }
 
@@ -651,7 +713,7 @@
         }
 
         .director-qa-answer {
-            padding-top: 20px;
+            padding-top: 0;
         }
 
         .director-qa-answer-header {
@@ -723,24 +785,48 @@
             padding-left: 0;
         }
 
-        [data-theme="dark"] .director-qa-item {
+        [data-theme="dark"] .director-qa-accordion-item {
             background: #2a2a2a;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .director-qa-item:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        [data-theme="dark"] .director-qa-question {
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-        }
-
-        [data-theme="dark"] .director-qa-question-header h4 {
+        [data-theme="dark"] #directorQuestionsAccordion .accordion-button {
+            background: #2a2a2a;
             color: #e0e0e0;
         }
 
-        [data-theme="dark"] .director-qa-question p {
+        [data-theme="dark"] #directorQuestionsAccordion .accordion-button:not(.collapsed) {
+            background: #333333;
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] #directorQuestionsAccordion .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e0e0e0'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        [data-theme="dark"] .director-qa-question-text {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] #directorQuestionsAccordion .accordion-body {
+            background: #2a2a2a !important;
+            color: #e0e0e0 !important;
+        }
+
+        [data-theme="dark"] #directorQuestionsAccordion .accordion-collapse {
+            background: #2a2a2a !important;
+        }
+
+        [data-theme="dark"] .director-qa-question-meta {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .director-qa-question-author {
+            color: #adb5bd;
+        }
+
+        [data-theme="dark"] .director-qa-question-author span,
+        [data-theme="dark"] .director-qa-date span {
             color: #adb5bd;
         }
 
@@ -762,10 +848,6 @@
 
         [data-theme="dark"] .director-question-form-card .form-subtitle {
             color: #adb5bd;
-        }
-
-        [data-theme="dark"] .director-qa-list .qa-title {
-            color: #e0e0e0;
         }
 
         .alert {

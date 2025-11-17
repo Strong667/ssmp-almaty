@@ -39,7 +39,7 @@ class FrontendController extends Controller
 
         $substations = Substation::query()
             ->withCount('employees')
-            ->orderBy('name')
+            ->orderBy('id')
             ->get();
 
         return view('frontend.home', compact('images', 'news', 'substations'));

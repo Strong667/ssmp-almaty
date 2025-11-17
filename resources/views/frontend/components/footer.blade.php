@@ -73,7 +73,7 @@
                                 <strong>АЛМАТЫ, УЛ. КАЗЫБЕК БИ, 115</strong>
                             </div>
                         </div>
-                    </div>
+                </div>
                 </div>
             </div>
         </div>

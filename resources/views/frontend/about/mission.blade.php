@@ -25,7 +25,7 @@
             @if($missionValues->isNotEmpty())
                 <div class="row gy-4">
                     @foreach($missionValues as $missionValue)
-                        <div class="col-lg-6">
+                        <div class="col-md-12">
                             <div class="mission-card">
                                 <div class="mission-content">
                                     <h3 class="mission-title">{{ $missionValue->title }}</h3>

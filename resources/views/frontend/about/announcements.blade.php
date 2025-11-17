@@ -46,11 +46,7 @@
                                                                 </div>
                                                                 @if($announcement->file_url)
                                                                     <div class="announcement-actions">
-                                                                        <a href="{{ $announcement->file_url }}" target="_blank" class="announcement-link">
-                                                                            <i class="bi bi-box-arrow-up-right"></i>
-                                                                            <span>Открыть файл</span>
-                                                                        </a>
-                                                                        <a href="{{ $announcement->file_url }}" download class="announcement-link announcement-link-secondary">
+                                                                        <a href="{{ $announcement->file_url }}" download class="announcement-link">
                                                                             <i class="bi bi-download"></i>
                                                                             <span>Скачать файл</span>
                                                                         </a>
@@ -185,7 +181,18 @@
         }
 
         .accordion-body {
-            padding: 25px;
+            padding: 25px !important;
+            background: #fff !important;
+            color: #495057 !important;
+        }
+
+        .accordion-body * {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .accordion-collapse {
+            background: #fff !important;
         }
 
         .announcements-list {
@@ -245,13 +252,6 @@
             color: #fff;
         }
 
-        .announcement-link-secondary {
-            background: #6c757d;
-        }
-
-        .announcement-link-secondary:hover {
-            background: #5a6268;
-        }
 
         .alert {
             padding: 20px;
@@ -328,6 +328,15 @@
 
         [data-theme="dark"] .announcement-text {
             color: #adb5bd;
+        }
+
+        [data-theme="dark"] .accordion-body {
+            background: #2a2a2a !important;
+            color: #adb5bd !important;
+        }
+
+        [data-theme="dark"] .accordion-collapse {
+            background: #2a2a2a !important;
         }
 
         @media (max-width: 768px) {

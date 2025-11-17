@@ -121,19 +121,53 @@
     <!-- Media Section -->
     <section id="media" class="media section">
         <div class="container" data-aos="fade-up">
-            <div class="row justify-content-center">
-                <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
-                    <div class="media-full">
-                        <div class="media-embed">
-                            <iframe
-                                width="100%"
-                                height="100%"
-                                src="https://www.youtube.com/embed/videoseries?list=PLsaGgmCCSu8VucnlqRDRA-637FOrsBy1o"
-                                frameborder="0"
-                                allow="autoplay; encrypted-media"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
+            <div class="row gy-4">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="media-embed">
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            src="https://www.youtube.com/embed/videoseries?list=PLsaGgmCCSu8VucnlqRDRA-637FOrsBy1o"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="media-embed">
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            src="https://www.youtube.com/embed/IOOHZe2NMWY"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="media-embed">
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            src="https://www.youtube.com/embed/bOja5HHLs6k"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="media-embed">
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            src="https://www.youtube.com/embed/au0LFE51JJk"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen>
+                        </iframe>
                     </div>
                 </div>
             </div>

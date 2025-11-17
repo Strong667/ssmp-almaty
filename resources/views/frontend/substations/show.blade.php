@@ -43,12 +43,7 @@
             </div>
 
             @if($employees->isNotEmpty())
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <h3 class="section-title">Сотрудники</h3>
-                    </div>
-                </div>
-                <div class="row gy-4 mt-2">
+                <div class="row gy-4 mt-4">
                     @foreach($employees as $employee)
                         <div class="col-lg-4 col-md-6">
                             <div class="employee-card">
