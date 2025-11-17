@@ -17,7 +17,7 @@
         /* Header Styles - Professional Corporate Design */
         #header {
             position: relative;
-            background: linear-gradient(135deg, rgba(44, 73, 100, 0.7) 0%, rgba(25, 119, 204, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(44, 73, 100, 0.85) 0%, rgb(4 22 39 / 85%) 100%);
             background-image: url('{{ asset("72_main.png") }}');
             background-size: cover;
             background-position: center;
@@ -33,14 +33,14 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(44, 73, 100, 0.7) 0%, rgba(25, 119, 204, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(44, 73, 100, 0.85) 0%, rgb(4 22 39 / 85%) 100%);
             z-index: -1;
         }
 
 
         /* Первый слой: Социальные сети, контакты, тема, локализация */
         .header-top {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.35);
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -540,7 +540,7 @@
         }
 
         [data-theme="dark"] #header {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(44, 73, 100, 0.85) 0%, rgb(4 22 39 / 85%) 100%);
             background-image: url('{{ asset("72_main.png") }}');
             background-size: cover;
             background-position: center;
@@ -548,7 +548,7 @@
         }
 
         [data-theme="dark"] #header::before {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(44, 73, 100, 0.85) 0%, rgb(4 22 39 / 85%) 100%);
         }
 
         [data-theme="dark"] .dropdown-menu {
@@ -580,7 +580,7 @@
         }
 
         [data-theme="dark"] .header-top {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             border-bottom-color: rgba(255, 255, 255, 0.15);
         }
 
@@ -761,10 +761,10 @@
             align-items: center;
             gap: 10px;
             padding: 14px 24px;
-            background: #ffffff;
+            background: #FFC107;
             border: none;
             border-radius: 10px;
-            color: #0d9488;
+            color: #212529;
             text-decoration: none;
             font-weight: 700;
             font-size: 14px;
@@ -775,7 +775,7 @@
 
         .quick-link-btn i {
             font-size: 20px;
-            color: #0d9488;
+            color: #212529;
             transition: transform 0.3s ease;
             flex-shrink: 0;
         }
@@ -786,14 +786,14 @@
         }
 
         .quick-link-btn:hover {
-            background: #f0fdfa;
-            color: #0f766e;
+            background: #FFB300;
+            color: #000000;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .quick-link-btn:hover i {
-            color: #0f766e;
+            color: #000000;
             transform: scale(1.1);
         }
 

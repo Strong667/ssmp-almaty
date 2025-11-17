@@ -263,11 +263,11 @@
         }
 
         .departments-tabs .nav-link.active {
-            color: #ffffff;
-            background: #0d9488;
+            color: #212529;
+            background: #FFC107;
             font-weight: 700;
             text-shadow: none;
-            box-shadow: 0 10px 25px rgba(13, 148, 136, 0.45);
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.45);
         }
 
         .departments-content {
@@ -322,7 +322,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #0d9488;
+            background: #FFC107;
             border-radius: 12px;
             position: relative;
             z-index: 1;
@@ -364,7 +364,7 @@
 
         .department-meta-item i {
             font-size: 16px;
-            color: #0d9488;
+            color: #FFC107;
             margin-top: 2px;
         }
 
@@ -427,11 +427,11 @@
         }
 
         [data-theme="dark"] .departments-tabs .nav-link.active {
-            color: #e0e0e0;
-            background: #2a2a2a;
-            border-bottom-color: #e0e0e0;
+            color: #212529;
+            background: #FFC107;
+            border-bottom-color: #FFC107;
             text-shadow: none;
-            box-shadow: none;
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.45);
         }
 
         [data-theme="dark"] .departments-content {
@@ -457,7 +457,7 @@
         }
 
         [data-theme="dark"] .department-meta-item i {
-            color: #22c55e;
+            color: #FFC107;
         }
 
         /* News Section */
