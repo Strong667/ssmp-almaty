@@ -30,10 +30,41 @@ class RubricForPopulation extends Model
     {
         parent::boot();
         
-        // Перед сохранением удаляем video_content из атрибутов
+        // Перед сохранением
         static::saving(function ($model) {
+            // Автоматически устанавливаем order при создании
+            if (!$model->exists) {
+                $maxOrder = static::query()->max('order') ?? -1;
+                $model->order = $maxOrder + 1;
+            }
+            
+            // Обрабатываем video_content и переносим в content для типа video
+            if ($model->type === 'video') {
+                $videoContent = request()->input('video_content');
+                if ($videoContent !== null && $videoContent !== '') {
+                    // Сохраняем video_content в content
+                    $model->content = trim($videoContent);
+                } elseif (!$model->exists && empty($model->content)) {
+                    // Если это новый блок и video_content пустой, берем из запроса еще раз
+                    $videoContent = request()->input('video_content', '');
+                    if (!empty($videoContent)) {
+                        $model->content = trim($videoContent);
+                    }
+                }
+            }
+            
+            // Удаляем video_content из атрибутов модели, чтобы не попало в SQL запрос
             if ($model->getAttributes() && array_key_exists('video_content', $model->getAttributes())) {
                 unset($model->attributes['video_content']);
+            }
+        });
+        
+        // После сохранения
+        static::saved(function ($model) {
+            // Очищаем content для типов, где он не нужен, только если file_path был сохранен
+            if (($model->type === 'pdf' || $model->type === 'images') && $model->content && $model->file_path) {
+                $model->content = null;
+                $model->saveQuietly(); // Сохраняем без вызова хуков
             }
         });
     }

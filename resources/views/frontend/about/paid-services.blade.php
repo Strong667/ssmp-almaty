@@ -25,7 +25,7 @@
             @if($services->isNotEmpty())
                 <div class="row gy-4">
                     @foreach($services as $service)
-                        <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="col-12">
                             <div class="service-card">
                                 <div class="service-image-wrapper">
                                     @if($service->image_url)
@@ -130,7 +130,8 @@
 
         .service-image-wrapper {
             width: 100%;
-            height: 250px;
+            height: auto;
+            min-height: 400px;
             overflow: hidden;
             background: #f8f9fa;
             display: flex;
@@ -140,8 +141,9 @@
 
         .service-image {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            min-height: 400px;
+            object-fit: contain;
             transition: transform 0.3s ease;
         }
 
@@ -216,7 +218,11 @@
 
         @media (max-width: 768px) {
             .service-image-wrapper {
-                height: 200px;
+                min-height: 300px;
+            }
+            
+            .service-image {
+                min-height: 300px;
             }
         }
     </style>

@@ -49,22 +49,18 @@
                         @elseif($item->type === 'pdf' && $item->file_url)
                             <div class="rubric-detail-pdf">
                                 <div class="pdf-wrapper">
-                                    <iframe
-                                        width="100%"
-                                        height="600"
-                                        src="{{ $item->file_url }}#toolbar=1&navpanes=1&scrollbar=1"
-                                        frameborder="0"
-                                    ></iframe>
-                                </div>
-                                <div class="pdf-actions">
-                                    <a href="{{ $item->file_url }}" target="_blank" class="pdf-link">
-                                        <i class="bi bi-box-arrow-up-right"></i>
-                                        <span>Открыть в новой вкладке</span>
-                                    </a>
-                                    <a href="{{ $item->file_url }}" download class="pdf-link pdf-link-secondary">
-                                        <i class="bi bi-download"></i>
-                                        <span>Скачать PDF</span>
-                                    </a>
+                                    <object data="{{ $item->file_url }}" type="application/pdf" width="100%" height="600">
+                                        <iframe
+                                            src="{{ $item->file_url }}"
+                                            width="100%"
+                                            height="600"
+                                            style="border: none;"
+                                        >
+                                            <p>Ваш браузер не поддерживает отображение PDF. 
+                                                <a href="{{ $item->file_url }}" download>Скачайте файл</a>.
+                                            </p>
+                                        </iframe>
+                                    </object>
                                 </div>
                             </div>
                         @elseif($item->type === 'video' && $item->embed_url)
@@ -80,16 +76,10 @@
                                     ></iframe>
                                 </div>
                             </div>
-                        @elseif($item->type === 'images' && $item->images_urls && count($item->images_urls) > 0)
+                        @elseif($item->type === 'images' && $item->file_url)
                             <div class="rubric-detail-images">
-                                <div class="row gy-3">
-                                    @foreach($item->images_urls as $imageUrl)
-                                        <div class="col-md-6">
-                                            <div class="image-item">
-                                                <img src="{{ $imageUrl }}" alt="Изображение" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                <div class="image-item">
+                                    <img src="{{ $item->file_url }}" alt="{{ $item->title }}" class="img-fluid">
                                 </div>
                             </div>
                         @endif

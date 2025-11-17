@@ -27,7 +27,6 @@
                     @foreach($plans as $plan)
                         <div class="col-12">
                             <div class="plan-card">
-                                <h3 class="plan-title">{{ $plan->title }}</h3>
                                 @if($plan->file_url)
                                     <div class="plan-pdf-wrapper">
                                         <iframe
@@ -39,10 +38,6 @@
                                         ></iframe>
                                     </div>
                                     <div class="plan-actions">
-                                        <a href="{{ $plan->file_url }}" target="_blank" class="plan-link">
-                                            <i class="bi bi-box-arrow-up-right"></i>
-                                            <span>Открыть в новой вкладке</span>
-                                        </a>
                                         <a href="{{ $plan->file_url }}" download class="plan-link plan-link-secondary">
                                             <i class="bi bi-download"></i>
                                             <span>Скачать PDF</span>
