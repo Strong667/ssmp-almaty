@@ -144,13 +144,15 @@
     @if($images->isNotEmpty())
         <section id="gallery" class="gallery section">
             <div class="container" data-aos="fade-up">
-                <div class="gallery-carousel">
-                    @foreach($images->merge($images) as $index => $item)
-                        <div class="gallery-item">
-                            <img src="{{ $item['url'] }}" alt="Изображение галереи #{{ ($index % $images->count()) + 1 }}" class="img-fluid">
-            </div>
-                    @endforeach
+                <div class="gallery-wrapper">
+                    <div class="gallery-carousel">
+                        @foreach($images->merge($images)->merge($images) as $index => $item)
+                            <div class="gallery-item">
+                                <img src="{{ $item['url'] }}" alt="Изображение галереи #{{ ($index % $images->count()) + 1 }}" class="img-fluid">
                             </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </section>
     @endif
@@ -575,34 +577,37 @@
             background: #fdfdfd;
         }
 
+        .gallery-wrapper {
+            overflow: hidden;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .gallery-wrapper:hover .gallery-carousel {
+            animation-play-state: paused;
+        }
+
         .gallery-carousel {
             display: flex;
             gap: 20px;
-            overflow-x: auto;
-            padding: 20px 0;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
+            width: fit-content;
+            animation: scroll-gallery 60s linear infinite;
         }
 
-        .gallery-carousel::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .gallery-carousel::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .gallery-carousel::-webkit-scrollbar-thumb {
-            background: #1977cc;
-            border-radius: 10px;
+        @keyframes scroll-gallery {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-33.333%);
+            }
         }
 
         .gallery-item {
             flex: 0 0 auto;
-            width: 400px;
-            height: 300px;
-            border-radius: 10px;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: 0.3s;
@@ -660,10 +665,11 @@
             }
 
             .gallery-item {
-                width: 300px;
-                height: 225px;
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
     @endpush
+
 @endsection

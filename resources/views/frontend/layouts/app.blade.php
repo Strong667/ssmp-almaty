@@ -930,7 +930,7 @@
         .footer {
             background: #2c4964;
             color: #fff;
-            font-size: 14px;
+            font-size: 16px;
             padding: 60px 0 20px;
         }
 
@@ -938,59 +938,137 @@
             padding-bottom: 40px;
         }
 
-        .footer h4 {
+        .footer-contact-item {
+            margin-bottom: 30px;
+        }
+
+        .footer-contact-item h5 {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             color: #fff;
-            position: relative;
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: "Montserrat", sans-serif;
         }
 
-        .footer h4::after {
-            content: '';
-            position: absolute;
-            display: block;
-            width: 50px;
-            height: 2px;
-            background: #1977cc;
-            bottom: 0;
-            left: 0;
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            font-weight: 500;
         }
 
-        .footer .footer-info p {
-            margin-top: 20px;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.8;
+        .contact-info i {
+            font-size: 20px;
+            color: #1977cc;
+            flex-shrink: 0;
         }
 
-        .footer .footer-links ul {
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            color: #1977cc;
+            text-decoration: underline;
+        }
+
+        .contact-hours {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .footer-nav {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .footer .footer-links ul li {
-            padding: 8px 0;
+        .footer-nav li {
+            padding: 12px 0;
         }
 
-        .footer .footer-links ul a {
-            color: rgba(255, 255, 255, 0.8);
+        .footer-nav a {
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            transition: 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: "Montserrat", sans-serif;
+            transition: color 0.3s;
+            display: block;
         }
 
-        .footer .footer-links ul a:hover {
+        .footer-nav a:hover {
             color: #1977cc;
-            padding-left: 5px;
         }
 
-        .footer .footer-contact p {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.8;
+        .footer-info-content {
+            display: flex;
+            flex-direction: column;
         }
 
-        .footer .footer-contact strong {
+        .footer-logo-section {
+            margin-top: 0;
+            text-align: left;
+        }
+
+        .footer-logo-wrapper {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 25px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            flex-shrink: 0;
+        }
+
+        .footer-logo img {
+            max-height: 140px;
+            width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            display: block;
+        }
+
+        .footer-hospital-name {
+            flex: 0 1 auto;
+            text-align: left;
+        }
+
+        .hospital-name-line {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: "Montserrat", sans-serif;
+            white-space: nowrap;
+        }
+
+        .footer-address {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: "Montserrat", sans-serif;
+            margin-top: 20px;
+        }
+
+        .footer-address strong {
             color: #fff;
         }
 
@@ -999,6 +1077,7 @@
             padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.8);
+            font-size: 15px;
         }
 
         .copyright strong {
@@ -1006,28 +1085,37 @@
         }
 
         [data-theme="dark"] .footer {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: #1e293b;
+            color: #e2e8f0;
         }
 
-        [data-theme="dark"] .footer h4 {
+        [data-theme="dark"] .footer-contact-item h5,
+        [data-theme="dark"] .hospital-name-line,
+        [data-theme="dark"] .footer-address strong,
+        [data-theme="dark"] .copyright strong {
             color: #fff;
         }
 
-        [data-theme="dark"] .footer .footer-links ul a {
-            color: rgba(255, 255, 255, 0.7);
+        [data-theme="dark"] .contact-info,
+        [data-theme="dark"] .contact-info a,
+        [data-theme="dark"] .contact-hours,
+        [data-theme="dark"] .footer-nav a,
+        [data-theme="dark"] .footer-address,
+        [data-theme="dark"] .copyright {
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        [data-theme="dark"] .footer .footer-links ul a:hover {
-            color: #1977cc;
+        [data-theme="dark"] .footer-nav a:hover,
+        [data-theme="dark"] .contact-info a:hover {
+            color: #60a5fa;
         }
 
-        [data-theme="dark"] .footer .footer-contact p,
-        [data-theme="dark"] .footer .footer-info p {
-            color: rgba(255, 255, 255, 0.7);
+        [data-theme="dark"] .contact-info i {
+            color: #60a5fa;
         }
 
         [data-theme="dark"] .copyright {
-            color: rgba(255, 255, 255, 0.7);
+            border-top-color: rgba(255, 255, 255, 0.1);
         }
 
         /* Back to Top Button */
