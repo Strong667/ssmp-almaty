@@ -33,30 +33,30 @@
                                         <i class="bi bi-file-earmark-medical"></i>
                                     </div>
                                     <div class="employment-content">
-                                        <h3 class="employment-title">{{ $info->title }}</h3>
-                                        @if($info->description)
+                                        <h3 class="employment-title">{{ $info->localized_title }}</h3>
+                                        @if($info->localized_description)
                                             <div class="employment-description">
-                                                {!! $info->description !!}
+                                                {!! $info->localized_description !!}
                                             </div>
                                         @endif
-                                        @if($info->file1_url || $info->file2_url || $info->file3_url)
+                                        @if($info->localized_file1 || $info->localized_file2 || $info->localized_file3)
                                             <div class="employment-actions">
-                                                @if($info->file1_url)
-                                                    <a href="{{ $info->file1_url }}" download class="employment-link">
+                                                @if($info->localized_file1)
+                                                    <a href="{{ route('storage.public', ['path' => $info->localized_file1]) }}" download class="employment-link">
                                                         <i class="bi bi-download"></i>
-                                                        <span>{{ $info->file1_name ?: 'Скачать файл 1' }}</span>
+                                                        <span>{{ $info->localized_file1_name ?: 'Скачать файл 1' }}</span>
                                                     </a>
                                                 @endif
-                                                @if($info->file2_url)
-                                                    <a href="{{ $info->file2_url }}" download class="employment-link">
+                                                @if($info->localized_file2)
+                                                    <a href="{{ route('storage.public', ['path' => $info->localized_file2]) }}" download class="employment-link">
                                                         <i class="bi bi-download"></i>
-                                                        <span>{{ $info->file2_name ?: 'Скачать файл 2' }}</span>
+                                                        <span>{{ $info->localized_file2_name ?: 'Скачать файл 2' }}</span>
                                                     </a>
                                                 @endif
-                                                @if($info->file3_url)
-                                                    <a href="{{ $info->file3_url }}" download class="employment-link">
+                                                @if($info->localized_file3)
+                                                    <a href="{{ route('storage.public', ['path' => $info->localized_file3]) }}" download class="employment-link">
                                                         <i class="bi bi-download"></i>
-                                                        <span>{{ $info->file3_name ?: 'Скачать файл 3' }}</span>
+                                                        <span>{{ $info->localized_file3_name ?: 'Скачать файл 3' }}</span>
                                                     </a>
                                                 @endif
                                             </div>
@@ -85,22 +85,22 @@
                                         <i class="bi bi-briefcase"></i>
                                     </div>
                                     <div class="vacancy-content">
-                                        <h3 class="vacancy-title">{{ $vacancy->title }}</h3>
-                                        @if($vacancy->description)
+                                        <h3 class="vacancy-title">{{ $vacancy->localized_title }}</h3>
+                                        @if($vacancy->localized_description)
                                             <div class="vacancy-description">
-                                                {!! $vacancy->description !!}
+                                                {!! $vacancy->localized_description !!}
                                             </div>
                                         @endif
-                                        @if($vacancy->schedule)
+                                        @if($vacancy->localized_schedule)
                                             <div class="vacancy-detail">
                                                 <i class="bi bi-clock"></i>
-                                                <span><strong>График работы:</strong> {{ $vacancy->schedule }}</span>
+                                                <span><strong>{{ __('frontend.vacancy.schedule_label') }}</strong> {{ $vacancy->localized_schedule }}</span>
                                             </div>
                                         @endif
                                         @if($vacancy->contact_info)
                                             <div class="vacancy-detail">
                                                 <i class="bi bi-telephone"></i>
-                                                <span><strong>Контактные данные:</strong> {{ $vacancy->contact_info }}</span>
+                                                <span><strong>{{ __('frontend.vacancy.contact_info_label') }}</strong> {{ $vacancy->contact_info }}</span>
                                             </div>
                                         @endif
                                     </div>
@@ -116,12 +116,12 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="vacancy-contact-info">
-                            <p class="vacancy-contact-text">Заработная плата обсуждается при собеседовании.</p>
-                            <p class="vacancy-contact-text"><strong>Резюме отправлять:</strong></p>
+                            <p class="vacancy-contact-text">{{ __('frontend.vacancy.salary_discussed') }}</p>
+                            <p class="vacancy-contact-text"><strong>{{ __('frontend.vacancy.send_resume') }}</strong></p>
                             <ul class="vacancy-contact-list">
-                                <li>на электронную почту - <a href="mailto:Kgpssmp@ssmp-almaty.ru">Kgpssmp@ssmp-almaty.ru</a></li>
-                                <li>на ватсап и по всем вопросам обращаться на номер <a href="tel:+77013144646">8 701 314 46 46</a></li>
-                                <li>или доставить по адресу - Казыбек би, 115.</li>
+                                <li>{{ __('frontend.vacancy.to_email') }} <a href="mailto:Kgpssmp@ssmp-almaty.ru">Kgpssmp@ssmp-almaty.ru</a></li>
+                                <li>{{ __('frontend.vacancy.to_whatsapp') }} <a href="tel:+77013144646">8 701 314 46 46</a></li>
+                                <li>{{ __('frontend.vacancy.or_deliver') }} Казыбек би, 115.</li>
                             </ul>
                         </div>
                     </div>

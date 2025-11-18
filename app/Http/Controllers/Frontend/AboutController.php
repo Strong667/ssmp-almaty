@@ -52,7 +52,7 @@ class AboutController extends Controller
     {
         $schedules = CitizenSchedule::query()
             ->orderBy('day')
-            ->orderBy('time')
+            ->orderBy('time_from')
             ->get();
 
         return view('frontend.about.schedule', compact('schedules'));
@@ -62,7 +62,18 @@ class AboutController extends Controller
     {
         $structures = Structure::query()
             ->orderBy('title')
-            ->get();
+            ->get()
+            ->each(function (Structure $structure) {
+                // Формируем URL для русского изображения
+                $structure->image_url = $structure->image
+                    ? route('storage.public', ['path' => $structure->image])
+                    : null;
+                
+                // Формируем URL для казахского изображения
+                $structure->image_kk_url = $structure->image_kk
+                    ? route('storage.public', ['path' => $structure->image_kk])
+                    : null;
+            });
 
         return view('frontend.about.structure', compact('structures'));
     }
@@ -73,8 +84,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (EthicalCode $item) {
+                // Формируем URL для русского PDF
                 $item->pdf_url = $item->pdf_path
                     ? Storage::disk('public')->url($item->pdf_path)
+                    : null;
+                
+                // Формируем URL для казахского PDF
+                $item->pdf_kk_url = $item->pdf_path_kk
+                    ? Storage::disk('public')->url($item->pdf_path_kk)
                     : null;
             });
 
@@ -87,8 +104,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (IncomeExpenseReport $item) {
+                // Формируем URL для русского файла
                 $item->file_url = $item->file_path
                     ? Storage::disk('public')->url($item->file_path)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $item->file_kk_url = $item->file_path_kk
+                    ? Storage::disk('public')->url($item->file_path_kk)
                     : null;
             });
 
@@ -105,6 +128,7 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (MedicalEmploymentInfo $item) {
+                // Формируем URL для русских файлов
                 $item->file1_url = $item->file1
                     ? route('storage.public', ['path' => $item->file1])
                     : null;
@@ -113,6 +137,17 @@ class AboutController extends Controller
                     : null;
                 $item->file3_url = $item->file3
                     ? route('storage.public', ['path' => $item->file3])
+                    : null;
+                
+                // Формируем URL для казахских файлов
+                $item->file1_kk_url = $item->file1_kk
+                    ? route('storage.public', ['path' => $item->file1_kk])
+                    : null;
+                $item->file2_kk_url = $item->file2_kk
+                    ? route('storage.public', ['path' => $item->file2_kk])
+                    : null;
+                $item->file3_kk_url = $item->file3_kk
+                    ? route('storage.public', ['path' => $item->file3_kk])
                     : null;
             });
 
@@ -127,8 +162,14 @@ class AboutController extends Controller
             ->get()
             ->each(function (CorporateDocument $category) {
                 $category->documents->each(function ($document) {
+                    // Формируем URL для русского файла
                     $document->file_url = $document->file_path
                         ? Storage::disk('public')->url($document->file_path)
+                        : null;
+                    
+                    // Формируем URL для казахского файла
+                    $document->file_kk_url = $document->file_path_kk
+                        ? Storage::disk('public')->url($document->file_path_kk)
                         : null;
                 });
             });

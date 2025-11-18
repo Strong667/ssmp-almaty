@@ -38,7 +38,7 @@ class SchedulePage extends Page
     {
         $schedules = CitizenSchedule::query()
             ->orderBy('day')
-            ->orderBy('time')
+            ->orderBy('time_from')
             ->get();
 
         return [
@@ -50,7 +50,7 @@ class SchedulePage extends Page
                             Text::make('ФИО', 'full_name'),
                             Text::make('Должность', 'position'),
                             Text::make('День', 'day'),
-                            Text::make('Время', 'time'),
+                            Text::make('Время', 'formatted_time'),
                         ],
                         $schedules
                     )

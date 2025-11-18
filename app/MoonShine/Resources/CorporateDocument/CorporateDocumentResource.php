@@ -29,7 +29,8 @@ class CorporateDocumentResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название категории', 'title')->sortable(),
+            Text::make('Название категории (русский)', 'title')->sortable(),
+            Text::make('Название категории (казахский)', 'title_kk'),
         ];
     }
 
@@ -40,9 +41,11 @@ class CorporateDocumentResource extends ModelResource
     {
         return [
             Box::make('Основная информация', [
-                Text::make('Название категории', 'title')
+                Text::make('Название категории (русский)', 'title')
                     ->required()
                     ->placeholder('Например: КОРПОРАТИВНЫЕ ДОКУМЕНТЫ'),
+                Text::make('Название категории (казахский)', 'title_kk')
+                    ->placeholder('Мысалы: КОРПОРАТИВТІК ҚҰЖАТТАР'),
             ]),
         ];
     }
@@ -54,7 +57,8 @@ class CorporateDocumentResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Название категории', 'title'),
+            Text::make('Название категории (русский)', 'title'),
+            Text::make('Название категории (казахский)', 'title_kk'),
         ];
     }
 
@@ -67,6 +71,7 @@ class CorporateDocumentResource extends ModelResource
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'title_kk' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

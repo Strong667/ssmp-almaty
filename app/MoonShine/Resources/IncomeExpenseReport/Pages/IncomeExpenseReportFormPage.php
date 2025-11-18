@@ -32,15 +32,23 @@ class IncomeExpenseReportFormPage extends FormPage
         return [
             Box::make([
                 ID::make(),
-                Text::make('Название', 'title')
+                Text::make('Название (русский)', 'title')
                     ->required()
                     ->placeholder('Введите название отчёта'),
-                File::make('Файл', 'file_path')
+                File::make('Файл (русский)', 'file_path')
                     ->allowedExtensions(['pdf', 'xlsx', 'xls', 'doc', 'docx'])
                     ->disk('public')
                     ->dir('income_expense_reports')
                     ->removable()
                     ->hint('Загрузите файл отчёта'),
+                Text::make('Название (казахский)', 'title_kk')
+                    ->placeholder('Введите название отчёта на казахском языке'),
+                File::make('Файл (казахский)', 'file_path_kk')
+                    ->allowedExtensions(['pdf', 'xlsx', 'xls', 'doc', 'docx'])
+                    ->disk('public')
+                    ->dir('income_expense_reports')
+                    ->removable()
+                    ->hint('Загрузите файл отчёта на казахском языке'),
             ]),
         ];
     }
@@ -59,7 +67,9 @@ class IncomeExpenseReportFormPage extends FormPage
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'title_kk' => ['nullable', 'string', 'max:255'],
             'file_path' => ['nullable', 'file', 'mimes:pdf,xlsx,xls,doc,docx'],
+            'file_path_kk' => ['nullable', 'file', 'mimes:pdf,xlsx,xls,doc,docx'],
         ];
     }
 

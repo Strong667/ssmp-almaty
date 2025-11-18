@@ -37,7 +37,9 @@ class SubstationController extends Controller
                     'id' => $employee->id,
                     'full_name' => $employee->full_name,
                     'position' => $employee->position,
+                    'localized_position' => $employee->localized_position,
                     'description' => $employee->description,
+                    'localized_description' => $employee->localized_description,
                     'photo_url' => $employee->photo 
                         ? Storage::disk('public')->url($employee->photo) 
                         : null,

@@ -32,8 +32,11 @@ class EthicalCodeIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'title')->sortable(),
-            File::make('PDF файл', 'pdf_path')
+            Text::make('Название (русский)', 'title')->sortable(),
+            Text::make('Название (казахский)', 'title_kk'),
+            File::make('PDF файл (русский)', 'pdf_path')
+                ->disk('public'),
+            File::make('PDF файл (казахский)', 'pdf_path_kk')
                 ->disk('public'),
         ];
     }

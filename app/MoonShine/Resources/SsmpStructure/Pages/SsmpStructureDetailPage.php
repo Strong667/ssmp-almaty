@@ -29,7 +29,8 @@ class SsmpStructureDetailPage extends DetailPage
         return [
             ID::make(),
             Number::make('№ п/с', 'substation_number'),
-            Text::make('Адрес', 'address'),
+            Text::make('Адрес (русский)', 'address'),
+            Text::make('Адрес (казахский)', 'address_kk'),
             Number::make('Кол-во бригад', 'brigades_count'),
             Number::make('Кол-во врачей', 'doctors_count'),
             Number::make('Кол-во фельдшеров', 'paramedics_count'),

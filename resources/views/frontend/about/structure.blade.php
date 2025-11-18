@@ -27,8 +27,8 @@
                     @foreach($structures as $structure)
                         <div class="col-12">
                             <div class="structure-card">
-                                @if($structure->image_url)
-                                    <img src="{{ $structure->image_url }}" alt="{{ $structure->title }}" class="structure-image img-fluid">
+                                @if($structure->localized_image_url)
+                                    <img src="{{ $structure->localized_image_url }}" alt="{{ $structure->title }}" class="structure-image img-fluid">
                                 @else
                                     <div class="structure-photo-placeholder">
                                         <i class="bi bi-image"></i>

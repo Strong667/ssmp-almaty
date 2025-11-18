@@ -36,13 +36,13 @@
                                     <i class="bi bi-hospital"></i>
                                 </div>
                                 <div class="department-info">
-                                    <h3 class="department-name">{{ $substation->name }}</h3>
-                                    @if($substation->address || $substation->phone)
+                                    <h3 class="department-name">{{ $substation->localized_name }}</h3>
+                                    @if($substation->localized_address || $substation->phone)
                                         <div class="department-meta">
-                                            @if($substation->address)
+                                            @if($substation->localized_address)
                                                 <div class="department-meta-item">
                                                     <i class="bi bi-geo-alt"></i>
-                                                    <span>{{ $substation->address }}</span>
+                                                    <span>{{ $substation->localized_address }}</span>
                                                 </div>
                                             @endif
                                             @if($substation->phone)

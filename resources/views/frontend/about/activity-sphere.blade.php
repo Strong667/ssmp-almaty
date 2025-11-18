@@ -34,12 +34,12 @@
                                     <h3 class="info-title">Общая информация</h3>
                                 </div>
                                 <div class="info-content">
-                                    {!! $activitySphere->general_info !!}
+                                    {!! $activitySphere->localized_general_info !!}
                                 </div>
                             </div>
                         @endif
 
-                        @if($activitySphere->mission)
+                        @if($activitySphere->localized_mission)
                             <div class="info-card">
                                 <div class="info-header">
                                     <div class="info-icon">
@@ -48,12 +48,12 @@
                                     <h3 class="info-title">Миссия</h3>
                                 </div>
                                 <div class="info-content">
-                                    {!! $activitySphere->mission !!}
+                                    {!! $activitySphere->localized_mission !!}
                                 </div>
                             </div>
                         @endif
 
-                        @if($activitySphere->goal)
+                        @if($activitySphere->localized_goal)
                             <div class="info-card">
                                 <div class="info-header">
                                     <div class="info-icon">
@@ -62,12 +62,12 @@
                                     <h3 class="info-title">Цель</h3>
                                 </div>
                                 <div class="info-content">
-                                    {!! $activitySphere->goal !!}
+                                    {!! $activitySphere->localized_goal !!}
                                 </div>
                             </div>
                         @endif
 
-                        @if($activitySphere->history)
+                        @if($activitySphere->localized_history)
                             <div class="info-card">
                                 <div class="info-header">
                                     <div class="info-icon">
@@ -76,7 +76,7 @@
                                     <h3 class="info-title">История</h3>
                                 </div>
                                 <div class="info-content">
-                                    {!! $activitySphere->history !!}
+                                    {!! $activitySphere->localized_history !!}
                                 </div>
                             </div>
                         @endif
@@ -124,7 +124,7 @@
                                         @foreach($ssmpStructures as $structure)
                                             <tr>
                                                 <td>{{ $structure->substation_number }}</td>
-                                                <td>{{ $structure->address }}</td>
+                                                <td>{{ $structure->localized_address }}</td>
                                                 <td>{{ $structure->brigades_count }}</td>
                                                 <td>{{ $structure->doctors_count }}</td>
                                                 <td>{{ $structure->paramedics_count }}</td>

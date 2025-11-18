@@ -31,9 +31,11 @@ class DocumentResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'title')->sortable(),
+            Text::make('Название (русский)', 'title')->sortable(),
+            Text::make('Название (казахский)', 'title_kk'),
             Text::make('Категория', 'corporateDocument.title'),
-            File::make('Файл', 'file_path')->disk('public'),
+            File::make('Файл (русский)', 'file_path')->disk('public'),
+            File::make('Файл (казахский)', 'file_path_kk')->disk('public'),
         ];
     }
 
@@ -43,7 +45,7 @@ class DocumentResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
+            Box::make('Основная информация (русский)', [
                 Select::make('Категория', 'corporate_document_id')
                     ->options(
                         CorporateDocument::query()
@@ -52,14 +54,23 @@ class DocumentResource extends ModelResource
                     )
                     ->required()
                     ->searchable(),
-                Text::make('Название документа', 'title')
+                Text::make('Название документа (русский)', 'title')
                     ->required()
                     ->placeholder('Например: Устав организации'),
-                File::make('Файл', 'file_path')
+                File::make('Файл (русский)', 'file_path')
                     ->disk('public')
                     ->dir('documents')
                     ->allowedExtensions(['pdf', 'doc', 'docx'])
                     ->required(),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Text::make('Название документа (казахский)', 'title_kk')
+                    ->placeholder('Мысалы: Ұйымның жарғысы'),
+                File::make('Файл (казахский)', 'file_path_kk')
+                    ->disk('public')
+                    ->dir('documents')
+                    ->allowedExtensions(['pdf', 'doc', 'docx'])
+                    ->removable(),
             ]),
         ];
     }
@@ -72,8 +83,10 @@ class DocumentResource extends ModelResource
         return [
             ID::make(),
             Text::make('Категория', 'corporateDocument.title'),
-            Text::make('Название документа', 'title'),
-            File::make('Файл', 'file_path')->disk('public'),
+            Text::make('Название документа (русский)', 'title'),
+            Text::make('Название документа (казахский)', 'title_kk'),
+            File::make('Файл (русский)', 'file_path')->disk('public'),
+            File::make('Файл (казахский)', 'file_path_kk')->disk('public'),
         ];
     }
 
@@ -87,8 +100,15 @@ class DocumentResource extends ModelResource
         return [
             'corporate_document_id' => ['required', 'exists:corporate_documents,id'],
             'title' => ['required', 'string', 'max:255'],
+            'title_kk' => ['nullable', 'string', 'max:255'],
             'file_path' => [
                 $item->exists ? 'nullable' : 'required',
+                'file',
+                'mimes:pdf,doc,docx',
+                'max:10240'
+            ],
+            'file_path_kk' => [
+                'nullable',
                 'file',
                 'mimes:pdf,doc,docx',
                 'max:10240'

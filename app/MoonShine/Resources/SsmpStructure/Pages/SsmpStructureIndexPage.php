@@ -33,7 +33,8 @@ class SsmpStructureIndexPage extends IndexPage
         return [
             ID::make()->sortable(),
             Number::make('№ п/с', 'substation_number')->sortable(),
-            Text::make('Адрес', 'address')->sortable(),
+            Text::make('Адрес (русский)', 'address')->sortable(),
+            Text::make('Адрес (казахский)', 'address_kk'),
             Number::make('Кол-во бригад', 'brigades_count')->sortable(),
             Number::make('Кол-во врачей', 'doctors_count')->sortable(),
             Number::make('Кол-во фельдшеров', 'paramedics_count')->sortable(),

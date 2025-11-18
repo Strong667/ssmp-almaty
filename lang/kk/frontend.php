@@ -117,5 +117,33 @@ return [
     'anticorruption' => [
         'service_tasks' => 'Қызмет міндеттері',
     ],
+
+    // Administration
+    'administration' => [
+        'title' => 'Әкімшілік',
+        'no_admins' => 'Әкімшілік әлі қосылмаған',
+        'position' => 'Лауазым',
+    ],
+
+    // Schedule
+    'schedule' => [
+        'title' => 'Азаматтарды қабылдау кестесі',
+        'no_schedule' => 'Азаматтарды қабылдау кестесі әлі қосылмаған',
+        'full_name' => 'Аты-жөні',
+        'position' => 'Лауазым',
+        'day' => 'Күні',
+        'time' => 'Уақыты',
+    ],
+
+    // Vacancy
+    'vacancy' => [
+        'salary_discussed' => 'Жалақы сұхбат кезінде талқыланады.',
+        'send_resume' => 'Резюме жіберу:',
+        'to_email' => 'электрондық поштаға -',
+        'to_whatsapp' => 'ватсапқа және барлық сұрақтар бойынша нөмірге хабарласу',
+        'or_deliver' => 'немесе мекенжайға жеткізу -',
+        'schedule_label' => 'Жұмыс кестесі:',
+        'contact_info_label' => 'Байланыс деректері:',
+    ],
 ];
 

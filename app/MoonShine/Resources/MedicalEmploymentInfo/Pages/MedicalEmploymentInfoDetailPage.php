@@ -29,16 +29,27 @@ class MedicalEmploymentInfoDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'title'),
-            TinyMce::make('Описание', 'description'),
-            Text::make('Название 1 файла', 'file1_name'),
-            File::make('Файл 1', 'file1')
+            Text::make('Название (русский)', 'title'),
+            Text::make('Название (казахский)', 'title_kk'),
+            TinyMce::make('Описание (русский)', 'description'),
+            TinyMce::make('Описание (казахский)', 'description_kk'),
+            Text::make('Название 1 файла (русский)', 'file1_name'),
+            File::make('Файл 1 (русский)', 'file1')
                 ->disk('public'),
-            Text::make('Название 2 файла', 'file2_name'),
-            File::make('Файл 2', 'file2')
+            Text::make('Название 1 файла (казахский)', 'file1_name_kk'),
+            File::make('Файл 1 (казахский)', 'file1_kk')
                 ->disk('public'),
-            Text::make('Название 3 файла', 'file3_name'),
-            File::make('Файл 3', 'file3')
+            Text::make('Название 2 файла (русский)', 'file2_name'),
+            File::make('Файл 2 (русский)', 'file2')
+                ->disk('public'),
+            Text::make('Название 2 файла (казахский)', 'file2_name_kk'),
+            File::make('Файл 2 (казахский)', 'file2_kk')
+                ->disk('public'),
+            Text::make('Название 3 файла (русский)', 'file3_name'),
+            File::make('Файл 3 (русский)', 'file3')
+                ->disk('public'),
+            Text::make('Название 3 файла (казахский)', 'file3_name_kk'),
+            File::make('Файл 3 (казахский)', 'file3_kk')
                 ->disk('public'),
         ];
     }

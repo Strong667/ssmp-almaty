@@ -34,7 +34,8 @@ class SubstationEmployeeResource extends ModelResource
             Text::make('Подстанция', 'substation.name')->sortable(),
             Image::make('Фото', 'photo')->disk('public'),
             Text::make('ФИО', 'full_name')->sortable(),
-            Text::make('Должность', 'position')->sortable(),
+            Text::make('Должность (русский)', 'position')->sortable(),
+            Text::make('Должность (казахский)', 'position_kk'),
         ];
     }
 
@@ -44,7 +45,7 @@ class SubstationEmployeeResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
+            Box::make('Основная информация (русский)', [
                 Select::make('Подстанция', 'substation_id')
                     ->required()
                     ->options(
@@ -59,11 +60,17 @@ class SubstationEmployeeResource extends ModelResource
                 Text::make('ФИО', 'full_name')
                     ->required()
                     ->placeholder('Например: Иванов Иван Иванович'),
-                Text::make('Должность', 'position')
+                Text::make('Должность (русский)', 'position')
                     ->required()
                     ->placeholder('Например: Врач скорой помощи'),
-                Textarea::make('Описание', 'description')
+                Textarea::make('Описание (русский)', 'description')
                     ->placeholder('Дополнительная информация о сотруднике'),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Text::make('Должность (казахский)', 'position_kk')
+                    ->placeholder('Мысалы: Жедел көмек дәрігері'),
+                Textarea::make('Описание (казахский)', 'description_kk')
+                    ->placeholder('Қызметкер туралы қосымша ақпарат'),
             ]),
         ];
     }
@@ -78,8 +85,10 @@ class SubstationEmployeeResource extends ModelResource
             Text::make('Подстанция', 'substation.name'),
             Image::make('Фото', 'photo')->disk('public'),
             Text::make('ФИО', 'full_name'),
-            Text::make('Должность', 'position'),
-            Textarea::make('Описание', 'description'),
+            Text::make('Должность (русский)', 'position'),
+            Text::make('Должность (казахский)', 'position_kk'),
+            Textarea::make('Описание (русский)', 'description'),
+            Textarea::make('Описание (казахский)', 'description_kk'),
         ];
     }
 
@@ -95,7 +104,9 @@ class SubstationEmployeeResource extends ModelResource
             'photo' => ['nullable', 'image', 'max:2048'],
             'full_name' => ['required', 'string', 'max:255'],
             'position' => ['required', 'string', 'max:255'],
+            'position_kk' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
+            'description_kk' => ['nullable', 'string'],
         ];
     }
 }

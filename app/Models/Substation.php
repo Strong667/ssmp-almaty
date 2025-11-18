@@ -9,9 +9,29 @@ class Substation extends Model
 {
     protected $fillable = [
         'name',
+        'name_kk',
         'address',
+        'address_kk',
         'phone',
     ];
+
+    public function getLocalizedNameAttribute(): string
+    {
+        if (app()->getLocale() === 'kk' && $this->name_kk) {
+            return $this->name_kk;
+        }
+
+        return $this->name;
+    }
+
+    public function getLocalizedAddressAttribute(): ?string
+    {
+        if (app()->getLocale() === 'kk' && $this->address_kk) {
+            return $this->address_kk;
+        }
+
+        return $this->address;
+    }
 
     /**
      * Сотрудники подстанции

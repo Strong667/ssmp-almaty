@@ -1,0 +1,402 @@
+/* Кнопка плагина - снизу слева */
+.saqtandyry-status-btn {
+  background: #61a832;
+  border: 2px solid #61a832;
+  border-radius: 39px;
+  box-shadow: 0 4px 10px rgba(97, 168, 50, 0.3);
+  cursor: pointer;
+  height: 54px;
+  width: 220px;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999 !important;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.saqtandyry-status-btn:hover {
+  box-shadow: 0 6px 15px rgba(97, 168, 50, 0.4);
+  transform: translateY(-2px);
+}
+
+.saqtandyry-status-btn i {
+  display: none;
+}
+
+.saqtandyry-status-btn>svg.saqtandyry-status-btn-title {
+  display: block;
+  position: absolute;
+  height: 54px;
+  left: 50px;
+  pointer-events: none;
+}
+
+svg.saqtandyry-status-logo {
+  position: absolute;
+  left: 15px;
+  top: 16px;
+  width: 22px;
+  height: 23px;
+  pointer-events: none;
+}
+
+/* Анимация для кнопки */
+@-webkit-keyframes saqtandyry-status-an {
+  0% {
+    box-shadow: 0 4px 5px rgba(97, 168, 50, 0.3), 0 0 0 0 rgba(97, 168, 50, 0.2),
+      0 0 0 0 rgba(97, 168, 50, 0.7);
+  }
+
+  40% {
+    box-shadow: 0 4px 5px rgba(97, 168, 50, 0.3),
+      0 0 0 19px rgba(97, 168, 50, 0.2), 0 0 0 0 rgba(97, 168, 50, 0.3);
+  }
+
+  80% {
+    box-shadow: 0 4px 5px rgba(97, 168, 50, 0.3),
+      0 0 0 19px rgba(97, 168, 50, 0), 0 0 0 13.4px rgba(97, 168, 50, 0.2);
+  }
+
+  100% {
+    box-shadow: 0 4px 5px rgba(97, 168, 50, 0.3),
+      0 0 0 35px rgba(97, 168, 50, 0), 0 0 0 20px rgba(97, 168, 50, 0);
+  }
+}
+
+@keyframes saqtandyry-status-an {
+  0% {
+    box-shadow: 0 4px 5px rgba(97, 168, 50, 0.3), 0 0 0 0 rgba(97, 168, 50, 0.2),
+      0 0 0 0 rgba(97, 168, 50, 0.7);
+  }
+
+  40% {
+    box-shadow: 0 4px 5px rgba(97, 168, 50, 0.3),
+      0 0 0 19px rgba(97, 168, 50, 0.2), 0 0 0 0 rgba(97, 168, 50, 0.3);
+  }
+
+  80% {
+    box-shadow: 0 4px 5px rgba(97, 168, 50, 0.3),
+      0 0 0 19px rgba(97, 168, 50, 0), 0 0 0 13.4px rgba(97, 168, 50, 0.2);
+  }
+
+  100% {
+    box-shadow: 0 4px 5px rgba(97, 168, 50, 0.3),
+      0 0 0 35px rgba(97, 168, 50, 0), 0 0 0 20px rgba(97, 168, 50, 0);
+  }
+}
+
+/* Контейнер формы - стиль в соответствии с сайтом */
+.saqtandyry-status-form-container {
+  position: fixed;
+  bottom: 90px;
+  left: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  width: 450px;
+  max-width: calc(100vw - 40px);
+  height: 550px;
+  max-height: calc(100vh - 120px);
+  overflow: hidden;
+  z-index: 9998 !important;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+}
+
+/* Хэндл для закрытия */
+.handle {
+  height: 50px;
+  background: #f8f9fa;
+  text-align: right;
+  padding: 10px 15px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.handle svg {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 30px;
+  height: 30px;
+}
+
+.handle svg:hover {
+  transform: rotate(90deg);
+}
+
+/* Iframe формы */
+#saqtandyry-form {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #ffffff;
+}
+
+/* Стили для элементов формы внутри iframe */
+.saqtandyry-status-b-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.saqtandyry-status-b-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.saqtandyry-status-b-form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-family: "Poppins", sans-serif;
+}
+
+.saqtandyry-status-b-form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #0d9488;
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+
+.saqtandyry-status-b-col-md-10 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.saqtandyry-status-b-col-form-label {
+  padding-top: calc(0.375rem + 1px);
+  padding-bottom: calc(0.375rem + 1px);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #2c4964;
+  font-family: "Montserrat", sans-serif;
+}
+
+.saqtandyry-status-b-justify-content-md-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+
+.saqtandyry-status-b-alert {
+  position: relative;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.saqtandyry-status-b-alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.saqtandyry-status-b-alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+.saqtandyry-status-b-alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.saqtandyry-status-b-btn {
+  display: inline-block;
+  font-weight: 600;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 100%;
+  padding: 20px;
+  background-color: white;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus {
+  background-color: #fff;
+  outline: none;
+  border-color: #0d9488;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+
+.form-container .saqtandyry-status-b-btn {
+  color: white;
+  padding: 14px 24px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 12px;
+  font-size: 16px;
+  background: #0d9488;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.form-container .saqtandyry-status-b-btn:hover {
+  background: #0f766e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+button.cancel {
+  background-color: #fff !important;
+  color: #0d9488 !important;
+  border: 2px solid #0d9488 !important;
+}
+
+button.cancel:hover {
+  background-color: #f8f9fa !important;
+  border-color: #0f766e !important;
+  color: #0f766e !important;
+}
+
+.saqtandyry-status-h4 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.4;
+  text-align: center;
+  color: #2c4964;
+  margin-bottom: 24px;
+  margin-top: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.g-recaptcha {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.rc-anchor-normal {
+  height: 74px;
+  width: 100% !important;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .saqtandyry-status-btn {
+    bottom: 15px;
+    left: 15px;
+    width: 180px;
+    height: 48px;
+  }
+
+  svg.saqtandyry-status-logo {
+    left: 12px;
+    top: 13px;
+    width: 20px;
+    height: 21px;
+  }
+
+  .saqtandyry-status-btn>svg.saqtandyry-status-btn-title {
+    left: 40px;
+    height: 48px;
+    font-size: 12px;
+  }
+
+  .saqtandyry-status-form-container {
+    bottom: 80px;
+    left: 10px;
+    right: 10px;
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
+    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+  }
+}
+
+/* Темная тема */
+[data-theme="dark"] .saqtandyry-status-form-container {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .handle {
+  background: #333333;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .saqtandyry-status-b-form-control {
+  background-color: #333333;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .saqtandyry-status-b-form-control:focus {
+  background-color: #3a3a3a;
+  border-color: #0d9488;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .saqtandyry-status-b-col-form-label {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .saqtandyry-status-h4 {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .form-container {
+  background-color: #2a2a2a;
+}
+
+[data-theme="dark"] button.cancel {
+  background-color: #333333 !important;
+  color: #0d9488 !important;
+  border-color: #0d9488 !important;
+}
+
+[data-theme="dark"] button.cancel:hover {
+  background-color: #3a3a3a !important;
+}

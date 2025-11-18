@@ -1334,5 +1334,5 @@
 
 </body>
 @stack('scripts')
-<script src="https://plugin.iss.fms.kz/js/saqtandyry-plugin.js"></script>
+<script src="{{ asset('js/saqtandyry-plugin.js') }}"></script>
 </html>

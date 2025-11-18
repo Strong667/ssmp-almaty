@@ -28,8 +28,11 @@ class EthicalCodeDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'title'),
-            File::make('PDF файл', 'pdf_path')
+            Text::make('Название (русский)', 'title'),
+            Text::make('Название (казахский)', 'title_kk'),
+            File::make('PDF файл (русский)', 'pdf_path')
+                ->disk('public'),
+            File::make('PDF файл (казахский)', 'pdf_path_kk')
                 ->disk('public'),
         ];
     }

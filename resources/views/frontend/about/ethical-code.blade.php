@@ -42,14 +42,14 @@
                                         <i class="bi bi-file-earmark-pdf-fill"></i>
                                     </div>
                                     <div class="ethical-code-content">
-                                        <h3 class="ethical-code-title">{{ $ethicalCode->title }}</h3>
-                                        @if($ethicalCode->pdf_url)
+                                        <h3 class="ethical-code-title">{{ $ethicalCode->localized_title }}</h3>
+                                        @if($ethicalCode->localized_pdf_url)
                                             <div class="ethical-code-actions">
-                                                <a href="{{ $ethicalCode->pdf_url }}" target="_blank" class="ethical-code-link">
+                                                <a href="{{ $ethicalCode->localized_pdf_url }}" target="_blank" class="ethical-code-link">
                                                     <i class="bi bi-box-arrow-up-right"></i>
                                                     <span>Открыть в новой вкладке</span>
                                                 </a>
-                                                <a href="{{ $ethicalCode->pdf_url }}" download class="ethical-code-link ethical-code-link-secondary">
+                                                <a href="{{ $ethicalCode->localized_pdf_url }}" download class="ethical-code-link ethical-code-link-secondary">
                                                     <i class="bi bi-download"></i>
                                                     <span>Скачать PDF</span>
                                                 </a>
@@ -57,13 +57,13 @@
                                         @endif
                                     </div>
                                 </div>
-                                @if($ethicalCode->pdf_url)
+                                @if($ethicalCode->localized_pdf_url)
                                     <div class="ethical-code-preview">
-                                        <iframe src="{{ $ethicalCode->pdf_url }}#toolbar=1&navpanes=0&scrollbar=1" 
+                                        <iframe src="{{ $ethicalCode->localized_pdf_url }}#toolbar=1&navpanes=0&scrollbar=1" 
                                                 class="ethical-code-iframe" 
-                                                title="{{ $ethicalCode->title }}">
+                                                title="{{ $ethicalCode->localized_title }}">
                                             <p>Ваш браузер не поддерживает отображение PDF. 
-                                                <a href="{{ $ethicalCode->pdf_url }}" target="_blank">Откройте PDF в новой вкладке</a>.
+                                                <a href="{{ $ethicalCode->localized_pdf_url }}" target="_blank">Откройте PDF в новой вкладке</a>.
                                             </p>
                                         </iframe>
                                     </div>

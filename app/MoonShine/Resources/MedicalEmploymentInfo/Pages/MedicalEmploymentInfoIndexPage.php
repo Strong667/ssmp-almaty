@@ -32,7 +32,8 @@ class MedicalEmploymentInfoIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'title')->sortable(),
+            Text::make('Название (русский)', 'title')->sortable(),
+            Text::make('Название (казахский)', 'title_kk'),
         ];
     }
 

@@ -89,7 +89,7 @@ class FrontendController extends Controller
     {
         $schedules = CitizenSchedule::query()
             ->orderBy('day')
-            ->orderBy('time')
+            ->orderBy('time_from')
             ->get();
 
         return view('frontend.about.schedule', compact('schedules'));
@@ -101,8 +101,14 @@ class FrontendController extends Controller
             ->orderBy('title')
             ->get()
             ->each(function (Structure $structure) {
+                // Формируем URL для русского изображения
                 $structure->image_url = $structure->image
                     ? route('storage.public', ['path' => $structure->image])
+                    : null;
+                
+                // Формируем URL для казахского изображения
+                $structure->image_kk_url = $structure->image_kk
+                    ? route('storage.public', ['path' => $structure->image_kk])
                     : null;
             });
 

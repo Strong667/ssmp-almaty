@@ -9,8 +9,19 @@ class CorporateDocument extends Model
 {
     protected $fillable = [
         'title',
+        'title_kk',
         'file_path',
+        'file_path_kk',
     ];
+
+    public function getLocalizedTitleAttribute(): string
+    {
+        if (app()->getLocale() === 'kk' && $this->title_kk) {
+            return $this->title_kk;
+        }
+
+        return $this->title;
+    }
 
     /**
      * Получить документы этой категории

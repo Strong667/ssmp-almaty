@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'График приёма граждан')
+@section('title', __('frontend.schedule.title'))
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -29,10 +29,10 @@
                             <table class="schedule-table">
                                 <thead>
                                     <tr>
-                                        <th>ФИО</th>
-                                        <th>Должность</th>
-                                        <th>День</th>
-                                        <th>Время</th>
+                                        <th>{{ __('frontend.schedule.full_name') }}</th>
+                                        <th>{{ __('frontend.schedule.position') }}</th>
+                                        <th>{{ __('frontend.schedule.day') }}</th>
+                                        <th>{{ __('frontend.schedule.time') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,17 +44,17 @@
                                                     <span>{{ $schedule->full_name }}</span>
                                                 </div>
                                             </td>
-                                            <td>{{ $schedule->position }}</td>
+                                            <td>{{ $schedule->localized_position }}</td>
                                             <td>
                                                 <div class="schedule-day">
                                                     <i class="bi bi-calendar-event"></i>
-                                                    <span>{{ $schedule->day }}</span>
+                                                    <span>{{ $schedule->localized_day }}</span>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="schedule-time">
                                                     <i class="bi bi-clock"></i>
-                                                    <span>{{ $schedule->time }}</span>
+                                                    <span>{{ $schedule->formatted_time }}</span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -69,7 +69,7 @@
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">График приёма граждан пока не добавлен</p>
+                            <p class="mb-0">{{ __('frontend.schedule.no_schedule') }}</p>
                         </div>
                     </div>
                 </div>

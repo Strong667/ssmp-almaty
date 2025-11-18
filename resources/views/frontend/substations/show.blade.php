@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $substation->name }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $substation->localized_name }}</li>
                 </ol>
             </nav>
         </div>
@@ -25,11 +25,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="substation-info">
-                        <h2 class="substation-name">{{ $substation->name }}</h2>
+                        <h2 class="substation-name">{{ $substation->localized_name }}</h2>
                         
                         <div class="substation-detail">
                             <i class="bi bi-geo-alt"></i>
-                            <span>{{ $substation->address }}</span>
+                            <span>{{ $substation->localized_address }}</span>
                         </div>
 
                         @if($substation->phone)
@@ -58,9 +58,9 @@
                                 @endif
                                 <div class="employee-info">
                                     <h4 class="employee-name">{{ $employee['full_name'] }}</h4>
-                                    <p class="employee-position">{{ $employee['position'] }}</p>
-                                    @if($employee['description'])
-                                        <p class="employee-description">{{ $employee['description'] }}</p>
+                                    <p class="employee-position">{{ $employee['localized_position'] }}</p>
+                                    @if($employee['localized_description'])
+                                        <p class="employee-description">{{ $employee['localized_description'] }}</p>
                                     @endif
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Администрация')
+@section('title', __('frontend.administration.title'))
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -38,7 +38,7 @@
                                 @endif
                                 <div class="admin-info">
                                     <h4 class="admin-name">{{ $admin->full_name }}</h4>
-                                    <p class="admin-position">{{ $admin->position }}</p>
+                                    <p class="admin-position">{{ $admin->localized_position }}</p>
                                     @if($admin->email)
                                         <div class="admin-email">
                                             <i class="bi bi-envelope"></i>
@@ -55,7 +55,7 @@
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">Администрация пока не добавлена</p>
+                            <p class="mb-0">{{ __('frontend.administration.no_admins') }}</p>
                         </div>
                     </div>
                 </div>

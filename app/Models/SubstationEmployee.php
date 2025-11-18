@@ -12,8 +12,28 @@ class SubstationEmployee extends Model
         'photo',
         'full_name',
         'position',
+        'position_kk',
         'description',
+        'description_kk',
     ];
+
+    public function getLocalizedPositionAttribute(): string
+    {
+        if (app()->getLocale() === 'kk' && $this->position_kk) {
+            return $this->position_kk;
+        }
+
+        return $this->position;
+    }
+
+    public function getLocalizedDescriptionAttribute(): ?string
+    {
+        if (app()->getLocale() === 'kk' && $this->description_kk) {
+            return $this->description_kk;
+        }
+
+        return $this->description;
+    }
 
     /**
      * Подстанция

@@ -31,6 +31,7 @@ class AdminResource extends ModelResource
             ID::make()->sortable(),
             Text::make('ФИО', 'full_name'),
             Text::make('Должность', 'position'),
+            Text::make('Должность (каз)', 'position_kk'),
             Text::make('Почта', 'email'),
             Image::make('Картинка', 'image')->disk('public'),
         ];
@@ -45,6 +46,7 @@ class AdminResource extends ModelResource
             Box::make([
                 Text::make('ФИО', 'full_name')->required(),
                 Text::make('Должность', 'position')->required(),
+                Text::make('Должность (казахский)', 'position_kk'),
                 Text::make('Почта', 'email')->required(),
                 Image::make('Картинка', 'image')->disk('public'),
             ])
@@ -60,6 +62,7 @@ class AdminResource extends ModelResource
             ID::make(),
             Text::make('ФИО', 'full_name'),
             Text::make('Должность', 'position'),
+            Text::make('Должность (казахский)', 'position_kk'),
             Text::make('Почта', 'email'),
             Image::make('Картинка', 'image')->disk('public'),
         ];
@@ -75,6 +78,7 @@ class AdminResource extends ModelResource
         return [
             'full_name' => ['required', 'string', 'max:255'],
             'position' => ['required', 'string', 'max:255'],
+            'position_kk' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:admins,email,' . ($item->id ?? 'null')],
             'image' => ['nullable', 'image', 'max:2048'],
         ];

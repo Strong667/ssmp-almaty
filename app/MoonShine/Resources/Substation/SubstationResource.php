@@ -29,8 +29,10 @@ class SubstationResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'name')->sortable(),
-            Text::make('Адрес', 'address')->sortable(),
+            Text::make('Название (русский)', 'name')->sortable(),
+            Text::make('Название (казахский)', 'name_kk'),
+            Text::make('Адрес (русский)', 'address')->sortable(),
+            Text::make('Адрес (казахский)', 'address_kk'),
             Text::make('Телефон', 'phone')->sortable(),
         ];
     }
@@ -41,16 +43,22 @@ class SubstationResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
-                Text::make('Название', 'name')
+            Box::make('Основная информация (русский)', [
+                Text::make('Название (русский)', 'name')
                     ->required()
                     ->placeholder('Например: Подстанция №1'),
-                Text::make('Адрес', 'address')
+                Text::make('Адрес (русский)', 'address')
                     ->required()
                     ->placeholder('Например: ул. Толстого, 6А'),
                 Text::make('Телефон', 'phone')
                     ->required()
                     ->placeholder('Например: +7 (727) 123-45-67'),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Text::make('Название (казахский)', 'name_kk')
+                    ->placeholder('Мысалы: Бекет №1'),
+                Text::make('Адрес (казахский)', 'address_kk')
+                    ->placeholder('Мысалы: Толстой көшесі, 6А'),
             ]),
         ];
     }
@@ -62,8 +70,10 @@ class SubstationResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Название', 'name'),
-            Text::make('Адрес', 'address'),
+            Text::make('Название (русский)', 'name'),
+            Text::make('Название (казахский)', 'name_kk'),
+            Text::make('Адрес (русский)', 'address'),
+            Text::make('Адрес (казахский)', 'address_kk'),
             Text::make('Телефон', 'phone'),
         ];
     }
@@ -77,7 +87,9 @@ class SubstationResource extends ModelResource
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'name_kk' => ['nullable', 'string', 'max:255'],
             'address' => ['required', 'string'],
+            'address_kk' => ['nullable', 'string'],
             'phone' => ['required', 'string', 'max:255'],
         ];
     }

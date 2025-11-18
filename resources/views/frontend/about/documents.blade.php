@@ -30,7 +30,7 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $category->id }}" aria-expanded="false" aria-controls="collapse{{ $category->id }}">
                                     <div class="category-title-wrapper">
                                         <i class="bi bi-folder-fill"></i>
-                                        <span class="category-title-text">{{ $category->title }}</span>
+                                        <span class="category-title-text">{{ $category->localized_title }}</span>
                                     </div>
                                 </button>
                             </h2>
@@ -44,10 +44,10 @@
                                                         <i class="bi bi-file-earmark-pdf-fill"></i>
                                                     </div>
                                                     <div class="document-content">
-                                                        <h4 class="document-title">{{ $document->title }}</h4>
-                                                        @if($document->file_url)
+                                                        <h4 class="document-title">{{ $document->localized_title }}</h4>
+                                                        @if($document->localized_file_url)
                                                             <div class="document-actions">
-                                                                <a href="{{ $document->file_url }}" download class="document-link">
+                                                                <a href="{{ $document->localized_file_url }}" download class="document-link">
                                                                     <i class="bi bi-download"></i>
                                                                     <span>Скачать файл</span>
                                                                 </a>

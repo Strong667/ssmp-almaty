@@ -10,6 +10,7 @@ class Admin extends Model
     protected $fillable = [
         'full_name',
         'position',
+        'position_kk',
         'email',
         'image',
     ];
@@ -17,5 +18,14 @@ class Admin extends Model
     public function getImageUrlAttribute(): ?string
     {
         return $this->image ? Storage::disk('public')->url($this->image) : null;
+    }
+
+    public function getLocalizedPositionAttribute(): string
+    {
+        if (app()->getLocale() === 'kk' && $this->position_kk) {
+            return $this->position_kk;
+        }
+
+        return $this->position;
     }
 }

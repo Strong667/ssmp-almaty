@@ -117,6 +117,34 @@ return [
     'anticorruption' => [
         'service_tasks' => 'Задачи Службы',
     ],
+
+    // Administration
+    'administration' => [
+        'title' => 'Администрация',
+        'no_admins' => 'Администрация пока не добавлена',
+        'position' => 'Должность',
+    ],
+
+    // Schedule
+    'schedule' => [
+        'title' => 'График приёма граждан',
+        'no_schedule' => 'График приёма граждан пока не добавлен',
+        'full_name' => 'ФИО',
+        'position' => 'Должность',
+        'day' => 'День',
+        'time' => 'Время',
+    ],
+
+    // Vacancy
+    'vacancy' => [
+        'salary_discussed' => 'Заработная плата обсуждается при собеседовании.',
+        'send_resume' => 'Резюме отправлять:',
+        'to_email' => 'на электронную почту -',
+        'to_whatsapp' => 'на ватсап и по всем вопросам обращаться на номер',
+        'or_deliver' => 'или доставить по адресу -',
+        'schedule_label' => 'График работы:',
+        'contact_info_label' => 'Контактные данные:',
+    ],
 ];
 
 

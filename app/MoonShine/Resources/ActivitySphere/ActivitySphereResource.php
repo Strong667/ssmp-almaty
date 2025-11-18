@@ -37,19 +37,33 @@ class ActivitySphereResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
-                Textarea::make('Общая информация об организации', 'general_info')
+            Box::make('Основная информация (русский)', [
+                Textarea::make('Общая информация об организации (русский)', 'general_info')
                     ->customAttributes(['rows' => 10])
                     ->placeholder('Введите общую информацию об организации'),
-                Textarea::make('Миссия организации', 'mission')
+                Textarea::make('Миссия организации (русский)', 'mission')
                     ->customAttributes(['rows' => 8])
                     ->placeholder('Введите миссию организации'),
-                Textarea::make('Цель организации', 'goal')
+                Textarea::make('Цель организации (русский)', 'goal')
                     ->customAttributes(['rows' => 8])
                     ->placeholder('Введите цель организации'),
-                Textarea::make('История ССМП', 'history')
+                Textarea::make('История ССМП (русский)', 'history')
                     ->customAttributes(['rows' => 15])
                     ->placeholder('Введите историю ССМП'),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Textarea::make('Общая информация об организации (казахский)', 'general_info_kk')
+                    ->customAttributes(['rows' => 10])
+                    ->placeholder('Ұйым туралы жалпы ақпаратты енгізіңіз'),
+                Textarea::make('Миссия организации (казахский)', 'mission_kk')
+                    ->customAttributes(['rows' => 8])
+                    ->placeholder('Ұйымның миссиясын енгізіңіз'),
+                Textarea::make('Цель организации (казахский)', 'goal_kk')
+                    ->customAttributes(['rows' => 8])
+                    ->placeholder('Ұйымның мақсатын енгізіңіз'),
+                Textarea::make('История ССМП (казахский)', 'history_kk')
+                    ->customAttributes(['rows' => 15])
+                    ->placeholder('ЖМК тарихын енгізіңіз'),
             ]),
         ];
     }
@@ -61,10 +75,14 @@ class ActivitySphereResource extends ModelResource
     {
         return [
             ID::make(),
-            Textarea::make('Общая информация об организации', 'general_info')->readonly(),
-            Textarea::make('Миссия организации', 'mission')->readonly(),
-            Textarea::make('Цель организации', 'goal')->readonly(),
-            Textarea::make('История ССМП', 'history')->readonly(),
+            Textarea::make('Общая информация об организации (русский)', 'general_info')->readonly(),
+            Textarea::make('Общая информация об организации (казахский)', 'general_info_kk')->readonly(),
+            Textarea::make('Миссия организации (русский)', 'mission')->readonly(),
+            Textarea::make('Миссия организации (казахский)', 'mission_kk')->readonly(),
+            Textarea::make('Цель организации (русский)', 'goal')->readonly(),
+            Textarea::make('Цель организации (казахский)', 'goal_kk')->readonly(),
+            Textarea::make('История ССМП (русский)', 'history')->readonly(),
+            Textarea::make('История ССМП (казахский)', 'history_kk')->readonly(),
         ];
     }
 
@@ -77,9 +95,13 @@ class ActivitySphereResource extends ModelResource
     {
         return [
             'general_info' => ['nullable', 'string'],
+            'general_info_kk' => ['nullable', 'string'],
             'mission' => ['nullable', 'string'],
+            'mission_kk' => ['nullable', 'string'],
             'goal' => ['nullable', 'string'],
+            'goal_kk' => ['nullable', 'string'],
             'history' => ['nullable', 'string'],
+            'history_kk' => ['nullable', 'string'],
         ];
     }
 }

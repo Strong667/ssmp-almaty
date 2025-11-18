@@ -28,8 +28,11 @@ class IncomeExpenseReportDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'title'),
-            File::make('Файл', 'file_path')
+            Text::make('Название (русский)', 'title'),
+            Text::make('Название (казахский)', 'title_kk'),
+            File::make('Файл (русский)', 'file_path')
+                ->disk('public'),
+            File::make('Файл (казахский)', 'file_path_kk')
                 ->disk('public'),
         ];
     }

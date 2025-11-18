@@ -31,7 +31,8 @@ class StructureResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Название', 'title'),
-            Image::make('Изображение', 'image')->disk('public'),
+            Image::make('Изображение (русский)', 'image')->disk('public'),
+            Image::make('Изображение (казахский)', 'image_kk')->disk('public'),
         ];
     }
 
@@ -46,7 +47,12 @@ class StructureResource extends ModelResource
                 Text::make('Название', 'title')
                     ->required(),
 
-                Image::make('Изображение', 'image')
+                Image::make('Изображение (русский)', 'image')
+                    ->dir('structures') // папка внутри storage/app/public
+                    ->disk('public')
+                    ->removable(),
+
+                Image::make('Изображение (казахский)', 'image_kk')
                     ->dir('structures') // папка внутри storage/app/public
                     ->disk('public')
                     ->removable(),
@@ -62,7 +68,8 @@ class StructureResource extends ModelResource
         return [
             ID::make(),
             Text::make('Название', 'title'),
-            Image::make('Изображение', 'image')->disk('public'),
+            Image::make('Изображение (русский)', 'image')->disk('public'),
+            Image::make('Изображение (казахский)', 'image_kk')->disk('public'),
         ];
     }
 
@@ -76,6 +83,7 @@ class StructureResource extends ModelResource
         return [
             'title' => ['required', 'string', 'max:255'],
             'image' => ['nullable', 'image', 'max:5120'],
+            'image_kk' => ['nullable', 'image', 'max:5120'],
         ];
     }
 }

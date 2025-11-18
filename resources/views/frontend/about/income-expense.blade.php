@@ -41,15 +41,15 @@
                                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                     </div>
                                     <div class="report-content">
-                                        <h3 class="report-title">{{ $report->title }}</h3>
+                                        <h3 class="report-title">{{ $report->localized_title }}</h3>
                                         @if($report->description)
                                             <div class="report-description">
                                                 {!! $report->description !!}
                                             </div>
                                         @endif
-                                        @if($report->file_url)
+                                        @if($report->localized_file_url)
                                             <div class="report-actions">
-                                                <a href="{{ $report->file_url }}" download class="report-link">
+                                                <a href="{{ $report->localized_file_url }}" download class="report-link">
                                                     <i class="bi bi-download"></i>
                                                     <span>Скачать файл</span>
                                                 </a>

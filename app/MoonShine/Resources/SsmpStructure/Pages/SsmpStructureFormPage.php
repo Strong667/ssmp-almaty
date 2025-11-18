@@ -37,9 +37,11 @@ class SsmpStructureFormPage extends FormPage
                     ->required()
                     ->min(1)
                     ->placeholder('Введите номер подстанции'),
-                Text::make('Адрес', 'address')
+                Text::make('Адрес (русский)', 'address')
                     ->required()
                     ->placeholder('Введите адрес подстанции'),
+                Text::make('Адрес (казахский)', 'address_kk')
+                    ->placeholder('Бекет мекенжайын енгізіңіз'),
                 Number::make('Кол-во бригад', 'brigades_count')
                     ->required()
                     ->min(0)
@@ -89,6 +91,7 @@ class SsmpStructureFormPage extends FormPage
                 Rule::unique('ssmp_structures', 'substation_number')->ignore($id),
             ],
             'address' => ['required', 'string', 'max:255'],
+            'address_kk' => ['nullable', 'string', 'max:255'],
             'brigades_count' => ['required', 'integer', 'min:0'],
             'doctors_count' => ['required', 'integer', 'min:0'],
             'paramedics_count' => ['required', 'integer', 'min:0'],
