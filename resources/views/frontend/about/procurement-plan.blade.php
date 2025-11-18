@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">План государственных закупок</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.procurement_plan') }}</li>
                 </ol>
             </nav>
         </div>

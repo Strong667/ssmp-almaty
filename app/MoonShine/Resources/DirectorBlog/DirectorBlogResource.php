@@ -53,7 +53,7 @@ class DirectorBlogResource extends ModelResource
                 Date::make('Дата рождения', 'birth_date')
                     ->nullable(),
             ]),
-            Box::make('Дополнительная информация', [
+            Box::make('Дополнительная информация (Русский)', [
                 Textarea::make('Личная информация', 'personal_info')
                     ->nullable(),
                 Textarea::make('Образования', 'education')
@@ -62,9 +62,19 @@ class DirectorBlogResource extends ModelResource
                 Textarea::make('Карьера', 'career')
                     ->nullable()
                     ->placeholder('Опишите карьерный путь, должности, достижения'),
-                Textarea::make('Ассоциированный профессор РАМ', 'associate_professor_ram')
+            ]),
+            Box::make('Дополнительная информация (Казахский)', [
+                Textarea::make('Личная информация (Қазақша)', 'personal_info_kk')
                     ->nullable()
-                    ->placeholder('Информация об ассоциированном профессоре РАМ'),
+                    ->hint('Если не заполнено, будет использована русская версия'),
+                Textarea::make('Образования (Қазақша)', 'education_kk')
+                    ->nullable()
+                    ->placeholder('Білім беру мекемелерін, мамандықтарды, оқу жылдарын көрсетіңіз')
+                    ->hint('Если не заполнено, будет использована русская версия'),
+                Textarea::make('Карьера (Қазақша)', 'career_kk')
+                    ->nullable()
+                    ->placeholder('Мансап жолын, лауазымдарды, жетістіктерді сипаттаңыз')
+                    ->hint('Если не заполнено, будет использована русская версия'),
             ]),
         ];
     }
@@ -80,9 +90,11 @@ class DirectorBlogResource extends ModelResource
             Text::make('ФИО', 'full_name'),
             Date::make('Дата рождения', 'birth_date'),
             Textarea::make('Личная информация', 'personal_info'),
+            Textarea::make('Личная информация (Қазақша)', 'personal_info_kk'),
             Textarea::make('Образования', 'education'),
+            Textarea::make('Образования (Қазақша)', 'education_kk'),
             Textarea::make('Карьера', 'career'),
-            Textarea::make('Ассоциированный профессор РАМ', 'associate_professor_ram'),
+            Textarea::make('Карьера (Қазақша)', 'career_kk'),
         ];
     }
 
@@ -97,10 +109,12 @@ class DirectorBlogResource extends ModelResource
             'photo' => ['nullable', 'image', 'max:2048'],
             'full_name' => ['required', 'string', 'max:255'],
             'personal_info' => ['nullable', 'string'],
+            'personal_info_kk' => ['nullable', 'string'],
             'birth_date' => ['nullable', 'date'],
             'education' => ['nullable', 'string'],
+            'education_kk' => ['nullable', 'string'],
             'career' => ['nullable', 'string'],
-            'associate_professor_ram' => ['nullable', 'string'],
+            'career_kk' => ['nullable', 'string'],
         ];
     }
 }

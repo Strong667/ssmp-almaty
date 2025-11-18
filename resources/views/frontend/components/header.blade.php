@@ -45,8 +45,8 @@
                         </button>
                         <div class="language-switcher">
                             <select id="language-select" class="language-select form-select form-select-sm">
-                                <option value="ru" selected>Рус</option>
-                                <option value="kk">Қаз</option>
+                                <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>Рус</option>
+                                <option value="kk" {{ app()->getLocale() === 'kk' ? 'selected' : '' }}>Қаз</option>
                             </select>
                         </div>
                     </div>
@@ -65,8 +65,8 @@
                             <img src="{{ asset('slujba.png') }}" alt="Логотип" class="logo-img">
                         </div>
                         <div class="logo-text">
-                            <h1 class="logo-title">Служба скорой медицинской помощи</h1>
-                            <p class="logo-subtitle">г. Алматы</p>
+                            <h1 class="logo-title">{{ __('frontend.header.logo_title') }}</h1>
+                            <p class="logo-subtitle">{{ __('frontend.header.logo_subtitle') }}</p>
                         </div>
                     </a>
                 </div>
@@ -85,93 +85,92 @@
                     <ul class="navbar-nav w-100 justify-content-center">
                         <li class="nav-item">
                             <a class="nav-link{{ request()->routeIs('home') ? ' active' : '' }}" href="{{ route('home') }}">
-                                Главная
+                                {{ __('frontend.header.home') }}
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle{{ request()->routeIs('about.administration', 'about.schedule', 'about.structure', 'about.mission', 'about.ethical-code', 'about.income-expense', 'about.vacancy-employment', 'about.documents', 'about.activity-sphere') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                О нас
+                            <a class="nav-link dropdown-toggle{{ request()->routeIs('about.administration', 'about.schedule', 'about.structure', 'about.ethical-code', 'about.income-expense', 'about.vacancy-employment', 'about.documents', 'about.activity-sphere') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ __('frontend.menu.about_us') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item{{ request()->routeIs('about.administration') ? ' active' : '' }}" href="{{ route('about.administration') }}">Администрация</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.administration') ? ' active' : '' }}" href="{{ route('about.administration') }}">{{ __('frontend.menu.administration') }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.schedule') ? ' active' : '' }}" href="{{ route('about.schedule') }}">График приёма граждан</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.structure') ? ' active' : '' }}" href="{{ route('about.structure') }}">Структура</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.mission') ? ' active' : '' }}" href="{{ route('about.mission') }}">Миссия и ценности</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.schedule') ? ' active' : '' }}" href="{{ route('about.schedule') }}">{{ __('frontend.menu.schedule') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.structure') ? ' active' : '' }}" href="{{ route('about.structure') }}">{{ __('frontend.menu.structure') }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.ethical-code') ? ' active' : '' }}" href="{{ route('about.ethical-code') }}">Этический кодекс</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.income-expense') ? ' active' : '' }}" href="{{ route('about.income-expense') }}">Отчёты о доходах и расходах</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.vacancy-employment') ? ' active' : '' }}" href="{{ route('about.vacancy-employment') }}">Вакансия</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.documents') ? ' active' : '' }}" href="{{ route('about.documents') }}">Документы</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.activity-sphere') ? ' active' : '' }}" href="{{ route('about.activity-sphere') }}">Сфера деятельности</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.ethical-code') ? ' active' : '' }}" href="{{ route('about.ethical-code') }}">{{ __('frontend.menu.ethical_code') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.income-expense') ? ' active' : '' }}" href="{{ route('about.income-expense') }}">{{ __('frontend.menu.income_expense') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.vacancy-employment') ? ' active' : '' }}" href="{{ route('about.vacancy-employment') }}">{{ __('frontend.menu.vacancy') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.documents') ? ' active' : '' }}" href="{{ route('about.documents') }}">{{ __('frontend.menu.documents') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.activity-sphere') ? ' active' : '' }}" href="{{ route('about.activity-sphere') }}">{{ __('frontend.menu.activity_sphere') }}</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.procurement-plan', 'about.announcements', 'about.protocols') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Государственные закупки
+                                {{ __('frontend.menu.procurement') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item{{ request()->routeIs('about.procurement-plan') ? ' active' : '' }}" href="{{ route('about.procurement-plan') }}">План государственных закупок</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.announcements') ? ' active' : '' }}" href="{{ route('about.announcements') }}">Объявления</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.protocols') ? ' active' : '' }}" href="{{ route('about.protocols') }}">Протоколы</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.procurement-plan') ? ' active' : '' }}" href="{{ route('about.procurement-plan') }}">{{ __('frontend.menu.procurement_plan') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.announcements') ? ' active' : '' }}" href="{{ route('about.announcements') }}">{{ __('frontend.menu.announcements') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.protocols') ? ' active' : '' }}" href="{{ route('about.protocols') }}">{{ __('frontend.menu.protocols') }}</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.medical-help-for-foreigners', 'about.legal-framework', 'about.emergency-service-rules', 'about.social-insurance', 'about.rubric-for-population') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Жителям Алматы
+                                {{ __('frontend.menu.residents') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item{{ request()->routeIs('about.medical-help-for-foreigners') ? ' active' : '' }}" href="{{ route('about.medical-help-for-foreigners') }}">Оказание медицинской помощи иностранному гражданину в РК</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.legal-framework') ? ' active' : '' }}" href="{{ route('about.legal-framework') }}">Нормативно-правовая база</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.emergency-service-rules') ? ' active' : '' }}" href="{{ route('about.emergency-service-rules') }}">Правила обращения в службу скорой медицинской помощи</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.social-insurance') ? ' active' : '' }}" href="{{ route('about.social-insurance') }}">Обязательное социальное медицинское страхование</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.rubric-for-population') ? ' active' : '' }}" href="{{ route('about.rubric-for-population') }}">Рубрика для населения</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.medical-help-for-foreigners') ? ' active' : '' }}" href="{{ route('about.medical-help-for-foreigners') }}">{{ __('frontend.menu.medical_help_foreigners') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.legal-framework') ? ' active' : '' }}" href="{{ route('about.legal-framework') }}">{{ __('frontend.menu.legal_framework') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.emergency-service-rules') ? ' active' : '' }}" href="{{ route('about.emergency-service-rules') }}">{{ __('frontend.menu.emergency_service_rules') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.social-insurance') ? ' active' : '' }}" href="{{ route('about.social-insurance') }}">{{ __('frontend.menu.social_insurance') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.rubric-for-population') ? ' active' : '' }}" href="{{ route('about.rubric-for-population') }}">{{ __('frontend.menu.rubric_for_population') }}</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.registry-of-state-services', 'about.state-service-standards', 'about.state-service-regulations', 'about.state-services') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Государственные услуги
+                                {{ __('frontend.menu.state_services') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item{{ request()->routeIs('about.state-services') ? ' active' : '' }}" href="{{ route('about.state-services') }}">Государственные услуги</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.registry-of-state-services') ? ' active' : '' }}" href="{{ route('about.registry-of-state-services') }}">Реестр государственных услуг</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.state-service-standards') ? ' active' : '' }}" href="{{ route('about.state-service-standards') }}">Стандарты государственных услуг</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.state-service-regulations') ? ' active' : '' }}" href="{{ route('about.state-service-regulations') }}">Регламенты государственных услуг</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.state-services') ? ' active' : '' }}" href="{{ route('about.state-services') }}">{{ __('frontend.menu.state_services') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.registry-of-state-services') ? ' active' : '' }}" href="{{ route('about.registry-of-state-services') }}">{{ __('frontend.menu.registry_state_services') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.state-service-standards') ? ' active' : '' }}" href="{{ route('about.state-service-standards') }}">{{ __('frontend.menu.state_service_standards') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.state-service-regulations') ? ' active' : '' }}" href="{{ route('about.state-service-regulations') }}">{{ __('frontend.menu.state_service_regulations') }}</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.state-flag', 'about.state-emblem', 'about.state-anthem') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Государственные символы
+                                {{ __('frontend.menu.state_symbols') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item{{ request()->routeIs('about.state-flag') ? ' active' : '' }}" href="{{ route('about.state-flag') }}">Государственный Флаг</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.state-emblem') ? ' active' : '' }}" href="{{ route('about.state-emblem') }}">Государственный Герб</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.state-anthem') ? ' active' : '' }}" href="{{ route('about.state-anthem') }}">Государственный Гимн</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.state-flag') ? ' active' : '' }}" href="{{ route('about.state-flag') }}">{{ __('frontend.menu.state_flag') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.state-emblem') ? ' active' : '' }}" href="{{ route('about.state-emblem') }}">{{ __('frontend.menu.state_emblem') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.state-anthem') ? ' active' : '' }}" href="{{ route('about.state-anthem') }}">{{ __('frontend.menu.state_anthem') }}</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link{{ request()->routeIs('about.paid-services') ? ' active' : '' }}" href="{{ route('about.paid-services') }}">
-                                Платные услуги
+                                {{ __('frontend.header.paid_services') }}
                             </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.compliance-officer-plan', 'about.corruption-risk-analysis', 'about.internal-regulations') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Комплаенс служба
+                                {{ __('frontend.menu.compliance_service') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item{{ request()->routeIs('about.compliance-officer-plan') ? ' active' : '' }}" href="{{ route('about.compliance-officer-plan') }}">План работы комплаенс офицера 2024г</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-analysis') ? ' active' : '' }}" href="{{ route('about.corruption-risk-analysis') }}">Внутренний анализ коррупционных рисков</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.internal-regulations') ? ' active' : '' }}" href="{{ route('about.internal-regulations') }}">Внутренние НПА</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.compliance-officer-plan') ? ' active' : '' }}" href="{{ route('about.compliance-officer-plan') }}">{{ __('frontend.menu.compliance_officer_plan') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-analysis') ? ' active' : '' }}" href="{{ route('about.corruption-risk-analysis') }}">{{ __('frontend.menu.corruption_risk_analysis') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.internal-regulations') ? ' active' : '' }}" href="{{ route('about.internal-regulations') }}">{{ __('frontend.menu.internal_regulations') }}</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.corruption-risk-positions', 'about.corruption-risk-list', 'about.corruption-risk-map') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Картограмма коррупции
+                                {{ __('frontend.menu.corruption_map') }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-positions') ? ' active' : '' }}" href="{{ route('about.corruption-risk-positions') }}">Должности, подверженные коррупционным рискам</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-list') ? ' active' : '' }}" href="{{ route('about.corruption-risk-list') }}">Перечень коррупционных рисков</a></li>
-                                <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-map') ? ' active' : '' }}" href="{{ route('about.corruption-risk-map') }}">Карта коррупционных рисков</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-positions') ? ' active' : '' }}" href="{{ route('about.corruption-risk-positions') }}">{{ __('frontend.menu.corruption_risk_positions') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-list') ? ' active' : '' }}" href="{{ route('about.corruption-risk-list') }}">{{ __('frontend.menu.corruption_risk_list') }}</a></li>
+                                <li><a class="dropdown-item{{ request()->routeIs('about.corruption-risk-map') ? ' active' : '' }}" href="{{ route('about.corruption-risk-map') }}">{{ __('frontend.menu.corruption_risk_map') }}</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -189,23 +188,23 @@
                     <div class="quick-links-wrapper">
                         <a href="{{ route('director-blog.show') }}" class="quick-link-btn">
                             <i class="bi bi-file-person"></i>
-                            <span>БЛОГ О ДИРЕКТОРЕ</span>
+                            <span>{!! __('frontend.quick_links.director_blog') !!}</span>
                         </a>
                         <a href="{{ route('news.list') }}" class="quick-link-btn">
                             <i class="bi bi-newspaper"></i>
-                            <span>НОВОСТИ</span>
+                            <span>{{ __('frontend.quick_links.news') }}</span>
                         </a>
                         <a href="{{ route('anticorruption.show') }}" class="quick-link-btn">
                             <i class="bi bi-shield-check"></i>
-                            <span>АНТИКОР</span>
+                            <span>{{ __('frontend.quick_links.anticorruption') }}</span>
                         </a>
                         <a href="{{ route('healthy-lifestyle.show') }}" class="quick-link-btn">
                             <i class="bi bi-heart-pulse"></i>
-                            <span>ЗОЖ</span>
+                            <span>{{ __('frontend.quick_links.healthy_lifestyle') }}</span>
                         </a>
                         <a href="{{ route('mission-of-emergency-service.show') }}" class="quick-link-btn">
                             <i class="bi bi-bullseye"></i>
-                            <span>МИССИЯ СКОРОЙ<br>ПОМОЩИ</span>
+                            <span>{!! __('frontend.quick_links.mission_emergency') !!}</span>
                         </a>
                     </div>
                 </div>

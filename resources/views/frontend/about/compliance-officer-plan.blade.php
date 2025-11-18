@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">План работы комплаенс офицера 2024г</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.compliance_officer_plan') }}</li>
                 </ol>
             </nav>
         </div>

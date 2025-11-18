@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Антикор</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.quick_links.anticorruption') }}</li>
                 </ol>
             </nav>
         </div>
@@ -28,7 +28,7 @@
                     <div class="row mb-5">
                         <div class="col-12">
                             <div class="header-image-wrapper">
-                                <img src="{{ $anticorruption->headerImage->image_url }}" alt="{{ $anticorruption->title }}" class="header-image img-fluid">
+                                <img src="{{ $anticorruption->headerImage->image_url }}" alt="{{ $anticorruption->localized_title }}" class="header-image img-fluid">
                             </div>
                         </div>
                     </div>
@@ -37,21 +37,21 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="anticorruption-content">
-                            <h2 class="content-title">{{ $anticorruption->title }}</h2>
+                            <h2 class="content-title">{{ $anticorruption->localized_title }}</h2>
                             
-                            @if($anticorruption->description)
+                            @if($anticorruption->localized_description)
                                 <div class="content-section">
                                     <div class="section-content">
-                                        {!! nl2br(e($anticorruption->description)) !!}
+                                        {!! nl2br(e($anticorruption->localized_description)) !!}
                                     </div>
                                 </div>
                             @endif
 
-                            @if($anticorruption->service_tasks)
+                            @if($anticorruption->localized_service_tasks)
                                 <div class="content-section">
-                                    <h3 class="section-title">Задачи Службы</h3>
+                                    <h3 class="section-title">{{ __('frontend.anticorruption.service_tasks') }}</h3>
                                     <div class="section-content">
-                                        {!! nl2br(e($anticorruption->service_tasks)) !!}
+                                        {!! nl2br(e($anticorruption->localized_service_tasks)) !!}
                                     </div>
                                 </div>
                             @endif
@@ -76,7 +76,6 @@
 
                             @if($anticorruption->images->where('is_header', false)->isNotEmpty())
                                 <div class="content-section">
-                                    <h3 class="section-title">Галерея</h3>
                                     <div class="images-gallery">
                                         <div class="row gy-4">
                                             @foreach($anticorruption->images->where('is_header', false) as $image)

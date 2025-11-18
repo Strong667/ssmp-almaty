@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Главная')
+@section('title', __('frontend.home.title'))
 
 @section('content')
     <!-- Departments Section with Tabs -->
@@ -11,12 +11,12 @@
                 <ul class="nav nav-tabs departments-tabs" id="departmentsTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="substations-tab" data-bs-toggle="tab" data-bs-target="#substations" type="button" role="tab" aria-controls="substations" aria-selected="true">
-                            ПОДСТАНЦИИ
+                            {{ __('frontend.home.substations') }}
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="map-tab" data-bs-toggle="tab" data-bs-target="#map" type="button" role="tab" aria-controls="map" aria-selected="false">
-                            КАРТА
+                            {{ __('frontend.home.map') }}
                         </button>
                     </li>
                 </ul>
@@ -54,7 +54,7 @@
                                                     </div>
                                                 @endif
                                                 <a href="{{ route('substations.show', $substation->id) }}" class="department-link">
-                                                    Посмотреть сотрудников <i class="bi bi-arrow-right"></i>
+                                                    {{ __('frontend.home.view_employees') }} <i class="bi bi-arrow-right"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -63,7 +63,7 @@
                             </div>
                         @else
                             <div class="alert alert-info text-center" role="alert">
-                                Подстанции пока не добавлены
+                                {{ __('frontend.home.no_substations') }}
                             </div>
                         @endif
                     </div>
@@ -99,14 +99,14 @@
                             <div class="news-box">
                                 @if($article->image_url)
                                     <div class="news-img">
-                                        <img src="{{ $article->image_url }}" alt="{{ $article->title }}" class="img-fluid">
+                                        <img src="{{ $article->image_url }}" alt="{{ $article->localized_title }}" class="img-fluid">
                                     </div>
                                 @endif
                                 <div class="news-content">
-                                    <h3 class="news-title">{{ $article->title }}</h3>
+                                    <h3 class="news-title">{{ $article->localized_title }}</h3>
                                     <p class="news-date">{{ $article->display_date }}</p>
                                     <a href="{{ route('news.detail', $article->slug) }}" class="read-more">
-                                        <span>Читать Новость</span>
+                                        <span>{{ __('frontend.home.read_news') }}</span>
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
                                 </div>

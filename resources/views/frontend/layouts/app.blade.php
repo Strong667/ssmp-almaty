@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1318,8 +1318,20 @@
                 });
             });
         }
-    });
+
+    // Language Switcher
+    (function() {
+        const languageSelect = document.getElementById('language-select');
+        if (!languageSelect) return;
+
+        languageSelect.addEventListener('change', function() {
+            const locale = this.value;
+            const url = '{{ route("locale.switch", ["locale" => ":locale"]) }}'.replace(':locale', locale);
+            window.location.href = url;
+        });
+    })();
 </script>
-@stack('scripts')
+    @stack('scripts')
+    <script src="https://plugin.iss.fms.kz/js/saqtandyry-plugin.js"></script>
 </body>
 </html>

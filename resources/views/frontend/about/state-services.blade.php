@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Государственные услуги</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.state_services') }}</li>
                 </ol>
             </nav>
         </div>

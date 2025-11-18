@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Этический кодекс</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.ethical_code') }}</li>
                 </ol>
             </nav>
         </div>

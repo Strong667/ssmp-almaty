@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">ЗОЖ</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.quick_links.healthy_lifestyle') }}</li>
                 </ol>
             </nav>
         </div>

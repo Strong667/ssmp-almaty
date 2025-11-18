@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Блог о директоре</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.breadcrumbs.director_blog') }}</li>
                 </ol>
             </nav>
         </div>
@@ -43,42 +43,33 @@
                             @if($director->birth_date)
                                 <div class="director-detail">
                                     <i class="bi bi-calendar-event"></i>
-                                    <span>Дата рождения: {{ $director->birth_date->format('d.m.Y') }}</span>
+                                    <span>{{ __('frontend.director_blog.birth_date') }}: {{ $director->birth_date->format('d.m.Y') }}</span>
                                 </div>
                             @endif
 
-                            @if($director->personal_info)
+                            @if($director->localized_personal_info)
                                 <div class="director-section">
-                                    <h3 class="section-title">Личная информация</h3>
+                                    <h3 class="section-title">{{ __('frontend.director_blog.personal_info') }}</h3>
                                     <div class="section-content">
-                                        {!! nl2br(e($director->personal_info)) !!}
+                                        {!! nl2br(e($director->localized_personal_info)) !!}
                                     </div>
                                 </div>
                             @endif
 
-                            @if($director->education)
+                            @if($director->localized_education)
                                 <div class="director-section">
-                                    <h3 class="section-title">Образования</h3>
+                                    <h3 class="section-title">{{ __('frontend.director_blog.education') }}</h3>
                                     <div class="section-content">
-                                        {!! nl2br(e($director->education)) !!}
+                                        {!! nl2br(e($director->localized_education)) !!}
                                     </div>
                                 </div>
                             @endif
 
-                            @if($director->career)
+                            @if($director->localized_career)
                                 <div class="director-section">
-                                    <h3 class="section-title">Карьера</h3>
+                                    <h3 class="section-title">{{ __('frontend.director_blog.career') }}</h3>
                                     <div class="section-content">
-                                        {!! nl2br(e($director->career)) !!}
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if($director->associate_professor_ram)
-                                <div class="director-section">
-                                    <h3 class="section-title">Ассоциированный профессор РАМ</h3>
-                                    <div class="section-content">
-                                        {!! nl2br(e($director->associate_professor_ram)) !!}
+                                        {!! nl2br(e($director->localized_career)) !!}
                                     </div>
                                 </div>
                             @endif

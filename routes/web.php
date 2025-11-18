@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\AnticorruptionController;
 use App\Http\Controllers\Frontend\MissionOfEmergencyServiceController;
 use App\Http\Controllers\Frontend\HealthyLifestyleController;
 use App\Http\Controllers\Frontend\QuestionController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Middleware\UseWebGuard;
 use App\MoonShine\Resources\About\Pages\EthicalCodePage;
 use App\MoonShine\Resources\About\Pages\IncomeExpensePage;
@@ -44,6 +45,9 @@ Route::get('storage/{path}', PublicStorageController::class)
     ->where('path', '.*')
     ->name('storage.public');
 
+// Переключение языка
+Route::get('locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
+
 // Middleware для переключения на web guard для публичных страниц
 Route::middleware([UseWebGuard::class])->group(function () {
     
@@ -54,7 +58,6 @@ Route::middleware([UseWebGuard::class])->group(function () {
     Route::get('/about/administration', [FrontendController::class, 'administration'])->name('about.administration');
     Route::get('/about/schedule', [FrontendController::class, 'schedule'])->name('about.schedule');
     Route::get('/about/structure', [FrontendController::class, 'structure'])->name('about.structure');
-    Route::get('/about/mission', [FrontendController::class, 'mission'])->name('about.mission');
     Route::get('/about/ethical-code', [AboutController::class, 'ethicalCode'])->name('about.ethical-code');
     Route::get('/about/income-expense', [AboutController::class, 'incomeExpense'])->name('about.income-expense');
     Route::get('/about/vacancy-employment', [AboutController::class, 'vacancyEmployment'])->name('about.vacancy-employment');

@@ -3,21 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class News extends Model
 {
     protected $fillable = [
         'title',
+        'title_kk',
         'slug',
         'description',
+        'description_kk',
         'video_url',
         'image',
         'published_at',
+        'is_featured',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'is_featured' => 'boolean',
     ];
 
     protected static function boot()
@@ -74,5 +79,41 @@ class News extends Model
         ];
 
         return $date->format('d') . ' ' . $months[$date->format('n')] . ', ' . $date->format('Y');
+    }
+
+    /**
+     * Получить локализованный заголовок
+     */
+    public function getLocalizedTitleAttribute(): string
+    {
+        $locale = app()->getLocale();
+        
+        if ($locale === 'kk' && $this->title_kk) {
+            return $this->title_kk;
+        }
+        
+        return $this->title;
+    }
+
+    /**
+     * Получить локализованное описание
+     */
+    public function getLocalizedDescriptionAttribute(): ?string
+    {
+        $locale = app()->getLocale();
+        
+        if ($locale === 'kk' && $this->description_kk) {
+            return $this->description_kk;
+        }
+        
+        return $this->description;
+    }
+
+    /**
+     * Изображения новости
+     */
+    public function images(): HasMany
+    {
+        return $this->hasMany(NewsImage::class)->orderBy('created_at');
     }
 }

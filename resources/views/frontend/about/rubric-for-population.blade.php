@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Рубрика для населения</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.rubric_for_population') }}</li>
                 </ol>
             </nav>
         </div>

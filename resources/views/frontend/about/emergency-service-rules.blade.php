@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Правила обращения в службу скорой медицинской помощи</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.emergency_service_rules') }}</li>
                 </ol>
             </nav>
         </div>

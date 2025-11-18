@@ -10,13 +10,51 @@ class DirectorBlog extends Model
         'photo',
         'full_name',
         'personal_info',
+        'personal_info_kk',
         'birth_date',
         'education',
+        'education_kk',
         'career',
-        'associate_professor_ram',
+        'career_kk',
     ];
 
     protected $casts = [
         'birth_date' => 'date',
     ];
+
+    /**
+     * Получить локализованную личную информацию
+     */
+    public function getLocalizedPersonalInfoAttribute(): ?string
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'kk' && $this->personal_info_kk) {
+            return $this->personal_info_kk;
+        }
+        return $this->personal_info;
+    }
+
+    /**
+     * Получить локализованное образование
+     */
+    public function getLocalizedEducationAttribute(): ?string
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'kk' && $this->education_kk) {
+            return $this->education_kk;
+        }
+        return $this->education;
+    }
+
+    /**
+     * Получить локализованную карьеру
+     */
+    public function getLocalizedCareerAttribute(): ?string
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'kk' && $this->career_kk) {
+            return $this->career_kk;
+        }
+        return $this->career;
+    }
 }

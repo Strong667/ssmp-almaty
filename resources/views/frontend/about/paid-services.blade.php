@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Платные услуги</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.header.paid_services') }}</li>
                 </ol>
             </nav>
         </div>

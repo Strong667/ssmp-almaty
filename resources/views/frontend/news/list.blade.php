@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Новости</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.header.news') }}</li>
                 </ol>
             </nav>
         </div>
@@ -30,7 +30,7 @@
                                 @if($item->image_url)
                                     <div class="news-card-image">
                                         <a href="{{ route('news.detail', $item->slug) }}">
-                                            <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="img-fluid">
+                                            <img src="{{ $item->image_url }}" alt="{{ $item->localized_title }}" class="img-fluid">
                                         </a>
                                     </div>
                                 @endif
@@ -39,7 +39,7 @@
                                         <i class="bi bi-calendar"></i> {{ $item->display_date }}
                                     </div>
                                     <h3 class="news-card-title">
-                                        <a href="{{ route('news.detail', $item->slug) }}">{{ $item->title }}</a>
+                                        <a href="{{ route('news.detail', $item->slug) }}">{{ $item->localized_title }}</a>
                                     </h3>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
             @else
                 <div class="alert alert-info text-center">
                     <i class="bi bi-info-circle"></i>
-                    <p class="mb-0">Новостей пока нет</p>
+                    <p class="mb-0">{{ __('frontend.news.no_news') }}</p>
                 </div>
             @endif
         </div>

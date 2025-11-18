@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">График приёма граждан</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.schedule') }}</li>
                 </ol>
             </nav>
         </div>

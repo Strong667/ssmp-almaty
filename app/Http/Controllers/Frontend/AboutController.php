@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\CitizenSchedule;
 use App\Models\Structure;
-use App\Models\MissionValue;
 use App\Models\EthicalCode;
 use App\Models\IncomeExpenseReport;
 use App\Models\Vacancy;
@@ -66,15 +65,6 @@ class AboutController extends Controller
             ->get();
 
         return view('frontend.about.structure', compact('structures'));
-    }
-
-    public function mission()
-    {
-        $missionValues = MissionValue::query()
-            ->orderBy('title')
-            ->get();
-
-        return view('frontend.about.mission', compact('missionValues'));
     }
 
     public function ethicalCode()

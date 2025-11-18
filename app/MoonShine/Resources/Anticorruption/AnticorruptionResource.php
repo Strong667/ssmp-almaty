@@ -41,14 +41,22 @@ class AnticorruptionResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
+            Box::make('Основная информация (Русский)', [
                 Text::make('Заголовок', 'title')
                     ->required()
                     ->placeholder('Введите заголовок'),
                 Textarea::make('Описание', 'description')
                     ->nullable(),
             ]),
-            Box::make('Дополнительная информация', [
+            Box::make('Основная информация (Казахский)', [
+                Text::make('Заголовок (Қазақша)', 'title_kk')
+                    ->nullable()
+                    ->hint('Если не заполнено, будет использован русский заголовок'),
+                Textarea::make('Описание (Қазақша)', 'description_kk')
+                    ->nullable()
+                    ->hint('Если не заполнено, будет использовано русское описание'),
+            ]),
+            Box::make('Дополнительная информация (Русский)', [
                 Textarea::make('Задачи Службы', 'service_tasks')
                     ->nullable()
                     ->placeholder('Опишите задачи службы'),
@@ -58,6 +66,12 @@ class AnticorruptionResource extends ModelResource
                 Textarea::make('Комплаенс-офицер', 'compliance_officer')
                     ->nullable()
                     ->placeholder('Информация о комплаенс-офицере'),
+            ]),
+            Box::make('Дополнительная информация (Казахский)', [
+                Textarea::make('Задачи Службы (Қазақша)', 'service_tasks_kk')
+                    ->nullable()
+                    ->placeholder('Қызмет міндеттерін сипаттаңыз')
+                    ->hint('Если не заполнено, будет использована русская версия'),
             ]),
             HasMany::make('Изображения', 'images', resource: AnticorruptionImageResource::class)
                 ->creatable(),
@@ -72,8 +86,11 @@ class AnticorruptionResource extends ModelResource
         return [
             ID::make(),
             Text::make('Заголовок', 'title'),
+            Text::make('Заголовок (Қазақша)', 'title_kk'),
             Textarea::make('Описание', 'description'),
+            Textarea::make('Описание (Қазақша)', 'description_kk'),
             Textarea::make('Задачи Службы', 'service_tasks'),
+            Textarea::make('Задачи Службы (Қазақша)', 'service_tasks_kk'),
             Textarea::make('Call-центр', 'call_center'),
             Textarea::make('Комплаенс-офицер', 'compliance_officer'),
         ];
@@ -88,8 +105,11 @@ class AnticorruptionResource extends ModelResource
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'title_kk' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
+            'description_kk' => ['nullable', 'string'],
             'service_tasks' => ['nullable', 'string'],
+            'service_tasks_kk' => ['nullable', 'string'],
             'call_center' => ['nullable', 'string'],
             'compliance_officer' => ['nullable', 'string'],
         ];

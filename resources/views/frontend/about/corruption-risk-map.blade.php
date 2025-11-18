@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Карта коррупционных рисков</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.corruption_risk_map') }}</li>
                 </ol>
             </nav>
         </div>

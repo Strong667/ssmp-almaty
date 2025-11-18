@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Сфера деятельности</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.activity_sphere') }}</li>
                 </ol>
             </nav>
         </div>

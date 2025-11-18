@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Внутренние НПА</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.internal_regulations') }}</li>
                 </ol>
             </nav>
         </div>

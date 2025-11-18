@@ -39,7 +39,6 @@ use MoonShine\MenuManager\MenuGroup;
 use App\MoonShine\Resources\Admin\AdminResource;
 use App\MoonShine\Resources\CitizenSchedule\CitizenScheduleResource;
 use App\MoonShine\Resources\Structure\StructureResource;
-use App\MoonShine\Resources\MissionValue\MissionValueResource;
 use App\MoonShine\Resources\EthicalCode\EthicalCodeResource;
 use App\MoonShine\Resources\IncomeExpenseReport\IncomeExpenseReportResource;
 use App\MoonShine\Resources\Vacancy\VacancyResource;
@@ -111,7 +110,6 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(AdminResource::class, 'Администрация'),
                 MenuItem::make(CitizenScheduleResource::class, 'График приёма граждан'),
                 MenuItem::make(StructureResource::class, 'Структура'),
-                MenuItem::make(MissionValueResource::class, 'Миссия и ценности'),
                 MenuItem::make(EthicalCodeResource::class, 'Этический кодекс'),
                 MenuItem::make(IncomeExpenseReportResource::class, 'Отчёты о доходах и расходах'),
                 MenuGroup::make('Вакансия', [

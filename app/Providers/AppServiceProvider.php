@@ -6,7 +6,6 @@ use App\MoonShine\Resources\Admin\AdminResource;
 use App\MoonShine\Resources\CitizenSchedule\CitizenScheduleResource;
 use App\MoonShine\Resources\EthicalCode\EthicalCodeResource;
 use App\MoonShine\Resources\IncomeExpenseReport\IncomeExpenseReportResource;
-use App\MoonShine\Resources\MissionValue\MissionValueResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use App\MoonShine\Resources\News\NewsResource;
@@ -48,7 +47,6 @@ class AppServiceProvider extends ServiceProvider
                 AdminResource::class,
                 CitizenScheduleResource::class,
                 StructureResource::class,
-                MissionValueResource::class,
                 EthicalCodeResource::class,
                 IncomeExpenseReportResource::class,
             ])

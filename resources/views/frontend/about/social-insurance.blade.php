@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Обязательное социальное медицинское страхование</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.social_insurance') }}</li>
                 </ol>
             </nav>
         </div>

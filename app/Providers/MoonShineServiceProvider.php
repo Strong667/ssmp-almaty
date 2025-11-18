@@ -16,7 +16,6 @@ use App\MoonShine\Resources\News\NewsResource;
 use App\MoonShine\Resources\Admin\AdminResource;
 use App\MoonShine\Resources\CitizenSchedule\CitizenScheduleResource;
 use App\MoonShine\Resources\Structure\StructureResource;
-use App\MoonShine\Resources\MissionValue\MissionValueResource;
 use App\MoonShine\Resources\EthicalCode\EthicalCodeResource;
 use App\MoonShine\Resources\IncomeExpenseReport\IncomeExpenseReportResource;
 use App\MoonShine\Resources\Home\HomeResource;
@@ -32,6 +31,7 @@ use App\MoonShine\Resources\SubstationEmployee\SubstationEmployeeResource;
 use App\MoonShine\Resources\DirectorBlog\DirectorBlogResource;
 use App\MoonShine\Resources\Anticorruption\AnticorruptionResource;
 use App\MoonShine\Resources\AnticorruptionImage\AnticorruptionImageResource;
+use App\MoonShine\Resources\NewsImage\NewsImageResource;
 use App\MoonShine\Resources\MissionOfEmergencyService\MissionOfEmergencyServiceResource;
 use App\MoonShine\Resources\HealthyLifestyle\HealthyLifestyleResource;
 use App\MoonShine\Resources\ProcurementPlan\ProcurementPlanResource;
@@ -79,7 +79,6 @@ class MoonShineServiceProvider extends ServiceProvider
                 AdminResource::class,
                 CitizenScheduleResource::class,
                 StructureResource::class,
-                MissionValueResource::class,
                 EthicalCodeResource::class,
                 IncomeExpenseReportResource::class,
                 HomeResource::class,
@@ -95,6 +94,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 DirectorBlogResource::class,
                 AnticorruptionResource::class,
                 AnticorruptionImageResource::class,
+                NewsImageResource::class,
                 MissionOfEmergencyServiceResource::class,
                 HealthyLifestyleResource::class,
                 ProcurementPlanResource::class,

@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Государственный Флаг</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.state_flag') }}</li>
                 </ol>
             </nav>
         </div>

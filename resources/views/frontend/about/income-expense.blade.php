@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Отчёты о доходах и расходах</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.income_expense') }}</li>
                 </ol>
             </nav>
         </div>

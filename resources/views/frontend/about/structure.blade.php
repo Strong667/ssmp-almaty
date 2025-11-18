@@ -13,7 +13,7 @@
                             <i class="bi bi-house-door"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Структура</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.menu.structure') }}</li>
                 </ol>
             </nav>
         </div>
