@@ -10,6 +10,7 @@ class StateAnthem extends Model
     protected $fillable = [
         'image',
         'description',
+        'description_kk',
         'text',
         'audio_file',
     ];
@@ -28,5 +29,14 @@ class StateAnthem extends Model
     public function getAudioUrlAttribute(): ?string
     {
         return $this->audio_file ? Storage::disk('public')->url($this->audio_file) : null;
+    }
+
+    public function getLocalizedDescriptionAttribute(): ?string
+    {
+        if (app()->getLocale() === 'kk' && $this->description_kk) {
+            return $this->description_kk;
+        }
+
+        return $this->description;
     }
 }

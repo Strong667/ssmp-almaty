@@ -28,14 +28,14 @@
                         <div class="documents-card">
                             <ul class="documents-list">
                                 @foreach($positions as $position)
-                                    @if($position->file_url)
+                                    @if($position->localized_file_url)
                                         <li class="document-item">
-                                            <a href="{{ $position->file_url }}" target="_blank" class="document-link">
+                                            <a href="{{ $position->localized_file_url }}" target="_blank" class="document-link">
                                                 <div class="document-icon">
                                                     <i class="bi bi-file-earmark-pdf-fill"></i>
                                                 </div>
                                                 <div class="document-content">
-                                                    <h4 class="document-title">{{ $position->title }}</h4>
+                                                    <h4 class="document-title">{{ $position->localized_title }}</h4>
                                                 </div>
                                                 <div class="document-arrow">
                                                     <i class="bi bi-chevron-right"></i>

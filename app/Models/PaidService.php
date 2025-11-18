@@ -10,8 +10,11 @@ class PaidService extends Model
 {
     protected $fillable = [
         'title',
+        'title_kk',
         'description',
+        'description_kk',
         'file',
+        'file_kk',
     ];
 
     /**
@@ -28,5 +31,38 @@ class PaidService extends Model
     public function getFileUrlAttribute(): ?string
     {
         return $this->file ? Storage::disk('public')->url($this->file) : null;
+    }
+
+    public function getLocalizedTitleAttribute(): ?string
+    {
+        if (app()->getLocale() === 'kk' && $this->title_kk) {
+            return $this->title_kk;
+        }
+
+        return $this->title;
+    }
+
+    public function getLocalizedDescriptionAttribute(): ?string
+    {
+        if (app()->getLocale() === 'kk' && $this->description_kk) {
+            return $this->description_kk;
+        }
+
+        return $this->description;
+    }
+
+    public function getLocalizedFileAttribute(): ?string
+    {
+        if (app()->getLocale() === 'kk' && $this->file_kk) {
+            return $this->file_kk;
+        }
+
+        return $this->file;
+    }
+
+    public function getLocalizedFileUrlAttribute(): ?string
+    {
+        $file = $this->localized_file;
+        return $file ? Storage::disk('public')->url($file) : null;
     }
 }

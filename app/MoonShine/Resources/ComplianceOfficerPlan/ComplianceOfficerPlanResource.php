@@ -19,7 +19,10 @@ class ComplianceOfficerPlanResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Название', 'title'),
-            File::make('Файл', 'file_path')
+            File::make('Файл (русский)', 'file_path')
+                ->disk('public')
+                ->readonly(),
+            File::make('Файл (казахский)', 'file_path_kk')
                 ->disk('public')
                 ->readonly(),
         ];
@@ -28,18 +31,27 @@ class ComplianceOfficerPlanResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
+            Box::make('Основная информация (русский)', [
                 ID::make()->readonly(),
                 Text::make('Название', 'title')
                     ->required()
                     ->placeholder('Введите название'),
-                File::make('PDF файл', 'file_path')
+                File::make('PDF файл (русский)', 'file_path')
                     ->dir('compliance-service')
                     ->disk('public')
                     ->removable()
                     ->required()
                     ->allowedExtensions(['pdf'])
                     ->hint('Загрузите PDF файл'),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                File::make('PDF файл (казахский)', 'file_path_kk')
+                    ->dir('compliance-service')
+                    ->disk('public')
+                    ->removable()
+                    ->nullable()
+                    ->allowedExtensions(['pdf'])
+                    ->hint('Загрузите PDF файл на казахском'),
             ]),
         ];
     }
@@ -49,7 +61,10 @@ class ComplianceOfficerPlanResource extends ModelResource
         return [
             ID::make(),
             Text::make('Название', 'title'),
-            File::make('Файл', 'file_path')
+            File::make('Файл (русский)', 'file_path')
+                ->disk('public')
+                ->readonly(),
+            File::make('Файл (казахский)', 'file_path_kk')
                 ->disk('public')
                 ->readonly(),
         ];
@@ -60,6 +75,7 @@ class ComplianceOfficerPlanResource extends ModelResource
         return [
             'title' => ['required', 'string'],
             'file_path' => ['required', 'file', 'mimes:pdf'],
+            'file_path_kk' => ['nullable', 'file', 'mimes:pdf'],
         ];
     }
 }

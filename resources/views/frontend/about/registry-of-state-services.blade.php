@@ -28,16 +28,16 @@
                         <div class="col-12">
                             <div class="info-card">
                                 <div class="info-content">
-                                    @if($item->text)
+                                    @if($item->localized_text)
                                         @if($item->url)
                                             <p>
                                                 <a href="{{ $item->url }}" target="_blank" class="info-link">
-                                                    {!! nl2br(e($item->text)) !!}
+                                                    {!! nl2br(e($item->localized_text)) !!}
                                                     <i class="bi bi-box-arrow-up-right"></i>
                                                 </a>
                                             </p>
                                         @else
-                                            <p>{!! nl2br(e($item->text)) !!}</p>
+                                            <p>{!! nl2br(e($item->localized_text)) !!}</p>
                                         @endif
                                     @elseif($item->url)
                                         <p>

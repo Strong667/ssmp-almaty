@@ -31,7 +31,8 @@ class PaidServiceResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'title')->sortable(),
+            Text::make('Название (русский)', 'title')->sortable(),
+            Text::make('Название (казахский)', 'title_kk'),
         ];
     }
 
@@ -41,14 +42,28 @@ class PaidServiceResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
-                Text::make('Название коммерческого предложения', 'title')
+            Box::make('Основная информация (русский)', [
+                Text::make('Название коммерческого предложения (русский)', 'title')
                     ->required()
                     ->placeholder('Введите название коммерческого предложения'),
-                Textarea::make('Описание', 'description')
+                Textarea::make('Описание (русский)', 'description')
                     ->nullable()
                     ->placeholder('Введите описание коммерческого предложения'),
-                File::make('Файл', 'file')
+                File::make('Файл (русский)', 'file')
+                    ->dir('paid-services')
+                    ->disk('public')
+                    ->removable()
+                    ->allowedExtensions(['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'])
+                    ->hint('Можно загрузить изображение, PDF, DOC или DOCX'),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Text::make('Название коммерческого предложения (казахский)', 'title_kk')
+                    ->nullable()
+                    ->placeholder('Введите название коммерческого предложения на казахском'),
+                Textarea::make('Описание (казахский)', 'description_kk')
+                    ->nullable()
+                    ->placeholder('Введите описание коммерческого предложения на казахском'),
+                File::make('Файл (казахский)', 'file_kk')
                     ->dir('paid-services')
                     ->disk('public')
                     ->removable()
@@ -67,9 +82,12 @@ class PaidServiceResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Название', 'title'),
-            Textarea::make('Описание', 'description'),
-            File::make('Файл', 'file')->disk('public'),
+            Text::make('Название (русский)', 'title'),
+            Text::make('Название (казахский)', 'title_kk'),
+            Textarea::make('Описание (русский)', 'description'),
+            Textarea::make('Описание (казахский)', 'description_kk'),
+            File::make('Файл (русский)', 'file')->disk('public'),
+            File::make('Файл (казахский)', 'file_kk')->disk('public'),
         ];
     }
 
@@ -82,8 +100,11 @@ class PaidServiceResource extends ModelResource
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'title_kk' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
+            'description_kk' => ['nullable', 'string'],
             'file' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf,doc,docx', 'max:10240'],
+            'file_kk' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf,doc,docx', 'max:10240'],
         ];
     }
 }

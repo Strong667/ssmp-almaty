@@ -27,10 +27,10 @@
                     @foreach($plans as $plan)
                         <div class="col-12">
                             <div class="plan-card">
-                                @if($plan->file_url)
+                                @if($plan->localized_file_url)
                                     <div class="plan-pdf-wrapper">
                                         <iframe
-                                            src="{{ $plan->file_url }}#toolbar=1&navpanes=1&scrollbar=1"
+                                            src="{{ $plan->localized_file_url }}#toolbar=1&navpanes=1&scrollbar=1"
                                             width="100%"
                                             height="800"
                                             frameborder="0"
@@ -38,7 +38,7 @@
                                         ></iframe>
                                     </div>
                                     <div class="plan-actions">
-                                        <a href="{{ $plan->file_url }}" download class="plan-link plan-link-secondary">
+                                        <a href="{{ $plan->localized_file_url }}" download class="plan-link plan-link-secondary">
                                             <i class="bi bi-download"></i>
                                             <span>Скачать PDF</span>
                                         </a>

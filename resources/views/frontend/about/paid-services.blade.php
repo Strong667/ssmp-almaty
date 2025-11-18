@@ -27,12 +27,12 @@
                     @if($service->items->isNotEmpty())
                         <div class="service-card mb-5">
                             <div class="service-header">
-                                <h3 class="service-title">{{ $service->title ?? 'Коммерческое предложение' }}</h3>
+                                <h3 class="service-title">{{ $service->localized_title ?? 'Коммерческое предложение' }}</h3>
                             </div>
                             <div class="service-content">
-                                @if($service->description)
+                                @if($service->localized_description)
                                     <div class="service-description mb-4">
-                                        <p>{{ $service->description }}</p>
+                                        <p>{{ $service->localized_description }}</p>
                                     </div>
                                 @endif
 
@@ -49,7 +49,7 @@
                                             <tbody>
                                                 @foreach($service->items as $item)
                                                     <tr>
-                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->localized_name }}</td>
                                                         <td>{{ $item->unit }}</td>
                                                         <td class="price-cell">{{ number_format($item->price, 0, ',', ' ') }}</td>
                                                     </tr>
@@ -59,9 +59,9 @@
                                     </div>
                                 @endif
 
-                                @if($service->file_url)
+                                @if($service->localized_file_url)
                                     <div class="service-file">
-                                        <a href="{{ $service->file_url }}" target="_blank" class="file-link" download>
+                                        <a href="{{ $service->localized_file_url }}" target="_blank" class="file-link" download>
                                             <i class="bi bi-file-earmark"></i>
                                             <span>Скачать файл</span>
                                         </a>

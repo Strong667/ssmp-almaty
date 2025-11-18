@@ -10,6 +10,7 @@ class PaidServiceItem extends Model
     protected $fillable = [
         'paid_service_id',
         'name',
+        'name_kk',
         'unit',
         'price',
         'order',
@@ -26,5 +27,14 @@ class PaidServiceItem extends Model
     public function paidService(): BelongsTo
     {
         return $this->belongsTo(PaidService::class);
+    }
+
+    public function getLocalizedNameAttribute(): ?string
+    {
+        if (app()->getLocale() === 'kk' && $this->name_kk) {
+            return $this->name_kk;
+        }
+
+        return $this->name;
     }
 }

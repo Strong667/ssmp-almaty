@@ -10,6 +10,7 @@ class StateEmblem extends Model
     protected $fillable = [
         'image',
         'description',
+        'description_kk',
     ];
 
     /**
@@ -18,5 +19,14 @@ class StateEmblem extends Model
     public function getImageUrlAttribute(): ?string
     {
         return $this->image ? Storage::disk('public')->url($this->image) : null;
+    }
+
+    public function getLocalizedDescriptionAttribute(): ?string
+    {
+        if (app()->getLocale() === 'kk' && $this->description_kk) {
+            return $this->description_kk;
+        }
+
+        return $this->description;
     }
 }

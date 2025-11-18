@@ -21,7 +21,8 @@ class StateAnthemResource extends ModelResource
             Image::make('Изображение', 'image')
                 ->disk('public')
                 ->readonly(),
-            Textarea::make('Описание', 'description'),
+            Textarea::make('Описание (русский)', 'description'),
+            Textarea::make('Описание (казахский)', 'description_kk'),
             File::make('Аудио файл', 'audio_file')
                 ->disk('public')
                 ->readonly(),
@@ -31,7 +32,7 @@ class StateAnthemResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
+            Box::make('Основная информация (русский)', [
                 ID::make()->readonly(),
                 Image::make('Изображение', 'image')
                     ->dir('state-symbols')
@@ -39,7 +40,7 @@ class StateAnthemResource extends ModelResource
                     ->removable()
                     ->required()
                     ->hint('Загрузите изображение'),
-                Textarea::make('Описание', 'description')
+                Textarea::make('Описание (русский)', 'description')
                     ->required()
                     ->customAttributes(['rows' => 5])
                     ->placeholder('Введите описание гимна'),
@@ -55,6 +56,12 @@ class StateAnthemResource extends ModelResource
                     ->nullable()
                     ->hint('Загрузите аудио файл гимна (mp3, wav, ogg, m4a)'),
             ]),
+            Box::make('Основная информация (казахский)', [
+                Textarea::make('Описание (казахский)', 'description_kk')
+                    ->nullable()
+                    ->customAttributes(['rows' => 5])
+                    ->placeholder('Введите описание гимна на казахском'),
+            ]),
         ];
     }
 
@@ -64,7 +71,10 @@ class StateAnthemResource extends ModelResource
             ID::make(),
             Image::make('Изображение', 'image')
                 ->disk('public'),
-            Textarea::make('Описание', 'description')
+            Textarea::make('Описание (русский)', 'description')
+                ->readonly()
+                ->customAttributes(['rows' => 5]),
+            Textarea::make('Описание (казахский)', 'description_kk')
                 ->readonly()
                 ->customAttributes(['rows' => 5]),
             Textarea::make('Текст гимна', 'text')
@@ -81,6 +91,7 @@ class StateAnthemResource extends ModelResource
         return [
             'image' => ['required', 'image'],
             'description' => ['required', 'string'],
+            'description_kk' => ['nullable', 'string'],
             'text' => ['required', 'string'],
             'audio_file' => ['nullable', 'file', 'mimes:mp3,wav,ogg,m4a'],
         ];

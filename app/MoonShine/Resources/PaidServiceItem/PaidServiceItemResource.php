@@ -31,7 +31,8 @@ class PaidServiceItemResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Наименование', 'name')->sortable(),
+            Text::make('Наименование (русский)', 'name')->sortable(),
+            Text::make('Наименование (казахский)', 'name_kk'),
             Text::make('Ед. изм.', 'unit'),
             Number::make('Стоимость (тенге)', 'price')->sortable(),
             Number::make('Порядок', 'order')->sortable(),
@@ -49,9 +50,12 @@ class PaidServiceItemResource extends ModelResource
                     ->options(PaidService::pluck('id', 'id')->toArray())
                     ->required()
                     ->searchable(),
-                Text::make('Наименование', 'name')
+                Text::make('Наименование (русский)', 'name')
                     ->required()
                     ->placeholder('Введите наименование услуги'),
+                Text::make('Наименование (казахский)', 'name_kk')
+                    ->nullable()
+                    ->placeholder('Введите наименование услуги на казахском'),
                 Text::make('Ед. изм.', 'unit')
                     ->required()
                     ->placeholder('Например: 1 (один) час'),
@@ -74,7 +78,8 @@ class PaidServiceItemResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Наименование', 'name'),
+            Text::make('Наименование (русский)', 'name'),
+            Text::make('Наименование (казахский)', 'name_kk'),
             Text::make('Ед. изм.', 'unit'),
             Number::make('Стоимость (тенге)', 'price'),
             Number::make('Порядок', 'order'),
@@ -91,6 +96,7 @@ class PaidServiceItemResource extends ModelResource
         return [
             'paid_service_id' => ['required', 'exists:paid_services,id'],
             'name' => ['required', 'string', 'max:255'],
+            'name_kk' => ['nullable', 'string', 'max:255'],
             'unit' => ['required', 'string', 'max:255'],
             'price' => ['required', 'numeric', 'min:0'],
             'order' => ['nullable', 'integer', 'min:0'],

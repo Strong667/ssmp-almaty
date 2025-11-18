@@ -18,7 +18,8 @@ class StateServiceRegulationsResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Textarea::make('Текст', 'text')->sortable(),
+            Textarea::make('Текст (русский)', 'text')->sortable(),
+            Textarea::make('Текст (казахский)', 'text_kk'),
             Text::make('Ссылка', 'url'),
         ];
     }
@@ -26,15 +27,20 @@ class StateServiceRegulationsResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
+            Box::make('Основная информация (русский)', [
                 ID::make()->readonly(),
-                Textarea::make('Текст', 'text')
+                Textarea::make('Текст (русский)', 'text')
                     ->required()
                     ->customAttributes(['rows' => 5]),
                 Text::make('Ссылка', 'url')
                     ->placeholder('https://...')
                     ->hint('URL ссылки на документ или страницу')
                     ->nullable(),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Textarea::make('Текст (казахский)', 'text_kk')
+                    ->nullable()
+                    ->customAttributes(['rows' => 5]),
             ]),
         ];
     }
@@ -43,7 +49,10 @@ class StateServiceRegulationsResource extends ModelResource
     {
         return [
             ID::make(),
-            Textarea::make('Текст', 'text')
+            Textarea::make('Текст (русский)', 'text')
+                ->readonly()
+                ->customAttributes(['rows' => 5]),
+            Textarea::make('Текст (казахский)', 'text_kk')
                 ->readonly()
                 ->customAttributes(['rows' => 5]),
             Text::make('Ссылка', 'url'),
@@ -54,6 +63,7 @@ class StateServiceRegulationsResource extends ModelResource
     {
         return [
             'text' => ['required', 'string'],
+            'text_kk' => ['nullable', 'string'],
             'url' => ['nullable', 'url'],
         ];
     }

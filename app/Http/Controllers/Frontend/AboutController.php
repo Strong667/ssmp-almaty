@@ -443,8 +443,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (PaidService $service) {
+                // Формируем URL для русского файла
                 $service->file_url = $service->file
                     ? Storage::disk('public')->url($service->file)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $service->file_kk_url = $service->file_kk
+                    ? Storage::disk('public')->url($service->file_kk)
                     : null;
             });
 
@@ -457,8 +463,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (ComplianceOfficerPlan $plan) {
+                // Формируем URL для русского файла
                 $plan->file_url = $plan->file_path
                     ? Storage::disk('public')->url($plan->file_path)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $plan->file_kk_url = $plan->file_path_kk
+                    ? Storage::disk('public')->url($plan->file_path_kk)
                     : null;
             });
 
@@ -471,8 +483,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (InternalCorruptionRiskAnalysis $analysis) {
+                // Формируем URL для русского файла
                 $analysis->file_url = $analysis->file_path
                     ? Storage::disk('public')->url($analysis->file_path)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $analysis->file_kk_url = $analysis->file_path_kk
+                    ? Storage::disk('public')->url($analysis->file_path_kk)
                     : null;
             });
 
@@ -485,8 +503,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (InternalRegulations $regulation) {
+                // Формируем URL для русского файла
                 $regulation->file_url = $regulation->file_path
                     ? Storage::disk('public')->url($regulation->file_path)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $regulation->file_kk_url = $regulation->file_path_kk
+                    ? Storage::disk('public')->url($regulation->file_path_kk)
                     : null;
             });
 
@@ -499,8 +523,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (CorruptionRiskPosition $position) {
+                // Формируем URL для русского файла
                 $position->file_url = $position->file_path
                     ? Storage::disk('public')->url($position->file_path)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $position->file_kk_url = $position->file_path_kk
+                    ? Storage::disk('public')->url($position->file_path_kk)
                     : null;
             });
 
@@ -513,8 +543,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (CorruptionRiskList $list) {
+                // Формируем URL для русского файла
                 $list->file_url = $list->file_path
                     ? Storage::disk('public')->url($list->file_path)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $list->file_kk_url = $list->file_path_kk
+                    ? Storage::disk('public')->url($list->file_path_kk)
                     : null;
             });
 
@@ -527,8 +563,14 @@ class AboutController extends Controller
             ->orderByDesc('created_at')
             ->get()
             ->each(function (CorruptionRiskMap $map) {
+                // Формируем URL для русского файла
                 $map->file_url = $map->file_path
                     ? Storage::disk('public')->url($map->file_path)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $map->file_kk_url = $map->file_path_kk
+                    ? Storage::disk('public')->url($map->file_path_kk)
                     : null;
             });
 

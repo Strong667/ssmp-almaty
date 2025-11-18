@@ -32,9 +32,9 @@
                                 </div>
                             @endif
 
-                            @if($item->description)
+                            @if($item->localized_description)
                                 <div class="symbol-description">
-                                    {!! nl2br(e($item->description)) !!}
+                                    {!! nl2br(e($item->localized_description)) !!}
                                 </div>
                             @endif
                         </div>
