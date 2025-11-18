@@ -139,11 +139,6 @@
                                 <li><a class="dropdown-item{{ request()->routeIs('about.state-service-regulations') ? ' active' : '' }}" href="{{ route('about.state-service-regulations') }}">Регламенты государственных услуг</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link{{ request()->routeIs('questions.index') ? ' active' : '' }}" href="{{ route('questions.index') }}">
-                                Вопросы и ответы
-                            </a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle{{ request()->routeIs('about.state-flag', 'about.state-emblem', 'about.state-anthem') ? ' active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Государственные символы

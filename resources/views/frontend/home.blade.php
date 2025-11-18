@@ -381,7 +381,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: #1977cc;
+            color: rgba(60, 60, 65, 1);
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
@@ -389,7 +389,7 @@
         }
 
         .department-link:hover {
-            color: #0d5aa7;
+            color: rgba(50, 50, 55, 1);
             gap: 12px;
         }
 

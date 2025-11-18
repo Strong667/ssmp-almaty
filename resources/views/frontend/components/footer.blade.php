@@ -63,11 +63,19 @@
                                     <img src="{{ asset('slujba.png') }}" alt="Логотип">
                                 </div>
                                 <div class="footer-hospital-name">
-                                    <div class="hospital-name-line">ЦЕНТРАЛЬНАЯ</div>
-                                    <div class="hospital-name-line">ГОРОДСКАЯ</div>
-                                    <div class="hospital-name-line">КЛИНИЧЕСКАЯ</div>
-                                    <div class="hospital-name-line">БОЛЬНИЦА</div>
+                                    <div class="hospital-name-line">СЛУЖБА</div>
+                                    <div class="hospital-name-line">СКОРОЙ</div>
+                                    <div class="hospital-name-line">МЕДИЦИНСКОЙ</div>
+                                    <div class="hospital-name-line">ПОМОЩИ</div>
                                 </div>
+                            </div>
+                            <div class="footer-social">
+                                <a href="#" target="_blank" aria-label="Instagram" class="footer-social-link">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="#" target="_blank" aria-label="Facebook" class="footer-social-link">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
                             </div>
                             <div class="footer-address">
                                 <strong>АЛМАТЫ, УЛ. КАЗЫБЕК БИ, 115</strong>
