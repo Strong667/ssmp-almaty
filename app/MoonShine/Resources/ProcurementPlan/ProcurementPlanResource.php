@@ -30,8 +30,10 @@ class ProcurementPlanResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'title')->sortable(),
-            File::make('Файл', 'file_path')->disk('public'),
+            Text::make('Название (русский)', 'title')->sortable(),
+            Text::make('Название (казахский)', 'title_kk'),
+            File::make('Файл (русский)', 'file_path')->disk('public'),
+            File::make('Файл (казахский)', 'file_path_kk')->disk('public'),
         ];
     }
 
@@ -41,15 +43,24 @@ class ProcurementPlanResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
-                Text::make('Название', 'title')
+            Box::make('Основная информация (русский)', [
+                Text::make('Название (русский)', 'title')
                     ->required()
                     ->placeholder('Например: План государственных закупок на 2025 год'),
-                File::make('Файл Excel', 'file_path')
+                File::make('Файл Excel (русский)', 'file_path')
                     ->disk('public')
                     ->dir('procurement_plans')
                     ->allowedExtensions(['xlsx', 'xls'])
                     ->required(),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Text::make('Название (казахский)', 'title_kk')
+                    ->placeholder('Мысалы: 2025 жылға арналған мемлекеттік сатып алулар жоспары'),
+                File::make('Файл Excel (казахский)', 'file_path_kk')
+                    ->disk('public')
+                    ->dir('procurement_plans')
+                    ->allowedExtensions(['xlsx', 'xls'])
+                    ->removable(),
             ]),
         ];
     }
@@ -61,8 +72,10 @@ class ProcurementPlanResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Название', 'title'),
-            File::make('Файл', 'file_path')->disk('public'),
+            Text::make('Название (русский)', 'title'),
+            Text::make('Название (казахский)', 'title_kk'),
+            File::make('Файл (русский)', 'file_path')->disk('public'),
+            File::make('Файл (казахский)', 'file_path_kk')->disk('public'),
         ];
     }
 
@@ -75,8 +88,15 @@ class ProcurementPlanResource extends ModelResource
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'title_kk' => ['nullable', 'string', 'max:255'],
             'file_path' => [
                 $item->exists ? 'nullable' : 'required',
+                'file',
+                'mimes:xlsx,xls',
+                'max:10240'
+            ],
+            'file_path_kk' => [
+                'nullable',
                 'file',
                 'mimes:xlsx,xls',
                 'max:10240'

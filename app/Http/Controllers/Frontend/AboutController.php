@@ -197,8 +197,14 @@ class AboutController extends Controller
             ->orderByDesc('year')
             ->get()
             ->each(function (ProcurementPlan $plan) {
+                // Формируем URL для русского файла
                 $plan->file_url = $plan->file_path
                     ? Storage::disk('public')->url($plan->file_path)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $plan->file_kk_url = $plan->file_path_kk
+                    ? Storage::disk('public')->url($plan->file_path_kk)
                     : null;
             });
 
@@ -213,8 +219,14 @@ class AboutController extends Controller
             ->get()
             ->each(function (AnnouncementCategory $category) {
                 $category->announcements->each(function ($announcement) {
+                    // Формируем URL для русского файла
                     $announcement->file_url = $announcement->file_path
                         ? Storage::disk('public')->url($announcement->file_path)
+                        : null;
+                    
+                    // Формируем URL для казахского файла
+                    $announcement->file_kk_url = $announcement->file_path_kk
+                        ? Storage::disk('public')->url($announcement->file_path_kk)
                         : null;
                 });
             });
@@ -229,8 +241,14 @@ class AboutController extends Controller
             ->orderBy('title')
             ->get()
             ->each(function (Protocol $protocol) {
+                // Формируем URL для русского файла
                 $protocol->file_url = $protocol->file_path
                     ? Storage::disk('public')->url($protocol->file_path)
+                    : null;
+                
+                // Формируем URL для казахского файла
+                $protocol->file_kk_url = $protocol->file_path_kk
+                    ? Storage::disk('public')->url($protocol->file_path_kk)
                     : null;
             })
             ->groupBy('year');

@@ -145,5 +145,24 @@ return [
         'schedule_label' => 'Жұмыс кестесі:',
         'contact_info_label' => 'Байланыс деректері:',
     ],
+
+    // Protocols
+    'protocols' => [
+        'for_year' => ':year жылға арналған хаттамалар',
+        'download_file' => 'Файлды жүктеу',
+    ],
+
+    // Announcements
+    'announcements' => [
+        'download_file' => 'Файлды жүктеу',
+    ],
+
+    // Procurement Plan
+    'procurement_plan' => [
+        'year' => ':year жыл',
+        'open_in_new_tab' => 'Жаңа вкладкада ашу',
+        'download_file' => 'Файлды жүктеу',
+        'file_not_uploaded' => 'Файл жүктелмеген',
+    ],
 ];
 

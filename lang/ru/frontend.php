@@ -145,6 +145,25 @@ return [
         'schedule_label' => 'График работы:',
         'contact_info_label' => 'Контактные данные:',
     ],
+
+    // Protocols
+    'protocols' => [
+        'for_year' => 'Протоколы за :year год',
+        'download_file' => 'Скачать файл',
+    ],
+
+    // Announcements
+    'announcements' => [
+        'download_file' => 'Скачать файл',
+    ],
+
+    // Procurement Plan
+    'procurement_plan' => [
+        'year' => ':year год',
+        'open_in_new_tab' => 'Открыть в новой вкладке',
+        'download_file' => 'Скачать файл',
+        'file_not_uploaded' => 'Файл не загружен',
+    ],
 ];
 
 

@@ -9,6 +9,7 @@ class AnnouncementCategory extends Model
 {
     protected $fillable = [
         'title',
+        'title_kk',
     ];
 
     /**
@@ -17,5 +18,14 @@ class AnnouncementCategory extends Model
     public function announcements(): HasMany
     {
         return $this->hasMany(Announcement::class);
+    }
+
+    public function getLocalizedTitleAttribute(): string
+    {
+        if (app()->getLocale() === 'kk' && $this->title_kk) {
+            return $this->title_kk;
+        }
+
+        return $this->title;
     }
 }

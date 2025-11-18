@@ -50,7 +50,7 @@ class AnnouncementsPage extends Page
         if ($categories->isNotEmpty()) {
             foreach ($categories as $category) {
                 $announcementComponents = [];
-                
+
                 if ($category->announcements->isNotEmpty()) {
                     // Используем TableBuilder для отображения объявлений в стиле MoonShine
                     $announcementComponents[] = TableBuilder::make(
@@ -65,7 +65,7 @@ class AnnouncementsPage extends Page
                     $announcementComponents[] = Text::make('Объявлений в этой категории пока нет')
                         ->readonly();
                 }
-                
+
                 // Используем Collapse для аккордеона в стиле MoonShine
                 $containerComponents[] = Collapse::make(
                     $category->title,

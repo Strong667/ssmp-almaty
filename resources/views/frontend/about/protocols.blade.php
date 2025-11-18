@@ -31,7 +31,7 @@
                                     <h2 class="accordion-header" id="heading{{ $year }}">
                                         <button class="accordion-button{{ $loop->first ? '' : ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $year }}" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="collapse{{ $year }}">
                                             <i class="bi bi-calendar-range"></i>
-                                            <span>Протоколы за {{ $year }} год</span>
+                                            <span>{{ __('frontend.protocols.for_year', ['year' => $year]) }}</span>
                                         </button>
                                     </h2>
                                     <div id="collapse{{ $year }}" class="accordion-collapse collapse{{ $loop->first ? ' show' : '' }}" aria-labelledby="heading{{ $year }}" data-bs-parent="#protocolsAccordion">
@@ -43,12 +43,12 @@
                                                             <i class="bi bi-file-earmark-pdf-fill"></i>
                                                         </div>
                                                         <div class="protocol-content">
-                                                            <h4 class="protocol-title">{{ $protocol->title }}</h4>
-                                                            @if($protocol->file_url)
+                                                            <h4 class="protocol-title">{{ $protocol->localized_title }}</h4>
+                                                            @if($protocol->localized_file_url)
                                                                 <div class="protocol-actions">
-                                                                    <a href="{{ $protocol->file_url }}" download class="protocol-link">
+                                                                    <a href="{{ $protocol->localized_file_url }}" download class="protocol-link">
                                                                         <i class="bi bi-download"></i>
-                                                                        <span>Скачать файл</span>
+                                                                        <span>{{ __('frontend.protocols.download_file') }}</span>
                                                                     </a>
                                                                 </div>
                                                             @endif

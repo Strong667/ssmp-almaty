@@ -32,28 +32,28 @@
                                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                     </div>
                                     <div class="plan-content">
-                                        <h3 class="plan-title">{{ $plan->title }}</h3>
+                                        <h3 class="plan-title">{{ $plan->localized_title }}</h3>
                                         @if($plan->year)
                                             <div class="plan-year">
                                                 <i class="bi bi-calendar"></i>
-                                                <span>{{ $plan->year }} год</span>
+                                                <span>{{ __('frontend.procurement_plan.year', ['year' => $plan->year]) }}</span>
                                             </div>
                                         @endif
-                                        @if($plan->file_url)
+                                        @if($plan->localized_file_url)
                                             <div class="plan-actions">
-                                                <a href="{{ $plan->file_url }}" target="_blank" class="plan-link">
+                                                <a href="{{ $plan->localized_file_url }}" target="_blank" class="plan-link">
                                                     <i class="bi bi-box-arrow-up-right"></i>
-                                                    <span>Открыть в новой вкладке</span>
+                                                    <span>{{ __('frontend.procurement_plan.open_in_new_tab') }}</span>
                                                 </a>
-                                                <a href="{{ $plan->file_url }}" download class="plan-link plan-link-secondary">
+                                                <a href="{{ $plan->localized_file_url }}" download class="plan-link plan-link-secondary">
                                                     <i class="bi bi-download"></i>
-                                                    <span>Скачать файл</span>
+                                                    <span>{{ __('frontend.procurement_plan.download_file') }}</span>
                                                 </a>
                                             </div>
                                         @else
                                             <div class="plan-no-file">
                                                 <i class="bi bi-exclamation-circle"></i>
-                                                <span>Файл не загружен</span>
+                                                <span>{{ __('frontend.procurement_plan.file_not_uploaded') }}</span>
                                             </div>
                                         @endif
                                     </div>

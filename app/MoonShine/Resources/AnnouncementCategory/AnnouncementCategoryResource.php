@@ -28,7 +28,8 @@ class AnnouncementCategoryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название категории', 'title')->sortable(),
+            Text::make('Название категории (русский)', 'title')->sortable(),
+            Text::make('Название категории (казахский)', 'title_kk'),
         ];
     }
 
@@ -38,10 +39,14 @@ class AnnouncementCategoryResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
-                Text::make('Название категории', 'title')
+            Box::make('Основная информация (русский)', [
+                Text::make('Название категории (русский)', 'title')
                     ->required()
                     ->placeholder('Например: Важные объявления'),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Text::make('Название категории (казахский)', 'title_kk')
+                    ->placeholder('Мысалы: Маңызды хабарландырулар'),
             ]),
         ];
     }
@@ -53,7 +58,8 @@ class AnnouncementCategoryResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Название категории', 'title'),
+            Text::make('Название категории (русский)', 'title'),
+            Text::make('Название категории (казахский)', 'title_kk'),
         ];
     }
 
@@ -66,6 +72,7 @@ class AnnouncementCategoryResource extends ModelResource
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'title_kk' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

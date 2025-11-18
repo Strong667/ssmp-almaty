@@ -31,7 +31,7 @@
                                     <h2 class="accordion-header" id="heading{{ $category->id }}">
                                         <button class="accordion-button{{ $index === 0 ? '' : ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $category->id }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="collapse{{ $category->id }}">
                                             <i class="bi bi-folder-fill"></i>
-                                            <span>{{ $category->title }}</span>
+                                            <span>{{ $category->localized_title }}</span>
                                         </button>
                                     </h2>
                                     <div id="collapse{{ $category->id }}" class="accordion-collapse collapse{{ $index === 0 ? ' show' : '' }}" aria-labelledby="heading{{ $category->id }}" data-bs-parent="#announcementsAccordion">
@@ -42,13 +42,13 @@
                                                         <div class="announcement-item">
                                                             <div class="announcement-content">
                                                                 <div class="announcement-text">
-                                                                    {!! $announcement->text !!}
+                                                                    {!! $announcement->localized_text !!}
                                                                 </div>
-                                                                @if($announcement->file_url)
+                                                                @if($announcement->localized_file_url)
                                                                     <div class="announcement-actions">
-                                                                        <a href="{{ $announcement->file_url }}" download class="announcement-link">
+                                                                        <a href="{{ $announcement->localized_file_url }}" download class="announcement-link">
                                                                             <i class="bi bi-download"></i>
-                                                                            <span>Скачать файл</span>
+                                                                            <span>{{ __('frontend.announcements.download_file') }}</span>
                                                                         </a>
                                                                     </div>
                                                                 @endif

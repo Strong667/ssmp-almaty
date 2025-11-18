@@ -33,7 +33,8 @@ class AnnouncementResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Категория', 'announcementCategory.title'),
-            File::make('Файл', 'file_path')->disk('public'),
+            File::make('Файл (русский)', 'file_path')->disk('public'),
+            File::make('Файл (казахский)', 'file_path_kk')->disk('public'),
         ];
     }
 
@@ -52,11 +53,23 @@ class AnnouncementResource extends ModelResource
                     )
                     ->required()
                     ->searchable(),
-                Textarea::make('Текст объявления', 'text')
+            ]),
+            Box::make('Основная информация (русский)', [
+                Textarea::make('Текст объявления (русский)', 'text')
                     ->required()
                     ->customAttributes(['rows' => 10])
                     ->placeholder('Введите текст объявления'),
-                File::make('Файл для скачивания', 'file_path')
+                File::make('Файл для скачивания (русский)', 'file_path')
+                    ->disk('public')
+                    ->dir('announcements')
+                    ->allowedExtensions(['pdf', 'doc', 'docx', 'xlsx', 'xls'])
+                    ->nullable(),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Textarea::make('Текст объявления (казахский)', 'text_kk')
+                    ->customAttributes(['rows' => 10])
+                    ->placeholder('Хабарландыру мәтінін енгізіңіз'),
+                File::make('Файл для скачивания (казахский)', 'file_path_kk')
                     ->disk('public')
                     ->dir('announcements')
                     ->allowedExtensions(['pdf', 'doc', 'docx', 'xlsx', 'xls'])
@@ -73,8 +86,10 @@ class AnnouncementResource extends ModelResource
         return [
             ID::make(),
             Text::make('Категория', 'announcementCategory.title'),
-            Textarea::make('Текст объявления', 'text'),
-            File::make('Файл', 'file_path')->disk('public'),
+            Textarea::make('Текст объявления (русский)', 'text'),
+            Textarea::make('Текст объявления (казахский)', 'text_kk'),
+            File::make('Файл (русский)', 'file_path')->disk('public'),
+            File::make('Файл (казахский)', 'file_path_kk')->disk('public'),
         ];
     }
 
@@ -88,7 +103,14 @@ class AnnouncementResource extends ModelResource
         return [
             'announcement_category_id' => ['required', 'exists:announcement_categories,id'],
             'text' => ['required', 'string'],
+            'text_kk' => ['nullable', 'string'],
             'file_path' => [
+                'nullable',
+                'file',
+                'mimes:pdf,doc,docx,xlsx,xls',
+                'max:10240'
+            ],
+            'file_path_kk' => [
                 'nullable',
                 'file',
                 'mimes:pdf,doc,docx,xlsx,xls',
