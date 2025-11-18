@@ -26,10 +26,10 @@
             @if($missions->isNotEmpty())
                 <div class="row gy-4">
                     @foreach($missions as $mission)
-                        @if($mission->image_url)
+                        @if($mission->localized_image_url)
                             <div class="col-12">
                                 <div class="mission-image-wrapper">
-                                    <img src="{{ $mission->image_url }}" alt="Миссия скорой помощи" class="mission-image img-fluid">
+                                    <img src="{{ $mission->localized_image_url }}" alt="Миссия скорой помощи" class="mission-image img-fluid">
                                 </div>
                             </div>
                         @endif

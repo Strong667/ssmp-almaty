@@ -603,7 +603,7 @@
 
         [data-theme="dark"] .header-bottom::before {
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.08) 100%);
-            box-shadow: 
+            box-shadow:
                 0 0 40px rgba(255, 255, 255, 0.08),
                 0 0 20px rgba(255, 255, 255, 0.05),
                 inset 0 2px 0 rgba(255, 255, 255, 0.15),
@@ -1331,7 +1331,8 @@
         });
     })();
 </script>
-    @stack('scripts')
-    <script src="https://plugin.iss.fms.kz/js/saqtandyry-plugin.js"></script>
+
 </body>
+@stack('scripts')
+<script src="https://plugin.iss.fms.kz/js/saqtandyry-plugin.js"></script>
 </html>

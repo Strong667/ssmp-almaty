@@ -29,6 +29,7 @@ class MissionOfEmergencyServiceResource extends ModelResource
         return [
             ID::make()->sortable(),
             Image::make('Изображение', 'image')->disk('public'),
+            Image::make('Изображение (Қазақша)', 'image_kk')->disk('public'),
         ];
     }
 
@@ -38,10 +39,16 @@ class MissionOfEmergencyServiceResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Изображение', [
+            Box::make('Изображение (Русский)', [
                 Image::make('Изображение', 'image')
                     ->disk('public')
                     ->required(),
+            ]),
+            Box::make('Изображение (Казахский)', [
+                Image::make('Изображение (Қазақша)', 'image_kk')
+                    ->disk('public')
+                    ->nullable()
+                    ->hint('Если не заполнено, будет использовано русское изображение'),
             ]),
         ];
     }
@@ -54,6 +61,7 @@ class MissionOfEmergencyServiceResource extends ModelResource
         return [
             ID::make(),
             Image::make('Изображение', 'image')->disk('public'),
+            Image::make('Изображение (Қазақша)', 'image_kk')->disk('public'),
         ];
     }
 
@@ -66,6 +74,7 @@ class MissionOfEmergencyServiceResource extends ModelResource
     {
         return [
             'image' => ['required', 'image', 'max:2048'],
+            'image_kk' => ['nullable', 'image', 'max:2048'],
         ];
     }
 }
