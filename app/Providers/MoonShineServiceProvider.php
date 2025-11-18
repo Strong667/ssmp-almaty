@@ -51,6 +51,7 @@ use App\MoonShine\Resources\StateFlag\StateFlagResource;
 use App\MoonShine\Resources\StateEmblem\StateEmblemResource;
 use App\MoonShine\Resources\StateAnthem\StateAnthemResource;
 use App\MoonShine\Resources\PaidService\PaidServiceResource;
+use App\MoonShine\Resources\PaidServiceItem\PaidServiceItemResource;
 use App\MoonShine\Resources\ComplianceOfficerPlan\ComplianceOfficerPlanResource;
 use App\MoonShine\Resources\InternalCorruptionRiskAnalysis\InternalCorruptionRiskAnalysisResource;
 use App\MoonShine\Resources\InternalRegulations\InternalRegulationsResource;
@@ -113,6 +114,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 StateEmblemResource::class,
                 StateAnthemResource::class,
                 PaidServiceResource::class,
+                PaidServiceItemResource::class,
                 ComplianceOfficerPlanResource::class,
                 InternalCorruptionRiskAnalysisResource::class,
                 InternalRegulationsResource::class,

@@ -23,23 +23,54 @@
     <section class="paid-services section">
         <div class="container">
             @if($services->isNotEmpty())
-                <div class="row gy-4">
-                    @foreach($services as $service)
-                        <div class="col-12">
-                            <div class="service-card">
-                                <div class="service-image-wrapper">
-                                    @if($service->image_url)
-                                        <img src="{{ $service->image_url }}" alt="Платная услуга" class="service-image">
-                                    @else
-                                        <div class="service-image-placeholder">
-                                            <i class="bi bi-image"></i>
-                                        </div>
-                                    @endif
-                                </div>
+                @foreach($services as $service)
+                    @if($service->items->isNotEmpty())
+                        <div class="service-card mb-5">
+                            <div class="service-header">
+                                <h3 class="service-title">{{ $service->title ?? 'Коммерческое предложение' }}</h3>
+                            </div>
+                            <div class="service-content">
+                                @if($service->description)
+                                    <div class="service-description mb-4">
+                                        <p>{{ $service->description }}</p>
+                                    </div>
+                                @endif
+
+                                @if($service->items->isNotEmpty())
+                                    <div class="table-responsive mb-4">
+                                        <table class="service-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Наименование</th>
+                                                    <th>Ед. изм.</th>
+                                                    <th>Стоимость (тенге), без учета НДС</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($service->items as $item)
+                                                    <tr>
+                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->unit }}</td>
+                                                        <td class="price-cell">{{ number_format($item->price, 0, ',', ' ') }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+
+                                @if($service->file_url)
+                                    <div class="service-file">
+                                        <a href="{{ $service->file_url }}" target="_blank" class="file-link" download>
+                                            <i class="bi bi-file-earmark"></i>
+                                            <span>Скачать файл</span>
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    @endif
+                @endforeach
             @else
                 <div class="row">
                     <div class="col-12">
@@ -120,45 +151,106 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             transition: all 0.3s ease;
-            height: 100%;
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .service-image-wrapper {
-            width: 100%;
-            height: auto;
-            min-height: 400px;
-            overflow: hidden;
+        .service-header {
+            padding: 20px 30px;
             background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-bottom: 1px solid #e5e7eb;
         }
 
-        .service-image {
+        .service-title {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c4964;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-description {
+            color: #495057;
+            font-size: 15px;
+            line-height: 1.6;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .service-table {
             width: 100%;
-            height: auto;
-            min-height: 400px;
-            object-fit: contain;
-            transition: transform 0.3s ease;
+            border-collapse: collapse;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .service-card:hover .service-image {
-            transform: scale(1.05);
+        .service-table thead {
+            background: #f8f9fa;
         }
 
-        .service-image-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
+        .service-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c4964;
+            border-bottom: 2px solid #e5e7eb;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .service-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .service-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .service-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price-cell {
+            font-weight: 600;
+            color: #2c4964;
+            text-align: right;
+        }
+
+        .service-file {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .file-link {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            color: #adb5bd;
-            font-size: 48px;
+            gap: 8px;
+            color: #0d9488;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            background: #e6f7f5;
+        }
+
+        .file-link:hover {
+            background: #0d9488;
+            color: #fff;
+        }
+
+        .file-link i {
+            font-size: 18px;
         }
 
         .alert {
@@ -204,28 +296,73 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        [data-theme="dark"] .service-card:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        [data-theme="dark"] .service-header {
+            background: #1a1a1a;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
         }
 
-        [data-theme="dark"] .service-image-wrapper {
+        [data-theme="dark"] .service-title {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .service-description {
+            color: #adb5bd;
+        }
+
+        [data-theme="dark"] .service-table thead {
             background: #1a1a1a;
         }
 
-        [data-theme="dark"] .service-image-placeholder {
-            color: #495057;
+        [data-theme="dark"] .service-table th {
+            color: #e0e0e0;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .service-table td {
+            color: #adb5bd;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .service-table tbody tr:hover {
+            background: #1a1a1a;
+        }
+
+        [data-theme="dark"] .price-cell {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .service-file {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .file-link {
+            background: rgba(13, 148, 136, 0.2);
+            color: #0d9488;
+        }
+
+        [data-theme="dark"] .file-link:hover {
+            background: #0d9488;
+            color: #fff;
         }
 
         @media (max-width: 768px) {
-            .service-image-wrapper {
-                min-height: 300px;
+            .service-header {
+                padding: 15px 20px;
             }
-            
-            .service-image {
-                min-height: 300px;
+
+            .service-content {
+                padding: 20px;
+            }
+
+            .service-table {
+                font-size: 12px;
+            }
+
+            .service-table th,
+            .service-table td {
+                padding: 10px 8px;
             }
         }
     </style>
     @endpush
 @endsection
-

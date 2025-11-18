@@ -390,11 +390,12 @@ class AboutController extends Controller
     public function paidServices()
     {
         $services = PaidService::query()
+            ->with('items')
             ->orderByDesc('created_at')
             ->get()
             ->each(function (PaidService $service) {
-                $service->image_url = $service->image
-                    ? Storage::disk('public')->url($service->image)
+                $service->file_url = $service->file
+                    ? Storage::disk('public')->url($service->file)
                     : null;
             });
 

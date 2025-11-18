@@ -1289,44 +1289,8 @@
         });
     })();
 
-    // Bootstrap 5 Dropdown с задержкой закрытия при наведении
-    document.addEventListener('DOMContentLoaded', function() {
-        // Добавляем задержку закрытия дропдаунов при наведении
-        const dropdowns = document.querySelectorAll('.dropdown');
-        let hoverTimeouts = {};
-
-        dropdowns.forEach(function(dropdown) {
-            const toggle = dropdown.querySelector('.dropdown-toggle');
-            const menu = dropdown.querySelector('.dropdown-menu');
-            
-            if (!toggle || !menu) return;
-
-            const dropdownId = dropdown.getAttribute('data-dropdown-id') || Math.random().toString(36);
-            dropdown.setAttribute('data-dropdown-id', dropdownId);
-
-            // При наведении на dropdown
-            dropdown.addEventListener('mouseenter', function() {
-                // Очищаем таймер закрытия, если он есть
-                if (hoverTimeouts[dropdownId]) {
-                    clearTimeout(hoverTimeouts[dropdownId]);
-                    hoverTimeouts[dropdownId] = null;
-                }
-                // Открываем дропдаун
-                const bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
-                bsDropdown.show();
-            });
-
-            // При уходе курсора с dropdown
-            dropdown.addEventListener('mouseleave', function() {
-                hoverTimeouts[dropdownId] = setTimeout(function() {
-                    const bsDropdown = bootstrap.Dropdown.getInstance(toggle);
-                    if (bsDropdown) {
-                        bsDropdown.hide();
-                    }
-                    hoverTimeouts[dropdownId] = null;
-                }, 200); // Задержка 200ms перед закрытием
-            });
-        });
+    // Bootstrap 5 Dropdown работает по клику (стандартное поведение)
+    // Bootstrap автоматически обрабатывает клики через data-bs-toggle="dropdown"
 
         // Back to Top Button
         const backToTop = document.getElementById('back-to-top');
