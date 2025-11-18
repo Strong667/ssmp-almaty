@@ -100,7 +100,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -188,8 +188,8 @@
             height: 50px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #0d9488;
-            color: #0d9488;
+            border: 2px solid #FFC107;
+            color: #FFC107;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -200,7 +200,7 @@
         }
 
         .slider-btn:hover {
-            background: #0d9488;
+            background: #FFC107;
             color: #fff;
         }
 
@@ -216,7 +216,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            border: 2px solid #0d9488;
+            border: 2px solid #FFC107;
             background: transparent;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -224,7 +224,7 @@
         }
 
         .indicator.active {
-            background: #0d9488;
+            background: #FFC107;
         }
 
 
@@ -251,7 +251,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {
@@ -272,7 +272,7 @@
 
         [data-theme="dark"] .slider-btn {
             background: rgba(42, 42, 42, 0.9);
-            border-color: #0d9488;
+            border-color: #FFC107;
         }
 
         @media (max-width: 991px) {

@@ -109,7 +109,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -170,7 +170,7 @@
         }
 
         .accordion-button i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 20px;
         }
 
@@ -213,7 +213,7 @@
             width: 45px;
             height: 45px;
             min-width: 45px;
-            background: #0d9488;
+            background: #FFC107;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -245,7 +245,7 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: #0d9488;
+            background: #FFC107;
             color: #fff;
             text-decoration: none;
             border-radius: 6px;
@@ -283,7 +283,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {

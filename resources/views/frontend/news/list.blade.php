@@ -88,7 +88,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -158,7 +158,7 @@
         }
 
         .news-card-date i {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .news-card-title {
@@ -177,7 +177,7 @@
         }
 
         .news-card-title a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .alert {
@@ -203,7 +203,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {
@@ -228,7 +228,7 @@
         }
 
         [data-theme="dark"] .news-card-title a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .news-card-date {

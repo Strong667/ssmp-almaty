@@ -96,7 +96,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -190,7 +190,7 @@
 
         .admin-position {
             font-size: 15px;
-            color: #0d9488;
+            color: #FFC107;
             font-weight: 500;
             margin: 0 0 15px 0;
         }
@@ -204,7 +204,7 @@
         }
 
         .admin-email i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 16px;
         }
 
@@ -215,7 +215,7 @@
         }
 
         .admin-email a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .alert {
@@ -241,7 +241,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {
@@ -284,7 +284,7 @@
         }
 
         [data-theme="dark"] .admin-email a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         @media (max-width: 991px) {

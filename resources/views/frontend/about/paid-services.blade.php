@@ -117,7 +117,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -235,7 +235,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: #0d9488;
+            color: #FFC107;
             text-decoration: none;
             padding: 10px 20px;
             border-radius: 4px;
@@ -245,7 +245,7 @@
         }
 
         .file-link:hover {
-            background: #0d9488;
+            background: #FFC107;
             color: #fff;
         }
 
@@ -276,7 +276,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {
@@ -337,11 +337,11 @@
 
         [data-theme="dark"] .file-link {
             background: rgba(13, 148, 136, 0.2);
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .file-link:hover {
-            background: #0d9488;
+            background: #FFC107;
             color: #fff;
         }
 

@@ -282,7 +282,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -356,7 +356,7 @@
         }
 
         .director-detail i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 18px;
         }
 
@@ -405,7 +405,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {
@@ -483,7 +483,7 @@
         }
 
         .director-question-form .form-label i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 16px;
         }
 
@@ -496,7 +496,7 @@
         }
 
         .director-question-form .form-control:focus {
-            border-color: #0d9488;
+            border-color: #FFC107;
             box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
             outline: none;
         }
@@ -520,12 +520,12 @@
         }
 
         .director-question-form .form-check-input:checked {
-            background-color: #0d9488;
-            border-color: #0d9488;
+            background-color: #FFC107;
+            border-color: #FFC107;
         }
 
         .director-question-form .form-check-input:focus {
-            border-color: #0d9488;
+            border-color: #FFC107;
             box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
             outline: none;
         }
@@ -543,13 +543,13 @@
         }
 
         .director-question-form .form-check-label i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 16px;
         }
 
         .director-question-form .btn-submit {
             width: 100%;
-            background: #0d9488;
+            background: #FFC107;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -641,7 +641,7 @@
         }
 
         .director-qa-question-header i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 20px;
             flex-shrink: 0;
         }
@@ -687,7 +687,7 @@
         }
 
         .director-qa-question-author i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 14px;
         }
 
@@ -750,7 +750,7 @@
         }
 
         [data-theme="dark"] .director-question-form .form-control:focus {
-            border-color: #0d9488;
+            border-color: #FFC107;
             background: #3a3a3a;
         }
 
@@ -764,8 +764,8 @@
         }
 
         [data-theme="dark"] .director-question-form .form-check-input:checked {
-            background-color: #0d9488;
-            border-color: #0d9488;
+            background-color: #FFC107;
+            border-color: #FFC107;
         }
 
         [data-theme="dark"] .director-question-form .form-check-label {

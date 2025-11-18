@@ -174,7 +174,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -239,7 +239,7 @@
             width: 50px;
             height: 50px;
             min-width: 50px;
-            background: #0d9488;
+            background: #FFC107;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -284,7 +284,7 @@
         }
 
         .vacancy-detail i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 18px;
         }
 
@@ -325,7 +325,7 @@
             content: '•';
             position: absolute;
             left: 0;
-            color: #0d9488;
+            color: #FFC107;
             font-weight: bold;
         }
 
@@ -334,7 +334,7 @@
         }
 
         .vacancy-contact-list a {
-            color: #0d9488;
+            color: #FFC107;
             text-decoration: none;
             transition: color 0.2s ease;
         }
@@ -356,7 +356,7 @@
             align-items: center;
             gap: 8px;
             padding: 10px 20px;
-            background: #0d9488;
+            background: #FFC107;
             color: #fff;
             text-decoration: none;
             border-radius: 8px;
@@ -401,7 +401,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {
@@ -458,11 +458,11 @@
         }
 
         [data-theme="dark"] .vacancy-contact-list li:before {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .vacancy-contact-list a {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .vacancy-contact-list a:hover {

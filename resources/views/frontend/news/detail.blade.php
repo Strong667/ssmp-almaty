@@ -123,7 +123,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -232,7 +232,7 @@
 
         .gallery-btn:hover {
             background: #fff;
-            color: #0d9488;
+            color: #FFC107;
             transform: scale(1.1);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
@@ -278,7 +278,7 @@
         }
 
         .news-detail-date i {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .news-detail-content {
@@ -304,7 +304,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {
@@ -338,7 +338,7 @@
 
         [data-theme="dark"] .gallery-btn:hover {
             background: rgba(255, 255, 255, 0.2);
-            color: #0d9488;
+            color: #FFC107;
         }
 
         @media (max-width: 991px) {

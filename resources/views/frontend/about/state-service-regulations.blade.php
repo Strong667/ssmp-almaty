@@ -98,7 +98,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -154,7 +154,7 @@
         }
 
         .info-link {
-            color: #0d9488;
+            color: #FFC107;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
@@ -194,7 +194,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {

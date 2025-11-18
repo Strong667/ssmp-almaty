@@ -109,7 +109,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -206,7 +206,7 @@
         }
 
         .symbol-text-title i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 22px;
         }
 
@@ -240,7 +240,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {

@@ -23,7 +23,8 @@ class MedicalHelpForForeignersResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'title')->sortable(),
+            Text::make('Название (русский)', 'title')->sortable(),
+            Text::make('Название (казахский)', 'title_kk'),
         ];
     }
 
@@ -35,11 +36,18 @@ class MedicalHelpForForeignersResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
+            Box::make('Основная информация (русский)', [
                 ID::make()->readonly(),
-                Text::make('Название', 'title')
+                Text::make('Название (русский)', 'title')
                     ->required(),
-                Textarea::make('Описание', 'description')
+                Textarea::make('Описание (русский)', 'description')
+                    ->nullable()
+                    ->customAttributes(['rows' => 10]),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Text::make('Название (казахский)', 'title_kk')
+                    ->nullable(),
+                Textarea::make('Описание (казахский)', 'description_kk')
                     ->nullable()
                     ->customAttributes(['rows' => 10]),
             ]),
@@ -55,8 +63,12 @@ class MedicalHelpForForeignersResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Название', 'title'),
-            Textarea::make('Описание', 'description')
+            Text::make('Название (русский)', 'title'),
+            Text::make('Название (казахский)', 'title_kk'),
+            Textarea::make('Описание (русский)', 'description')
+                ->readonly()
+                ->customAttributes(['rows' => 10]),
+            Textarea::make('Описание (казахский)', 'description_kk')
                 ->readonly()
                 ->customAttributes(['rows' => 10]),
         ];
@@ -72,7 +84,9 @@ class MedicalHelpForForeignersResource extends ModelResource
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'title_kk' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
+            'description_kk' => ['nullable', 'string'],
         ];
     }
 }

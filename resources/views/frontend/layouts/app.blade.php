@@ -314,7 +314,7 @@
             background: transparent;
             padding: 4px 0;
             border-top: 2px solid #FFC107;
-            border-bottom: 2px solid #FFC107;
+            border-bottom: none;
             position: relative;
         }
 
@@ -745,7 +745,7 @@
         .header-quick-links {
             background: transparent;
             padding: 20px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px solid #FFC107;
         }
 
         .quick-links-wrapper {

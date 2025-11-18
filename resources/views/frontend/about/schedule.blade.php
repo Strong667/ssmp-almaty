@@ -110,7 +110,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -200,7 +200,7 @@
         .schedule-name i,
         .schedule-day i,
         .schedule-time i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 18px;
         }
 
@@ -233,7 +233,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {

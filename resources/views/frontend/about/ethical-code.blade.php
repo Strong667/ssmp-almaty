@@ -59,10 +59,10 @@
                                 </div>
                                 @if($ethicalCode->localized_pdf_url)
                                     <div class="ethical-code-preview">
-                                        <iframe src="{{ $ethicalCode->localized_pdf_url }}#toolbar=1&navpanes=0&scrollbar=1" 
-                                                class="ethical-code-iframe" 
+                                        <iframe src="{{ $ethicalCode->localized_pdf_url }}#toolbar=1&navpanes=0&scrollbar=1"
+                                                class="ethical-code-iframe"
                                                 title="{{ $ethicalCode->localized_title }}">
-                                            <p>Ваш браузер не поддерживает отображение PDF. 
+                                            <p>Ваш браузер не поддерживает отображение PDF.
                                                 <a href="{{ $ethicalCode->localized_pdf_url }}" target="_blank">Откройте PDF в новой вкладке</a>.
                                             </p>
                                         </iframe>
@@ -109,7 +109,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -163,7 +163,7 @@
             width: 50px;
             height: 50px;
             min-width: 50px;
-            background: #0d9488;
+            background: #FFC107;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -196,7 +196,7 @@
             align-items: center;
             gap: 8px;
             padding: 10px 20px;
-            background: #0d9488;
+            background: #FFC107;
             color: #fff;
             text-decoration: none;
             border-radius: 8px;
@@ -211,7 +211,7 @@
         }
 
         .ethical-code-link-secondary {
-            background: #6c757d;
+            background: #FFC107;
         }
 
         .ethical-code-link-secondary:hover {
@@ -262,7 +262,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {

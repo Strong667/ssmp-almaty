@@ -23,7 +23,8 @@ class EmergencyServiceRulesResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Textarea::make('Текст', 'text'),
+            Textarea::make('Текст (русский)', 'text'),
+            Textarea::make('Текст (казахский)', 'text_kk'),
         ];
     }
 
@@ -35,10 +36,15 @@ class EmergencyServiceRulesResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make('Основная информация', [
+            Box::make('Основная информация (русский)', [
                 ID::make()->readonly(),
-                Textarea::make('Текст', 'text')
+                Textarea::make('Текст (русский)', 'text')
                     ->required()
+                    ->customAttributes(['rows' => 10]),
+            ]),
+            Box::make('Основная информация (казахский)', [
+                Textarea::make('Текст (казахский)', 'text_kk')
+                    ->nullable()
                     ->customAttributes(['rows' => 10]),
             ]),
         ];
@@ -53,7 +59,10 @@ class EmergencyServiceRulesResource extends ModelResource
     {
         return [
             ID::make(),
-            Textarea::make('Текст', 'text')
+            Textarea::make('Текст (русский)', 'text')
+                ->readonly()
+                ->customAttributes(['rows' => 10]),
+            Textarea::make('Текст (казахский)', 'text_kk')
                 ->readonly()
                 ->customAttributes(['rows' => 10]),
         ];
@@ -69,6 +78,7 @@ class EmergencyServiceRulesResource extends ModelResource
     {
         return [
             'text' => ['required', 'string'],
+            'text_kk' => ['nullable', 'string'],
         ];
     }
 }

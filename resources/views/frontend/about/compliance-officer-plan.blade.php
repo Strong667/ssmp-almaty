@@ -94,7 +94,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -170,7 +170,7 @@
             align-items: center;
             gap: 8px;
             padding: 10px 20px;
-            background: #0d9488;
+            background: #FFC107;
             color: #fff;
             text-decoration: none;
             border-radius: 6px;
@@ -215,7 +215,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {

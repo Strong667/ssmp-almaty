@@ -210,7 +210,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -278,7 +278,7 @@
         }
 
         .form-label i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 16px;
         }
 
@@ -291,14 +291,14 @@
         }
 
         .form-control:focus {
-            border-color: #0d9488;
+            border-color: #FFC107;
             box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
             outline: none;
         }
 
         .btn-submit {
             width: 100%;
-            background: #0d9488;
+            background: #FFC107;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -343,12 +343,12 @@
         }
 
         .form-check-input:checked {
-            background-color: #0d9488;
-            border-color: #0d9488;
+            background-color: #FFC107;
+            border-color: #FFC107;
         }
 
         .form-check-input:focus {
-            border-color: #0d9488;
+            border-color: #FFC107;
             box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
             outline: none;
         }
@@ -366,7 +366,7 @@
         }
 
         .form-check-label i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 16px;
         }
 
@@ -376,8 +376,8 @@
         }
 
         [data-theme="dark"] .form-check-input:checked {
-            background-color: #0d9488;
-            border-color: #0d9488;
+            background-color: #FFC107;
+            border-color: #FFC107;
         }
 
         [data-theme="dark"] .form-check-label {
@@ -451,7 +451,7 @@
         }
 
         .qa-question-header i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 20px;
             flex-shrink: 0;
         }
@@ -497,7 +497,7 @@
         }
 
         .qa-question-author i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 14px;
         }
 
@@ -592,7 +592,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {
@@ -627,7 +627,7 @@
         }
 
         [data-theme="dark"] .form-control:focus {
-            border-color: #0d9488;
+            border-color: #FFC107;
             background: #3a3a3a;
         }
 

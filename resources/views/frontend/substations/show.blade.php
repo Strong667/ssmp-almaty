@@ -113,7 +113,7 @@
         }
 
         .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         .breadcrumb-item.active {
@@ -170,7 +170,7 @@
         }
 
         .substation-detail i {
-            color: #0d9488;
+            color: #FFC107;
             font-size: 18px;
         }
 
@@ -240,7 +240,7 @@
 
         .employee-position {
             font-size: 15px;
-            color: #0d9488;
+            color: #FFC107;
             font-weight: 500;
             margin: 0 0 15px 0;
         }
@@ -276,7 +276,7 @@
         }
 
         [data-theme="dark"] .breadcrumb-item a:hover {
-            color: #0d9488;
+            color: #FFC107;
         }
 
         [data-theme="dark"] .breadcrumb-item.active {
