@@ -382,6 +382,42 @@ final class GuestLayout extends AppLayout
                                 align-items: center;
                                 vertical-align: middle;
                             }
+
+                            /* Отключаем hover для дропдаунов, включаем только click */
+                            [class*="menu"][class*="horizontal"] [x-data*="dropdown"] {
+                                position: relative;
+                            }
+
+                            [class*="menu"][class*="horizontal"] [x-data*="dropdown"] > *:first-child {
+                                cursor: pointer;
+                            }
+
+                            /* Агрессивно отключаем автоматическое открытие при hover через CSS */
+                            [class*="menu"][class*="horizontal"] [x-data*="dropdown"]:hover [x-show],
+                            [class*="menu"][class*="horizontal"] [x-data*="dropdown"]:hover > [x-show],
+                            [class*="menu"][class*="horizontal"] [x-data*="dropdown"] > *:hover ~ [x-show] {
+                                display: none !important;
+                                opacity: 0 !important;
+                                visibility: hidden !important;
+                                pointer-events: none !important;
+                            }
+
+                            /* Блокируем все hover эффекты на дропдаунах */
+                            [class*="menu"][class*="horizontal"] [x-data*="dropdown"]:hover {
+                                pointer-events: auto;
+                            }
+
+                            [class*="menu"][class*="horizontal"] [x-data*="dropdown"] [x-show] {
+                                display: none !important;
+                            }
+
+                            [class*="menu"][class*="horizontal"] [x-data*="dropdown"][data-open="true"] [x-show],
+                            [class*="menu"][class*="horizontal"] [x-data*="dropdown"].dropdown-open [x-show] {
+                                display: block !important;
+                                opacity: 1 !important;
+                                visibility: visible !important;
+                                pointer-events: auto !important;
+                            }
                         </style>
                         <script>
                             function toggleContainerExpand() {
@@ -412,7 +448,165 @@ final class GuestLayout extends AppLayout
                             document.addEventListener("DOMContentLoaded", function() {
                                 const isExpanded = localStorage.getItem("containerExpanded") === "true";
                                 applyContainerExpand(isExpanded);
+
+                                // Настройка дропдаунов на клик вместо hover
+                                setupDropdownClickBehavior();
                             });
+
+                            function setupDropdownClickBehavior() {
+                                // Ждем, пока Alpine.js инициализируется
+                                setTimeout(function() {
+                                    // Находим все дропдауны в меню
+                                    const menuSelector = "[class*=\\"menu\\"][class*=\\"horizontal\\"] [x-data*=\\"dropdown\\"]";
+                                    const dropdowns = document.querySelectorAll(menuSelector);
+                                    
+                                    dropdowns.forEach(function(dropdown) {
+                                        const toggler = dropdown.querySelector("> *:first-child");
+                                        if (!toggler) return;
+
+                                        // Агрессивно блокируем hover события
+                                        toggler.addEventListener("mouseenter", function(e) {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            e.stopImmediatePropagation();
+                                            return false;
+                                        }, true);
+
+                                        dropdown.addEventListener("mouseenter", function(e) {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            e.stopImmediatePropagation();
+                                            return false;
+                                        }, true);
+
+                                        // Блокируем все события мыши, кроме клика
+                                        ["mouseover", "mouseenter", "mouseleave"].forEach(function(eventType) {
+                                            toggler.addEventListener(eventType, function(e) {
+                                                if (eventType !== "click") {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    e.stopImmediatePropagation();
+                                                }
+                                            }, true);
+                                        });
+
+                                        // Добавляем обработчик клика для переключения
+                                        toggler.addEventListener("click", function(e) {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            
+                                            // Получаем Alpine.js компонент
+                                            const alpineComponent = Alpine.$data(dropdown);
+                                            
+                                            // Закрываем все другие дропдауны
+                                            dropdowns.forEach(function(otherDropdown) {
+                                                if (otherDropdown !== dropdown) {
+                                                    const otherAlpine = Alpine.$data(otherDropdown);
+                                                    if (otherAlpine) {
+                                                        if (typeof otherAlpine.toggle === "function") {
+                                                            if (otherAlpine.open) {
+                                                                otherAlpine.toggle();
+                                                            }
+                                                        } else if ("open" in otherAlpine) {
+                                                            otherAlpine.open = false;
+                                                        }
+                                                    }
+                                                    otherDropdown.removeAttribute("data-open");
+                                                    otherDropdown.classList.remove("dropdown-open");
+                                                }
+                                            });
+                                            
+                                            // Переключаем текущий дропдаун
+                                            if (alpineComponent) {
+                                                if (typeof alpineComponent.toggle === "function") {
+                                                    alpineComponent.toggle();
+                                                } else if ("open" in alpineComponent) {
+                                                    alpineComponent.open = !alpineComponent.open;
+                                                }
+                                                
+                                                // Устанавливаем атрибут для CSS
+                                                if (alpineComponent.open || (alpineComponent && "open" in alpineComponent && alpineComponent.open)) {
+                                                    dropdown.setAttribute("data-open", "true");
+                                                    dropdown.classList.add("dropdown-open");
+                                                } else {
+                                                    dropdown.removeAttribute("data-open");
+                                                    dropdown.classList.remove("dropdown-open");
+                                                }
+                                            }
+                                        }, true);
+                                    });
+
+                                    // Закрываем дропдауны при клике вне их
+                                    document.addEventListener("click", function(e) {
+                                        if (!e.target.closest("[x-data*=\\"dropdown\\"]")) {
+                                            dropdowns.forEach(function(dropdown) {
+                                                const alpineComponent = Alpine.$data(dropdown);
+                                                if (alpineComponent) {
+                                                    if (typeof alpineComponent.toggle === "function") {
+                                                        if (alpineComponent.open) {
+                                                            alpineComponent.toggle();
+                                                        }
+                                                    } else if ("open" in alpineComponent) {
+                                                        alpineComponent.open = false;
+                                                    }
+                                                }
+                                                dropdown.removeAttribute("data-open");
+                                                dropdown.classList.remove("dropdown-open");
+                                            });
+                                        }
+                                    }, true);
+
+                                    // Дополнительная защита: перехватываем все mouseenter на уровне документа
+                                    document.addEventListener("mouseenter", function(e) {
+                                        const target = e.target;
+                                        if (target && target.closest && target.closest("[class*=\\"menu\\"][class*=\\"horizontal\\"] [x-data*=\\"dropdown\\"]")) {
+                                            const dropdown = target.closest("[x-data*=\\"dropdown\\"]");
+                                            if (dropdown && !dropdown.hasAttribute("data-open") && !dropdown.classList.contains("dropdown-open")) {
+                                                // Блокируем автоматическое открытие
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                e.stopImmediatePropagation();
+                                                
+                                                // Принудительно закрываем, если открылся
+                                                const alpineComponent = Alpine.$data(dropdown);
+                                                if (alpineComponent && "open" in alpineComponent && alpineComponent.open) {
+                                                    alpineComponent.open = false;
+                                                }
+                                                dropdown.removeAttribute("data-open");
+                                                dropdown.classList.remove("dropdown-open");
+                                                const menu = dropdown.querySelector("[x-show]");
+                                                if (menu) {
+                                                    menu.style.display = "none";
+                                                }
+                                            }
+                                        }
+                                    }, true);
+
+                                    // Отслеживаем изменения в Alpine.js и принудительно закрываем при hover
+                                    dropdowns.forEach(function(dropdown) {
+                                        const observer = new MutationObserver(function(mutations) {
+                                            const alpineComponent = Alpine.$data(dropdown);
+                                            if (alpineComponent && "open" in alpineComponent) {
+                                                // Если открылся не по клику (нет атрибута data-open), закрываем
+                                                if (alpineComponent.open && !dropdown.hasAttribute("data-open") && !dropdown.classList.contains("dropdown-open")) {
+                                                    alpineComponent.open = false;
+                                                    const menu = dropdown.querySelector("[x-show]");
+                                                    if (menu) {
+                                                        menu.style.display = "none";
+                                                    }
+                                                }
+                                            }
+                                        });
+                                        
+                                        observer.observe(dropdown, {
+                                            attributes: true,
+                                            attributeFilter: ["class", "style"],
+                                            childList: true,
+                                            subtree: true
+                                        });
+                                    });
+                                }, 200);
+                            }
                         </script>'
                     ),
                     Wrapper::make([

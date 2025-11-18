@@ -345,6 +345,7 @@
             color: #2c4964;
             margin: 0 0 12px 0;
             line-height: 1.4;
+            font-family: "Montserrat", sans-serif;
         }
 
         .department-meta {
@@ -540,14 +541,15 @@
         .read-more {
             display: inline-flex;
             align-items: center;
-            color: #1977cc;
+            color: #333333;
             text-decoration: none;
             font-weight: 500;
             margin-top: auto;
+            font-family: "Montserrat", sans-serif;
         }
 
         .read-more:hover {
-            color: #0d5aa7;
+            color: #555555;
         }
 
         .read-more i {
@@ -678,6 +680,14 @@
 
         [data-theme="dark"] .news-date {
             color: #b0b0b0;
+        }
+
+        [data-theme="dark"] .read-more {
+            color: #cccccc;
+        }
+
+        [data-theme="dark"] .read-more:hover {
+            color: #e0e0e0;
         }
 
         [data-theme="dark"] .departments::before {
