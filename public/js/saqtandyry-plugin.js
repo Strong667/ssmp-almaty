@@ -5,7 +5,7 @@ let getLanguage = () => {
     if (htmlLang && accessLang.indexOf(htmlLang) !== -1) {
         return htmlLang;
     }
-    
+
     // Если не найдено, проверяем скрипты
     for (let scr of document.scripts) {
         for (let attr of scr.attributes) {
@@ -35,35 +35,70 @@ document.addEventListener("DOMContentLoaded", function (event) {
     btn_container.style.display = "block";
 
 
-    btn_container.innerHTML = `<svg viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="saqtandyry-status-logo">
-            <path
-                d="M10.4649 13.806L11.5351 13.1811L13.1405 12.2587V12.9133L17.9865 15.7102L17.9568 19.1022L15.0432 20.7982L12.1297 19.1022V14.1332L13.1703 14.7581L13.1405 18.4774L15.0432 19.5783L16.9459 18.4774V16.3053L11.5351 13.1811V22.6727L10.9703 23L10.4649 22.6727V13.806Z"
-                fill="white" />
-            <path
-                d="M12.1 7.31953L11.5351 7.64683L13.1405 8.59896V2.32083L15.073 1.24968L16.9459 2.32083V4.52264L13.7054 6.3674V7.61708L17.9865 5.11772V1.72574L15.073 0L12.1 1.72574V7.31953Z"
-                fill="white" />
+    btn_container.innerHTML = `
+    <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+        <!-- ЛОГО -->
+        <svg viewBox="0 0 22 23" width="22" height="23" fill="none"
+             xmlns="http://www.w3.org/2000/svg" class="saqtandyry-status-logo">
+            <path d="M10.4649 13.806L11.5351 13.1811L13.1405 12.2587V12.9133L17.9865 15.7102L17.9568 19.1022L15.0432 20.7982L12.1297 19.1022V14.1332L13.1703 14.7581L13.1405 18.4774L15.0432 19.5783L16.9459 18.4774V16.3053L11.5351 13.1811V22.6727L10.9703 23L10.4649 22.6727V13.806Z"
+                fill="white"/>
+            <path d="M12.1 7.31953L11.5351 7.64683L13.1405 8.59896V2.32083L15.073 1.24968L16.9459 2.32083V4.52264L13.7054 6.3674V7.61708L17.9865 5.11772V1.72574L15.073 0L12.1 1.72574V7.31953Z"
+                fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M6.98649 20.7982L9.92973 19.1022V13.4787L19.0865 8.21216L20.9595 9.34282V11.4851L19.0865 12.6455L15.8162 10.7115L14.7459 11.3364L19.0865 13.8655L22 12.11V8.71798L19.0865 7.02199L14.2108 9.81889L5.08378 4.52264V2.35058L6.98649 1.21992L8.85946 2.35058V6.06986L9.92973 6.6947V1.72574L6.98649 0L4.04324 1.72574V5.14748L8.85946 7.91462V9.1643L2.94324 12.6158L1.07027 11.5149V9.31307L2.94324 8.24191L6.18378 10.0867L7.25405 9.49159L2.94324 6.99224L0 8.68823V12.11L2.94324 13.8357L8.85946 10.414V18.4774L6.98649 19.5783L5.05405 18.4476V16.3053L8.32432 14.4308V13.1811L4.01351 15.7102L4.04324 19.0724L6.98649 20.7982ZM9.92973 8.5097V12.2885L13.1703 10.414L9.92973 8.5097Z"
-                fill="white" />
+                fill="white"/>
         </svg>
-    <svg xmlns="http://www.w3.org/2000/svg"  
-     width="124" height="13" viewBox="0 0 130 13"
-     class="saqtandyry-status-btn-title" id="saqtandyry-status-btn-title">
-    <text y="10" font-size="14" font-weight="600"  
-    font-family="Museo Sans Cyrl" fill="white">
-        ${lang === 'ru' ? "Определить статус" : "Мәртебені анықтау"}
-    </text>
-</svg>`;
-    
+
+        <!-- ТЕКСТ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="160" height="54" viewBox="0 0 160 54"
+             class="saqtandyry-status-btn-title">
+            <text x="80" y="27"
+                  font-size="13"
+                  font-weight="600"
+                  font-family="Museo Sans Cyrl"
+                  fill="white"
+                  text-anchor="middle"
+                  dominant-baseline="middle">
+                ${lang === 'ru' ? "Определить статус" : "Мәртебені анықтау"}
+            </text>
+        </svg>
+    </div>`;
+
+    // Создаем overlay для модального окна
+    let overlay = document.createElement("div");
+    overlay.id = "saqtandyry-status-form-overlay";
+    overlay.className = "saqtandyry-status-form-overlay";
+
     // Добавляем обработчик клика на всю кнопку
     btn_container.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
         const formContainer = document.getElementById('saqtandyry-status-form-id');
         const btnContainer = document.getElementById('saqtandyry-status-btn-id');
-        if (formContainer && btnContainer) {
-            formContainer.style.display = 'block';
+        const overlayEl = document.getElementById('saqtandyry-status-form-overlay');
+        if (formContainer && btnContainer && overlayEl) {
+            formContainer.style.display = 'flex';
+            formContainer.classList.add('active');
+            overlayEl.classList.add('active');
             btnContainer.style.display = 'none';
+            document.body.style.overflow = 'hidden'; // Блокируем прокрутку страницы
+        }
+    });
+
+    // Обработчик клика на overlay для закрытия
+    overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) {
+            const formContainer = document.getElementById('saqtandyry-status-form-id');
+            const btnContainer = document.getElementById('saqtandyry-status-btn-id');
+            const overlayEl = document.getElementById('saqtandyry-status-form-overlay');
+            if (formContainer && btnContainer && overlayEl) {
+                formContainer.style.display = 'none';
+                formContainer.classList.remove('active');
+                overlayEl.classList.remove('active');
+                btnContainer.style.display = 'block';
+                document.body.style.overflow = ''; // Разблокируем прокрутку страницы
+            }
         }
     });
 
@@ -90,8 +125,92 @@ document.addEventListener("DOMContentLoaded", function (event) {
     //form.src = "http://localhost:8877/saqtandyry-form.html?lang=" + lang;
     form_container.appendChild(form);
 
+    // Попытка центровки содержимого после загрузки iframe
+    form.onload = function() {
+        try {
+            var iframeDoc = form.contentDocument || form.contentWindow.document;
+            if (iframeDoc) {
+                var style = iframeDoc.createElement('style');
+                style.textContent = `
+                    body {
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: center !important;
+                        justify-content: flex-start !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    .form-container {
+                        width: 100% !important;
+                        max-width: 400px !important;
+                        padding: 5% !important;
+                        margin: 0 auto !important;
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: center !important;
+                        justify-content: flex-start !important;
+                        background-color: white !important;
+                        overflow-x: hidden !important;
+                        box-sizing: border-box !important;
+                    }
+                    .g-recaptcha {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        display: flex !important;
+                        justify-content: center !important;
+                        align-items: center !important;
+                    }
+                    .g-recaptcha > div {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                    .g-recaptcha iframe {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                    .rc-anchor-normal {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                    .rc-anchor-normal .rc-anchor-content {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                    .g-recaptcha * {
+                        box-sizing: border-box !important;
+                    }
+                    .rc-anchor {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                    .rc-anchor-invisible {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                    .rc-anchor-pt {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                    .rc-anchor-pt iframe {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                    .saqtandyry-status-b-col-md-10 .g-recaptcha {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                    }
+                `;
+                iframeDoc.head.appendChild(style);
+            }
+        } catch (e) {
+            // CORS ограничение - не можем изменить содержимое iframe с другого домена
+            console.log('Cannot access iframe content due to CORS policy');
+        }
+    };
+
     /*add to document*/
     document.body.appendChild(btn_container);
+    document.body.appendChild(overlay);
     document.body.appendChild(form_container);
     document.body.appendChild(app_css);
 
@@ -107,9 +226,13 @@ window.onload = function () {
             e.stopPropagation();
             const formContainer = document.getElementById('saqtandyry-status-form-id');
             const btnContainer = document.getElementById('saqtandyry-status-btn-id');
-            if (formContainer && btnContainer) {
+            const overlayEl = document.getElementById('saqtandyry-status-form-overlay');
+            if (formContainer && btnContainer && overlayEl) {
                 formContainer.style.display = 'none';
+                formContainer.classList.remove('active');
+                overlayEl.classList.remove('active');
                 btnContainer.style.display = 'block';
+                document.body.style.overflow = ''; // Разблокируем прокрутку страницы
             }
         });
     }
@@ -119,7 +242,7 @@ window.addEventListener("message", function (event) {
     if (event.origin === "https://plugin.iss.fms.kz") {
         const formContainer = this.document.getElementById('saqtandyry-status-form-id');
         const form = this.document.getElementById('saqtandyry-form');
-        
+
         if (event.data === "REQ_BTN_TRIGGERED") {
             if (formContainer) {
                 formContainer.style.maxHeight = '90vh';
@@ -127,14 +250,16 @@ window.addEventListener("message", function (event) {
             }
             if (form) {
                 form.style.height = '100%';
+                form.style.minHeight = '100%';
             }
         } else if (event.data === "CLEAR") {
             if (formContainer) {
-                formContainer.style.maxHeight = 'calc(100vh - 120px)';
-                formContainer.style.height = '550px';
+                formContainer.style.maxHeight = 'calc(100vh - 100px)';
+                formContainer.style.height = '590px';
             }
             if (form) {
                 form.style.height = '100%';
+                form.style.minHeight = '0';
             }
         }
     }
