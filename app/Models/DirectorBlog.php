@@ -16,6 +16,8 @@ class DirectorBlog extends Model
         'education_kk',
         'career',
         'career_kk',
+        'awards',
+        'awards_kk',
     ];
 
     protected $casts = [
@@ -56,5 +58,17 @@ class DirectorBlog extends Model
             return $this->career_kk;
         }
         return $this->career;
+    }
+
+    /**
+     * Получить локализованные награды
+     */
+    public function getLocalizedAwardsAttribute(): ?string
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'kk' && $this->awards_kk) {
+            return $this->awards_kk;
+        }
+        return $this->awards;
     }
 }

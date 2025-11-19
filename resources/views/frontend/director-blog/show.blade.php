@@ -47,30 +47,88 @@
                                 </div>
                             @endif
 
-                            @if($director->localized_personal_info)
-                                <div class="director-section">
-                                    <h3 class="section-title">{{ __('frontend.director_blog.personal_info') }}</h3>
-                                    <div class="section-content">
-                                        {!! nl2br(e($director->localized_personal_info)) !!}
-                                    </div>
-                                </div>
-                            @endif
+                            <!-- Tabs Navigation -->
+                            @php
+                                $hasPersonalInfo = $director->localized_personal_info;
+                                $hasEducation = $director->localized_education;
+                                $hasCareer = $director->localized_career;
+                                $hasAwards = $director->localized_awards;
+                                $firstTab = $hasPersonalInfo ? 'personal-info' : ($hasEducation ? 'education' : ($hasCareer ? 'career' : ($hasAwards ? 'awards' : null)));
+                            @endphp
+                            
+                            @if($firstTab)
+                                <ul class="nav nav-tabs director-tabs" id="directorInfoTab" role="tablist">
+                                    @if($hasPersonalInfo)
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link{{ $firstTab === 'personal-info' ? ' active' : '' }}" id="personal-info-tab" data-bs-toggle="tab" data-bs-target="#personal-info" type="button" role="tab" aria-controls="personal-info" aria-selected="{{ $firstTab === 'personal-info' ? 'true' : 'false' }}">
+                                                {{ __('frontend.director_blog.personal_info') }}
+                                            </button>
+                                        </li>
+                                    @endif
+                                    @if($hasEducation)
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link{{ $firstTab === 'education' ? ' active' : '' }}" id="education-tab" data-bs-toggle="tab" data-bs-target="#education" type="button" role="tab" aria-controls="education" aria-selected="{{ $firstTab === 'education' ? 'true' : 'false' }}">
+                                                {{ __('frontend.director_blog.education') }}
+                                            </button>
+                                        </li>
+                                    @endif
+                                    @if($hasCareer)
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link{{ $firstTab === 'career' ? ' active' : '' }}" id="career-tab" data-bs-toggle="tab" data-bs-target="#career" type="button" role="tab" aria-controls="career" aria-selected="{{ $firstTab === 'career' ? 'true' : 'false' }}">
+                                                {{ __('frontend.director_blog.career') }}
+                                            </button>
+                                        </li>
+                                    @endif
+                                    @if($hasAwards)
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link{{ $firstTab === 'awards' ? ' active' : '' }}" id="awards-tab" data-bs-toggle="tab" data-bs-target="#awards" type="button" role="tab" aria-controls="awards" aria-selected="{{ $firstTab === 'awards' ? 'true' : 'false' }}">
+                                                {{ __('frontend.director_blog.awards') }}
+                                            </button>
+                                        </li>
+                                    @endif
+                                </ul>
 
-                            @if($director->localized_education)
-                                <div class="director-section">
-                                    <h3 class="section-title">{{ __('frontend.director_blog.education') }}</h3>
-                                    <div class="section-content">
-                                        {!! nl2br(e($director->localized_education)) !!}
-                                    </div>
-                                </div>
-                            @endif
+                                <!-- Tab Content -->
+                                <div class="tab-content" id="directorInfoTabContent">
+                                    @if($hasPersonalInfo)
+                                        <div class="tab-pane fade{{ $firstTab === 'personal-info' ? ' show active' : '' }}" id="personal-info" role="tabpanel" aria-labelledby="personal-info-tab">
+                                            <div class="director-section">
+                                                <div class="section-content">
+                                                    {!! nl2br(e($director->localized_personal_info)) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
 
-                            @if($director->localized_career)
-                                <div class="director-section">
-                                    <h3 class="section-title">{{ __('frontend.director_blog.career') }}</h3>
-                                    <div class="section-content">
-                                        {!! nl2br(e($director->localized_career)) !!}
-                                    </div>
+                                    @if($hasEducation)
+                                        <div class="tab-pane fade{{ $firstTab === 'education' ? ' show active' : '' }}" id="education" role="tabpanel" aria-labelledby="education-tab">
+                                            <div class="director-section">
+                                                <div class="section-content">
+                                                    {!! nl2br(e($director->localized_education)) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if($hasCareer)
+                                        <div class="tab-pane fade{{ $firstTab === 'career' ? ' show active' : '' }}" id="career" role="tabpanel" aria-labelledby="career-tab">
+                                            <div class="director-section">
+                                                <div class="section-content">
+                                                    {!! nl2br(e($director->localized_career)) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if($hasAwards)
+                                        <div class="tab-pane fade{{ $firstTab === 'awards' ? ' show active' : '' }}" id="awards" role="tabpanel" aria-labelledby="awards-tab">
+                                            <div class="director-section">
+                                                <div class="section-content">
+                                                    {!! nl2br(e($director->localized_awards)) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             @endif
                         </div>
@@ -360,8 +418,67 @@
             font-size: 18px;
         }
 
-        .director-section {
+        /* Director Tabs */
+        .director-tabs {
+            border-bottom: 2px solid #e5e7eb;
             margin-bottom: 25px;
+            gap: 8px;
+        }
+
+        .director-tabs .nav-item {
+            margin-bottom: 0;
+        }
+
+        .director-tabs .nav-link {
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #6c757d;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .director-tabs .nav-link:hover {
+            color: #2c4964;
+            background: transparent;
+            border-bottom-color: #FFC107;
+            text-shadow: none;
+        }
+
+        .director-tabs .nav-link.active {
+            color: #2c4964;
+            background: transparent;
+            border-bottom-color: #FFC107;
+            font-weight: 700;
+            text-shadow: none;
+        }
+
+        .tab-content {
+            padding: 20px 0;
+        }
+
+        .tab-pane {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .director-section {
+            margin-bottom: 0;
         }
 
         .director-section:last-child {
@@ -427,6 +544,27 @@
         [data-theme="dark"] .director-detail {
             color: #adb5bd;
             border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .director-tabs {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .director-tabs .nav-link {
+            color: #adb5bd;
+            text-shadow: none;
+        }
+
+        [data-theme="dark"] .director-tabs .nav-link:hover {
+            color: #e0e0e0;
+            border-bottom-color: #FFC107;
+            text-shadow: none;
+        }
+
+        [data-theme="dark"] .director-tabs .nav-link.active {
+            color: #e0e0e0;
+            border-bottom-color: #FFC107;
+            text-shadow: none;
         }
 
         [data-theme="dark"] .section-title {
@@ -903,6 +1041,16 @@
 
             .director-photo-wrapper {
                 margin-bottom: 25px;
+            }
+
+            .director-tabs {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+
+            .director-tabs .nav-link {
+                padding: 10px 16px;
+                font-size: 13px;
             }
 
             .director-qa-list {

@@ -24,6 +24,22 @@
             background-repeat: no-repeat;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
+            z-index: 1030;
+        }
+        
+        @media (min-width: 992px) {
+            #header {
+                overflow: visible !important;
+            }
+            
+            #header.fixed-top {
+                overflow: visible !important;
+            }
+            
+            /* Переопределяем Bootstrap fixed-top overflow */
+            .fixed-top {
+                overflow: visible !important;
+            }
         }
 
         #header::before {
@@ -348,6 +364,19 @@
             border-top: 2px solid #FFC107;
             border-bottom: none;
             position: relative;
+            overflow: hidden;
+        }
+        
+        @media (min-width: 992px) {
+            .header-bottom {
+                overflow: visible !important;
+            }
+            
+            .header-bottom .container-fluid {
+                overflow-x: visible !important;
+                overflow-y: visible !important;
+                padding-bottom: 4px;
+            }
         }
 
 
@@ -357,6 +386,21 @@
 
         .navbar-collapse {
             flex-grow: 1;
+            overflow: hidden;
+        }
+        
+        @media (min-width: 992px) {
+            .navbar-collapse {
+                overflow: visible !important;
+            }
+            
+            .navbar {
+                overflow: visible !important;
+            }
+            
+            .header-bottom .navbar {
+                overflow: visible !important;
+            }
         }
 
         .navbar-nav {
@@ -369,29 +413,53 @@
             flex-wrap: nowrap;
             gap: 6px;
             width: 100%;
-            justify-content: center;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+            justify-content: flex-start;
+        }
+        
+        @media (max-width: 991px) {
+            .navbar-nav {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+            }
         }
 
-        .navbar-nav::-webkit-scrollbar {
-            display: none;
-        }
-
-        .navbar-nav {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        /* Скрываем скроллбар на мобильных */
+        @media (max-width: 991px) {
+            .navbar-nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .navbar-nav {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
         }
 
         @media (min-width: 992px) {
             .navbar-nav {
-                justify-content: center;
-                overflow-x: visible;
+                justify-content: flex-start;
+                overflow-x: visible !important;
+                overflow-y: visible !important;
+                padding-bottom: 4px;
             }
         }
 
         .nav-item {
             position: relative;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+        
+        @media (min-width: 992px) {
+            .nav-item {
+                flex-shrink: 0;
+            }
+            
+            .nav-item.dropdown {
+                overflow: visible !important;
+                position: relative;
+            }
         }
 
         .nav-link {
@@ -482,6 +550,44 @@
             left: 50% !important;
             transform: translateX(-50%) !important;
             right: auto !important;
+            z-index: 1050 !important;
+            position: absolute !important;
+            top: 100% !important;
+        }
+        
+        .dropdown-menu.show {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Убеждаемся, что дропдауны видны на десктопе */
+        @media (min-width: 992px) {
+            .dropdown-menu {
+                display: none;
+            }
+            
+            .dropdown-menu.show {
+                display: block !important;
+            }
+            
+            .header-bottom .dropdown-menu {
+                margin-top: 0;
+            }
+            
+            /* Дропдауны должны выходить за пределы хедера */
+            #header {
+                overflow: visible !important;
+            }
+            
+            .header-quick-links {
+                overflow: visible !important;
+            }
+            
+            /* Увеличиваем z-index дропдаунов, чтобы они были поверх 4-го слоя */
+            .header-bottom .dropdown-menu {
+                z-index: 1060 !important;
+            }
         }
 
         @keyframes dropdownFadeIn {
@@ -1000,6 +1106,9 @@
             background: transparent;
             padding: 20px 0;
             border-top: 2px solid #FFC107;
+            overflow: visible !important;
+            position: relative;
+            z-index: 1029;
         }
 
         .quick-links-wrapper {
@@ -1482,6 +1591,12 @@
             font-family: "Poppins", sans-serif;
             color: #2c4964;
         }
+        
+        @media (min-width: 992px) {
+            body {
+                overflow-x: hidden;
+            }
+        }
 
         a {
             color: #1977cc;
@@ -1659,5 +1774,8 @@
 
 </body>
 @stack('scripts')
+<script src="{{ asset('js/saqtandyry-plugin.js') }}"></script>
+</html>
+
 <script src="{{ asset('js/saqtandyry-plugin.js') }}"></script>
 </html>

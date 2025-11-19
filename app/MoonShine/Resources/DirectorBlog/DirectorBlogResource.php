@@ -76,6 +76,15 @@ class DirectorBlogResource extends ModelResource
                     ->placeholder('Мансап жолын, лауазымдарды, жетістіктерді сипаттаңыз')
                     ->hint('Если не заполнено, будет использована русская версия'),
             ]),
+            Box::make('Награды', [
+                Textarea::make('Награды (Русский)', 'awards')
+                    ->nullable()
+                    ->placeholder('Укажите награды, звания, почетные грамоты и другие достижения'),
+                Textarea::make('Награды (Қазақша)', 'awards_kk')
+                    ->nullable()
+                    ->placeholder('Марапаттарды, атақтарды, құрмет грамоталарын және басқа жетістіктерді көрсетіңіз')
+                    ->hint('Если не заполнено, будет использована русская версия'),
+            ]),
         ];
     }
 
@@ -95,6 +104,8 @@ class DirectorBlogResource extends ModelResource
             Textarea::make('Образования (Қазақша)', 'education_kk'),
             Textarea::make('Карьера', 'career'),
             Textarea::make('Карьера (Қазақша)', 'career_kk'),
+            Textarea::make('Награды', 'awards'),
+            Textarea::make('Награды (Қазақша)', 'awards_kk'),
         ];
     }
 
@@ -115,6 +126,8 @@ class DirectorBlogResource extends ModelResource
             'education_kk' => ['nullable', 'string'],
             'career' => ['nullable', 'string'],
             'career_kk' => ['nullable', 'string'],
+            'awards' => ['nullable', 'string'],
+            'awards_kk' => ['nullable', 'string'],
         ];
     }
 }
