@@ -155,6 +155,38 @@
             gap: 15px;
         }
 
+        .mobile-menu-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #fff;
+            padding: 0;
+            backdrop-filter: blur(10px);
+            font-size: 18px;
+            position: relative;
+            z-index: 10000;
+        }
+
+        @media (min-width: 992px) {
+            .mobile-menu-btn:hover {
+                background: rgba(255, 255, 255, 0.25);
+                border-color: rgba(255, 255, 255, 0.4);
+                transform: scale(1.1);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .mobile-menu-btn:active {
+                transform: scale(0.95);
+            }
+        }
+
         .theme-toggle-btn {
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -620,47 +652,269 @@
             }
         }
 
+        /* Мобильный сайдбар */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 99999;
+            display: none;
+            pointer-events: none;
+        }
+
+        .mobile-sidebar.active {
+            display: block;
+            pointer-events: auto;
+        }
+
+        .mobile-sidebar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-sidebar.active .mobile-sidebar-overlay {
+            opacity: 1;
+        }
+
+        .mobile-sidebar-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 320px;
+            max-width: 85vw;
+            height: 100vh;
+            background: rgba(44, 73, 100, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .mobile-sidebar.active .mobile-sidebar-content {
+            transform: translateX(0);
+        }
+
+        .mobile-sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-sidebar-header h3 {
+            margin: 0;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: "Montserrat", sans-serif;
+            text-transform: uppercase;
+        }
+
+        .mobile-sidebar-close {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #fff;
+            padding: 0;
+        }
+
+        .mobile-sidebar-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: rotate(90deg);
+        }
+
+        .mobile-sidebar-close i {
+            font-size: 18px;
+        }
+
+        .mobile-sidebar-nav {
+            flex: 1;
+            padding: 10px 0;
+            overflow-y: auto;
+        }
+
+        .mobile-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav-item {
+            margin: 0;
+        }
+
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: "Montserrat", sans-serif;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-nav-link i:first-child {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-left-color: #FFC107;
+        }
+
+        .mobile-nav-dropdown-toggle {
+            position: relative;
+        }
+
+        .mobile-dropdown-icon {
+            margin-left: auto;
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav-dropdown-toggle.active .mobile-dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .mobile-nav-dropdown {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-nav-dropdown.active {
+            max-height: 1000px;
+        }
+
+        .mobile-nav-dropdown-item {
+            display: block;
+            padding: 10px 20px 10px 56px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: "Montserrat", sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-dropdown-item:hover,
+        .mobile-nav-dropdown-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFC107;
+            padding-left: 60px;
+        }
+
+        .mobile-nav-divider {
+            margin: 15px 0;
+        }
+
+        .mobile-nav-divider hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 0;
+        }
+
+        [data-theme="dark"] .mobile-sidebar-content {
+            background: rgba(30, 41, 59, 0.98);
+        }
+
+        [data-theme="dark"] .mobile-sidebar-header {
+            border-bottom-color: rgba(255, 255, 255, 0.15);
+        }
+
         /* Mobile Styles */
         @media (max-width: 991px) {
-            .header-main-content {
-                flex-direction: column;
-                gap: 12px;
-                align-items: center;
-                width: 100%;
+            /* Показываем кнопку меню на мобильных и фиксируем слева */
+            #mobile-menu-toggle {
+                display: flex !important;
+                position: fixed;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 100000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             }
 
+            /* Скрываем кнопку меню в header-top-right на мобильных */
+            .header-top-right .mobile-menu-btn {
+                display: none !important;
+            }
+
+            /* Исправляем hover для фиксированной кнопки */
+            #mobile-menu-toggle:hover {
+                transform: translateY(-50%) scale(1.1);
+            }
+
+            #mobile-menu-toggle:active {
+                transform: translateY(-50%) scale(0.95);
+            }
+
+            /* В первом слое скрываем соцсети и контакты, оставляем только тему и локализацию */
             .header-social {
-                justify-content: center;
+                display: none;
             }
 
             .header-contacts {
-                flex-direction: column;
-                gap: 8px;
-                align-items: center;
-                width: 100%;
+                display: none;
+            }
+
+            .header-main-content {
+                display: none;
+            }
+
+            /* Центрируем тему и локализацию на мобильных */
+            .header-top .row {
                 justify-content: center;
             }
 
-            .contact-item {
-                font-size: 10px;
-                flex-direction: column;
-                text-align: center;
-                gap: 4px;
-            }
-
-            .contact-item i {
-                font-size: 14px;
-            }
-
-            .contact-item span,
-            .contact-item a {
+            .header-top .col-md-3 {
                 text-align: center;
             }
 
-            .social-link {
-                width: 28px;
-                height: 28px;
-                font-size: 14px;
+            .header-top-right {
+                justify-content: center;
+            }
+
+            /* Скрываем третий слой (меню навигации) */
+            .header-bottom {
+                display: none;
+            }
+
+            /* Скрываем четвертый слой (быстрые кнопки) */
+            .header-quick-links {
+                display: none;
             }
 
             .logo-link {
@@ -1328,6 +1582,77 @@
             const locale = this.value;
             const url = '{{ route("locale.switch", ["locale" => ":locale"]) }}'.replace(':locale', locale);
             window.location.href = url;
+        });
+    })();
+
+    // Mobile Sidebar
+    (function() {
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const mobileSidebarClose = document.getElementById('mobile-sidebar-close');
+        const mobileSidebarOverlay = mobileSidebar?.querySelector('.mobile-sidebar-overlay');
+        const body = document.body;
+
+        function openSidebar() {
+            if (mobileSidebar) {
+                mobileSidebar.classList.add('active');
+                body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSidebar() {
+            if (mobileSidebar) {
+                mobileSidebar.classList.remove('active');
+                body.style.overflow = '';
+            }
+        }
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                openSidebar();
+            });
+        }
+
+        if (mobileSidebarClose) {
+            mobileSidebarClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                closeSidebar();
+            });
+        }
+
+        if (mobileSidebarOverlay) {
+            mobileSidebarOverlay.addEventListener('click', function() {
+                closeSidebar();
+            });
+        }
+
+        // Обработка выпадающих меню в сайдбаре
+        const dropdownToggles = document.querySelectorAll('.mobile-nav-dropdown-toggle');
+        dropdownToggles.forEach(function(toggle) {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                const dropdown = document.getElementById(targetId);
+                
+                if (dropdown) {
+                    const isActive = dropdown.classList.contains('active');
+                    
+                    // Закрываем все остальные выпадающие меню
+                    document.querySelectorAll('.mobile-nav-dropdown').forEach(function(dd) {
+                        dd.classList.remove('active');
+                    });
+                    document.querySelectorAll('.mobile-nav-dropdown-toggle').forEach(function(tt) {
+                        tt.classList.remove('active');
+                    });
+                    
+                    // Открываем/закрываем текущее меню
+                    if (!isActive) {
+                        dropdown.classList.add('active');
+                        this.classList.add('active');
+                    }
+                }
+            });
         });
     })();
 </script>

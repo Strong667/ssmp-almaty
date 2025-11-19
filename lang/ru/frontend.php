@@ -9,6 +9,7 @@ return [
         'about' => 'О нас',
         'news' => 'Новости',
         'paid_services' => 'Платные услуги',
+        'menu' => 'Меню',
     ],
 
     // Home page

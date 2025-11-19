@@ -9,6 +9,7 @@ return [
         'about' => 'Біз туралы',
         'news' => 'Жаңалықтар',
         'paid_services' => 'Ақылы қызметтер',
+        'menu' => 'Мәзір',
     ],
 
     // Home page

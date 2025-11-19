@@ -39,6 +39,9 @@
                 </div>
                 <div class="col-md-3 text-end">
                     <div class="header-top-right">
+                        <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Открыть меню">
+                            <i class="bi bi-list"></i>
+                        </button>
                         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Переключить тему">
                             <i class="bi bi-sun-fill theme-icon-light"></i>
                             <i class="bi bi-moon-fill theme-icon-dark"></i>
@@ -213,3 +216,159 @@
     </div>
     @endif
 </header>
+
+<!-- Мобильный сайдбар с меню -->
+<div id="mobile-sidebar" class="mobile-sidebar">
+    <div class="mobile-sidebar-overlay"></div>
+    <div class="mobile-sidebar-content">
+        <div class="mobile-sidebar-header">
+            <h3>{{ __('frontend.header.menu') ?? 'Меню' }}</h3>
+            <button id="mobile-sidebar-close" class="mobile-sidebar-close" aria-label="Закрыть меню">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <nav class="mobile-sidebar-nav">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link{{ request()->routeIs('home') ? ' active' : '' }}" href="{{ route('home') }}">
+                        <i class="bi bi-house"></i>
+                        <span>{{ __('frontend.header.home') }}</span>
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link mobile-nav-dropdown-toggle{{ request()->routeIs('about.administration', 'about.schedule', 'about.structure', 'about.ethical-code', 'about.income-expense', 'about.vacancy-employment', 'about.documents', 'about.activity-sphere') ? ' active' : '' }}" href="#" data-target="about-us">
+                        <i class="bi bi-info-circle"></i>
+                        <span>{{ __('frontend.menu.about_us') }}</span>
+                        <i class="bi bi-chevron-down mobile-dropdown-icon"></i>
+                    </a>
+                    <ul class="mobile-nav-dropdown" id="about-us">
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.administration') ? ' active' : '' }}" href="{{ route('about.administration') }}">{{ __('frontend.menu.administration') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.schedule') ? ' active' : '' }}" href="{{ route('about.schedule') }}">{{ __('frontend.menu.schedule') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.structure') ? ' active' : '' }}" href="{{ route('about.structure') }}">{{ __('frontend.menu.structure') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.ethical-code') ? ' active' : '' }}" href="{{ route('about.ethical-code') }}">{{ __('frontend.menu.ethical_code') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.income-expense') ? ' active' : '' }}" href="{{ route('about.income-expense') }}">{{ __('frontend.menu.income_expense') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.vacancy-employment') ? ' active' : '' }}" href="{{ route('about.vacancy-employment') }}">{{ __('frontend.menu.vacancy') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.documents') ? ' active' : '' }}" href="{{ route('about.documents') }}">{{ __('frontend.menu.documents') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.activity-sphere') ? ' active' : '' }}" href="{{ route('about.activity-sphere') }}">{{ __('frontend.menu.activity_sphere') }}</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link mobile-nav-dropdown-toggle{{ request()->routeIs('about.procurement-plan', 'about.announcements', 'about.protocols') ? ' active' : '' }}" href="#" data-target="procurement">
+                        <i class="bi bi-briefcase"></i>
+                        <span>{{ __('frontend.menu.procurement') }}</span>
+                        <i class="bi bi-chevron-down mobile-dropdown-icon"></i>
+                    </a>
+                    <ul class="mobile-nav-dropdown" id="procurement">
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.procurement-plan') ? ' active' : '' }}" href="{{ route('about.procurement-plan') }}">{{ __('frontend.menu.procurement_plan') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.announcements') ? ' active' : '' }}" href="{{ route('about.announcements') }}">{{ __('frontend.menu.announcements') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.protocols') ? ' active' : '' }}" href="{{ route('about.protocols') }}">{{ __('frontend.menu.protocols') }}</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link mobile-nav-dropdown-toggle{{ request()->routeIs('about.medical-help-for-foreigners', 'about.legal-framework', 'about.emergency-service-rules', 'about.social-insurance', 'about.rubric-for-population') ? ' active' : '' }}" href="#" data-target="residents">
+                        <i class="bi bi-people"></i>
+                        <span>{{ __('frontend.menu.residents') }}</span>
+                        <i class="bi bi-chevron-down mobile-dropdown-icon"></i>
+                    </a>
+                    <ul class="mobile-nav-dropdown" id="residents">
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.medical-help-for-foreigners') ? ' active' : '' }}" href="{{ route('about.medical-help-for-foreigners') }}">{{ __('frontend.menu.medical_help_foreigners') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.legal-framework') ? ' active' : '' }}" href="{{ route('about.legal-framework') }}">{{ __('frontend.menu.legal_framework') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.emergency-service-rules') ? ' active' : '' }}" href="{{ route('about.emergency-service-rules') }}">{{ __('frontend.menu.emergency_service_rules') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.social-insurance') ? ' active' : '' }}" href="{{ route('about.social-insurance') }}">{{ __('frontend.menu.social_insurance') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.rubric-for-population') ? ' active' : '' }}" href="{{ route('about.rubric-for-population') }}">{{ __('frontend.menu.rubric_for_population') }}</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link mobile-nav-dropdown-toggle{{ request()->routeIs('about.registry-of-state-services', 'about.state-service-standards', 'about.state-service-regulations', 'about.state-services') ? ' active' : '' }}" href="#" data-target="state-services">
+                        <i class="bi bi-building"></i>
+                        <span>{{ __('frontend.menu.state_services') }}</span>
+                        <i class="bi bi-chevron-down mobile-dropdown-icon"></i>
+                    </a>
+                    <ul class="mobile-nav-dropdown" id="state-services">
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.state-services') ? ' active' : '' }}" href="{{ route('about.state-services') }}">{{ __('frontend.menu.state_services') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.registry-of-state-services') ? ' active' : '' }}" href="{{ route('about.registry-of-state-services') }}">{{ __('frontend.menu.registry_state_services') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.state-service-standards') ? ' active' : '' }}" href="{{ route('about.state-service-standards') }}">{{ __('frontend.menu.state_service_standards') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.state-service-regulations') ? ' active' : '' }}" href="{{ route('about.state-service-regulations') }}">{{ __('frontend.menu.state_service_regulations') }}</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link mobile-nav-dropdown-toggle{{ request()->routeIs('about.state-flag', 'about.state-emblem', 'about.state-anthem') ? ' active' : '' }}" href="#" data-target="state-symbols">
+                        <i class="bi bi-flag"></i>
+                        <span>{{ __('frontend.menu.state_symbols') }}</span>
+                        <i class="bi bi-chevron-down mobile-dropdown-icon"></i>
+                    </a>
+                    <ul class="mobile-nav-dropdown" id="state-symbols">
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.state-flag') ? ' active' : '' }}" href="{{ route('about.state-flag') }}">{{ __('frontend.menu.state_flag') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.state-emblem') ? ' active' : '' }}" href="{{ route('about.state-emblem') }}">{{ __('frontend.menu.state_emblem') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.state-anthem') ? ' active' : '' }}" href="{{ route('about.state-anthem') }}">{{ __('frontend.menu.state_anthem') }}</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link{{ request()->routeIs('about.paid-services') ? ' active' : '' }}" href="{{ route('about.paid-services') }}">
+                        <i class="bi bi-credit-card"></i>
+                        <span>{{ __('frontend.header.paid_services') }}</span>
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link mobile-nav-dropdown-toggle{{ request()->routeIs('about.compliance-officer-plan', 'about.corruption-risk-analysis', 'about.internal-regulations') ? ' active' : '' }}" href="#" data-target="compliance-service">
+                        <i class="bi bi-shield-check"></i>
+                        <span>{{ __('frontend.menu.compliance_service') }}</span>
+                        <i class="bi bi-chevron-down mobile-dropdown-icon"></i>
+                    </a>
+                    <ul class="mobile-nav-dropdown" id="compliance-service">
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.compliance-officer-plan') ? ' active' : '' }}" href="{{ route('about.compliance-officer-plan') }}">{{ __('frontend.menu.compliance_officer_plan') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.corruption-risk-analysis') ? ' active' : '' }}" href="{{ route('about.corruption-risk-analysis') }}">{{ __('frontend.menu.corruption_risk_analysis') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.internal-regulations') ? ' active' : '' }}" href="{{ route('about.internal-regulations') }}">{{ __('frontend.menu.internal_regulations') }}</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link mobile-nav-dropdown-toggle{{ request()->routeIs('about.corruption-risk-positions', 'about.corruption-risk-list', 'about.corruption-risk-map') ? ' active' : '' }}" href="#" data-target="corruption-map">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <span>{{ __('frontend.menu.corruption_map') }}</span>
+                        <i class="bi bi-chevron-down mobile-dropdown-icon"></i>
+                    </a>
+                    <ul class="mobile-nav-dropdown" id="corruption-map">
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.corruption-risk-positions') ? ' active' : '' }}" href="{{ route('about.corruption-risk-positions') }}">{{ __('frontend.menu.corruption_risk_positions') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.corruption-risk-list') ? ' active' : '' }}" href="{{ route('about.corruption-risk-list') }}">{{ __('frontend.menu.corruption_risk_list') }}</a></li>
+                        <li><a class="mobile-nav-dropdown-item{{ request()->routeIs('about.corruption-risk-map') ? ' active' : '' }}" href="{{ route('about.corruption-risk-map') }}">{{ __('frontend.menu.corruption_risk_map') }}</a></li>
+                    </ul>
+                </li>
+                @if(request()->routeIs('home'))
+                <li class="mobile-nav-item mobile-nav-divider">
+                    <hr>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link" href="{{ route('director-blog.show') }}">
+                        <i class="bi bi-file-person"></i>
+                        <span>{!! __('frontend.quick_links.director_blog') !!}</span>
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link" href="{{ route('news.list') }}">
+                        <i class="bi bi-newspaper"></i>
+                        <span>{{ __('frontend.quick_links.news') }}</span>
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link" href="{{ route('anticorruption.show') }}">
+                        <i class="bi bi-shield-check"></i>
+                        <span>{{ __('frontend.quick_links.anticorruption') }}</span>
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link" href="{{ route('healthy-lifestyle.show') }}">
+                        <i class="bi bi-heart-pulse"></i>
+                        <span>{{ __('frontend.quick_links.healthy_lifestyle') }}</span>
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a class="mobile-nav-link" href="{{ route('mission-of-emergency-service.show') }}">
+                        <i class="bi bi-bullseye"></i>
+                        <span>{!! __('frontend.quick_links.mission_emergency') !!}</span>
+                    </a>
+                </li>
+                @endif
+            </ul>
+        </nav>
+    </div>
+</div>
