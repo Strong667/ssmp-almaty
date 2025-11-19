@@ -366,7 +366,7 @@
         }
 
         .employment-link:hover {
-            background: #0b7d73;
+            background: #d4a000;
             color: #fff;
         }
 
@@ -375,7 +375,7 @@
         }
 
         .employment-link-secondary:hover {
-            background: #5a6268;
+            background: #d4a000;
         }
 
         .alert {

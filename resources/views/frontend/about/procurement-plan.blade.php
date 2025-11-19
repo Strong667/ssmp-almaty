@@ -215,16 +215,16 @@
         }
 
         .plan-link:hover {
-            background: #0b7d73;
+            background: #d4a000;
             color: #fff;
         }
 
         .plan-link-secondary {
-            background: #6c757d;
+            background: #FFC107;
         }
 
         .plan-link-secondary:hover {
-            background: #5a6268;
+            background: #d4a000;
         }
 
         .plan-no-file {

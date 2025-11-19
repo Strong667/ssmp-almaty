@@ -255,7 +255,7 @@
         }
 
         .protocol-link:hover {
-            background: #0b7d73;
+            background: #d4a000;
             color: #fff;
         }
 

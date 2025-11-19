@@ -206,7 +206,7 @@
         }
 
         .ethical-code-link:hover {
-            background: #0b7d73;
+            background: #d4a000;
             color: #fff;
         }
 
@@ -215,7 +215,7 @@
         }
 
         .ethical-code-link-secondary:hover {
-            background: #5a6268;
+            background: #d4a000;
         }
 
         .ethical-code-link i {

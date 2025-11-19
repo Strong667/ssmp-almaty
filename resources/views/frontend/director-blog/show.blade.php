@@ -81,7 +81,7 @@
                     <div class="col-12">
                         <div class="alert alert-info text-center">
                             <i class="bi bi-info-circle"></i>
-                            <p class="mb-0">Информация о директоре пока не добавлена</p>
+                            <p class="mb-0">{{ __('frontend.director_blog.no_director_info') }}</p>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
             <!-- Questions to Director Section -->
             <div class="row mt-5">
                 <div class="col-12">
-                    <h2 class="section-title mb-4">Вопросы к директору</h2>
+                    <h2 class="section-title mb-4">{{ __('frontend.director_blog.questions_title') }}</h2>
                 </div>
             </div>
 
@@ -98,8 +98,8 @@
                 <!-- Form Section -->
                 <div class="col-lg-5">
                     <div class="director-question-form-card">
-                        <h2 class="form-title">Задать вопрос директору</h2>
-                        <p class="form-subtitle">Заполните форму ниже, и директор ответит вам в ближайшее время</p>
+                        <h2 class="form-title">{{ __('frontend.director_blog.form_title') }}</h2>
+                        <p class="form-subtitle">{{ __('frontend.director_blog.form_subtitle') }}</p>
 
                         @if(session('success'))
                             <div class="alert alert-success">
@@ -123,7 +123,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="director_question_name" class="form-label">
-                                    <i class="bi bi-person"></i> Ваше имя <span class="text-danger">*</span>
+                                    <i class="bi bi-person"></i> {{ __('frontend.director_blog.name_label') }} <span class="text-danger">*</span>
                                 </label>
                                 <input 
                                     type="text" 
@@ -132,7 +132,7 @@
                                     name="name" 
                                     value="{{ old('name') }}" 
                                     required
-                                    placeholder="Введите ваше имя"
+                                    placeholder="{{ __('frontend.director_blog.name_placeholder') }}"
                                 >
                                 @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -141,7 +141,7 @@
 
                             <div class="form-group">
                                 <label for="director_question_email" class="form-label">
-                                    <i class="bi bi-envelope"></i> Email <span class="text-danger">*</span>
+                                    <i class="bi bi-envelope"></i> {{ __('frontend.director_blog.email_label') }} <span class="text-danger">*</span>
                                 </label>
                                 <input 
                                     type="email" 
@@ -150,7 +150,7 @@
                                     name="email" 
                                     value="{{ old('email') }}" 
                                     required
-                                    placeholder="example@mail.com"
+                                    placeholder="{{ __('frontend.director_blog.email_placeholder') }}"
                                 >
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -159,7 +159,7 @@
 
                             <div class="form-group">
                                 <label for="director_question_text" class="form-label">
-                                    <i class="bi bi-question-circle"></i> Ваш вопрос <span class="text-danger">*</span>
+                                    <i class="bi bi-question-circle"></i> {{ __('frontend.director_blog.question_label') }} <span class="text-danger">*</span>
                                 </label>
                                 <textarea 
                                     class="form-control @error('question') is-invalid @enderror" 
@@ -167,7 +167,7 @@
                                     name="question" 
                                     rows="6" 
                                     required
-                                    placeholder="Опишите ваш вопрос подробно..."
+                                    placeholder="{{ __('frontend.director_blog.question_placeholder') }}"
                                 >{{ old('question') }}</textarea>
                                 @error('question')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -185,14 +185,14 @@
                                         {{ old('notify_email') ? 'checked' : '' }}
                                     >
                                     <label class="form-check-label" for="director_question_notify">
-                                        <i class="bi bi-bell"></i> Получить уведомление на email
+                                        <i class="bi bi-bell"></i> {{ __('frontend.director_blog.notify_label') }}
                                     </label>
                                 </div>
                             </div>
 
                             <button type="submit" class="btn-submit">
                                 <i class="bi bi-send"></i>
-                                Отправить вопрос
+                                {{ __('frontend.director_blog.submit_button') }}
                             </button>
                         </form>
                     </div>
@@ -228,7 +228,7 @@
                                                 <div class="director-qa-answer">
                                                     <div class="director-qa-answer-header">
                                                         <i class="bi bi-check-circle-fill"></i>
-                                                        <h5>Ответ директора:</h5>
+                                                        <h5>{{ __('frontend.director_blog.answer_label') }}</h5>
                                                     </div>
                                                     <p>{{ $question->answer }}</p>
                                                 </div>
@@ -240,7 +240,7 @@
                         @else
                             <div class="alert alert-info">
                                 <i class="bi bi-info-circle"></i>
-                                <p class="mb-0">Пока нет опубликованных вопросов и ответов</p>
+                                <p class="mb-0">{{ __('frontend.director_blog.no_questions') }}</p>
                             </div>
                         @endif
                     </div>
@@ -565,9 +565,9 @@
         }
 
         .director-question-form .btn-submit:hover {
-            background: #0f766e;
+            background: #d4a000;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+            box-shadow: 0 4px 12px rgba(212, 160, 0, 0.3);
         }
 
         .director-question-form .btn-submit i {

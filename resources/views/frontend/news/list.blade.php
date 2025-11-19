@@ -146,6 +146,8 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            background: #f8f9fa;
+            border-top: 1px solid #e5e7eb;
         }
 
         .news-card-date {
@@ -229,6 +231,11 @@
 
         [data-theme="dark"] .news-card-title a:hover {
             color: #FFC107;
+        }
+
+        [data-theme="dark"] .news-card-body {
+            background: #2a2a2a;
+            border-top-color: rgba(255, 255, 255, 0.1);
         }
 
         [data-theme="dark"] .news-card-date {

@@ -135,7 +135,7 @@
         .admin-card {
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             transition: all 0.3s ease;
             height: 100%;
@@ -145,7 +145,7 @@
 
         .admin-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         .admin-photo {
@@ -190,8 +190,8 @@
 
         .admin-position {
             font-size: 15px;
-            color: #FFC107;
-            font-weight: 500;
+            color: #d4a000;
+            font-weight: 600;
             margin: 0 0 15px 0;
         }
 
@@ -262,11 +262,11 @@
 
         [data-theme="dark"] .admin-card {
             background: #2a2a2a;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         [data-theme="dark"] .admin-card:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
         }
 
         [data-theme="dark"] .admin-photo-placeholder {
@@ -284,6 +284,10 @@
         }
 
         [data-theme="dark"] .admin-email a:hover {
+            color: #FFC107;
+        }
+
+        [data-theme="dark"] .admin-position {
             color: #FFC107;
         }
 

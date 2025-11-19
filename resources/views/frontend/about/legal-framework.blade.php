@@ -154,7 +154,7 @@
         }
 
         .info-link {
-            color: #FFC107;
+            color: #0b7d73;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
@@ -164,7 +164,7 @@
         }
 
         .info-link:hover {
-            color: #0b7d73;
+            color: #5a6268;
         }
 
         .info-link i {
