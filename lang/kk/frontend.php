@@ -67,7 +67,7 @@ return [
         'state_emblem' => 'Мемлекеттік Елтаңба',
         'state_anthem' => 'Мемлекеттік Әнұран',
         'compliance_service' => 'Комплаенс қызметі',
-        'compliance_officer_plan' => 'Комплаенс офицерінің 2024 жылғы жоспары',
+        'compliance_officer_plan' => 'Комплаенс офицерінің 2025 жылғы жоспары',
         'corruption_risk_analysis' => 'Коррупциялық тәуекелдерді ішкі талдау',
         'internal_regulations' => 'Ішкі НҚА',
         'corruption_map' => 'Коррупция картограммасы',

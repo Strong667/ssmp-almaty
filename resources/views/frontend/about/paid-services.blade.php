@@ -55,16 +55,17 @@
                                             </tbody>
                                         </table>
                                     </div>
+
+                                    @if($service->localized_file_url)
+                                        <div class="service-actions">
+                                            <button type="button" class="view-btn" onclick="openPdfSidebar('{{ $service->localized_file_url }}', '{{ addslashes($service->localized_title ?? 'Коммерческое предложение') }}')">
+                                                <i class="bi bi-eye"></i>
+                                                <span>Просмотр</span>
+                                            </button>
+                                        </div>
+                                    @endif
                                 @endif
 
-                                @if($service->localized_file_url)
-                                    <div class="service-file">
-                                        <a href="{{ $service->localized_file_url }}" target="_blank" class="file-link" download>
-                                            <i class="bi bi-file-earmark"></i>
-                                            <span>Скачать файл</span>
-                                        </a>
-                                    </div>
-                                @endif
                             </div>
                         </div>
                     @endif
@@ -81,6 +82,22 @@
             @endif
         </div>
     </section>
+
+    <!-- PDF Sidebar -->
+    <div id="pdf-sidebar" class="pdf-sidebar">
+        <div class="pdf-sidebar-overlay" onclick="closePdfSidebar()"></div>
+        <div class="pdf-sidebar-content">
+            <div class="pdf-sidebar-header">
+                <h3 id="pdf-sidebar-title" class="pdf-sidebar-title"></h3>
+                <button type="button" class="pdf-sidebar-close" onclick="closePdfSidebar()" aria-label="Закрыть">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="pdf-sidebar-body">
+                <iframe id="pdf-sidebar-iframe" src="" class="pdf-sidebar-iframe" title="PDF Viewer"></iframe>
+            </div>
+        </div>
+    </div>
 
     @push('styles')
     <style>
@@ -220,36 +237,159 @@
         .price-cell {
             font-weight: 600;
             color: #2c4964;
-            text-align: right;
         }
 
-        .service-file {
+        .service-actions {
             margin-top: 20px;
             padding-top: 20px;
             border-top: 1px solid #e5e7eb;
-            text-align: center;
         }
 
-        .file-link {
+        .view-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            color: #FFC107;
-            text-decoration: none;
-            padding: 10px 20px;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #FFC107;
+            color: #fff;
+            border: none;
             border-radius: 4px;
-            transition: all 0.2s ease;
+            font-size: 13px;
             font-weight: 500;
-            background: #e6f7f5;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .file-link:hover {
-            background: #FFC107;
+        .view-btn:hover {
+            background: #d4a000;
             color: #fff;
         }
 
-        .file-link i {
-            font-size: 18px;
+        .view-btn i {
+            font-size: 14px;
+        }
+
+        /* PDF Sidebar - Matching Mobile Menu Design */
+        .pdf-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 99999;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: visibility 0s linear 0.3s, opacity 0.3s ease;
+        }
+
+        .pdf-sidebar.active {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+            transition: visibility 0s linear 0s, opacity 0.3s ease;
+        }
+
+        .pdf-sidebar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pdf-sidebar.active .pdf-sidebar-overlay {
+            opacity: 1;
+        }
+
+        .pdf-sidebar-content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 900px;
+            max-width: 85vw;
+            height: 100vh;
+            background: rgba(44, 73, 100, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .pdf-sidebar.active .pdf-sidebar-content {
+            transform: translateX(0);
+        }
+
+        .pdf-sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.35);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .pdf-sidebar-title {
+            margin: 0;
+            color: #FFC107;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: "Montserrat", sans-serif;
+            text-transform: uppercase;
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .pdf-sidebar-close {
+            background: transparent;
+            border: none;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #FFC107;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .pdf-sidebar-close:hover {
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        .pdf-sidebar-close i {
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .pdf-sidebar-body {
+            flex: 1;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .pdf-sidebar-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+        }
+
+        [data-theme="dark"] .pdf-sidebar-header {
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom-color: rgba(255, 255, 255, 0.15);
         }
 
         .alert {
@@ -336,18 +476,17 @@
             color: #e0e0e0;
         }
 
-        [data-theme="dark"] .service-file {
+        [data-theme="dark"] .service-actions {
             border-top-color: rgba(255, 255, 255, 0.1);
         }
 
-        [data-theme="dark"] .file-link {
-            background: rgba(13, 148, 136, 0.2);
-            color: #FFC107;
-        }
-
-        [data-theme="dark"] .file-link:hover {
+        [data-theme="dark"] .view-btn {
             background: #FFC107;
             color: #fff;
+        }
+
+        [data-theme="dark"] .view-btn:hover {
+            background: #d4a000;
         }
 
         @media (max-width: 768px) {
@@ -368,6 +507,72 @@
                 padding: 10px 8px;
             }
         }
+
+        @media (max-width: 768px) {
+            .pdf-sidebar-content {
+                width: 100%;
+                max-width: 100vw;
+            }
+
+            .pdf-sidebar-header {
+                padding: 16px 20px;
+            }
+
+            .pdf-sidebar-title {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pdf-sidebar-header {
+                padding: 14px 16px;
+            }
+
+            .pdf-sidebar-title {
+                font-size: 16px;
+                padding-right: 12px;
+            }
+
+            .pdf-sidebar-close {
+                width: 32px;
+                height: 32px;
+            }
+        }
     </style>
+    @endpush
+
+    @push('scripts')
+    <script>
+        function openPdfSidebar(pdfUrl, title) {
+            const sidebar = document.getElementById('pdf-sidebar');
+            const iframe = document.getElementById('pdf-sidebar-iframe');
+            const titleElement = document.getElementById('pdf-sidebar-title');
+            
+            iframe.src = pdfUrl + '#toolbar=0&navpanes=0&scrollbar=0';
+            titleElement.textContent = title;
+            sidebar.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePdfSidebar() {
+            const sidebar = document.getElementById('pdf-sidebar');
+            const iframe = document.getElementById('pdf-sidebar-iframe');
+            
+            sidebar.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Очищаем iframe после закрытия для экономии ресурсов
+            setTimeout(() => {
+                iframe.src = '';
+            }, 300);
+        }
+
+        // Закрытие по ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePdfSidebar();
+            }
+        });
+    </script>
     @endpush
 @endsection

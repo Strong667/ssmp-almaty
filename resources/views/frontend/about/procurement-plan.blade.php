@@ -39,10 +39,6 @@
                                         @endif
                                         @if($plan->localized_file_url)
                                             <div class="plan-actions">
-                                                <a href="{{ $plan->localized_file_url }}" target="_blank" class="plan-link">
-                                                    <i class="bi bi-box-arrow-up-right"></i>
-                                                    <span>{{ __('frontend.procurement_plan.open_in_new_tab') }}</span>
-                                                </a>
                                                 <a href="{{ $plan->localized_file_url }}" download class="plan-link plan-link-secondary">
                                                     <i class="bi bi-download"></i>
                                                     <span>{{ __('frontend.procurement_plan.download_file') }}</span>

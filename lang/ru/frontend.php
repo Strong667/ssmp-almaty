@@ -67,7 +67,7 @@ return [
         'state_emblem' => 'Государственный Герб',
         'state_anthem' => 'Государственный Гимн',
         'compliance_service' => 'Комплаенс служба',
-        'compliance_officer_plan' => 'План комплаенс-офицера на 2024 год',
+        'compliance_officer_plan' => 'План комплаенс-офицера на 2025 год',
         'corruption_risk_analysis' => 'Внутренний анализ коррупционных рисков',
         'internal_regulations' => 'Внутренние НПА',
         'corruption_map' => 'Картограмма коррупции',

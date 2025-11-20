@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'План работы комплаенс офицера 2024г')
+@section('title', 'План комплаенс-офицера на 2025 год')
 
 @section('content')
     <!-- Breadcrumbs Section -->
@@ -28,7 +28,7 @@
                                 @if($plan->localized_file_url)
                                     <div class="plan-pdf-wrapper">
                                         <iframe
-                                            src="{{ $plan->localized_file_url }}#toolbar=1&navpanes=1&scrollbar=1"
+                                            src="{{ $plan->localized_file_url }}#toolbar=0&navpanes=0&scrollbar=0"
                                             width="100%"
                                             height="800"
                                             frameborder="0"
@@ -184,7 +184,7 @@
         }
 
         .plan-link-secondary {
-            background: #6c757d;
+            background: #FFC107;
         }
 
         .plan-link-secondary:hover {
