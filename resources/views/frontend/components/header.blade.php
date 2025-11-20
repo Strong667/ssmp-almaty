@@ -32,7 +32,7 @@
                             </div>
                             <div class="contact-item">
                                 <i class="bi bi-envelope-fill"></i>
-                                <a href="mailto:Kgpssmp@ssmp-almaty.kz">Kgpssmp@ssmp-almaty.kz</a>
+                                <a href="mailto:info@ssmp-almaty.kz">info@ssmp-almaty.kz</a>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                         <div class="language-switcher">
                             <select id="language-select" class="language-select form-select form-select-sm">
                                 <option value="ru" {{ app()->getLocale() === 'ru' ? 'selected' : '' }}>Рус</option>
-                                <option value="kk" {{ app()->getLocale() === 'kk' ? 'selected' : '' }}>Қаз</option>
+                                <option value="kk" {{ app()->getLocale() !== 'ru' ? 'selected' : '' }}>Қаз</option>
                             </select>
                         </div>
                     </div>

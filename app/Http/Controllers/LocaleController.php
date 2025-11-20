@@ -12,7 +12,7 @@ class LocaleController extends Controller
     {
         // Проверяем, что локаль поддерживается
         if (!in_array($locale, ['ru', 'kk'])) {
-            $locale = 'ru';
+            $locale = 'kk';
         }
 
         // Устанавливаем локаль

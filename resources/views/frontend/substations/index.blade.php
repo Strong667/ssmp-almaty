@@ -9,11 +9,9 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('home') }}">
-                            <i class="bi bi-house-door"></i>
-                        </a>
+                        <a href="{{ route('home') }}">{{ __('frontend.breadcrumbs.home') }}</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('frontend.breadcrumbs.departments') }}</li>
+                    <li class="breadcrumb-item active" aria-current="page"> >> {{ __('frontend.breadcrumbs.departments') }}</li>
                 </ol>
             </nav>
         </div>
@@ -116,16 +114,17 @@
             color: #2c4964;
             font-weight: 500;
         }
-
-        .breadcrumb-item::after {
-            content: '>';
-            margin: 0 8px;
-            color: #adb5bd;
+        /* Убираем стандартный разделитель Bootstrap */
+        .breadcrumb-item + .breadcrumb-item::before {
+            display: none !important;
+            content: none !important;
+        }
+        /* Добавляем отступ после >> */
+        .breadcrumb-item:not(:first-child) {
+            margin-left: 8px;
         }
 
-        .breadcrumb-item:last-child::after {
-            display: none;
-        }
+
 
         .breadcrumb-item i {
             font-size: 16px;
@@ -307,10 +306,16 @@
         [data-theme="dark"] .breadcrumb-item.active {
             color: #e0e0e0;
         }
-
-        [data-theme="dark"] .breadcrumb-item::after {
-            color: #495057;
+        /* Убираем стандартный разделитель Bootstrap */
+        .breadcrumb-item + .breadcrumb-item::before {
+            display: none !important;
+            content: none !important;
         }
+        /* Добавляем отступ после >> */
+        .breadcrumb-item:not(:first-child) {
+            margin-left: 8px;
+        }
+
 
         [data-theme="dark"] .substations-list {
             background: #1a1a1a;
@@ -330,6 +335,14 @@
 
         [data-theme="dark"] .department-card:hover {
             background: #3a3a3a;
+        }
+
+        [data-theme="dark"] .department-link {
+            color: #FFC107;
+        }
+
+        [data-theme="dark"] .department-link:hover {
+            color: #FFB300;
         }
 
         [data-theme="dark"] .department-name {

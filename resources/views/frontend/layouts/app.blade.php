@@ -1631,10 +1631,9 @@
         if (!themeToggle) return;
         const html = document.documentElement;
 
-        // Получаем сохраненную тему или используем системную
+        // Получаем сохраненную тему или используем светлую по умолчанию
         const savedTheme = localStorage.getItem('theme');
-        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        const currentTheme = savedTheme || systemTheme;
+        const currentTheme = savedTheme || 'light';
 
         // Применяем тему при загрузке
         html.setAttribute('data-theme', currentTheme);
@@ -1650,12 +1649,8 @@
             });
         }
 
-        // Слушаем изменения системной темы
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-            if (!localStorage.getItem('theme')) {
-                html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-            }
-        });
+        // Слушаем изменения системной темы (только если пользователь не выбрал тему вручную)
+        // По умолчанию используем светлую тему, поэтому этот слушатель не нужен
     })();
 
     // Bootstrap 5 Dropdown работает по клику (стандартное поведение)

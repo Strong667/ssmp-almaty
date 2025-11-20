@@ -100,6 +100,7 @@ return [
 
     // Breadcrumbs
     'breadcrumbs' => [
+        'home' => 'Главная страница',
         'departments' => 'Отделения',
         'questions' => 'Вопросы и ответы',
         'mission_emergency_service' => 'Миссия скорой помощи',

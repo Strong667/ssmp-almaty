@@ -100,6 +100,7 @@ return [
 
     // Breadcrumbs
     'breadcrumbs' => [
+        'home' => 'Басты бет',
         'departments' => 'Бөлімдер',
         'questions' => 'Сұрақтар мен жауаптар',
         'mission_emergency_service' => 'Жедел көмектің миссиясы',

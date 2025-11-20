@@ -9,14 +9,12 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('home') }}">
-                            <i class="bi bi-house-door"></i>
-                        </a>
+                        <a href="{{ route('home') }}">{{ __('frontend.breadcrumbs.home') }}</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('news.list') }}">{{ __('frontend.header.news') }}</a>
+                        <a href="{{ route('news.list') }}"> >> {{ __('frontend.header.news') }}</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ \Illuminate\Support\Str::limit($news->localized_title, 50) }}</li>
+                    <li class="breadcrumb-item active" aria-current="page"> >> {{ \Illuminate\Support\Str::limit($news->localized_title, 50) }}</li>
                 </ol>
             </nav>
         </div>
@@ -131,14 +129,15 @@
             font-weight: 500;
         }
 
-        .breadcrumb-item::after {
-            content: '>';
-            margin: 0 8px;
-            color: #adb5bd;
+        /* Убираем стандартный разделитель Bootstrap */
+        .breadcrumb-item + .breadcrumb-item::before {
+            display: none !important;
+            content: none !important;
         }
 
-        .breadcrumb-item:last-child::after {
-            display: none;
+        /* Добавляем отступ после >> */
+        .breadcrumb-item:not(:first-child) {
+            margin-left: 8px;
         }
 
         .breadcrumb-item i {
@@ -311,9 +310,6 @@
             color: #e0e0e0;
         }
 
-        [data-theme="dark"] .breadcrumb-item::after {
-            color: #495057;
-        }
 
         [data-theme="dark"] .news-detail-section {
             background: #1a1a1a;

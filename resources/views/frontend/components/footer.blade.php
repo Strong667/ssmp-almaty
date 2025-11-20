@@ -8,7 +8,7 @@
                         <h5>{{ __('frontend.footer.office') }}</h5>
                         <div class="contact-info">
                             <i class="bi bi-envelope"></i>
-                            <a href="mailto:Kgpssmp@ssmp-almaty.kz">Kgpssmp@ssmp-almaty.kz</a>
+                            <a href="mailto:info@ssmp-almaty.kz">info@ssmp-almaty.kz</a>
                         </div>
                     </div>
 
@@ -16,7 +16,7 @@
                         <h5>{{ __('frontend.footer.patient_support') }}</h5>
                         <div class="contact-info">
                             <i class="bi bi-envelope"></i>
-                            <a href="mailto:Kgpssmp@ssmp-almaty.kz">Kgpssmp@ssmp-almaty.kz</a>
+                            <a href="mailto:info@ssmp-almaty.kz">info@ssmp-almaty.kz</a>
                         </div>
                     </div>
 

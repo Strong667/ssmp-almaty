@@ -18,10 +18,16 @@ class SetLocale
     public function handle(Request $request, Closure $next): Response
     {
         // Получаем локаль из сессии или используем дефолтную
-        $locale = Session::get('locale', config('app.locale'));
+        // Если сессия еще не инициализирована, используем дефолтную локаль
+        $locale = Session::has('locale') ? Session::get('locale') : config('app.locale');
         
         // Устанавливаем локаль
         App::setLocale($locale);
+        
+        // Сохраняем локаль в сессии для следующего запроса
+        if (!Session::has('locale')) {
+            Session::put('locale', $locale);
+        }
 
         return $next($request);
     }

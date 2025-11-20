@@ -449,6 +449,14 @@
             background: #3a3a3a;
         }
 
+        [data-theme="dark"] .department-link {
+            color: #FFC107;
+        }
+
+        [data-theme="dark"] .department-link:hover {
+            color: #FFB300;
+        }
+
         [data-theme="dark"] .department-name {
             color: #e0e0e0;
         }
